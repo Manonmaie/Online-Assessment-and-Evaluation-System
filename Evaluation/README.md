@@ -1,3 +1,3 @@
 # Online Evaluation System
 
-![alt text](./Eval-UML.jpg?raw=true)
+![alt text](./Eval-UML.jpeg?raw=true)
