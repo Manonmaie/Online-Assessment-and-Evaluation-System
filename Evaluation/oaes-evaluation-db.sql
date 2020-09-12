@@ -6,14 +6,6 @@ USE oaes_evaluation_db;
 --
 
 -- --------------------------------------------------------
--- Table structure for table `ev_drive_center_examinee`
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS ev_drive_center_examinee(
-  drive_center_examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY(drive_center_examinee_id)
-);
-
--- --------------------------------------------------------
 -- Table structure for table `ev_question_paper`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_question_paper(
@@ -81,6 +73,14 @@ CREATE TABLE IF NOT EXISTS ev_item_true_false(
 
 ALTER TABLE ev_item_true_false
   ADD CONSTRAINT `fk_ev_item_true_false_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Table structure for table `ev_drive_center_examinee`
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ev_drive_center_examinee(
+  drive_center_examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY(drive_center_examinee_id)
+);
 
 -- --------------------------------------------------------
 -- Table structure for table ev_examinee_item_marks
