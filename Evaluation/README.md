@@ -1,3 +1,3 @@
 # Evaluation System
 
-![alt text](./Eval-UML.jpeg?raw=true)
+![alt text](./Evaluation_UML.png?raw=true)
