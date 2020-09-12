@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS ea_examinee(
   examinee_password varchar(255) NOT NULL,
   examinee_branch varchar(255),
   examinee_email varchar(255),
+  examinee_college varchar(255),
   PRIMARY KEY(examinee_id)
 );
 
