@@ -1,5 +1,5 @@
 # Exam Admin (Controller of Exams)
 
 
-![alt text](./AdminUML.jpeg?raw=true)
+![alt text](./Exam\Admin_UML.png?raw=true)
 
