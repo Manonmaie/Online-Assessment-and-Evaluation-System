@@ -17,6 +17,13 @@ CREATE TABLE IF NOT EXISTS ea_examdrive(
 );
 
 -- --------------------------------------------------------
+-- Data Entry for table ea_examdrive
+-- --------------------------------------------------------
+INSERT INTO ea_examdrive VALUES(0,"MID","Mid Term Examination",'COMPLETED');
+INSERT INTO ea_examdrive VALUES(0,"END","End Term Examination",'NOT_STARTED');
+INSERT INTO ea_examdrive VALUES(0,"IMP","Improvement Examination",'NOT_STARTED');
+
+-- --------------------------------------------------------
 -- Table structure for table ea_examinee
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_examinee(
@@ -26,6 +33,7 @@ CREATE TABLE IF NOT EXISTS ea_examinee(
   examinee_password varchar(255) NOT NULL,
   examinee_branch varchar(255),
   examinee_email varchar(255),
+  examinee_college varchar(255),
   PRIMARY KEY(examinee_id)
 );
 
