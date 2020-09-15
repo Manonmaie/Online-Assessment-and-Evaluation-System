@@ -40,6 +40,12 @@ CREATE TABLE IF NOT EXISTS as_center(
 );
 
 -- --------------------------------------------------------
+-- Data Entry for table `as_center`
+-- --------------------------------------------------------
+
+INSERT INTO as_center VALUES(0,"CENTER_1","IIIT-Bangalore");
+
+-- --------------------------------------------------------
 -- Table structure for table `as_drive_center_examinee`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_drive_center_examinee(
@@ -72,6 +78,12 @@ ALTER TABLE as_batch
   ADD CONSTRAINT `fk_as_batch_center_id` FOREIGN KEY (center_id) REFERENCES as_center(center_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table `as_batch`
+-- --------------------------------------------------------
+
+INSERT INTO as_batch VALUES(0,"AM","2020-01-01 09:00:00","2020-01-01 12:00:00",1);
+
+-- --------------------------------------------------------
 -- Table structure for table `as_course_master`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_course_master (
@@ -80,6 +92,12 @@ CREATE TABLE IF NOT EXISTS as_course_master (
   course_name varchar(255) NOT NULL,
   PRIMARY KEY (course_master_id)
 );
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_course_master`
+-- --------------------------------------------------------
+
+INSERT INTO as_course_master VALUES(0,"MATHS","Mathematices");
 
 -- --------------------------------------------------------
 -- Table structure for table `as_batch_course`
@@ -96,6 +114,12 @@ CREATE TABLE IF NOT EXISTS as_batch_course (
 ALTER TABLE as_batch_course
   ADD CONSTRAINT `fk_as_batch_course_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_as_batch_course_course_master_id` FOREIGN KEY (course_master_id) REFERENCES as_course_master(course_master_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_question_paper`
+-- --------------------------------------------------------
+
+INSERT INTO as_batch_course VALUES(1,1,1,'PENDING');
 
 -- --------------------------------------------------------
 -- Table structure for table `as_invigilator`
@@ -128,6 +152,14 @@ CREATE TABLE IF NOT EXISTS as_question_paper(
 
 ALTER TABLE as_question_paper
   ADD CONSTRAINT `fk_as_question_paper_batch_course_id` FOREIGN KEY (batch_course_id) REFERENCES as_batch_course(batch_course_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_question_paper`
+-- --------------------------------------------------------
+
+INSERT INTO as_question_paper VALUES(0,"MAT_1",1,100,180);
+INSERT INTO as_question_paper VALUES(0,"PHY_1",1,50,120);
+INSERT INTO as_question_paper VALUES(0,"CHEM_1",1,25,60);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_question_paper`
