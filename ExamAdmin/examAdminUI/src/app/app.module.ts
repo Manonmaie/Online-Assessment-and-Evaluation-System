@@ -3,16 +3,28 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ExamdriveComponent } from './examdrive/examdrive.component';
+import { HttpClientModule } from '@angular/common/http';
+// import { HttpModule } from '@angular/http';
+import {baseURL} from './shared/baseurl';
+
+import {ExamdriveService} from './services/examdrive.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ExamdriveComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // HttpModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ExamdriveService,
+    {provide: 'BaseURL', useValue: baseURL}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

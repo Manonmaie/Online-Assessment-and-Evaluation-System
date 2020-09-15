@@ -7,5 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'examAdminUI';
-  examDrives: string[] = ['Mid Term Examination','End Term Examination','Improvement Examination'];
 }
