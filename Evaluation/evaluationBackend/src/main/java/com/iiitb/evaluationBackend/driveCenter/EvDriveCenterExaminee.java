@@ -28,8 +28,8 @@ public class EvDriveCenterExaminee {
 	public String getStatus_id() {
 		return status;
 	}
-	public void setStatus_id(String status_id) {
-		this.status = status_id;
+	public void setStatus_id(String status) {
+		this.status = status;
 	}
 	
 }
