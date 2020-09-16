@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS ea_drive_center_examinee(
   examinee_id int(10) unsigned,
   center_id int(10) unsigned,
   PRIMARY KEY(drive_center_examinee_id),
-  CONSTRAINT `uk_ea_drive_center_examinee` UNIQUE(examdrive_id,examinee_id,center_id)
+  CONSTRAINT `uk_ea_drive_center_examinee` UNIQUE(examdrive_id,examinee_id,center_id),
+  CONSTRAINT `uk_ea_drive_center_examinee_1` UNIQUE(examdrive_id,examinee_id)
 );
 
 ALTER TABLE ea_drive_center_examinee
