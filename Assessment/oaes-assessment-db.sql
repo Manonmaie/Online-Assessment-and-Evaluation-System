@@ -54,7 +54,8 @@ CREATE TABLE IF NOT EXISTS as_drive_center_examinee(
   examinee_id int(10) unsigned,
   center_id int(10) unsigned,
   PRIMARY KEY(drive_center_examinee_id),
-  CONSTRAINT `uk_as_drive_center_examinee` UNIQUE(examdrive_id,examinee_id,center_id)
+  CONSTRAINT `uk_as_drive_center_examinee` UNIQUE(examdrive_id,examinee_id,center_id),
+  CONSTRAINT `uk_as_drive_center_examinee_1` UNIQUE(examdrive_id,examinee_id)
 );
 
 ALTER TABLE as_drive_center_examinee
@@ -182,7 +183,6 @@ CREATE TABLE IF NOT EXISTS as_examinee_drive_qp(
   examinee_drive_qp_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   qp_id int(10) unsigned,
   drive_center_examinee_id int(10) unsigned,
-  marks_obtained float(24) NOT NULL,
   PRIMARY KEY(examinee_drive_qp_id),
   CONSTRAINT `uk_as_examinee_drive_qp` UNIQUE (qp_id,drive_center_examinee_id)
 );
