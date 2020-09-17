@@ -3,9 +3,9 @@
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let examDrive of driveCenterExaminee">
         {{examDrive.drive_center_examinee_id}}
-        <a>{{examDrive.status_id}}</a>
-        <button type="button" class="btn btn-primary float-right mr-1"><i class="fa fa-cogs"></i>Trigger</button>
-        <button type="button" class="btn btn-success float-right mr-1"><i class="fa fa-info-circle"></i>Info</button>
+        <a class="col-md-6">status: {{examDrive.status_id}}</a>
+        <button type="button" class="btn btn-success float-right mr-1"><i class="fa fa-info-circle"></i> Info</button>
+        <button type="button" class="btn btn-primary float-right mr-1"><i class="fa fa-cogs"></i> Trigger</button>
         </li>
     </ul>
 </div>
