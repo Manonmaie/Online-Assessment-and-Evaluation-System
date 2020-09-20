@@ -38,6 +38,12 @@ CREATE TABLE IF NOT EXISTS ea_examinee(
 );
 
 -- --------------------------------------------------------
+-- Data Entry for table ea_examinee
+-- --------------------------------------------------------
+INSERT INTO ea_examinee VALUES(0,"S1","ABC","abc","CSE","ABC@iiitb.org",'IIITB');
+INSERT INTO ea_examinee VALUES(0,"S2","XYZ","xyz",NULL,NULL,NULL);
+
+-- --------------------------------------------------------
 -- Table structure for table ea_center
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_center(
@@ -46,6 +52,11 @@ CREATE TABLE IF NOT EXISTS ea_center(
   center_name varchar(255) NOT NULL,
   PRIMARY KEY(center_id)
 );
+
+-- --------------------------------------------------------
+-- Data Entry for table ea_center
+-- --------------------------------------------------------
+INSERT INTO ea_center VALUES(0,"IIITB","International Institute of Information Technology, Bangalore");
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_drive_center_examinee`
