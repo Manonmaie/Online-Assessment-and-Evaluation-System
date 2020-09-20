@@ -16,6 +16,9 @@ CREATE TABLE IF NOT EXISTS ev_question_paper(
   PRIMARY KEY(qp_id)
 );
 
+INSERT INTO ev_question_paper VALUES(0,"MAT_1",100,180);
+INSERT INTO ev_question_paper VALUES(0,"PHY_1",50,120);
+INSERT INTO ev_question_paper VALUES(0,"CHEM_1",25,60);
 -- --------------------------------------------------------
 -- Table structure for table `ev_itemtype_master`
 -- --------------------------------------------------------
@@ -26,6 +29,11 @@ CREATE TABLE IF NOT EXISTS ev_itemtype_master (
   itemtype_category ENUM('AUTO','MANUAL') DEFAULT 'MANUAL',
   PRIMARY KEY (itemtype_id)
 );
+
+INSERT INTO ev_itemtype_master VALUES(0,"Single","SingleCorrect",'AUTO');
+INSERT INTO ev_itemtype_master VALUES(0,"Multi","MultiCorrect",'AUTO');
+INSERT INTO ev_itemtype_master VALUES(0,"T/F","True/False",'AUTO');
+INSERT INTO ev_itemtype_master VALUES(0,"Theory","Descriptive",'MANUAL');
 
 -- --------------------------------------------------------
 -- Table structure for table `ev_qp_item`
@@ -79,9 +87,15 @@ ALTER TABLE ev_item_true_false
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_drive_center_examinee(
   drive_center_examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  status ENUM('PENDING','COMPLETED','ABANDONED') DEFAULT 'PENDING',
   PRIMARY KEY(drive_center_examinee_id)
 );
 
+INSERT INTO ev_drive_center_examinee VALUES(0,'COMPLETED');
+INSERT INTO ev_drive_center_examinee VALUES(0,'PENDING');
+INSERT INTO ev_drive_center_examinee VALUES(0,'COMPLETED');
+INSERT INTO ev_drive_center_examinee VALUES(0,'PENDING');
+INSERT INTO ev_drive_center_examinee VALUES(0,'ABANDONED');
 -- --------------------------------------------------------
 -- Table structure for table ev_examinee_item_marks
 -- --------------------------------------------------------
