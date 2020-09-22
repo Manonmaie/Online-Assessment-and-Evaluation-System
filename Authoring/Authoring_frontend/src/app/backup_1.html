@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="jumbotron">
+      <h2>Add Item </h2>
+    </div>
+  
+  
+  <form [formGroup]="volunteerForm" (ngSubmit)="onSubmit()">  
+    <div class="form-group" >
+      <label for="exampleFormControlSelect1">Item Type<span class="required">*</span></label>
+      <select [(ngModel)]="selectedType" class="form-control" id="exampleFormControlSelect1" formControlName="type">
+        <option value="" selected disabled>Select Item Type</option>
+        <option>MCQ's</option>
+        <option>True/False</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Cognitive Level<span class="required">*</span></label>
+      <select [(ngModel)]="selectedCGLvl" class="form-control" id="exampleFormControlSelect1" formControlName="cg_lvl">
+        <option value="" selected disabled>Select Cognitive Level</option>
+        <option>REMEMBER</option>
+        <option>UNDERSTAND</option>
+        <option>APPLY</option>
+        <option>ANALYZE</option>
+        <option>EVALUATE</option>
+        <option>CREATE</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class=" control-label">Marks<span class="required">*</span></label>
+      <div class="">
+          <input type="text" class="form-control" name="number" formControlName="marks"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Item Description<span class="required">*</span></label>
+      <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"formControlName="text"></ckeditor>
+    </div>
+  
+    <div class="control">
+      <input type="submit" value="SUBMIT" />
+    </div>
+    <p aria-hidden="true" id="required-description">
+      <span class="required">*</span>Required field
+    </p>
+  </form> 
+  
+  
+  
+  
+  </div>

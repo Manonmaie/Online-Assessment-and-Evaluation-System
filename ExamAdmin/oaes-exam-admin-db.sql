@@ -38,6 +38,12 @@ CREATE TABLE IF NOT EXISTS ea_examinee(
 );
 
 -- --------------------------------------------------------
+-- Data Entry for table ea_examinee
+-- --------------------------------------------------------
+INSERT INTO ea_examinee VALUES(0,"S1","ABC","abc","CSE","ABC@iiitb.org",'IIITB');
+INSERT INTO ea_examinee VALUES(0,"S2","XYZ","xyz",NULL,NULL,NULL);
+
+-- --------------------------------------------------------
 -- Table structure for table ea_center
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_center(
@@ -48,6 +54,11 @@ CREATE TABLE IF NOT EXISTS ea_center(
 );
 
 -- --------------------------------------------------------
+-- Data Entry for table ea_center
+-- --------------------------------------------------------
+INSERT INTO ea_center VALUES(0,"IIITB","International Institute of Information Technology, Bangalore");
+
+-- --------------------------------------------------------
 -- Table structure for table `ea_drive_center_examinee`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_drive_center_examinee(
@@ -56,7 +67,8 @@ CREATE TABLE IF NOT EXISTS ea_drive_center_examinee(
   examinee_id int(10) unsigned,
   center_id int(10) unsigned,
   PRIMARY KEY(drive_center_examinee_id),
-  CONSTRAINT `uk_ea_drive_center_examinee` UNIQUE(examdrive_id,examinee_id,center_id)
+  CONSTRAINT `uk_ea_drive_center_examinee` UNIQUE(examdrive_id,examinee_id,center_id),
+  CONSTRAINT `uk_ea_drive_center_examinee_1` UNIQUE(examdrive_id,examinee_id)
 );
 
 ALTER TABLE ea_drive_center_examinee

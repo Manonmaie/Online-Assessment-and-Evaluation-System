@@ -1,25 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+// import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExamdriveComponent } from './examdrive/examdrive.component';
+import { HeaderComponent } from './header/header.component';
+import { CenterComponent } from './center/center.component';
+import { ExamineeComponent } from './examinee/examinee.component';
+
 import { HttpClientModule } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 import {baseURL} from './shared/baseurl';
 
 import {ExamdriveService} from './services/examdrive.service';
 
+import {AppRoutingModule} from './app-routing/app-routing.module';
+
 @NgModule({
   declarations: [
     AppComponent,
-    ExamdriveComponent
+    ExamdriveComponent,
+    HeaderComponent,
+    CenterComponent,
+    ExamineeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     // HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     ExamdriveService,
