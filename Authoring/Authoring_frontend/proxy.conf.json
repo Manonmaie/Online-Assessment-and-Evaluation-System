@@ -1,0 +1,10 @@
+{
+    "/api": {
+        "target": "http://localhost:8080/urest/v1",
+        "secure": true,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+          }
+    }
+}

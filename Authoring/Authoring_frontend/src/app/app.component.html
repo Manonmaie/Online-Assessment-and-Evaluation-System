@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="jumbotron">
+    <h2>Add Item </h2>
+  </div>
+
+<div class="form-group">
+  <label for="exampleFormControlSelect1">Item Type<span class="required">*</span></label>
+  <select  id="cg" name="cg" class="form-control" [(ngModel)]="selectedType">
+    <option *ngFor="let type of types" [ngValue]="type.value"> 
+        {{ type.label }}
+    </option>
+  </select>
+</div>
+<div class="form-group">
+  <label for="exampleFormControlSelect1">Cognitive Level<span class="required">*</span></label>
+  <select  id="cg" name="cg" class="form-control" [(ngModel)]="selectedCGLvl">
+    <option *ngFor="let cg of cgLvl" [ngValue]="cg.value"> 
+        {{ cg.label }}
+    </option>
+  </select>
+</div>
+<div class="form-group">
+  <label class=" control-label">Marks<span class="required">*</span></label>
+  <div class="">
+      <input type="text" class="form-control" name="number" [(ngModel)]="totalMarks" />
+  </div>
+</div>
+<div class="form-group">
+  <label for="exampleFormControlTextarea1">Item Description<span class="required">*</span></label>
+  <ckeditor 
+    [(ngModel)]="model.editorData" 
+    [editor]="Editor" 
+    data=""
+    [config]="{
+      ckfinder: {
+        options: {
+          resourceType: 'Images'
+        },
+        uploadUrl: 'http://localhost:3000/test/upload/image'
+       }
+    }"
+  ></ckeditor>
+</div>
+
+<div class="control">
+  <input (click)="onSubmit()" type="submit" value="SUBMIT" />
+</div>
+<p aria-hidden="true" id="required-description">
+  <span class="required">*</span>Required field
+</p>
+
+
+
+
+</div>
