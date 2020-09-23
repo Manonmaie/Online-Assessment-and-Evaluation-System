@@ -6,86 +6,6 @@ USE oaes_assessment_db;
 --
 
 -- --------------------------------------------------------
--- Table structure for table as_examdrive
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_examdrive(
-  examdrive_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  examdrive_code varchar(255) UNIQUE NOT NULL,
-  examdrive_name varchar(255) NOT NULL,
-  status ENUM('NOT_STARTED','IN_PROGRESS','COMPLETED') DEFAULT 'NOT_STARTED',
-  PRIMARY KEY (examdrive_id)
-);
-
--- --------------------------------------------------------
--- Table structure for table as_examinee
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_examinee(
-  examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  examinee_code varchar(255) UNIQUE NOT NULL,
-  examinee_name varchar(255) NOT NULL,
-  examinee_password varchar(255) NOT NULL,
-  examinee_branch varchar(255),
-  examinee_email varchar(255),
-  PRIMARY KEY(examinee_id)
-);
-
--- --------------------------------------------------------
--- Table structure for table as_center
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_center(
-  center_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  center_code varchar(255) UNIQUE NOT NULL,
-  center_name varchar(255) NOT NULL,
-  PRIMARY KEY(center_id)
-);
-
--- --------------------------------------------------------
--- Data Entry for table `as_center`
--- --------------------------------------------------------
-
-INSERT INTO as_center VALUES(0,"CENTER_1","IIIT-Bangalore");
-
--- --------------------------------------------------------
--- Table structure for table `as_drive_center_examinee`
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_drive_center_examinee(
-  drive_center_examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  examdrive_id int(10) unsigned,
-  examinee_id int(10) unsigned,
-  center_id int(10) unsigned,
-  PRIMARY KEY(drive_center_examinee_id),
-  CONSTRAINT `uk_as_drive_center_examinee` UNIQUE(examdrive_id,examinee_id,center_id),
-  CONSTRAINT `uk_as_drive_center_examinee_1` UNIQUE(examdrive_id,examinee_id)
-);
-
-ALTER TABLE as_drive_center_examinee
-  ADD CONSTRAINT `fk_as_drive_center_examinee_examdrive_id` FOREIGN KEY (examdrive_id) REFERENCES as_examdrive(examdrive_id) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_as_drive_center_examinee_examinee_id` FOREIGN KEY (examinee_id) REFERENCES as_examinee(examinee_id) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_as_drive_center_examinee_center_id` FOREIGN KEY (center_id) REFERENCES as_center(center_id) ON DELETE SET NULL;
-
--- --------------------------------------------------------
--- Table structure for table `as_batch`
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_batch(
-  batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  batch_code varchar(255) UNIQUE NOT NULL,
-  batch_start_time datetime NOT NULL,
-  batch_end_time datetime NOT NULL,
-  center_id int(10) unsigned,
-  PRIMARY KEY (batch_id)
-);
-
-ALTER TABLE as_batch
-  ADD CONSTRAINT `fk_as_batch_center_id` FOREIGN KEY (center_id) REFERENCES as_center(center_id) ON DELETE SET NULL;
-
--- --------------------------------------------------------
--- Data Entry for table `as_batch`
--- --------------------------------------------------------
-
-INSERT INTO as_batch VALUES(0,"AM","2020-09-22 19:00:00","2020-09-22 21:00:00",1);
-INSERT INTO as_batch VALUES(0,"PM","2020-01-01 14:00:00","2020-01-01 17:00:00",1);
-
--- --------------------------------------------------------
 -- Table structure for table `as_course_master`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_course_master (
@@ -98,36 +18,103 @@ CREATE TABLE IF NOT EXISTS as_course_master (
 -- --------------------------------------------------------
 -- Data Entry for table `as_course_master`
 -- --------------------------------------------------------
-
 INSERT INTO as_course_master VALUES(0,"MAT_Course","Mathematices");
 INSERT INTO as_course_master VALUES(0,"PHY_Course","Physics");
 INSERT INTO as_course_master VALUES(0,"CHEM_Course","Chemistry");
 
 -- --------------------------------------------------------
--- Table structure for table `as_batch_course`
+-- Table structure for table as_examdrive
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_batch_course (
-  batch_course_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  batch_id int(10) unsigned,
+CREATE TABLE IF NOT EXISTS as_examdrive(
+  examdrive_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  examdrive_code varchar(255) UNIQUE NOT NULL,
+  examdrive_name varchar(255) NOT NULL,
+  status ENUM('NOT_STARTED','IN_PROGRESS','COMPLETED') DEFAULT 'NOT_STARTED',
   course_master_id int(10) unsigned,
-  qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING') DEFAULT 'PENDING',
-  PRIMARY KEY (batch_course_id),
-  CONSTRAINT `uk_as_batch_course` UNIQUE (batch_id,course_master_id)
+  PRIMARY KEY (examdrive_id)
 );
 
-ALTER TABLE as_batch_course
-  ADD CONSTRAINT `fk_as_batch_course_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_as_batch_course_course_master_id` FOREIGN KEY (course_master_id) REFERENCES as_course_master(course_master_id) ON DELETE SET NULL;
+ALTER TABLE as_examdrive
+  ADD CONSTRAINT `fk_as_examdrive_course_master_id` FOREIGN KEY (course_master_id) REFERENCES as_course_master(course_master_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
--- Data Entry for table `as_question_paper`
+-- Table structure for table as_examinee
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_examinee(
+  examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  examinee_code varchar(255) UNIQUE NOT NULL,
+  examinee_name varchar(255) NOT NULL,
+  examinee_password varchar(255) NOT NULL,
+  examinee_branch varchar(255),
+  examinee_email varchar(255),
+  examinee_college varchar(255),
+  PRIMARY KEY(examinee_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table ea_examinee
+-- --------------------------------------------------------
+INSERT INTO as_examinee VALUES(0,"S1","ABC","abc","CSE","ABC@iiitb.org",'IIITB');
+INSERT INTO as_examinee VALUES(0,"S2","XYZ","xyz",NULL,NULL,NULL);
+
+-- --------------------------------------------------------
+-- Table structure for table as_center
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_center(
+  center_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  center_code varchar(255) UNIQUE NOT NULL,
+  center_name varchar(255) NOT NULL,
+  center_capacity int(10) unsigned,
+  PRIMARY KEY(center_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_center`
 -- --------------------------------------------------------
 
-INSERT INTO as_batch_course VALUES(0,1,1,'PENDING');
-INSERT INTO as_batch_course VALUES(0,1,2,'PENDING');
-INSERT INTO as_batch_course VALUES(0,2,3,'PENDING');
+INSERT INTO as_center VALUES(0,"CENTER_1","IIIT-Bangalore",1000);
 
--- select as_question_paper.qp_id, as_question_paper.qp_code, as_question_paper.maximum_marks, as_question_paper.duration, as_batch.batch_start_time, as_batch.batch_end_time, as_course_master.course_name, as_batch_course.qp_status from (((as_batch inner join as_batch_course on as_batch.batch_id = as_batch_course.batch_id) inner join as_course_master on as_batch_course.course_master_id = as_course_master.course_master_id) inner join as_question_paper on as_batch_course.batch_course_id = as_question_paper.batch_course_id) where as_batch.batch_start_time between "2020-01-01 08:00:00" and "2020-01-01 09:00:00";
+-- --------------------------------------------------------
+-- Table structure for table `as_batch`
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_batch(
+  batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  batch_code varchar(255) UNIQUE NOT NULL,
+  batch_start_time datetime NOT NULL,
+  batch_end_time datetime NOT NULL,
+  qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING') DEFAULT 'PENDING',
+  center_id int(10) unsigned,
+  PRIMARY KEY (batch_id)
+);
+
+ALTER TABLE as_batch
+  ADD CONSTRAINT `fk_as_batch_center_id` FOREIGN KEY (center_id) REFERENCES as_center(center_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_batch`
+-- --------------------------------------------------------
+
+INSERT INTO as_batch VALUES(0,"AM","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",1);
+INSERT INTO as_batch VALUES(0,"PM","2020-01-01 14:00:00","2020-01-01 17:00:00","RECEIVED",1);
+
+-- --------------------------------------------------------
+-- Table structure for table `as_examinee_batch`
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_examinee_batch (
+  examinee_batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  batch_id int(10) unsigned,
+  examinee_id int(10) unsigned,
+  PRIMARY KEY (examinee_batch_id)
+);
+
+ALTER TABLE as_examinee_batch
+  ADD CONSTRAINT `fk_as_examinee_batch_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_as_examinee_batch_examinee_id` FOREIGN KEY (examinee_id) REFERENCES as_examinee(examinee_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table as_examinee_batch
+-- --------------------------------------------------------
+INSERT INTO as_examinee_batch VALUES(0,1,1);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_invigilator`
@@ -138,13 +125,13 @@ CREATE TABLE IF NOT EXISTS as_invigilator (
   invigilator_name varchar(255) NOT NULL,
   invigilator_email varchar(255) UNIQUE NOT NULL,
   invigilator_password varchar(255) NOT NULL,
-  batch_course_id int(10) unsigned,
+  batch_id int(10) unsigned,
   user_status ENUM('Active', 'NOT_Active'),
   PRIMARY KEY (invigilator_id)
 );
 
 ALTER TABLE as_invigilator
-  ADD CONSTRAINT `fk_as_invigilator_batch_course_id` FOREIGN KEY (batch_course_id) REFERENCES as_batch_course(batch_course_id) ON DELETE SET NULL;
+  ADD CONSTRAINT `fk_as_invigilator_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Table structure for table `as_question_paper`
@@ -152,22 +139,22 @@ ALTER TABLE as_invigilator
 CREATE TABLE IF NOT EXISTS as_question_paper(
   qp_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   qp_code varchar(255) UNIQUE NOT NULL,
-  batch_course_id int(10) unsigned,
+  batch_id int(10) unsigned,
   maximum_marks float(24) NOT NULL DEFAULT 100,
   duration int(10) NOT NULL DEFAULT 180,
   PRIMARY KEY(qp_id)
 );
 
 ALTER TABLE as_question_paper
-  ADD CONSTRAINT `fk_as_question_paper_batch_course_id` FOREIGN KEY (batch_course_id) REFERENCES as_batch_course(batch_course_id) ON DELETE SET NULL;
+  ADD CONSTRAINT `fk_as_question_paper_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Data Entry for table `as_question_paper`
 -- --------------------------------------------------------
 
 INSERT INTO as_question_paper VALUES(0,"MAT_1",1,100,180);
-INSERT INTO as_question_paper VALUES(0,"PHY_1",2,50,120);
-INSERT INTO as_question_paper VALUES(0,"CHEM_1",3,25,60);
+INSERT INTO as_question_paper VALUES(0,"PHY_1",1,50,120);
+INSERT INTO as_question_paper VALUES(0,"CHEM_1",1,25,60);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_instruction`
@@ -194,21 +181,6 @@ INSERT INTO as_instruction VALUES(0,"Phy_Ins_1",2,"Exam duration is 2 hrs");
 INSERT INTO as_instruction VALUES(0,"Phy_Ins_2",2,"It has only one section");
 INSERT INTO as_instruction VALUES(0,"Chem_Ins_1",3,"Exam duration is 1 hr");
 INSERT INTO as_instruction VALUES(0,"Chem_Ins_2",3,"It has only one section with no negative marking");
-
--- --------------------------------------------------------
--- Table structure for table `as_examinee_drive_qp`
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_examinee_drive_qp(
-  examinee_drive_qp_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qp_id int(10) unsigned,
-  drive_center_examinee_id int(10) unsigned,
-  PRIMARY KEY(examinee_drive_qp_id),
-  CONSTRAINT `uk_as_examinee_drive_qp` UNIQUE (qp_id,drive_center_examinee_id)
-);
-
-ALTER TABLE as_examinee_drive_qp
-  ADD CONSTRAINT `fk_as_examinee_drive_qp_qp_id` FOREIGN KEY (qp_id) REFERENCES as_question_paper(qp_id) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_as_examinee_drive_qp_drive_center_examinee_id` FOREIGN KEY (drive_center_examinee_id) REFERENCES as_drive_center_examinee(drive_center_examinee_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Table structure for table `as_itemtype_master`
@@ -278,12 +250,12 @@ CREATE TABLE IF NOT EXISTS as_attempt (
   attempt_start_time timestamp NOT NULL,
   attempt_end_time timestamp NOT NULL,
   status ENUM('NOT_Started','IN_Progress','Completed','Abandoned'),
-  examinee_drive_qp_id int(10) unsigned,
+  examinee_batch_id int(10) unsigned,
   PRIMARY KEY (attempt_id)
 );
 
 ALTER TABLE as_attempt
-  ADD constraint `fk_as_attempt_examinee_drive_qp_id` FOREIGN KEY (examinee_drive_qp_id) REFERENCES as_examinee_drive_qp(examinee_drive_qp_id) ON DELETE SET NULL;
+  ADD constraint `fk_as_attempt_examinee_batch_id` FOREIGN KEY (examinee_batch_id) REFERENCES as_examinee_batch(examinee_batch_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response`
