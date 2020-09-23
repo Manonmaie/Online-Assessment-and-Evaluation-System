@@ -1,4 +1,4 @@
-package com.iiitb.examAdminBackEnd.examinee;
+package com.iiitb.examAdminBackEnd.course;
 
 import java.util.List;
 
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class ExamineeController {
+public class CourseController {
 	@Autowired
-	private ExamineeService examineeService;
+	private CourseService courseService;
 	
-	@RequestMapping("/examinees")
-	public List<Examinee> getAllExaminees() {
-		return examineeService.getAllExaminees();
+	@RequestMapping("/courses")
+	public List<Course> getAllCenters() {
+		return courseService.getAllCourses();
 	}
 }

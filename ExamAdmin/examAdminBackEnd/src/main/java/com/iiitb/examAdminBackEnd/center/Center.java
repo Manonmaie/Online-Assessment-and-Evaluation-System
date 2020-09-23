@@ -2,18 +2,20 @@ package com.iiitb.examAdminBackEnd.center;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class EaCenter {
+@Table(name = "ea_center")
+public class Center {
 	
 	@Id
 	private int center_id;
 	private String center_code,center_name;
 	private int center_capacity;
 	
-	public EaCenter() {
+	public Center() {
 	}
-	public EaCenter(int center_id, String center_code, String center_name, int center_capacity) {
+	public Center(int center_id, String center_code, String center_name, int center_capacity) {
 		super();
 		this.center_id = center_id;
 		this.center_code = center_code;

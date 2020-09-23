@@ -15,6 +15,7 @@ import {baseURL} from './shared/baseurl';
 import {ExamdriveService} from './services/examdrive.service';
 
 import {AppRoutingModule} from './app-routing/app-routing.module';
+import { CourseComponent } from './course/course.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
     ExamdriveComponent,
     HeaderComponent,
     CenterComponent,
-    ExamineeComponent
+    ExamineeComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,

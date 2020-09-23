@@ -16,7 +16,7 @@ public class ExamdriveController {
 	private ExamdriveService examdriveService;
 	
 	@RequestMapping("/examdrives")
-	public List<EaExamdrive> getAllExamDrives() {
+	public List<Examdrive> getAllExamDrives() {
 		return examdriveService.getAllExamDrives();
 	}
 }
