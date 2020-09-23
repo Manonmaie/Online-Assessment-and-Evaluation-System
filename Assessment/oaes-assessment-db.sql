@@ -82,7 +82,8 @@ ALTER TABLE as_batch
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
 
-INSERT INTO as_batch VALUES(0,"AM","2020-01-01 09:00:00","2020-01-01 12:00:00",1);
+INSERT INTO as_batch VALUES(0,"AM","2020-09-22 19:00:00","2020-09-22 21:00:00",1);
+INSERT INTO as_batch VALUES(0,"PM","2020-01-01 14:00:00","2020-01-01 17:00:00",1);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_course_master`
@@ -98,7 +99,9 @@ CREATE TABLE IF NOT EXISTS as_course_master (
 -- Data Entry for table `as_course_master`
 -- --------------------------------------------------------
 
-INSERT INTO as_course_master VALUES(0,"MATHS","Mathematices");
+INSERT INTO as_course_master VALUES(0,"MAT_Course","Mathematices");
+INSERT INTO as_course_master VALUES(0,"PHY_Course","Physics");
+INSERT INTO as_course_master VALUES(0,"CHEM_Course","Chemistry");
 
 -- --------------------------------------------------------
 -- Table structure for table `as_batch_course`
@@ -120,7 +123,11 @@ ALTER TABLE as_batch_course
 -- Data Entry for table `as_question_paper`
 -- --------------------------------------------------------
 
-INSERT INTO as_batch_course VALUES(1,1,1,'PENDING');
+INSERT INTO as_batch_course VALUES(0,1,1,'PENDING');
+INSERT INTO as_batch_course VALUES(0,1,2,'PENDING');
+INSERT INTO as_batch_course VALUES(0,2,3,'PENDING');
+
+-- select as_question_paper.qp_id, as_question_paper.qp_code, as_question_paper.maximum_marks, as_question_paper.duration, as_batch.batch_start_time, as_batch.batch_end_time, as_course_master.course_name, as_batch_course.qp_status from (((as_batch inner join as_batch_course on as_batch.batch_id = as_batch_course.batch_id) inner join as_course_master on as_batch_course.course_master_id = as_course_master.course_master_id) inner join as_question_paper on as_batch_course.batch_course_id = as_question_paper.batch_course_id) where as_batch.batch_start_time between "2020-01-01 08:00:00" and "2020-01-01 09:00:00";
 
 -- --------------------------------------------------------
 -- Table structure for table `as_invigilator`
@@ -159,11 +166,11 @@ ALTER TABLE as_question_paper
 -- --------------------------------------------------------
 
 INSERT INTO as_question_paper VALUES(0,"MAT_1",1,100,180);
-INSERT INTO as_question_paper VALUES(0,"PHY_1",1,50,120);
-INSERT INTO as_question_paper VALUES(0,"CHEM_1",1,25,60);
+INSERT INTO as_question_paper VALUES(0,"PHY_1",2,50,120);
+INSERT INTO as_question_paper VALUES(0,"CHEM_1",3,25,60);
 
 -- --------------------------------------------------------
--- Table structure for table `as_question_paper`
+-- Table structure for table `as_instruction`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_instruction(
   instruction_id int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -175,6 +182,18 @@ CREATE TABLE IF NOT EXISTS as_instruction(
 
 ALTER TABLE as_instruction
   ADD CONSTRAINT `fk_as_instruction_qp_id` FOREIGN KEY (qp_id) REFERENCES as_question_paper(qp_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_instruction`
+-- --------------------------------------------------------
+
+INSERT INTO as_instruction VALUES(0,"Mat_Ins_1",1,"Exam duration is 3 hrs");
+INSERT INTO as_instruction VALUES(0,"Mat_Ins_2",1,"It has two sections");
+INSERT INTO as_instruction VALUES(0,"Mat_Ins_3",1,"Each section contributes to 50% of the total marks");
+INSERT INTO as_instruction VALUES(0,"Phy_Ins_1",2,"Exam duration is 2 hrs");
+INSERT INTO as_instruction VALUES(0,"Phy_Ins_2",2,"It has only one section");
+INSERT INTO as_instruction VALUES(0,"Chem_Ins_1",3,"Exam duration is 1 hr");
+INSERT INTO as_instruction VALUES(0,"Chem_Ins_2",3,"It has only one section with no negative marking");
 
 -- --------------------------------------------------------
 -- Table structure for table `as_examinee_drive_qp`

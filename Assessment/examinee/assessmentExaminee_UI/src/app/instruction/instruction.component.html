@@ -1,0 +1,16 @@
+<div class="container">
+    <h2 style="text-align:center;"> Instructions for the Exam </h2>
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let instruction of instructions">
+            {{instruction.instructionText}}
+            </li>
+        </ul>
+    </div>
+    
+    <div class="text-center">
+        <button type="button" class="btn btn-success btn-lg btn-space" routerLink="/questionPaper">OK</button>
+    </div>
+    
+</div>
+
