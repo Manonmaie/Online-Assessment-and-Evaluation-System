@@ -1,6 +1,6 @@
 export class QuestionPaper{
     qpId: number;
-    qpCode: string;
+    examineeName: string;
     maximumMarks: number;
     duration: number;
     batchStartTime: string;

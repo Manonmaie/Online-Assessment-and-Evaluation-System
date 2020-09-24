@@ -1,4 +1,4 @@
 # Assessment System
 
 
-![alt text](./AssesmentModule_UML.png?raw=true)
+![alt text](./AssesmentModuleUML.png?raw=true)

@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS as_examinee(
 -- --------------------------------------------------------
 INSERT INTO as_examinee VALUES(0,"S1","ABC","abc","CSE","ABC@iiitb.org",'IIITB');
 INSERT INTO as_examinee VALUES(0,"S2","XYZ","xyz",NULL,NULL,NULL);
-
+INSERT INTO as_examinee VALUES(0,"S3","PQR","pqr","CSE","PQR@iiitb.org",'IITB');
+INSERT INTO as_examinee VALUES(0,"S4","UVW","uvw",NULL,NULL,NULL);
 -- --------------------------------------------------------
 -- Table structure for table as_center
 -- --------------------------------------------------------
@@ -84,6 +85,7 @@ CREATE TABLE IF NOT EXISTS as_batch(
   batch_end_time datetime NOT NULL,
   qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING') DEFAULT 'PENDING',
   center_id int(10) unsigned,
+  course_master_id int(10) unsigned,
   PRIMARY KEY (batch_id)
 );
 
@@ -94,8 +96,9 @@ ALTER TABLE as_batch
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
 
-INSERT INTO as_batch VALUES(0,"AM","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",1);
-INSERT INTO as_batch VALUES(0,"PM","2020-01-01 14:00:00","2020-01-01 17:00:00","RECEIVED",1);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-09-23 09:00:00","2020-09-23 12:00:00","RECEIVED",1,1);
+INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-01-01 14:00:00","2020-01-01 17:00:00","RECEIVED",1,2);
+INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_examinee_batch`
@@ -115,6 +118,11 @@ ALTER TABLE as_examinee_batch
 -- Data Entry for table as_examinee_batch
 -- --------------------------------------------------------
 INSERT INTO as_examinee_batch VALUES(0,1,1);
+INSERT INTO as_examinee_batch VALUES(0,1,2);
+INSERT INTO as_examinee_batch VALUES(0,1,3);
+INSERT INTO as_examinee_batch VALUES(0,2,1);
+INSERT INTO as_examinee_batch VALUES(0,2,2);
+INSERT INTO as_examinee_batch VALUES(0,2,4);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_invigilator`
@@ -152,9 +160,10 @@ ALTER TABLE as_question_paper
 -- Data Entry for table `as_question_paper`
 -- --------------------------------------------------------
 
-INSERT INTO as_question_paper VALUES(0,"MAT_1",1,100,180);
-INSERT INTO as_question_paper VALUES(0,"PHY_1",1,50,120);
-INSERT INTO as_question_paper VALUES(0,"CHEM_1",1,25,60);
+INSERT INTO as_question_paper VALUES(0,"MAT_Paper_1",1,100,180);
+INSERT INTO as_question_paper VALUES(0,"MAT_Paper_2",1,100,180);
+INSERT INTO as_question_paper VALUES(0,"PHY_1",2,50,120);
+INSERT INTO as_question_paper VALUES(0,"CHEM_1",3,25,60);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_instruction`

@@ -11,9 +11,9 @@ public class QuestionPaperService {
 	@Autowired
 	private QuestionPaperRepository asQuestionPaperRepository;
 	
-	public List<AsQuestionPaperBatchCourse> getAllQps(String dt1, String dt2) {
+	public List<AsQuestionPaperBatchCourse> getAllQps(int examineeId) {
 		List<AsQuestionPaperBatchCourse> qpList = new ArrayList<>();
-		asQuestionPaperRepository.findAllQuestionPaperNative(dt1,dt2)
+		asQuestionPaperRepository.findAllQuestionPaperNative(examineeId)
 		.forEach(qpList::add);
 		return qpList;
 	}
