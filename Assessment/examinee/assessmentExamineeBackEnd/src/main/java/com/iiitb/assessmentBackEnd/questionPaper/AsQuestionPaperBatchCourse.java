@@ -12,7 +12,7 @@ public class AsQuestionPaperBatchCourse {
 	
 	private enum qpStatusList { PENDING, RECEIVED, ERROR_SENDING };
 	
-	private String qpCode;
+	private String examineeName;
 	private double maximumMarks;
 	private int duration;
 	private LocalDateTime batchStartTime;
@@ -24,11 +24,11 @@ public class AsQuestionPaperBatchCourse {
 		
 	}
 	
-	public AsQuestionPaperBatchCourse(int qpId, String qpCode, double maximumMarks, int duration, LocalDateTime batchStartTime,
+	public AsQuestionPaperBatchCourse(int qpId, String examineeName, double maximumMarks, int duration, LocalDateTime batchStartTime,
 			LocalDateTime batchEndTime, String courseName, String qpStatus) {
 		super();
 		this.qpId = qpId;
-		this.qpCode = qpCode;
+		this.examineeName = examineeName;
 		this.maximumMarks = maximumMarks;
 		this.duration = duration;
 		this.batchStartTime = batchStartTime;
@@ -43,11 +43,11 @@ public class AsQuestionPaperBatchCourse {
 	public void setQpId(int qpId) {
 		this.qpId = qpId;
 	}
-	public String getQpCode() {
-		return qpCode;
+	public String getExamineeName() {
+		return examineeName;
 	}
-	public void setQpCode(String qpCode) {
-		this.qpCode = qpCode;
+	public void setExamineeName(String examineeName) {
+		this.examineeName = examineeName;
 	}
 	public double getMaximumMarks() {
 		return maximumMarks;

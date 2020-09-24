@@ -12,8 +12,8 @@ export class QuestionPaperService {
 
   constructor(private http: HttpClient) { }
 
-  getQuestionPapers(): Observable<QuestionPaper[]>{
-    return this.http.get<QuestionPaper[]>(baseURL + 'questionPapers');
+  getQuestionPapers(examineeId: number): Observable<QuestionPaper[]>{
+    return this.http.get<QuestionPaper[]>(baseURL + 'examinee/' + examineeId + '/questionPapers');
   }
 
   // getQuestionPapers(): QuestionPaper[]{
