@@ -2,16 +2,18 @@ package com.iiitb.examAdminBackEnd.examinee;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class EaExaminee {
+@Table(name = "ea_examinee")
+public class Examinee {
 	@Id
 	private int examinee_id;
 	private String examinee_code,examinee_name,examinee_password,examinee_branch,examinee_email,examinee_college;
 	
-	public EaExaminee() {
+	public Examinee() {
 	}
-	public EaExaminee(int examinee_id, String examinee_code, String examinee_name, String examinee_password,
+	public Examinee(int examinee_id, String examinee_code, String examinee_name, String examinee_password,
 			String examinee_branch, String examinee_email, String examinee_college) {
 		super();
 		this.examinee_id = examinee_id;

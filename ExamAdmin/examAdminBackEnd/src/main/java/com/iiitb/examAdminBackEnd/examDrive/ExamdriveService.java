@@ -19,8 +19,8 @@ public class ExamdriveService {
 //			new ExamDrive(1,"IMP","Improvement Examination")
 //			);
 	
-	public List<EaExamdrive> getAllExamDrives() {
-		List<EaExamdrive> examdrives = new ArrayList<>();
+	public List<Examdrive> getAllExamDrives() {
+		List<Examdrive> examdrives = new ArrayList<>();
 		examdriveRepository.findAll().forEach(examdrives::add);
 		return examdrives;
 	}

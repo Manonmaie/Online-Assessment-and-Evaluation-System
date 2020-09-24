@@ -14,7 +14,7 @@ public class CenterController {
 	private CenterService centerService;
 	
 	@RequestMapping("/centers")
-	public List<EaCenter> getAllCenters() {
+	public List<Center> getAllCenters() {
 		return centerService.getAllCenters();
 	}
 }
