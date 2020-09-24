@@ -17,4 +17,8 @@ public class CourseService {
 		courseRepository.findAll().forEach(courses::add);
 		return courses;
 	}
+
+	public void deleteCourse(int id) {
+		courseRepository.deleteById(id);
+	}
 }

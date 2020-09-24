@@ -15,4 +15,8 @@ export class CenterService {
   getCenters(): Observable<Center[]>{
     return this.http.get<Center[]>(baseURL + 'centers');
   }
+
+  deleteCenter(id: number): Observable<any>{
+    return this.http.delete<any>(baseURL + 'centers/'+id);
+  }
 }
