@@ -15,4 +15,7 @@ export class ExamineeService {
   getExaminees(): Observable<Examinee[]>{
     return this.http.get<Examinee[]>(baseURL + 'examinees');
   }
+  deleteExaminee(id: number): Observable<any>{
+    return this.http.delete<any>(baseURL+'examinees/'+id);
+  }
 }

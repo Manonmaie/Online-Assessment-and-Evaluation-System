@@ -13,6 +13,19 @@ export class ExamdriveComponent implements OnInit {
   constructor(private examdriveService:ExamdriveService) { }
 
   ngOnInit(): void {
+    this.getExamdrives();
+  }
+
+  getExamdrives(): void{
     this.examdriveService.getExamdrives().subscribe((examdrives) => this.examdrives = examdrives);
+  }
+
+  deleteExamdrive(examdrive: Examdrive): void{
+    if(confirm("Are you sure to delete the "+examdrive.examdrive_name+" drive")){
+      this.examdriveService.deleteExamdrive(examdrive.examdrive_id).subscribe( response => {
+        // alert(response.message);
+        this.getExamdrives();
+      });
+    }
   }
 }

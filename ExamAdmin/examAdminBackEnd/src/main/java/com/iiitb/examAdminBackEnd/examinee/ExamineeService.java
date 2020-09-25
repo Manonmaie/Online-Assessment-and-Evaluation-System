@@ -16,4 +16,8 @@ public class ExamineeService {
 		examineeRepository.findAll().forEach(examinees::add);
 		return examinees;
 	}
+
+	public void deleteExaminee(int id) {
+		examineeRepository.deleteById(id);
+	}
 }

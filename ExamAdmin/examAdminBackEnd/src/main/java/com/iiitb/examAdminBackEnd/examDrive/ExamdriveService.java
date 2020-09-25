@@ -1,7 +1,6 @@
 package com.iiitb.examAdminBackEnd.examDrive;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +22,9 @@ public class ExamdriveService {
 		List<Examdrive> examdrives = new ArrayList<>();
 		examdriveRepository.findAll().forEach(examdrives::add);
 		return examdrives;
+	}
+
+	public void deleteExamdrive(int id) {
+		examdriveRepository.deleteById(id);
 	}
 }

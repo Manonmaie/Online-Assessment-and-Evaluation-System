@@ -17,4 +17,8 @@ public class CenterService {
 		centerRepository.findAll().forEach(centers::add);
 		return centers;
 	}
+
+	public void deleteCenter(int id) {
+		centerRepository.deleteById(id);
+	}
 }

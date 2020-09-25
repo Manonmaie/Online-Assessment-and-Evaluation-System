@@ -13,6 +13,19 @@ export class CenterComponent implements OnInit {
   constructor(private centerService:CenterService) { }
 
   ngOnInit(): void {
+    this.getCenters();
+  }
+
+  getCenters(): void{
     this.centerService.getCenters().subscribe((centers) => this.centers = centers);
+  }
+
+  deleteCenter(center: Center): void{
+    if(confirm("Are you sure to delete the "+center.center_name+" center")){
+      this.centerService.deleteCenter(center.center_id).subscribe( response => {
+        // alert(response.message);
+        this.getCenters();
+      });
+    }
   }
 }

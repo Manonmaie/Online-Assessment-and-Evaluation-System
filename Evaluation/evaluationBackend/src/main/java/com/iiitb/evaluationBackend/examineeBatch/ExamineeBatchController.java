@@ -1,4 +1,4 @@
-package com.iiitb.evaluationBackend.driveCenter;
+package com.iiitb.evaluationBackend.examineeBatch;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class DriveCenterExamineeController {
+public class ExamineeBatchController {
 	@Autowired
-	private DriveCenterExamineeService examdriveService;
+	private ExamineeBatchService examdriveService;
 	
 	@RequestMapping("/examdrives")
-	public List<EvDriveCenterExaminee> getAllExamDrives() {
+	public List<EvExamineeBatch> getAllExamDrives() {
 		return examdriveService.getAllExamDrives();
 	}
 }
