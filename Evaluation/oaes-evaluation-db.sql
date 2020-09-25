@@ -83,32 +83,32 @@ ALTER TABLE ev_item_true_false
   ADD CONSTRAINT `fk_ev_item_true_false_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
--- Table structure for table `ev_drive_center_examinee`
+-- Table structure for table `ev_examinee_batch`
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS ev_drive_center_examinee(
-  drive_center_examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS ev_examinee_batch(
+  examinee_batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   status ENUM('PENDING','COMPLETED','ABANDONED') DEFAULT 'PENDING',
-  PRIMARY KEY(drive_center_examinee_id)
+  PRIMARY KEY(examinee_batch_id)
 );
 
-INSERT INTO ev_drive_center_examinee VALUES(0,'COMPLETED');
-INSERT INTO ev_drive_center_examinee VALUES(0,'PENDING');
-INSERT INTO ev_drive_center_examinee VALUES(0,'COMPLETED');
-INSERT INTO ev_drive_center_examinee VALUES(0,'PENDING');
-INSERT INTO ev_drive_center_examinee VALUES(0,'ABANDONED');
+INSERT INTO ev_examinee_batch VALUES(0,'COMPLETED');
+INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+INSERT INTO ev_examinee_batch VALUES(0,'COMPLETED');
+INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+INSERT INTO ev_examinee_batch VALUES(0,'ABANDONED');
 -- --------------------------------------------------------
 -- Table structure for table ev_examinee_item_marks
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_examinee_item_marks(
 	examinee_item_marks_id int(10) unsigned NOT NULL AUTO_INCREMENT,
 	examinee_item_marks float(24) NOT NULL,
-	drive_center_examinee_id int(10) unsigned,
+	examinee_batch_id int(10) unsigned,
 	qp_item_id int(10) unsigned,
 	PRIMARY KEY (examinee_item_marks_id)
 );
 
 ALTER TABLE ev_examinee_item_marks
-  ADD CONSTRAINT `fk_ev_examinee_item_marks_drive_center_examinee_id` FOREIGN KEY (drive_center_examinee_id) REFERENCES ev_drive_center_examinee(drive_center_examinee_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_ev_examinee_item_marks_examinee_batch_id` FOREIGN KEY (examinee_batch_id) REFERENCES ev_examinee_batch(examinee_batch_id) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_ev_examinee_item_marks_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
