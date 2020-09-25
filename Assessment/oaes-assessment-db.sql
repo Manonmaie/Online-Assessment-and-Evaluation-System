@@ -1,6 +1,7 @@
 DROP DATABASE oaes_assessment_db;
 CREATE DATABASE oaes_assessment_db;
 USE oaes_assessment_db;
+
 --
 -- Database: `oaes_assessment_db`
 --
@@ -96,7 +97,7 @@ ALTER TABLE as_batch
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
 
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-09-23 09:00:00","2020-09-23 12:00:00","RECEIVED",1,1);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-09-25 14:00:00","2020-09-25 23:00:00","RECEIVED",1,1);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-01-01 14:00:00","2020-01-01 17:00:00","RECEIVED",1,2);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3);
 
@@ -220,6 +221,21 @@ ALTER TABLE as_qp_item
   ADD constraint `fk_as_qp_item_qp_id` FOREIGN KEY (qp_id) REFERENCES as_question_paper(qp_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table `as_qp_item`
+-- --------------------------------------------------------
+
+INSERT INTO as_qp_item VALUES(0,"Item1_qp1","What is a database?",2,"MCQ","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"MCQ","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item3_qp1","What is a FK?",2,"MCQ","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item4_qp1","UK and PK are same.",1,"True/False","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item5_qp1","Uk with no null values is Pk.",2,"True/False","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item1_qp2","What is a database?",2,"MCQ","UNDERSTAND",2);
+INSERT INTO as_qp_item VALUES(0,"Item2_qp2","What is a  PK?",1,"MCQ","UNDERSTAND",2);
+INSERT INTO as_qp_item VALUES(0,"Item3_qp2","What is a FK?",2,"MCQ","UNDERSTAND",2);
+INSERT INTO as_qp_item VALUES(0,"Item4_qp2","UK and PK are same.",1,"True/False","UNDERSTAND",2);
+INSERT INTO as_qp_item VALUES(0,"Item5_qp2","Uk with no null values is Pk.",2,"True/False","UNDERSTAND",2);
+
+-- --------------------------------------------------------
 -- Table structure for table `as_item_mcq_options`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_item_mcq_options(
@@ -227,12 +243,28 @@ CREATE TABLE IF NOT EXISTS as_item_mcq_options(
   item_mcq_options_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
   mcq_option_text varchar(255) NOT NULL,
-  mcq_option_percentage float(24) DEFAULT 0.0,
   PRIMARY KEY(item_mcq_id)
 );
 
 ALTER TABLE as_item_mcq_options
   ADD constraint `as_item_mcq_options_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES as_qp_item(qp_item_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_item_mcq_options`
+-- --------------------------------------------------------
+
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item1_qp1",1,"Collection of related data");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item1_qp1",1,"Collection of data");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item1_qp1",1,"Collection of words");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item1_qp1",1,"Collection of people");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item2_qp1",2,"Primary Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item2_qp1",2,"Personal Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item2_qp1",2,"Person Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item2_qp1",2,"Primary Keyword");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item3_qp1",3,"Foreign Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item3_qp1",3,"Foreign Keyword");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item3_qp1",3,"Fashion Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item3_qp1",3,"Forward Key");
 
 -- --------------------------------------------------------
 -- Table structure for table `as_item_true_false`
@@ -241,8 +273,6 @@ CREATE TABLE IF NOT EXISTS as_item_true_false(
   item_true_false_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
   item_true_false_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
-  true_percentage float(24) DEFAULT 0.0,
-  false_percentage  float(24) DEFAULT 0.0,
   PRIMARY KEY(item_true_false_id)
 );
 
@@ -257,7 +287,7 @@ CREATE TABLE IF NOT EXISTS as_attempt (
   attempt_code varchar(255) UNIQUE NOT NULL,
   attempt_number int(10) unsigned NOT NULL,
   attempt_start_time timestamp NOT NULL,
-  attempt_end_time timestamp NOT NULL,
+  attempt_end_time timestamp,
   status ENUM('NOT_Started','IN_Progress','Completed','Abandoned'),
   examinee_batch_id int(10) unsigned,
   PRIMARY KEY (attempt_id)

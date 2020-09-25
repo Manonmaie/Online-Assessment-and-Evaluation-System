@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { InstructionComponent } from './instruction/instruction.component';
 import { QuestionPaperComponent } from './question-paper/question-paper.component';
+import { ExaminationComponent } from './examination/examination.component';
 
 const routes: Routes = [
   { path: 'questionPaper/1', component: QuestionPaperComponent },
   { path: 'questionPaperinstruction/:id', component: InstructionComponent },
+  { path: 'examination/:id', component: ExaminationComponent },
   { path: '', redirectTo: '/questionPaper/1', pathMatch: 'full' }
 ];
 

@@ -10,15 +10,18 @@ import { QuestionPaperComponent } from './question-paper/question-paper.componen
 import { HttpClientModule } from "@angular/common/http";
 import { baseURL } from "./shared/baseurl";
 import { InstructionComponent } from './instruction/instruction.component';
+import { DatePipe } from '@angular/common'
 
 import { QuestionPaperService } from "./services/question-paper.service";
 import { InstructionService } from "./services/instruction.service";
+import { ExaminationComponent } from './examination/examination.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionPaperComponent,
-    InstructionComponent
+    InstructionComponent,
+    ExaminationComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +34,7 @@ import { InstructionService } from "./services/instruction.service";
   providers: [
     QuestionPaperService,
     InstructionService,
+    DatePipe,
     { provide: 'BaseURL', useValue: baseURL }
   ],
   bootstrap: [AppComponent]
