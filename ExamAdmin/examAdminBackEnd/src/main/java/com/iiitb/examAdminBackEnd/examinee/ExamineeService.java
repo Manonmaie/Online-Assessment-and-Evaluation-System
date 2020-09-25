@@ -11,9 +11,13 @@ public class ExamineeService {
 	@Autowired
 	private ExamineeRepository examineeRepository;
 	
-	public List<EaExaminee> getAllExaminees() {
-		List<EaExaminee> examinees = new ArrayList<>();
+	public List<Examinee> getAllExaminees() {
+		List<Examinee> examinees = new ArrayList<>();
 		examineeRepository.findAll().forEach(examinees::add);
 		return examinees;
+	}
+
+	public void deleteExaminee(int id) {
+		examineeRepository.deleteById(id);
 	}
 }

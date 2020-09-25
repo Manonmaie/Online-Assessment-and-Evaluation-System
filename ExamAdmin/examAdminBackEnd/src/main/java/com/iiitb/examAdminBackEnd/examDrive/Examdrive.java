@@ -2,9 +2,11 @@ package com.iiitb.examAdminBackEnd.examDrive;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class EaExamdrive {
+@Table(name = "ea_examdrive")
+public class Examdrive {
 	
 	@Id
 	private int examdrive_id;
@@ -13,10 +15,10 @@ public class EaExamdrive {
 //	private statusList status;
 	private String status;
 	
-	public EaExamdrive() {
+	public Examdrive() {
 	}
 	
-	public EaExamdrive(int examdrive_id, String examdrive_code, String examdrive_name, String status) {
+	public Examdrive(int examdrive_id, String examdrive_code, String examdrive_name, String status) {
 		super();
 		this.examdrive_id = examdrive_id;
 		this.examdrive_code = examdrive_code;

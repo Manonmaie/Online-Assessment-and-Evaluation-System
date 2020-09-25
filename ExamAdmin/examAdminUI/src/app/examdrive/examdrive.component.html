@@ -10,7 +10,7 @@
     <li class="list-group-item" *ngFor="let examdrive of examdrives">
       {{examdrive.examdrive_name}} 
       <font size="-2">[{{examdrive.status}}]</font>
-      <button type="button" class="btn btn-danger float-right"><i class="fa fa-trash-o"></i></button>
+      <button type="button" class="btn btn-danger float-right" (click)="deleteExamdrive(examdrive)"><i class="fa fa-trash-o"></i></button>
       <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
       <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>
     </li>

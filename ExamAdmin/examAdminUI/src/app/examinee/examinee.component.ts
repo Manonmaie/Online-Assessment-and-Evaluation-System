@@ -10,9 +10,22 @@ import {Observable, of} from 'rxjs';
 })
 export class ExamineeComponent implements OnInit {
   examinees: Examinee[];
-  constructor(private examdriveService:ExamineeService) { }
+  constructor(private examineeService:ExamineeService) { }
 
   ngOnInit(): void {
-    this.examdriveService.getExaminees().subscribe((examinees) => this.examinees = examinees);
+    this.getExaminees();
+  }
+
+  getExaminees():void {
+    this.examineeService.getExaminees().subscribe((examinees) => this.examinees = examinees);
+  }
+
+  deleteExaminee(examinee: Examinee): void{
+    if(confirm("Are you sure to delete the "+examinee.examinee_name+" student")){
+      this.examineeService.deleteExaminee(examinee.examinee_id).subscribe( response => {
+        // alert(response.message);
+        this.getExaminees();
+      });
+    }
   }
 }

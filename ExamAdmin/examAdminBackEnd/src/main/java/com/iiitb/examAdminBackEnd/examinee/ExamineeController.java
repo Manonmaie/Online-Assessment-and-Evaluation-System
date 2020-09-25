@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,7 +16,12 @@ public class ExamineeController {
 	private ExamineeService examineeService;
 	
 	@RequestMapping("/examinees")
-	public List<EaExaminee> getAllExaminees() {
+	public List<Examinee> getAllExaminees() {
 		return examineeService.getAllExaminees();
+	}
+	
+	@RequestMapping(method=RequestMethod.DELETE, value="/examinees/{id}")
+	public void deleteExaminee(@PathVariable int id) {
+		examineeService.deleteExaminee(id);
 	}
 }

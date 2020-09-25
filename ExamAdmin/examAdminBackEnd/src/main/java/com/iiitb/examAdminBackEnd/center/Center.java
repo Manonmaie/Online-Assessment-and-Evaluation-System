@@ -2,21 +2,25 @@ package com.iiitb.examAdminBackEnd.center;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class EaCenter {
+@Table(name = "ea_center")
+public class Center {
 	
 	@Id
 	private int center_id;
 	private String center_code,center_name;
+	private int center_capacity;
 	
-	public EaCenter() {
+	public Center() {
 	}
-	public EaCenter(int center_id, String center_code, String center_name) {
+	public Center(int center_id, String center_code, String center_name, int center_capacity) {
 		super();
 		this.center_id = center_id;
 		this.center_code = center_code;
 		this.center_name = center_name;
+		this.center_capacity = center_capacity;
 	}
 	
 	public int getCenter_id() {
@@ -36,5 +40,11 @@ public class EaCenter {
 	}
 	public void setCenter_name(String center_name) {
 		this.center_name = center_name;
+	}
+	public int getCenter_capacity() {
+		return center_capacity;
+	}
+	public void setCenter_capacity(int center_capacity) {
+		this.center_capacity = center_capacity;
 	}
 }

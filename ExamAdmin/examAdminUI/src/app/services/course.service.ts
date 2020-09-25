@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Center} from '../shared/center';
+import {Course} from '../shared/course';
 import { HttpClient } from '@angular/common/http';
 import {baseURL} from '../shared/baseurl';
 import {Observable, of} from 'rxjs';
@@ -8,15 +8,14 @@ import { delay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CenterService {
+export class CourseService {
 
   constructor(private http: HttpClient) { }
 
-  getCenters(): Observable<Center[]>{
-    return this.http.get<Center[]>(baseURL + 'centers');
+  getCourses(): Observable<Course[]>{
+    return this.http.get<Course[]>(baseURL + 'courses');
   }
-
-  deleteCenter(id: number): Observable<any>{
-    return this.http.delete<any>(baseURL + 'centers/'+id);
+  deleteCourse(id: number): Observable<any>{
+    return this.http.delete<any>(baseURL+'courses/'+id);
   }
 }

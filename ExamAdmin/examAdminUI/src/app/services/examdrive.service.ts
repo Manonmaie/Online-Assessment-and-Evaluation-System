@@ -16,4 +16,7 @@ export class ExamdriveService {
     // return of(EXAMDRIVES).pipe(delay(2000));
     return this.http.get<Examdrive[]>(baseURL + 'examdrives');
   }
+  deleteExamdrive(id: number): Observable<any>{
+    return this.http.delete<any>(baseURL+'examdrives/'+id);
+  }
 }

@@ -1,18 +1,19 @@
 <div class="container">
     <button type="button" class="btn btn-success btn-lg btn-block">
         <i class="fa fa-plus-square" style="font-size:24px"></i>
-        Add Student
+        Add Course
       </button>
     </div>
     
-<div class="container">
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let examinee of examinees">
-          {{examinee.examinee_name}} 
-          <font size="-2">[{{examinee.examinee_code}}]</font>
-          <button type="button" class="btn btn-danger float-right" (click)="deleteExaminee(examinee)"><i class="fa fa-trash-o"></i></button>
+    <div class="container">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let course of courses">
+          {{course.course_name}} 
+          <font size="-2">[{{course.course_code}}]</font>
+          <button type="button" class="btn btn-danger float-right" (click)="deleteCourse(course)"><i class="fa fa-trash-o"></i></button>
           <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
           <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>
         </li>
-    </ul>
-</div>
+      </ul>
+    </div>
+    

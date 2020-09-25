@@ -1,4 +1,4 @@
-package com.iiitb.examAdminBackEnd.center;
+package com.iiitb.examAdminBackEnd.course;
 
 import java.util.List;
 
@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class CenterController {
+public class CourseController {
 	@Autowired
-	private CenterService centerService;
+	private CourseService courseService;
 	
-	@RequestMapping("/centers")
-	public List<Center> getAllCenters() {
-		return centerService.getAllCenters();
+	@RequestMapping("/courses")
+	public List<Course> getAllCourses() {
+		return courseService.getAllCourses();
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/centers/{id}")
-	public void deleteCenter(@PathVariable int id) {
-		centerService.deleteCenter(id);
+	@RequestMapping(method=RequestMethod.DELETE, value="/courses/{id}")
+	public void deleteCourse(@PathVariable int id) {
+		courseService.deleteCourse(id);
 	}
 }

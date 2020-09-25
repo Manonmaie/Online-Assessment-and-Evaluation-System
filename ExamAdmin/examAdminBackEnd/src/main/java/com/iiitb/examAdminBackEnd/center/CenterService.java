@@ -12,9 +12,13 @@ public class CenterService {
 	@Autowired
 	private CenterRepository centerRepository;
 	
-	public List<EaCenter> getAllCenters() {
-		List<EaCenter> centers = new ArrayList<>();
+	public List<Center> getAllCenters() {
+		List<Center> centers = new ArrayList<>();
 		centerRepository.findAll().forEach(centers::add);
 		return centers;
+	}
+
+	public void deleteCenter(int id) {
+		centerRepository.deleteById(id);
 	}
 }
