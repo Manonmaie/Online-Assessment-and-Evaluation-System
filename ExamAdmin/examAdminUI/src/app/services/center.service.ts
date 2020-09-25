@@ -19,4 +19,8 @@ export class CenterService {
   deleteCenter(id: number): Observable<any>{
     return this.http.delete<any>(baseURL + 'centers/'+id);
   }
+
+  getCenter(id: number): Observable<Center>{
+    return this.http.get<Center>(baseURL + 'centers/'+id);
+  }
 }
