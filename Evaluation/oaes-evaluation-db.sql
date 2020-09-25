@@ -93,6 +93,9 @@ CREATE TABLE IF NOT EXISTS ev_examinee_batch(
 
 INSERT INTO ev_examinee_batch VALUES(0,'COMPLETED');
 INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+INSERT INTO ev_examinee_batch VALUES(0,'ABANDONED');
 INSERT INTO ev_examinee_batch VALUES(0,'COMPLETED');
 INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
 INSERT INTO ev_examinee_batch VALUES(0,'ABANDONED');
