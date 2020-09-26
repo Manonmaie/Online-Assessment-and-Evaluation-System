@@ -21,8 +21,8 @@ export class ExamdriveComponent implements OnInit {
   }
 
   deleteExamdrive(examdrive: Examdrive): void{
-    if(confirm("Are you sure to delete the "+examdrive.examdrive_name+" drive")){
-      this.examdriveService.deleteExamdrive(examdrive.examdrive_id).subscribe( response => {
+    if(confirm("Are you sure to delete the "+examdrive.examdriveName+" drive")){
+      this.examdriveService.deleteExamdrive(examdrive.examdriveId).subscribe( response => {
         // alert(response.message);
         this.getExamdrives();
       });

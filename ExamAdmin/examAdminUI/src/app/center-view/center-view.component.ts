@@ -14,8 +14,8 @@ export class CenterViewComponent implements OnInit {
   constructor(private centerService:CenterService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const center_id = this.route.snapshot.params['id'];
-    this.getCenter(center_id);
+    const centerId = this.route.snapshot.params['id'];
+    this.getCenter(centerId);
   }
 
   getCenter(id: number): void{

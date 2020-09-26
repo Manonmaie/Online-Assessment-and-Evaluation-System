@@ -8,8 +8,8 @@
     <div class="container">
       <ul class="list-group">
         <li class="list-group-item" *ngFor="let course of courses">
-          {{course.course_name}} 
-          <font size="-2">[{{course.course_code}}]</font>
+          {{course.courseName}} 
+          <font size="-2">[{{course.courseCode}}]</font>
           <button type="button" class="btn btn-danger float-right" (click)="deleteCourse(course)"><i class="fa fa-trash-o"></i></button>
           <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
           <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>

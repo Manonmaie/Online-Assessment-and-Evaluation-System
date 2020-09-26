@@ -21,8 +21,8 @@ export class CourseComponent implements OnInit {
   }
 
   deleteCourse(course: Course): void{
-    if(confirm("Are you sure to delete the "+course.course_name+" course")){
-      this.courseService.deleteCourse(course.course_master_id).subscribe( response => {
+    if(confirm("Are you sure to delete the "+course.courseName+" course")){
+      this.courseService.deleteCourse(course.courseMasterId).subscribe( response => {
         // alert(response.message);
         this.getCourses();
       });
