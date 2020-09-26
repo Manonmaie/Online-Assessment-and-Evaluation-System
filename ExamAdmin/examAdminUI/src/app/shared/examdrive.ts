@@ -1,6 +1,9 @@
+import { Course } from './course';
+
 export class Examdrive{
-    examdrive_id: number;
-    examdrive_code: string;
-    examdrive_name: string;
+    examdriveId: number;
+    examdriveCode: string;
+    examdriveName: string;
     status: string;
+    course: Course;
 }

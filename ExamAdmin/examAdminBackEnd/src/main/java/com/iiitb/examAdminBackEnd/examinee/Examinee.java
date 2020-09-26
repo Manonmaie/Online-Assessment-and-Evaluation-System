@@ -8,63 +8,63 @@ import javax.persistence.Table;
 @Table(name = "ea_examinee")
 public class Examinee {
 	@Id
-	private int examinee_id;
-	private String examinee_code,examinee_name,examinee_password,examinee_branch,examinee_email,examinee_college;
+	private int examineeId;
+	private String examineeCode,examineeName,examineePassword,examineeBranch,examineeEmail,examineeCollege;
 	
 	public Examinee() {
 	}
-	public Examinee(int examinee_id, String examinee_code, String examinee_name, String examinee_password,
-			String examinee_branch, String examinee_email, String examinee_college) {
+	public Examinee(int examineeId, String examineeCode, String examineeName, String examineePassword,
+			String examineeBranch, String examineeEmail, String examineeCollege) {
 		super();
-		this.examinee_id = examinee_id;
-		this.examinee_code = examinee_code;
-		this.examinee_name = examinee_name;
-		this.examinee_password = examinee_password;
-		this.examinee_branch = examinee_branch;
-		this.examinee_email = examinee_email;
-		this.examinee_college = examinee_college;
+		this.examineeId = examineeId;
+		this.examineeCode = examineeCode;
+		this.examineeName = examineeName;
+		this.examineePassword = examineePassword;
+		this.examineeBranch = examineeBranch;
+		this.examineeEmail = examineeEmail;
+		this.examineeCollege = examineeCollege;
 	}
 	
-	public int getExaminee_id() {
-		return examinee_id;
+	public int getExamineeId() {
+		return examineeId;
 	}
-	public void setExaminee_id(int examinee_id) {
-		this.examinee_id = examinee_id;
+	public void setExamineeId(int examineeId) {
+		this.examineeId = examineeId;
 	}
-	public String getExaminee_code() {
-		return examinee_code;
+	public String getExamineeCode() {
+		return examineeCode;
 	}
-	public void setExaminee_code(String examinee_code) {
-		this.examinee_code = examinee_code;
+	public void setExamineeCode(String examineeCode) {
+		this.examineeCode = examineeCode;
 	}
-	public String getExaminee_name() {
-		return examinee_name;
+	public String getExamineeName() {
+		return examineeName;
 	}
-	public void setExaminee_name(String examinee_name) {
-		this.examinee_name = examinee_name;
+	public void setExamineeName(String examineeName) {
+		this.examineeName = examineeName;
 	}
-	public String getExaminee_password() {
-		return examinee_password;
+	public String getExamineePassword() {
+		return examineePassword;
 	}
-	public void setExaminee_password(String examinee_password) {
-		this.examinee_password = examinee_password;
+	public void setExamineePassword(String examineePassword) {
+		this.examineePassword = examineePassword;
 	}
-	public String getExaminee_branch() {
-		return examinee_branch;
+	public String getExamineeBranch() {
+		return examineeBranch;
 	}
-	public void setExaminee_branch(String examinee_branch) {
-		this.examinee_branch = examinee_branch;
+	public void setExamineeBranch(String examineeBranch) {
+		this.examineeBranch = examineeBranch;
 	}
-	public String getExaminee_email() {
-		return examinee_email;
+	public String getExamineeEmail() {
+		return examineeEmail;
 	}
-	public void setExaminee_email(String examinee_email) {
-		this.examinee_email = examinee_email;
+	public void setExamineeEmail(String examineeEmail) {
+		this.examineeEmail = examineeEmail;
 	}
-	public String getExaminee_college() {
-		return examinee_college;
+	public String getExamineeCollege() {
+		return examineeCollege;
 	}
-	public void setExaminee_college(String examinee_college) {
-		this.examinee_college = examinee_college;
+	public void setExamineeCollege(String examineeCollege) {
+		this.examineeCollege = examineeCollege;
 	}
 }

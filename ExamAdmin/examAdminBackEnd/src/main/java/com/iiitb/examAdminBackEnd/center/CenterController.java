@@ -1,6 +1,7 @@
 package com.iiitb.examAdminBackEnd.center;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +19,11 @@ public class CenterController {
 	@RequestMapping("/centers")
 	public List<Center> getAllCenters() {
 		return centerService.getAllCenters();
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/centers/{id}")
+	public Optional<Center> getCenter(@PathVariable int id) {
+		return centerService.getCenter(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/centers/{id}")

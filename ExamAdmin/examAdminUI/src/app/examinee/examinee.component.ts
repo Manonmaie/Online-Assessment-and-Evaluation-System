@@ -21,8 +21,8 @@ export class ExamineeComponent implements OnInit {
   }
 
   deleteExaminee(examinee: Examinee): void{
-    if(confirm("Are you sure to delete the "+examinee.examinee_name+" student")){
-      this.examineeService.deleteExaminee(examinee.examinee_id).subscribe( response => {
+    if(confirm("Are you sure to delete the "+examinee.examineeName+" student")){
+      this.examineeService.deleteExaminee(examinee.examineeId).subscribe( response => {
         // alert(response.message);
         this.getExaminees();
       });

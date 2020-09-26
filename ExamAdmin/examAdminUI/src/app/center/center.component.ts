@@ -21,8 +21,8 @@ export class CenterComponent implements OnInit {
   }
 
   deleteCenter(center: Center): void{
-    if(confirm("Are you sure to delete the "+center.center_name+" center")){
-      this.centerService.deleteCenter(center.center_id).subscribe( response => {
+    if(confirm("Are you sure to delete the "+center.centerName+" center")){
+      this.centerService.deleteCenter(center.centerId).subscribe( response => {
         // alert(response.message);
         this.getCenters();
       });
