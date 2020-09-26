@@ -26,4 +26,8 @@ public class CenterService {
 	public Optional<Center> getCenter(int id) {
 		return centerRepository.findById(id);
 	}
+
+	public void addCenter(Center center) {
+		centerRepository.save(center);
+	}
 }

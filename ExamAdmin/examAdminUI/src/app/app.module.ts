@@ -11,6 +11,7 @@ import { ExamineeComponent } from './examinee/examinee.component';
 import { HttpClientModule } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 import {baseURL} from './shared/baseurl';
+import { FormsModule } from '@angular/forms';
 
 import {ExamdriveService} from './services/examdrive.service';
 
@@ -18,6 +19,7 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import { CourseComponent } from './course/course.component';
 import { CenterViewComponent } from './center-view/center-view.component';
 import { CourseViewComponent } from './course-view/course-view.component';
+import { CenterAddComponent } from './center-add/center-add.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,16 @@ import { CourseViewComponent } from './course-view/course-view.component';
     ExamineeComponent,
     CourseComponent,
     CenterViewComponent,
-    CourseViewComponent
+    CourseViewComponent,
+    CenterAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     // HttpModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     ExamdriveService,

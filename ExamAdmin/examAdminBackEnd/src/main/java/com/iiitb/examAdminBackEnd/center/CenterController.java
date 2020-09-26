@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +30,10 @@ public class CenterController {
 	@RequestMapping(method=RequestMethod.DELETE, value="/centers/{id}")
 	public void deleteCenter(@PathVariable int id) {
 		centerService.deleteCenter(id);
+	}
+	
+	@RequestMapping(method=RequestMethod.POST,value="/centers")
+	public void addCenter(@RequestBody Center center) {
+		centerService.addCenter(center);
 	}
 }
