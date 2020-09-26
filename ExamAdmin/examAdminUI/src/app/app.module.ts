@@ -17,6 +17,7 @@ import {ExamdriveService} from './services/examdrive.service';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { CourseComponent } from './course/course.component';
 import { CenterViewComponent } from './center-view/center-view.component';
+import { CourseViewComponent } from './course-view/course-view.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CenterViewComponent } from './center-view/center-view.component';
     CenterComponent,
     ExamineeComponent,
     CourseComponent,
-    CenterViewComponent
+    CenterViewComponent,
+    CourseViewComponent
   ],
   imports: [
     BrowserModule,

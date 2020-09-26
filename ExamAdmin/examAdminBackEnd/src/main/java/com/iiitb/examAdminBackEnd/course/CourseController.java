@@ -1,6 +1,7 @@
 package com.iiitb.examAdminBackEnd.course;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,5 +24,10 @@ public class CourseController {
 	@RequestMapping(method=RequestMethod.DELETE, value="/courses/{id}")
 	public void deleteCourse(@PathVariable int id) {
 		courseService.deleteCourse(id);
+	}
+	
+	@RequestMapping("/courses/{id}")
+	public Optional<Course> getCourse(@PathVariable int id){
+		return courseService.getCourse(id);
 	}
 }

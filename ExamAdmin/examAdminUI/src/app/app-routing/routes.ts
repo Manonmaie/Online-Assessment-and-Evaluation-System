@@ -5,6 +5,7 @@ import { CenterComponent } from '../center/center.component';
 import { ExamineeComponent } from '../examinee/examinee.component';
 import { CourseComponent } from '../course/course.component';
 import { CenterViewComponent } from '../center-view/center-view.component';
+import { CourseViewComponent } from '../course-view/course-view.component';
 
 export const routes: Routes = [
     {path: 'examdrives', component: ExamdriveComponent},
@@ -12,5 +13,6 @@ export const routes: Routes = [
     {path: 'examinees', component: ExamineeComponent},
     {path: 'courses', component: CourseComponent},
     {path: 'centerview/:id', component: CenterViewComponent},
+    {path: 'courseview/:id', component: CourseViewComponent},
     {path: '', redirectTo: '/examdrives', pathMatch: 'full'}
 ];
