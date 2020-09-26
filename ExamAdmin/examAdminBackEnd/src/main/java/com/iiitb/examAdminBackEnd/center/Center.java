@@ -9,42 +9,42 @@ import javax.persistence.Table;
 public class Center {
 	
 	@Id
-	private int center_id;
-	private String center_code,center_name;
-	private int center_capacity;
+	private int centerId;
+	private String centerCode,centerName;
+	private int centerCapacity;
 	
 	public Center() {
 	}
-	public Center(int center_id, String center_code, String center_name, int center_capacity) {
+	public Center(int centerId, String centerCode, String centerName, int centerCapacity) {
 		super();
-		this.center_id = center_id;
-		this.center_code = center_code;
-		this.center_name = center_name;
-		this.center_capacity = center_capacity;
+		this.centerId = centerId;
+		this.centerCode = centerCode;
+		this.centerName = centerName;
+		this.centerCapacity = centerCapacity;
 	}
 	
-	public int getCenter_id() {
-		return center_id;
+	public int getCenterId() {
+		return centerId;
 	}
-	public void setCenter_id(int center_id) {
-		this.center_id = center_id;
+	public void setCenterId(int centerId) {
+		this.centerId = centerId;
 	}
-	public String getCenter_code() {
-		return center_code;
+	public String getCenterCode() {
+		return centerCode;
 	}
-	public void setCenter_code(String center_code) {
-		this.center_code = center_code;
+	public void setCenterCode(String centerCode) {
+		this.centerCode = centerCode;
 	}
-	public String getCenter_name() {
-		return center_name;
+	public String getCenterName() {
+		return centerName;
 	}
-	public void setCenter_name(String center_name) {
-		this.center_name = center_name;
+	public void setCenterName(String centerName) {
+		this.centerName = centerName;
 	}
-	public int getCenter_capacity() {
-		return center_capacity;
+	public int getCenterCapacity() {
+		return centerCapacity;
 	}
-	public void setCenter_capacity(int center_capacity) {
-		this.center_capacity = center_capacity;
+	public void setCenterCapacity(int centerCapacity) {
+		this.centerCapacity = centerCapacity;
 	}
 }

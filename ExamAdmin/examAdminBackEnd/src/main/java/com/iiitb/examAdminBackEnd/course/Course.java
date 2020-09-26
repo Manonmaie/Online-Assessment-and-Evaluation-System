@@ -8,34 +8,34 @@ import javax.persistence.Table;
 @Table(name = "ea_course_master")
 public class Course {
 	@Id
-	private int course_master_id;
-	private String course_code,course_name;
+	private int courseMasterId;
+	private String courseCode,courseName;
 	
 	public Course() {
 	}
-	public Course(int course_master_id, String course_code, String course_name) {
+	public Course(int courseMasterId, String courseCode, String courseName) {
 		super();
-		this.course_master_id = course_master_id;
-		this.course_code = course_code;
-		this.course_name = course_name;
+		this.courseMasterId = courseMasterId;
+		this.courseCode = courseCode;
+		this.courseName = courseName;
 	}
 	
-	public int getCourse_master_id() {
-		return course_master_id;
+	public int getCourseMasterId() {
+		return courseMasterId;
 	}
-	public void setCourse_master_id(int course_master_id) {
-		this.course_master_id = course_master_id;
+	public void setCourseMasterId(int courseMasterId) {
+		this.courseMasterId = courseMasterId;
 	}
-	public String getCourse_code() {
-		return course_code;
+	public String getCourseCode() {
+		return courseCode;
 	}
-	public void setCourse_code(String course_code) {
-		this.course_code = course_code;
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
 	}
-	public String getCourse_name() {
-		return course_name;
+	public String getCourseName() {
+		return courseName;
 	}
-	public void setCourse_name(String course_name) {
-		this.course_name = course_name;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 }
