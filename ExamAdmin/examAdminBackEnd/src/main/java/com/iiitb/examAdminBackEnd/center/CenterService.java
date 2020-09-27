@@ -30,4 +30,8 @@ public class CenterService {
 	public void addCenter(Center center) {
 		centerRepository.save(center);
 	}
+	
+	public void updateCenter(int id, Center center) {
+		centerRepository.save(center);
+	}
 }

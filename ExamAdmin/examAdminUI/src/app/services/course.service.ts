@@ -27,4 +27,8 @@ export class CourseService {
   addCourse(course: Course): Observable<Course>{
     return this.http.post<Course>(baseURL + 'courses', course);
   }
+
+  updateCourse(id: number, course: Course): Observable<Course>{
+    return this.http.put<Course>(baseURL + 'courses/'+id, course);
+  }
 }

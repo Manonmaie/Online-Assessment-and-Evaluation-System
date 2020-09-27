@@ -27,4 +27,8 @@ export class CenterService {
   addCenter(center: Center): Observable<Center>{
     return this.http.post<Center>(baseURL + 'centers', center);
   }
+
+  updateCenter(id: number, center: Center): Observable<Center>{
+    return this.http.put<Center>(baseURL + 'centers/'+id, center);
+  }
 }

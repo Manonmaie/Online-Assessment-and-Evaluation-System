@@ -21,6 +21,8 @@ import { CenterViewComponent } from './center-view/center-view.component';
 import { CourseViewComponent } from './course-view/course-view.component';
 import { CenterAddComponent } from './center-add/center-add.component';
 import { CourseAddComponent } from './course-add/course-add.component';
+import { CenterUpdateComponent } from './center-update/center-update.component';
+import { CourseUpdateComponent } from './course-update/course-update.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { CourseAddComponent } from './course-add/course-add.component';
     CenterViewComponent,
     CourseViewComponent,
     CenterAddComponent,
-    CourseAddComponent
+    CourseAddComponent,
+    CenterUpdateComponent,
+    CourseUpdateComponent
   ],
   imports: [
     BrowserModule,

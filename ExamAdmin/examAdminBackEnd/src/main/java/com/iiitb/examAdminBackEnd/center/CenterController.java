@@ -36,4 +36,9 @@ public class CenterController {
 	public void addCenter(@RequestBody Center center) {
 		centerService.addCenter(center);
 	}
+	
+	@RequestMapping(method=RequestMethod.PUT, value="/centers/{id}")
+	public void updateCenter(@PathVariable int id,@RequestBody Center center) {
+		centerService.updateCenter(id, center);
+	}
 }
