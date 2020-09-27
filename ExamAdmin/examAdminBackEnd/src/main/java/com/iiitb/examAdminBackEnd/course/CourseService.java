@@ -26,4 +26,8 @@ public class CourseService {
 	public Optional<Course> getCourse(int id){
 		return courseRepository.findById(id);
 	}
+	
+	public void addCourse(Course course) {
+		courseRepository.save(course);
+	}
 }

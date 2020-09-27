@@ -20,6 +20,7 @@ import { CourseComponent } from './course/course.component';
 import { CenterViewComponent } from './center-view/center-view.component';
 import { CourseViewComponent } from './course-view/course-view.component';
 import { CenterAddComponent } from './center-add/center-add.component';
+import { CourseAddComponent } from './course-add/course-add.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CenterAddComponent } from './center-add/center-add.component';
     CourseComponent,
     CenterViewComponent,
     CourseViewComponent,
-    CenterAddComponent
+    CenterAddComponent,
+    CourseAddComponent
   ],
   imports: [
     BrowserModule,
