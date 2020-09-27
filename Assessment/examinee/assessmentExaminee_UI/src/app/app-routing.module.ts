@@ -23,3 +23,5 @@ export class AppRoutingModule { }
 //                        -> { path: '', redirectTo: '/questionPaper/1', pathMatch: 'full' } to { path: '', redirectTo: '/questionPaper/:id', pathMatch: 'full' }
 //  question-paper.component.ts -> const examineeId = 1; to const examineeId = this.route.snapshot.params['id'];
 // instruction.component.html -> <button type="button" class="btn btn-success btn-lg btn-space" routerLink="/questionPaper/1">OK</button> to <button type="button" class="btn btn-success btn-lg btn-space" [routerLink]="['/questionPaper', examinee.examineeId]">OK</button>
+
+// Post method in attempt table when clicked on start exam

@@ -15,7 +15,7 @@ public class InstructionController {
 	@Autowired
 	public InstructionService instructionService;
 	
-	@RequestMapping("/questionPapers/{qpId}/instructions")
+	@RequestMapping("/questionPaper/{qpId}/instructions")
 	public List<AsInstruction> getInstForQp(@PathVariable int qpId){
 		return instructionService.getAllInstForQp(qpId);
 	}

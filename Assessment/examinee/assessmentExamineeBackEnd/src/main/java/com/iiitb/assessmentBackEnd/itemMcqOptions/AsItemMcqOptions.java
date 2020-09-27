@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.assessmentBackEnd.qpItem.AsQpItem;
 
 @Entity
@@ -17,6 +19,7 @@ public class AsItemMcqOptions {
 	
 	@ManyToOne
 	@JoinColumn(name="qp_item_id")
+	@JsonIgnore
 	private AsQpItem asQpItem;
 	
 	public AsItemMcqOptions() {

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Examination } from "../shared/examination";
+import { ItemMcqOption } from "../shared/itemMcqOption";
+import { ExaminationService } from "../services/examination.service";
 import { Params, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -8,9 +11,13 @@ import { Params, ActivatedRoute } from '@angular/router';
 })
 export class ExaminationComponent implements OnInit {
 
-  constructor() { }
+  qpItems: Examination[];
+
+  constructor(private examinationService: ExaminationService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const qpId = this.route.snapshot.params['id'];
+    this.examinationService.getQpItemsOfQuestionPaper(qpId).subscribe((qpItems) => this.qpItems = qpItems);
   }
 
 }
