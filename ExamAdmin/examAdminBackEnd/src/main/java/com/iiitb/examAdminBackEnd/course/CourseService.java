@@ -2,6 +2,7 @@ package com.iiitb.examAdminBackEnd.course;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,17 @@ public class CourseService {
 
 	public void deleteCourse(int id) {
 		courseRepository.deleteById(id);
+	}
+	
+	public Optional<Course> getCourse(int id){
+		return courseRepository.findById(id);
+	}
+	
+	public void addCourse(Course course) {
+		courseRepository.save(course);
+	}
+	
+	public void updateCourse(int id, Course course) {
+		courseRepository.save(course);
 	}
 }

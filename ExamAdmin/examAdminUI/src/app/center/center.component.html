@@ -1,5 +1,5 @@
 <div class="container">
-    <button type="button" class="btn btn-success btn-lg btn-block">
+    <button type="button" class="btn btn-success btn-lg btn-block" [routerLink]="['/centeradd']">
         <i class="fa fa-plus-square" style="font-size:24px"></i>
         Add Center
       </button>
@@ -11,7 +11,7 @@
           {{center.centerName}} 
           <font size="-2">[{{center.centerCode}}]</font>
           <button type="button" class="btn btn-danger float-right" (click)="deleteCenter(center)"><i class="fa fa-trash-o"></i></button>
-          <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-warning float-right mr-1" [routerLink]="['/centerupdate', center.centerId]"><i class="fa fa-pencil"></i></button>
           <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/centerview', center.centerId]"><i class="fa fa-eye"></i></button>
         </li>
     </ul>
