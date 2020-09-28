@@ -8,7 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { CenterComponent } from './center/center.component';
 import { ExamineeComponent } from './examinee/examinee.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 import {baseURL} from './shared/baseurl';
 import { FormsModule } from '@angular/forms';
@@ -23,6 +23,7 @@ import { CenterAddComponent } from './center-add/center-add.component';
 import { CourseAddComponent } from './course-add/course-add.component';
 import { CenterUpdateComponent } from './center-update/center-update.component';
 import { CourseUpdateComponent } from './course-update/course-update.component';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CourseUpdateComponent } from './course-update/course-update.component';
   ],
   providers: [
     ExamdriveService,
-    {provide: 'BaseURL', useValue: baseURL}
+    {provide: 'BaseURL', useValue: baseURL},
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService,multi: true}
   ],
   bootstrap: [AppComponent]
 })
