@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.assessmentBackEnd.itemMcqOptions.AsItemMcqOptions;
 import com.iiitb.assessmentBackEnd.questionPaper.AsQuestionPaper;
 
@@ -26,10 +27,11 @@ public class AsQpItem {
 	
 	@ManyToOne
 	@JoinColumn(name="qp_id")
+	@JsonIgnore
 	private AsQuestionPaper asQuestionPaper;
 	
-//	@OneToMany(mappedBy="asQpItem")
-//	private List<AsItemMcqOptions> asItemMcqOptionsList;
+	@OneToMany(mappedBy="asQpItem")
+	private List<AsItemMcqOptions> asItemMcqOptionsList;
 
 	public AsQpItem() {
 		
@@ -103,4 +105,13 @@ public class AsQpItem {
 	public void setAsQuestionPaper(AsQuestionPaper asQuestionPaper) {
 		this.asQuestionPaper = asQuestionPaper;
 	}
+
+	public List<AsItemMcqOptions> getAsItemMcqOptionsList() {
+		return asItemMcqOptionsList;
+	}
+
+	public void setAsItemMcqOptionsList(List<AsItemMcqOptions> asItemMcqOptionsList) {
+		this.asItemMcqOptionsList = asItemMcqOptionsList;
+	}
+	
 }

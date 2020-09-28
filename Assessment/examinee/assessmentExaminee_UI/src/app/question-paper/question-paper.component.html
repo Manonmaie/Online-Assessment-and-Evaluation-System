@@ -3,7 +3,7 @@
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let questionPaper of questionPapers">
             {{questionPaper.courseName}} Exam <span style="color:rgb(153, 146, 146);font-size:15px;"> - Maximum Marks: {{questionPaper.maximumMarks}}, Duration: {{questionPaper.duration}}, Starts at: {{questionPaper.batchStartTime | date : "MMM d, y HH:mm:ss"}}</span>
-            <button type="button" class="btn btn-primary float-right mr-1" attr.id="StartButton_{{questionPaper.qpId}}" data-toggle="modal" (click) = "onSelect(questionPaper)" data-target="#showModel"><i class="fa fa-pencil-square-o"></i> Start Exam</button>
+            <button type="button" class="btn btn-primary float-right mr-1" data-toggle="modal" (click) = "onSelect(questionPaper)" data-target="#showModel"><i class="fa fa-pencil-square-o"></i> Start Exam</button>
             <!-- <button type="button" class="btn btn-primary float-right mr-1" [routerLink]="['/examination', questionPaper.qpId]"><i class="fa fa-pencil-square-o"></i> Start Exam</button> -->
             <button type="button" class="btn btn-success float-right mr-1" [routerLink]="['/questionPaperinstruction', questionPaper.qpId]"><i class="fa fa-info-circle"></i> Instructions</button>
             

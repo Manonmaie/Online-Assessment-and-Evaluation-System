@@ -12,6 +12,6 @@ export class InstructionService {
   constructor(private http: HttpClient) { }
 
   getInstructionOfQuestionPaper(qpId: number): Observable<Instruction[]>{
-    return this.http.get<Instruction[]>(baseURL + 'questionPapers/' + qpId + '/instructions');
+    return this.http.get<Instruction[]>(baseURL + 'questionPaper/' + qpId + '/instructions');
   }
 }

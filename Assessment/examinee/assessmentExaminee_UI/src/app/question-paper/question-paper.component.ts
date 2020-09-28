@@ -26,7 +26,7 @@ export class QuestionPaperComponent implements OnInit {
     
     if(currDateTime >= new Date(questionPaper.batchStartTime) && currDateTime <= new Date(questionPaper.batchEndTime)){
       this.showStartExamModalPopup = false;
-      this.route.navigate(['/examination/questionPaper.qpId']);
+      this.route.navigate(['/examination/' + questionPaper.qpId]);
       // (<HTMLInputElement> document.getElementById("StartButton_"+questionPaper.qpId.toString())).disabled = false;
     }
     else{

@@ -15,7 +15,7 @@ public class QpItemController {
 	@Autowired
 	public QpItemService qpItemService;
 	
-	@RequestMapping("/questionPapers/{qpId}/qpItems")
+	@RequestMapping("/questionPaper/{qpId}/qpItems")
 	public List<AsQpItem> getAllQpItemsForQuestionPaper(@PathVariable int qpId){
 		return qpItemService.getAllQpItemsForQp(qpId);
 	}
