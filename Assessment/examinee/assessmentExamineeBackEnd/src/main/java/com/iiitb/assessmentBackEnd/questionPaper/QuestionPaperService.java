@@ -11,9 +11,16 @@ public class QuestionPaperService {
 	@Autowired
 	private QuestionPaperRepository asQuestionPaperRepository;
 	
-	public List<AsQuestionPaperBatchCourse> getAllQps(int examineeId) {
-		List<AsQuestionPaperBatchCourse> qpList = new ArrayList<>();
-		asQuestionPaperRepository.findAllQuestionPaperNative(examineeId)
+//	public List<AsQuestionPaperBatchCourse> getAllQps(int examineeId) {
+//		List<AsQuestionPaperBatchCourse> qpList = new ArrayList<>();
+//		asQuestionPaperRepository.findAllQuestionPaperNative(examineeId)
+//		.forEach(qpList::add);
+//		return qpList;
+//	}
+	
+	public List<AsQuestionPaper> getAllQps(int examineeId) {
+		List<AsQuestionPaper> qpList = new ArrayList<>();
+		asQuestionPaperRepository.findByAsBatchAsExamineeListExamineeExamineeId(examineeId)
 		.forEach(qpList::add);
 		return qpList;
 	}

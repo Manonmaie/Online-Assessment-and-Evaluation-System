@@ -97,33 +97,33 @@ ALTER TABLE as_batch
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
 
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-09-27 14:00:00","2020-09-27 23:00:00","RECEIVED",1,1);
-INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-01-01 14:00:00","2020-01-01 17:00:00","RECEIVED",1,2);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-09-29 14:00:00","2020-09-29 23:00:00","RECEIVED",1,1);
+INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_examinee_batch`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_examinee_batch (
-  examinee_batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  batch_id int(10) unsigned,
-  examinee_id int(10) unsigned,
-  PRIMARY KEY (examinee_batch_id)
+  -- examinee_batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  batch_id int(10) unsigned NOT NULL,
+  examinee_id int(10) unsigned NOT NULL,
+  PRIMARY KEY (examinee_id, batch_id)
 );
 
 ALTER TABLE as_examinee_batch
-  ADD CONSTRAINT `fk_as_examinee_batch_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_as_examinee_batch_examinee_id` FOREIGN KEY (examinee_id) REFERENCES as_examinee(examinee_id) ON DELETE SET NULL;
+  ADD CONSTRAINT `fk_as_examinee_batch_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_as_examinee_batch_examinee_id` FOREIGN KEY (examinee_id) REFERENCES as_examinee(examinee_id) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
 -- Data Entry for table as_examinee_batch
 -- --------------------------------------------------------
-INSERT INTO as_examinee_batch VALUES(0,1,1);
-INSERT INTO as_examinee_batch VALUES(0,1,2);
-INSERT INTO as_examinee_batch VALUES(0,1,3);
-INSERT INTO as_examinee_batch VALUES(0,2,1);
-INSERT INTO as_examinee_batch VALUES(0,2,2);
-INSERT INTO as_examinee_batch VALUES(0,2,4);
+INSERT INTO as_examinee_batch VALUES(1,1);
+INSERT INTO as_examinee_batch VALUES(1,2);
+INSERT INTO as_examinee_batch VALUES(1,3);
+INSERT INTO as_examinee_batch VALUES(2,1);
+INSERT INTO as_examinee_batch VALUES(2,2);
+INSERT INTO as_examinee_batch VALUES(2,4);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_invigilator`
@@ -288,13 +288,22 @@ CREATE TABLE IF NOT EXISTS as_attempt (
   attempt_number int(10) unsigned NOT NULL,
   attempt_start_time timestamp NOT NULL,
   attempt_end_time timestamp,
-  status ENUM('NOT_Started','IN_Progress','Completed','Abandoned'),
-  examinee_batch_id int(10) unsigned,
+  attempt_status ENUM('NOT_STARTED','IN_PROGRESS','COMPLETED','ABANDONED'),
+  -- examinee_batch_id int(10) unsigned,
+  batch_id int(10) unsigned,
+  examinee_id int(10) unsigned,
   PRIMARY KEY (attempt_id)
 );
 
 ALTER TABLE as_attempt
-  ADD constraint `fk_as_attempt_examinee_batch_id` FOREIGN KEY (examinee_batch_id) REFERENCES as_examinee_batch(examinee_batch_id) ON DELETE SET NULL;
+  ADD constraint `fk_as_attempt_batch_id` FOREIGN KEY (batch_id) REFERENCES as_examinee_batch(batch_id) ON DELETE SET NULL,
+  ADD constraint `fk_as_attempt_examinee_id` FOREIGN KEY (examinee_id) REFERENCES as_examinee_batch(examinee_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_attempt`
+-- --------------------------------------------------------
+
+-- INSERT INTO as_attempt VALUES(0,"Attempt1",1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response`
