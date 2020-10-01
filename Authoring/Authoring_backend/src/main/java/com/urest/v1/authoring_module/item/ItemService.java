@@ -15,9 +15,9 @@ public class ItemService {
 	private ItemRepository itemRepository;
 	
 	private List<Item> items =  Arrays.asList(
-			new Item(1, 100, "Test", "REMEMBER"),
-			new Item(2, 100, "Test","UNDERSTAND"),
-			new Item(3, 100, "Test","ANALYZE")
+			new Item(1, 100, "Test", "REMEMBER","PENDING","ACTIVE",0),
+			new Item(2, 100, "Test","UNDERSTAND","PENDING","ACTIVE",0),
+			new Item(3, 100, "Test","ANALYZE","PENDING","ACTIVE",0)
 		);
 	
 	public List<Item> getAllItems() {
@@ -39,7 +39,9 @@ public class ItemService {
 		item.setQuestion(question.getQuestion());
 		item.setMarks(question.getMarks());
 		item.setCg_lvl(question.getCg_lvl());
-
+		item.setReview_status("PENDING");
+		item.setItem_use_count(0);
+		item.setItem_status("ACTIVE");
 		itemRepository.save(item);
 
 		return item;
