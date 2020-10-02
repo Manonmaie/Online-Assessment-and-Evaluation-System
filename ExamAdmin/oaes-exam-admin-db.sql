@@ -202,7 +202,6 @@ CREATE TABLE IF NOT EXISTS ea_item_mcq_options(
   item_mcq_options_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
   mcq_option_text varchar(255) NOT NULL,
-  mcq_option_percentage float(24) DEFAULT 0.0,
   PRIMARY KEY(item_mcq_id)
 );
 
@@ -216,8 +215,6 @@ CREATE TABLE IF NOT EXISTS ea_item_true_false(
   item_true_false_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
   item_true_false_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
-  true_percentage float(24) DEFAULT 0.0,
-  false_percentage  float(24) DEFAULT 0.0,
   PRIMARY KEY(item_true_false_id)
 );
 
