@@ -18,15 +18,13 @@ export class QuestionPaperComponent implements OnInit {
   questionPaperPrevious: QuestionPaper;
 
   attempt: Attempt = {attemptId: 0, attemptCode: '', attemptNumber: 1, attemptStartTime: '', attemptEndTime: null, attemptStatus: 'IN_PROGRESS', asExamineeBatch: null};
-  constructor(private questionPaperService: QuestionPaperService, private activeRoute: ActivatedRoute, public route: Router, public datepipe: DatePipe) { }
-
   examineeBatch: ExamineeBatch = {examineeBatchId: null, examineeBatchStartTime: '', examineeBatchEndTime: null, examineeBatchStatus: 'IN_PROGRESS', examinee: null, batch: null};
-  // {"examineeBatchId":{"examineeId":1,"batchId":1},"examineeBatchStartTime":"2020-10-02T09:15:00","examineeBatchEndTime":null,"examineeBatchStatus":"IN_PROGRESS", "examinee":null, "batch":null}
+
+  constructor(private questionPaperService: QuestionPaperService, private activeRoute: ActivatedRoute, public route: Router, public datepipe: DatePipe) { }
 
   ngOnInit(): void {
     const examineeId = 1;
     this.questionPaperService.getQuestionPapers(examineeId).subscribe((questionPapers) => this.questionPapers = questionPapers);
-    // this.questionPapers = this.questionPaperService.getQuestionPapers()
   }
 
   onSelect(questionPaper: QuestionPaper) {
