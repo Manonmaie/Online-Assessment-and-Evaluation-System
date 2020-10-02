@@ -20,6 +20,9 @@ export class QuestionPaperComponent implements OnInit {
   attempt: Attempt = {attemptId: 0, attemptCode: '', attemptNumber: 1, attemptStartTime: '', attemptEndTime: null, attemptStatus: 'IN_PROGRESS', asExamineeBatch: null};
   constructor(private questionPaperService: QuestionPaperService, private activeRoute: ActivatedRoute, public route: Router, public datepipe: DatePipe) { }
 
+  examineeBatch: ExamineeBatch = {examineeBatchId: null, examineeBatchStartTime: '', examineeBatchEndTime: null, examineeBatchStatus: 'IN_PROGRESS', examinee: null, batch: null};
+  // {"examineeBatchId":{"examineeId":1,"batchId":1},"examineeBatchStartTime":"2020-10-02T09:15:00","examineeBatchEndTime":null,"examineeBatchStatus":"IN_PROGRESS", "examinee":null, "batch":null}
+
   ngOnInit(): void {
     const examineeId = 1;
     this.questionPaperService.getQuestionPapers(examineeId).subscribe((questionPapers) => this.questionPapers = questionPapers);
@@ -43,9 +46,13 @@ export class QuestionPaperComponent implements OnInit {
 
     this.attempt.attemptCode = 'Attempt' + examineeId + questionPaper.asBatch.batchId;
 
+    this.examineeBatch.examineeBatchId = examineeBatchId;
+    this.examineeBatch.examineeBatchStartTime = currDateTimeFormatted;
+
     if(currDateTime >= new Date(questionPaper.asBatch.batchStartTime) && currDateTime <= new Date(questionPaper.asBatch.batchEndTime)){
       this.showStartExamModalPopup = false;
       this.addAttempt(examineeId, questionPaper.asBatch.batchId, this.attempt);
+      this.updateExamineeBatch(examineeId, questionPaper.asBatch.batchId, this.examineeBatch);
       this.route.navigate(['/examination/' + questionPaper.qpId]);
       // (<HTMLInputElement> document.getElementById("StartButton_"+questionPaper.qpId.toString())).disabled = false;
     }
@@ -58,6 +65,10 @@ export class QuestionPaperComponent implements OnInit {
 
   addAttempt(examineeId: number, batchId: number, attempt: Attempt): void{
     this.questionPaperService.postAttemptForExamineeAndBatch(examineeId, batchId, attempt).subscribe((attempt) => this.attempt = attempt);
+  }
+
+  updateExamineeBatch(examineeId: number, batchId: number, examineeBatch: ExamineeBatch): void{
+    this.questionPaperService.updateExamineeBatchStartTimeAndStatus(examineeId,batchId,examineeBatch).subscribe((examineeBatch) => this.examineeBatch = examineeBatch);
   }
 
 }

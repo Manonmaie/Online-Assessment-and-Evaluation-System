@@ -97,7 +97,7 @@ ALTER TABLE as_batch
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
 
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-09-29 14:00:00","2020-09-29 23:00:00","RECEIVED",1,1);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-02 09:00:00","2020-10-02 23:00:00","RECEIVED",1,1);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3);
 
@@ -105,10 +105,14 @@ INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00
 -- Table structure for table `as_examinee_batch`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_examinee_batch (
-  -- examinee_batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  examinee_batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  examinee_batch_start_time datetime,
+  examinee_batch_end_time datetime,
+  examinee_batch_status ENUM('NOT_STARTED', 'IN_PROGRESS', 'COMPLETED'),
   batch_id int(10) unsigned NOT NULL,
   examinee_id int(10) unsigned NOT NULL,
-  PRIMARY KEY (examinee_id, batch_id)
+  -- PRIMARY KEY (examinee_id, batch_id)
+  PRIMARY KEY (examinee_batch_id)
 );
 
 ALTER TABLE as_examinee_batch
@@ -118,12 +122,12 @@ ALTER TABLE as_examinee_batch
 -- --------------------------------------------------------
 -- Data Entry for table as_examinee_batch
 -- --------------------------------------------------------
-INSERT INTO as_examinee_batch VALUES(1,1);
-INSERT INTO as_examinee_batch VALUES(1,2);
-INSERT INTO as_examinee_batch VALUES(1,3);
-INSERT INTO as_examinee_batch VALUES(2,1);
-INSERT INTO as_examinee_batch VALUES(2,2);
-INSERT INTO as_examinee_batch VALUES(2,4);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,1);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,2);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,3);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,1);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,2);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,4);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_invigilator`
@@ -135,7 +139,7 @@ CREATE TABLE IF NOT EXISTS as_invigilator (
   invigilator_email varchar(255) UNIQUE NOT NULL,
   invigilator_password varchar(255) NOT NULL,
   batch_id int(10) unsigned,
-  user_status ENUM('Active', 'NOT_Active'),
+  user_status ENUM('ACTIVE', 'NOT_ACTIVE'),
   PRIMARY KEY (invigilator_id)
 );
 
@@ -288,7 +292,7 @@ CREATE TABLE IF NOT EXISTS as_attempt (
   attempt_number int(10) unsigned NOT NULL,
   attempt_start_time timestamp NOT NULL,
   attempt_end_time timestamp,
-  attempt_status ENUM('NOT_STARTED','IN_PROGRESS','COMPLETED','ABANDONED'),
+  attempt_status ENUM('IN_PROGRESS','COMPLETED','ABANDONED'),
   -- examinee_batch_id int(10) unsigned,
   batch_id int(10) unsigned,
   examinee_id int(10) unsigned,

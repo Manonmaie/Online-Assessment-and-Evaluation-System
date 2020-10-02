@@ -5,6 +5,7 @@ import { Attempt } from "../shared/attempt";
 import { HttpClient } from "@angular/common/http";
 import { baseURL } from "../shared/baseurl";
 import { Observable, of } from "rxjs";
+import { ExamineeBatch } from '../shared/examineeBatch';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class QuestionPaperService {
 
   postAttemptForExamineeAndBatch(examineeId: number, batchId: number, attempt: Attempt): Observable<Attempt>{
     return this.http.post<Attempt>(baseURL +  'examinee/' + examineeId + '/batch/' + batchId + '/attempt', attempt);
+  }
+
+  updateExamineeBatchStartTimeAndStatus(examineeId: number, batchId: number, examineeBatch: ExamineeBatch): Observable<ExamineeBatch>{
+    return this.http.put<ExamineeBatch>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/examineeBatch', examineeBatch);
   }
 
   // getQuestionPapers(): QuestionPaper[]{

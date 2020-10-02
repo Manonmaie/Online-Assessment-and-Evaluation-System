@@ -17,7 +17,7 @@ public class AsAttempt {
 	private String attemptCode;
 	private int attemptNumber;
 	private LocalDateTime attemptStartTime, attemptEndTime;
-	private enum attemptStatusList {NOT_STARTED, IN_PROGRESS, COMPLETED, ABANDONED};
+	private enum attemptStatusList {IN_PROGRESS, COMPLETED, ABANDONED};
 	private String attemptStatus;
 	
 	@ManyToOne

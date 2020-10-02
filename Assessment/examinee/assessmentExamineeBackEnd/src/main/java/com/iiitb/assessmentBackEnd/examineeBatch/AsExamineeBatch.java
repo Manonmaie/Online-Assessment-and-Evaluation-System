@@ -1,5 +1,7 @@
 package com.iiitb.assessmentBackEnd.examineeBatch;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,6 +21,10 @@ public class AsExamineeBatch {
 	
 	@EmbeddedId
     private ExamineeBatchKey examineeBatchId;
+	
+	private LocalDateTime examineeBatchStartTime, examineeBatchEndTime;
+	private enum examineeBatchStatusList {NOT_STARTED, IN_PROGRESS, COMPLETED};
+	private String examineeBatchStatus;
  
     @ManyToOne
     @MapsId("examineeId")
@@ -36,9 +42,13 @@ public class AsExamineeBatch {
     	
     }
     
-	public AsExamineeBatch(ExamineeBatchKey examineeBatchId, AsExaminee examinee, AsBatch batch) {
+	public AsExamineeBatch(ExamineeBatchKey examineeBatchId, LocalDateTime examineeBatchStartTime, LocalDateTime examineeBatchEndTime, 
+			String examineeBatchStatus, AsExaminee examinee, AsBatch batch) {
 		super();
 		this.examineeBatchId = examineeBatchId;
+		this.examineeBatchStartTime = examineeBatchStartTime;
+		this.examineeBatchEndTime = examineeBatchEndTime;
+		this.examineeBatchStatus = examineeBatchStatus;
 		this.examinee = examinee;
 		this.batch = batch;
 	}
@@ -49,6 +59,30 @@ public class AsExamineeBatch {
 
 	public void setExamineeBatchId(ExamineeBatchKey examineeBatchId) {
 		this.examineeBatchId = examineeBatchId;
+	}
+	
+	public LocalDateTime getExamineeBatchStartTime() {
+		return examineeBatchStartTime;
+	}
+
+	public void setExamineeBatchStartTime(LocalDateTime examineeBatchStartTime) {
+		this.examineeBatchStartTime = examineeBatchStartTime;
+	}
+
+	public LocalDateTime getExamineeBatchEndTime() {
+		return examineeBatchEndTime;
+	}
+
+	public void setExamineeBatchEndTime(LocalDateTime examineeBatchEndTime) {
+		this.examineeBatchEndTime = examineeBatchEndTime;
+	}
+
+	public String getExamineeBatchStatus() {
+		return examineeBatchStatus;
+	}
+
+	public void setExamineeBatchStatus(String examineeBatchStatus) {
+		this.examineeBatchStatus = examineeBatchStatus;
 	}
 
 	public AsExaminee getExaminee() {

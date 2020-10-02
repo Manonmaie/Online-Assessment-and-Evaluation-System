@@ -9,6 +9,9 @@ export class ExamineeBatchId{
 
 export class ExamineeBatch{
     examineeBatchId: ExamineeBatchId;
+    examineeBatchStartTime: string;
+    examineeBatchEndTime: string;
+    examineeBatchStatus: string;
     examinee: Examinee;
     batch: Batch;
 }

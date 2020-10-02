@@ -23,7 +23,7 @@ public class AttemptController {
 	@RequestMapping(method=RequestMethod.POST, value="/examinee/{examineeId}/batch/{batchId}/attempt")
 	public void addAttempt(@RequestBody AsAttempt attempt, @PathVariable int examineeId, @PathVariable int batchId) {
 		ExamineeBatchKey examineeBatchKey = new ExamineeBatchKey(examineeId, batchId);
-		AsExamineeBatch asExamineeBatch = new AsExamineeBatch(examineeBatchKey,null,null);
+		AsExamineeBatch asExamineeBatch = new AsExamineeBatch(examineeBatchKey,null,null,"NOT_STARTED",null,null);
 //		asExamineeBatch.setExamineeBatchId(examineeBatchKey);
 		attempt.setAsExamineeBatch(asExamineeBatch);
 		attemptService.addAttempt(attempt);
