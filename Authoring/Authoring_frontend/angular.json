@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "OAES-project": {
+    "frontEndAuthoring": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/OAES-project",
+            "outputPath": "dist/frontEndAuthoring",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,7 +24,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"            ],
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles.css"
+             ],
             "scripts": []
           },
           "configurations": {
@@ -61,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "OAES-project:build"
+            "browserTarget": "frontEndAuthoring:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "OAES-project:build:production"
+              "browserTarget": "frontEndAuthoring:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "OAES-project:build"
+            "browserTarget": "frontEndAuthoring:build"
           }
         },
         "test": {
@@ -109,15 +111,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "OAES-project:serve"
+            "devServerTarget": "frontEndAuthoring:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "OAES-project:serve:production"
+              "devServerTarget": "frontEndAuthoring:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "OAES-project"
+  "defaultProject": "frontEndAuthoring"
 }

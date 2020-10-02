@@ -1,9 +1,11 @@
 package com.urest.v1.authoring_module.item;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class Item {
@@ -15,20 +17,44 @@ public class Item {
 		
 	}
 
-	public Item(Integer id, Integer marks, String question, String cg_lvl) {
+	public Item(Integer id, Integer marks, String question, String cg_lvl,String review_status,String item_status,Integer item_use_count) {
 		super();
 		// TODO Auto-generated constructor stub
 		this.id = id;
 		this.marks = marks;
 		this.question = question;
 		this.cg_lvl = cg_lvl;
+		this.review_status=review_status;
+		this.item_status=item_status;
+		this.item_use_count=item_use_count;
 	}
 
 	private Integer marks;
-
+	@Lob
+	@Column(length=8192)
 	private String question;
 
 	private String cg_lvl;
+	
+	private String review_status="PENDING";
+	private Integer item_use_count=0;
+	private String item_status="ACTIVE";
+	
+	public Integer getItem_use_count() {
+		return item_use_count;
+	}
+
+	public void setItem_use_count(Integer item_use_count) {
+		this.item_use_count = item_use_count;
+	}
+
+	public String getItem_status() {
+		return item_status;
+	}
+
+	public void setItem_status(String item_status) {
+		this.item_status = item_status;
+	}
 
 	public Integer getId() {
 		return id;
@@ -56,6 +82,14 @@ public class Item {
 
 	public String getCg_lvl() {
 		return cg_lvl;
+	}
+
+	public String getReview_status() {
+		return review_status;
+	}
+
+	public void setReview_status(String review_status) {
+		this.review_status = review_status;
 	}
 
 	public void setCg_lvl(String cg_lvl) {

@@ -1,10 +1,13 @@
+import { Batch } from './batch';
+
 export class QuestionPaper{
     qpId: number;
-    examineeName: string;
+    qpCode: String;
     maximumMarks: number;
     duration: number;
-    batchStartTime: string;
-    batchEndTime: string;
-    courseName: string;
-    qpStatus: string;
+    asBatch: Batch;
+    // batchStartTime: string;
+    // batchEndTime: string;
+    // courseName: string;
+    // qpStatus: string;
 }

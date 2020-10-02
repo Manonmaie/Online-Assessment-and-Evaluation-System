@@ -27,7 +27,7 @@ public class QuestionPaperController {
 //	}
 	
 	@RequestMapping("/examinee/{examineeId}/questionPapers")
-	public List<AsQuestionPaperBatchCourse> getAllQpsOfExaminee(@PathVariable int examineeId) {
+	public List<AsQuestionPaper> getAllQpsOfExaminee(@PathVariable int examineeId) {
 		return questionPaperService.getAllQps(examineeId);
 	}
 }

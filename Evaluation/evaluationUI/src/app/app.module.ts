@@ -9,14 +9,18 @@ import { HttpClientModule } from "@angular/common/http";
 // import { HttpModule } from "@angular/http";
 import { baseURL } from "./shared/baseurl";
 import { DriveCenterService } from "./services/drive-center.service";
+import { QpItemComponent } from './qp-item/qp-item.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DriveCenterComponent
+    DriveCenterComponent,
+    QpItemComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule
   ],

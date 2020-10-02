@@ -2,7 +2,7 @@
     <h2 style="text-align:center;"> Examinations </h2>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let questionPaper of questionPapers">
-            {{questionPaper.courseName}} Exam <span style="color:rgb(153, 146, 146);font-size:15px;"> - Maximum Marks: {{questionPaper.maximumMarks}}, Duration: {{questionPaper.duration}}, Starts at: {{questionPaper.batchStartTime | date : "MMM d, y HH:mm:ss"}}</span>
+            {{questionPaper.asBatch.asCourseMaster.courseName}} Exam <span style="color:rgb(153, 146, 146);font-size:15px;"> - Maximum Marks: {{questionPaper.maximumMarks}}, Duration: {{questionPaper.duration}}, Starts at: {{questionPaper.asBatch.batchStartTime | date : "MMM d, y HH:mm:ss"}}</span>
             <button type="button" class="btn btn-primary float-right mr-1" data-toggle="modal" (click) = "onSelect(questionPaper)" data-target="#showModel"><i class="fa fa-pencil-square-o"></i> Start Exam</button>
             <!-- <button type="button" class="btn btn-primary float-right mr-1" [routerLink]="['/examination', questionPaper.qpId]"><i class="fa fa-pencil-square-o"></i> Start Exam</button> -->
             <button type="button" class="btn btn-success float-right mr-1" [routerLink]="['/questionPaperinstruction', questionPaper.qpId]"><i class="fa fa-info-circle"></i> Instructions</button>
@@ -17,7 +17,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Exam Starts at {{questionPaper.batchStartTime | date : "dd-MM-yyyy HH:mm:ss"}} and ends by {{questionPaper.batchEndTime | date : "dd-MM-yyyy HH:mm:ss"}}</p>
+                            <p>Exam Starts at {{questionPaperPrevious.asBatch.batchStartTime | date : "dd-MM-yyyy HH:mm:ss"}} and ends by {{questionPaperPrevious.asBatch.batchEndTime | date : "dd-MM-yyyy HH:mm:ss"}}</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

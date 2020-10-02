@@ -2,6 +2,10 @@ package com.iiitb.assessmentBackEnd.questionPaper;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.iiitb.assessmentBackEnd.batch.AsBatch;
 
 @Entity
 public class AsQuestionPaper {
@@ -12,10 +16,13 @@ public class AsQuestionPaper {
 	private enum qpStatusList { PENDING, RECEIVED, ERROR_SENDING };
 	
 	private String qpCode;
-//	private int batch_course_id;
 	private double maximumMarks;
 	private int duration;
 	
+	@ManyToOne
+	@JoinColumn(name="batch_id")
+	private AsBatch asBatch;
+
 	public AsQuestionPaper() {
 		
 	}
@@ -52,10 +59,10 @@ public class AsQuestionPaper {
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-//	public int getBatch_course_id() {
-//		return batch_course_id;
-//	}
-//	public void setBatch_course_id(int batch_course_id) {
-//		this.batch_course_id = batch_course_id;
-//	}
+	public AsBatch getAsBatch() {
+		return asBatch;
+	}
+	public void setAsBatch(AsBatch asBatch) {
+		this.asBatch = asBatch;
+	}
 }
