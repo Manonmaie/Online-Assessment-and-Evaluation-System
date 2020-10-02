@@ -1,0 +1,11 @@
+<div class="container">
+    <h2 style="text-align:center;"> Qp-Item Details </h2>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let QpItem of qpitems">
+        {{QpItem.itemCode}}
+        <a class="col-md-6">type: {{QpItem.itemType}}</a>
+        <span style="text-align: right;">{{QpItem.itemText}}</span>
+        <button type="button" class="btn btn-success float-right mr-1"><i class="fa fa-info-circle"></i> Info</button>
+        </li>
+    </ul>
+</div>

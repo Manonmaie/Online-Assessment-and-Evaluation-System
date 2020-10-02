@@ -1,0 +1,31 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Subject</th>
+    <th scope="col">Question</th>
+    <th scope="col">Review Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let country of countries">
+    <th scope="row">{{ country.id }}</th>
+    <td>
+      {{ country.subject }}
+    </td>
+    <td>{{ country.question }}</td>
+    <td>{{ country.isReviewed === true ? "Yes" : "No" }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">
+  </ngb-pagination>
+
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshCountries()">
+    <option [ngValue]="10">10 items per page</option>
+    <option [ngValue]="20">20 items per page</option>
+    <option [ngValue]="50">50 items per page</option>
+  </select>
+</div>

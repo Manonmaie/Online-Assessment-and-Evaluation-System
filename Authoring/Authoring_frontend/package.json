@@ -1,5 +1,5 @@
 {
-  "name": "oaes-project",
+  "name": "front-end-authoring",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -16,17 +16,16 @@
     "@angular/compiler": "~10.0.11",
     "@angular/core": "~10.0.11",
     "@angular/forms": "~10.0.11",
+    "@angular/localize": "~10.0.11",
     "@angular/platform-browser": "~10.0.11",
     "@angular/platform-browser-dynamic": "~10.0.11",
     "@angular/router": "~10.0.11",
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^22.0.0",
-    "angular-froala-wysiwyg": "^3.2.1-1",
-    "boostrap": "^2.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
     "rxjs": "~6.5.5",
-    "summernote": "^0.8.18",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
