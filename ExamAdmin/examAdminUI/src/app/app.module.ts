@@ -24,6 +24,9 @@ import { CourseAddComponent } from './course-add/course-add.component';
 import { CenterUpdateComponent } from './center-update/center-update.component';
 import { CourseUpdateComponent } from './course-update/course-update.component';
 import { InterceptorService } from './services/interceptor.service';
+import { ExamineeViewComponent } from './examinee-view/examinee-view.component';
+import { ExamineeUpdateComponent } from './examinee-update/examinee-update.component';
+import { ExamineeAddComponent } from './examinee-add/examinee-add.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { InterceptorService } from './services/interceptor.service';
     CenterAddComponent,
     CourseAddComponent,
     CenterUpdateComponent,
-    CourseUpdateComponent
+    CourseUpdateComponent,
+    ExamineeViewComponent,
+    ExamineeUpdateComponent,
+    ExamineeAddComponent
   ],
   imports: [
     BrowserModule,

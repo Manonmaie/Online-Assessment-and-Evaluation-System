@@ -5,10 +5,13 @@ import { CenterComponent } from '../center/center.component';
 import { ExamineeComponent } from '../examinee/examinee.component';
 import { CourseComponent } from '../course/course.component';
 import { CenterViewComponent } from '../center-view/center-view.component';
+import { ExamineeViewComponent } from '../examinee-view/examinee-view.component';
 import { CourseViewComponent } from '../course-view/course-view.component';
 import { CenterAddComponent } from '../center-add/center-add.component';
+import { ExamineeAddComponent } from '../examinee-add/examinee-add.component';
 import { CourseAddComponent } from '../course-add/course-add.component';
 import { CenterUpdateComponent } from '../center-update/center-update.component';
+import { ExamineeUpdateComponent } from '../examinee-update/examinee-update.component';
 import { CourseUpdateComponent } from '../course-update/course-update.component';
 
 export const routes: Routes = [
@@ -17,10 +20,13 @@ export const routes: Routes = [
     {path: 'examinees', component: ExamineeComponent},
     {path: 'courses', component: CourseComponent},
     {path: 'centerview/:id', component: CenterViewComponent},
+    {path: 'examineeview/:id', component: ExamineeViewComponent},
     {path: 'courseview/:id', component: CourseViewComponent},
     {path: 'centeradd', component: CenterAddComponent},
+    {path: 'examineeadd', component: ExamineeAddComponent},
     {path: 'courseadd', component: CourseAddComponent},
     {path: 'centerupdate/:id', component: CenterUpdateComponent},
+    {path: 'examineeupdate/:id', component: ExamineeUpdateComponent},
     {path: 'courseupdate/:id', component: CourseUpdateComponent},
     {path: '', redirectTo: '/examdrives', pathMatch: 'full'}
 ];

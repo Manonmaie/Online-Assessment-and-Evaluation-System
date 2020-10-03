@@ -19,6 +19,6 @@ export class CourseViewComponent implements OnInit {
   }
 
   getCourse(id: number): void{
-    this.courseService.getCourse(id).subscribe((course) => this.course=course)
+    this.courseService.getCourse(id).subscribe((course) => this.course=course);
   }
 }

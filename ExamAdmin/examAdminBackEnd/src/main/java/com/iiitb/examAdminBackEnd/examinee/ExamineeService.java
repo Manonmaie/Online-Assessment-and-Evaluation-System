@@ -2,6 +2,7 @@ package com.iiitb.examAdminBackEnd.examinee;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,9 @@ public class ExamineeService {
 
 	public void deleteExaminee(int id) {
 		examineeRepository.deleteById(id);
+	}
+	
+	public Optional<Examinee> getExaminee(int id){
+		return examineeRepository.findById(id);
 	}
 }

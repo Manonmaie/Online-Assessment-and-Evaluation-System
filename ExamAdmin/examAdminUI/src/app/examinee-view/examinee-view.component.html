@@ -1,0 +1,47 @@
+<div class="container">
+    <legend>Student Details</legend>
+    <ul class="list-group">
+        <li class="list-group-item">
+          <h4>Name: <span style="color:rgb(95, 93, 93)">{{examinee.examineeName}}</span> </h4>
+        </li>
+        <li class="list-group-item">
+          Student Code: <span style="color:rgb(95, 93, 93)">{{examinee.examineeCode}}</span> 
+        </li>
+        <li class="list-group-item">
+            Branch: <span style="color:rgb(95, 93, 93)">{{examinee.examineeBranch}}</span> 
+        </li>
+        <li class="list-group-item">
+            Email-id: <span style="color:rgb(95, 93, 93)">{{examinee.examineeEmail}}</span> 
+        </li>
+        <li class="list-group-item">
+            College: <span style="color:rgb(95, 93, 93)">{{examinee.examineeCollege}}</span> 
+        </li> 
+    </ul>
+</div>
+
+<div class="container">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Drive</th>
+          <th scope="col">Course</th>
+          <th scope="col">Exam Date</th>
+          <th scope="col">Exam Center</th>
+          <th scope="col">Marks Obtained</th>
+          <!-- <th scope="col"></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let examineeBatch of examinee.examineeBatchList">
+          <td>{{examineeBatch.batch.examdrive.examdriveName}}</td>
+          <td>{{examineeBatch.batch.examdrive.course.courseCode}}</td>
+          <td>{{examineeBatch.batch.batchEndTime.substr(0,10)}}</td>
+          <td>{{examineeBatch.batch.center.centerCode}}</td>
+          <td>{{examineeBatch.marksObtained}}</td>
+          <!-- <td>
+            <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
