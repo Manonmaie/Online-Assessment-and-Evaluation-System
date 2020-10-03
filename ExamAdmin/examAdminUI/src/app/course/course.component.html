@@ -1,19 +1,29 @@
 <div class="container">
-    <button type="button" class="btn btn-success btn-lg btn-block" [routerLink]="['/courseadd']">
-        <i class="fa fa-plus-square" style="font-size:24px"></i>
+  <button type="button" class="btn btn-success btn-lg btn-block" [routerLink]="['/courseadd']">
+      <i class="fa fa-plus-square" style="font-size:24px"></i>
         Add Course
-      </button>
-    </div>
-    
-    <div class="container">
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let course of courses">
-          {{course.courseName}} 
-          <font size="-2">[{{course.courseCode}}]</font>
+  </button>
+</div>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Course Name</th>
+        <th scope="col">Course Code</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses">
+        <td>{{ course.courseName }}</td>
+        <td>{{ course.courseCode }}</td>
+        <td>
           <button type="button" class="btn btn-danger float-right" (click)="deleteCourse(course)"><i class="fa fa-trash-o"></i></button>
           <button type="button" class="btn btn-warning float-right mr-1" [routerLink]="['/courseupdate', course.courseMasterId]"><i class="fa fa-pencil"></i></button>
           <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/courseview', course.courseMasterId]"><i class="fa fa-eye"></i></button>
-        </li>
-      </ul>
-    </div>
-    
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

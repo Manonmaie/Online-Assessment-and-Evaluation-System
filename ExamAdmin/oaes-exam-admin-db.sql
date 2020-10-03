@@ -88,18 +88,19 @@ CREATE TABLE IF NOT EXISTS ea_batch(
   batch_end_time datetime NOT NULL,
   qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING') DEFAULT 'PENDING',
   center_id int(10) unsigned,
-  course_master_id int(10) unsigned,
+  examdrive_id int(10) unsigned,
+  qp_id int(10) unsigned,
   PRIMARY KEY (batch_id)
 );
 
 ALTER TABLE ea_batch
   ADD CONSTRAINT `fk_ea_batch_center_id` FOREIGN KEY (center_id) REFERENCES ea_center(center_id) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_ea_batch_course_master_id` FOREIGN KEY (course_master_id) REFERENCES ea_course_master(course_master_id) ON DELETE SET NULL;
+  ADD CONSTRAINT `fk_ea_batch_examdrive_id` FOREIGN KEY (examdrive_id) REFERENCES ea_examdrive(examdrive_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Data Entry for table ea_batch
 -- --------------------------------------------------------
-INSERT INTO ea_batch VALUES(0,"MRNG","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",1,1);
+INSERT INTO ea_batch VALUES(0,"MRNG","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",1,1,NULL);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_examinee_batch`
@@ -135,6 +136,9 @@ CREATE TABLE IF NOT EXISTS ea_question_paper(
 
 ALTER TABLE ea_question_paper
   ADD CONSTRAINT `fk_ea_question_paper_batch_id` FOREIGN KEY (batch_id) REFERENCES ea_batch(batch_id) ON DELETE SET NULL;
+
+ALTER TABLE ea_batch
+  ADD CONSTRAINT `fk_ea_batch_qp_id` FOREIGN KEY (qp_id) REFERENCES ea_question_paper(qp_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_instruction`
@@ -202,7 +206,6 @@ CREATE TABLE IF NOT EXISTS ea_item_mcq_options(
   item_mcq_options_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
   mcq_option_text varchar(255) NOT NULL,
-  mcq_option_percentage float(24) DEFAULT 0.0,
   PRIMARY KEY(item_mcq_id)
 );
 
@@ -216,8 +219,6 @@ CREATE TABLE IF NOT EXISTS ea_item_true_false(
   item_true_false_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
   item_true_false_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
-  true_percentage float(24) DEFAULT 0.0,
-  false_percentage  float(24) DEFAULT 0.0,
   PRIMARY KEY(item_true_false_id)
 );
 
