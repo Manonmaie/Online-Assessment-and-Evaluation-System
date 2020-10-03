@@ -1,4 +1,4 @@
-package com.iiitb.assessmentBackEnd.Examdrive;
+package com.iiitb.assessmentBackEnd.examdrive;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
