@@ -23,4 +23,8 @@ export class ExamineeService {
   getExaminee(id: number): Observable<Examinee>{
     return this.http.get<Examinee>(baseURL+'examinees/'+id);
   }
+
+  updateExaminee(id: number, examinee: Examinee): Observable<Examinee>{
+    return this.http.put<Examinee>(baseURL + 'examinees/'+id, examinee);
+  }
 }

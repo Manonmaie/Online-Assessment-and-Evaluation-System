@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +30,10 @@ public class ExamineeController {
 	@RequestMapping ("/examinees/{id}")
 	public Optional<Examinee> getExaminee(@PathVariable int id) {
 		return examineeService.getExaminee(id);
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT, value="/examinees/{id}")
+	public void updateExaminee(@PathVariable int id, @RequestBody Examinee examinee) {
+		examineeService.updateExaminee(id, examinee);
 	}
 }

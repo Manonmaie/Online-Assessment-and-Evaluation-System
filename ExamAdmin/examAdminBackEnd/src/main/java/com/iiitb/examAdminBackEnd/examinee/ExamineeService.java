@@ -25,4 +25,8 @@ public class ExamineeService {
 	public Optional<Examinee> getExaminee(int id){
 		return examineeRepository.findById(id);
 	}
+	
+	public void updateExaminee(int id,Examinee examinee) {
+		examineeRepository.save(examinee);
+	}
 }
