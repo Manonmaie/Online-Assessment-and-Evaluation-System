@@ -20,7 +20,7 @@ public class QuestionPaperService {
 	
 	public List<AsQuestionPaper> getAllQps(int examineeId) {
 		List<AsQuestionPaper> qpList = new ArrayList<>();
-		asQuestionPaperRepository.findByAsBatchAsExamineeListExamineeExamineeId(examineeId)
+		asQuestionPaperRepository.findByAsBatchAsExamineeBatchListExamineeExamineeId(examineeId)
 		.forEach(qpList::add);
 		return qpList;
 	}

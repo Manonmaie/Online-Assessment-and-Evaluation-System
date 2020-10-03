@@ -14,7 +14,6 @@ public class AsAttempt {
 	@Id
 	private int attemptId;
 	
-	private String attemptCode;
 	private int attemptNumber;
 	private LocalDateTime attemptStartTime, attemptEndTime;
 	private enum attemptStatusList {IN_PROGRESS, COMPLETED, ABANDONED};
@@ -38,11 +37,10 @@ public class AsAttempt {
 		
 	}
 	
-	public AsAttempt(int attemptId, String attemptCode, int attemptNumber, LocalDateTime attemptStartTime,
+	public AsAttempt(int attemptId, int attemptNumber, LocalDateTime attemptStartTime,
 			LocalDateTime attemptEndTime, String attemptStatus, AsExamineeBatch asExamineeBatch) {
 		super();
 		this.attemptId = attemptId;
-		this.attemptCode = attemptCode;
 		this.attemptNumber = attemptNumber;
 		this.attemptStartTime = attemptStartTime;
 		this.attemptEndTime = attemptEndTime;
@@ -56,14 +54,6 @@ public class AsAttempt {
 
 	public void setAttemptId(int attemptId) {
 		this.attemptId = attemptId;
-	}
-
-	public String getAttemptCode() {
-		return attemptCode;
-	}
-
-	public void setAttemptCode(String attemptCode) {
-		this.attemptCode = attemptCode;
 	}
 
 	public int getAttemptNumber() {

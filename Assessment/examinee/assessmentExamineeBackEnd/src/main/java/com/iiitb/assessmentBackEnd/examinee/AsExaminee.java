@@ -24,7 +24,7 @@ public class AsExaminee {
 //			  name = "as_examinee_batch", 
 //			  joinColumns = @JoinColumn(name = "examinee_id", referencedColumnName = "examineeId"), 
 //			  inverseJoinColumns = @JoinColumn(name = "batch_id", referencedColumnName = "batchId"))
-	private List<AsExamineeBatch> asBatchList;
+	private List<AsExamineeBatch> asExamineeBatchList;
 	
 	public AsExaminee() {
 		
@@ -84,9 +84,9 @@ public class AsExaminee {
 		this.examineeCollege = examineeCollege;
 	}
 	public List<AsExamineeBatch> getAsBatchList() {
-		return asBatchList;
+		return asExamineeBatchList;
 	}
 	public void setAsBatchList(List<AsExamineeBatch> asBatchList) {
-		this.asBatchList = asBatchList;
+		this.asExamineeBatchList = asBatchList;
 	}
 }

@@ -3,7 +3,7 @@ package com.iiitb.assessmentBackEnd.questionPaper;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.iiitb.assessmentBackEnd.batch.AsBatch;
 
@@ -19,7 +19,7 @@ public class AsQuestionPaper {
 	private double maximumMarks;
 	private int duration;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="batch_id")
 	private AsBatch asBatch;
 
@@ -27,12 +27,14 @@ public class AsQuestionPaper {
 		
 	}
 	
-	public AsQuestionPaper(int qpId, String qpCode, double maximumMarks, int duration) {
+	public AsQuestionPaper(int qpId, String qpCode, double maximumMarks, int duration, int batchId) {
 		super();
 		this.qpId = qpId;
 		this.qpCode = qpCode;
 		this.maximumMarks = maximumMarks;
 		this.duration = duration;
+		this.asBatch = new AsBatch();
+		this.asBatch.setBatchId(batchId);
 	}
 	
 	public int getQpId() {

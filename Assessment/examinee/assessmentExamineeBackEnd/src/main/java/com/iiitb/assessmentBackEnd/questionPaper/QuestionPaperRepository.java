@@ -12,6 +12,6 @@ public interface QuestionPaperRepository extends CrudRepository<AsQuestionPaper,
 //			nativeQuery = true)
 //	List<AsQuestionPaperBatchCourse> findAllQuestionPaperNative(int examineeId);
 	
-	List<AsQuestionPaper> findByAsBatchAsExamineeListExamineeExamineeId(int examineeId);
+	List<AsQuestionPaper> findByAsBatchAsExamineeBatchListExamineeExamineeId(int examineeId);
 	
 }
