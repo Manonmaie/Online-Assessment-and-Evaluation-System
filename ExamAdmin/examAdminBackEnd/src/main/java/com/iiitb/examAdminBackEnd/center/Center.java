@@ -1,8 +1,14 @@
 package com.iiitb.examAdminBackEnd.center;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.iiitb.examAdminBackEnd.batch.Batch;
 
 @Entity
 @Table(name = "ea_center")
@@ -12,6 +18,10 @@ public class Center {
 	private int centerId;
 	private String centerCode,centerName;
 	private int centerCapacity;
+	
+	@OneToMany(mappedBy = "center")
+	@JsonIgnore
+	private List<Batch> batchList;
 	
 	public Center() {
 	}
@@ -46,5 +56,11 @@ public class Center {
 	}
 	public void setCenterCapacity(int centerCapacity) {
 		this.centerCapacity = centerCapacity;
+	}
+	public List<Batch> getBatchList() {
+		return batchList;
+	}
+	public void setBatchList(List<Batch> batchList) {
+		this.batchList = batchList;
 	}
 }

@@ -1,3 +1,5 @@
+import { ExamineeBatch } from './examinee-batch';
+
 export class Examinee{
     examineeId: number;
     examineeCode: string;
@@ -6,4 +8,5 @@ export class Examinee{
     examineeBranch: string;
     examineeEmail: string;
     examineeCollege: string;
+    examineeBatchList: ExamineeBatch[];
 }

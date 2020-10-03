@@ -1,4 +1,4 @@
-package com.iiitb.examAdminBackEnd.examDrive;
+package com.iiitb.examAdminBackEnd.examdrive;
 
 import java.util.ArrayList;
 import java.util.List;
