@@ -1,5 +1,6 @@
 // "batch":{"":1,"":"Mrng1","":"2020-09-27T14:00:00","":"2020-09-27T23:00:00","":"RECEIVED"}}}
 import { CourseMaster } from "./courseMaster";
+import { Examdrive } from "./examdrive";
 
 export class Batch{
     batchId: number;
@@ -7,5 +8,6 @@ export class Batch{
     batchStartTime: string;
     batchEndTime: string;
     qpStatus: string;
-    asCourseMaster: CourseMaster;
+    // asCourseMaster: CourseMaster;
+    asExamdrive: Examdrive;
 }

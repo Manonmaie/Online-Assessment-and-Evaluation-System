@@ -17,7 +17,7 @@ export class QuestionPaperComponent implements OnInit {
   showStartExamModalPopup: boolean = false;
   questionPaperPrevious: QuestionPaper;
 
-  attempt: Attempt = {attemptId: 0, attemptCode: '', attemptNumber: 1, attemptStartTime: '', attemptEndTime: null, attemptStatus: 'IN_PROGRESS', asExamineeBatch: null};
+  attempt: Attempt = {attemptId: 0, attemptNumber: 1, attemptStartTime: '', attemptEndTime: null, attemptStatus: 'IN_PROGRESS', asExamineeBatch: null};
   examineeBatch: ExamineeBatch = {examineeBatchId: null, examineeBatchStartTime: '', examineeBatchEndTime: null, examineeBatchStatus: 'IN_PROGRESS', examinee: null, batch: null};
 
   constructor(private questionPaperService: QuestionPaperService, private activeRoute: ActivatedRoute, public route: Router, public datepipe: DatePipe) { }
@@ -42,7 +42,7 @@ export class QuestionPaperComponent implements OnInit {
     let currDateTimeFormatted: string = this.datepipe.transform(currDateTime, 'yyyy-MM-ddTHH:mm:ss');
     this.attempt.attemptStartTime = currDateTimeFormatted;
 
-    this.attempt.attemptCode = 'Attempt' + examineeId + questionPaper.asBatch.batchId;
+    // this.attempt.attemptCode = 'Attempt' + examineeId + questionPaper.asBatch.batchId;
 
     this.examineeBatch.examineeBatchId = examineeBatchId;
     this.examineeBatch.examineeBatchStartTime = currDateTimeFormatted;

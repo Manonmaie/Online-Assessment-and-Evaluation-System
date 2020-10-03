@@ -1,10 +1,10 @@
 <div class="container">
     <h2 style="text-align:center;"> Examination </h2>
-    <ul class="list-group">
+    <ol class="list-group">
         <li class="list-group-item" *ngFor="let qpItem of qpItems">
-            {{qpItem.qpItemId}}. {{qpItem.itemText}}
+            {{qpItem.itemText}}
         <span class="badge badge-primary badge-pill">{{qpItem.itemMarks}} Marks</span>
-        <ul class="list-group">
+        <ol class="list-group" type="a">
             <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
                 <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="checkbox">
                     <label><input type="checkbox" name="optCheckbox">  {{itemMcqOption.mcqOptionText}}</label>
@@ -13,15 +13,29 @@
                     <label><input type="radio" name="optRadio">  {{itemMcqOption.mcqOptionText}}</label>
                 </div>
             </li>
-        </ul>
-        <div *ngIf='qpItem.itemType === "True/False"' class="btn-group">
+        </ol>
+        
+        <div *ngIf='qpItem.itemType === "True/False"' class="radio">
+            <ol class="list-group" type="a">
+                <li class="list-group-item">
+                    <label><input type="radio" name="optRadio">  True</label>
+                </li>
+                <li class="list-group-item">
+                    <label><input type="radio" name="optRadio">  False</label>
+                </li>
+            </ol>
+        </div>
+       
+        
+        
+        <!-- <div *ngIf='qpItem.itemType === "True/False"' class="btn-group">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">True or False?</span> <span class="caret"></span>
             </button>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" id="1" href="#" >True</a></li>
                 <li><a class="dropdown-item" id="2" href="#">False</a></li>
               </ul>
-        </div>
+        </div> -->
         <!-- <div *ngIf='qpItem.itemType === "True/False"' class="dropdown">
             <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <span id="selected">True or False?</span><span class="caret"></span></a>
@@ -40,11 +54,11 @@
             </ul>
         </div> -->
         </li>
-    </ul>
+    </ol>
     
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(function(){
         $("#1").click(function () {
             $("#opt").text($(this).text());
@@ -59,4 +73,4 @@
     // $(document).on('click', 'someyourContainer .dropdown-menu', function (e) {
     //     e.stopPropagation();
     // });
-</script>
+</script> -->

@@ -6,12 +6,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.assessmentBackEnd.center.AsCenter;
 import com.iiitb.assessmentBackEnd.courseMaster.AsCourseMaster;
+import com.iiitb.assessmentBackEnd.examdrive.AsExamdrive;
 import com.iiitb.assessmentBackEnd.examineeBatch.AsExamineeBatch;
+import com.iiitb.assessmentBackEnd.questionPaper.AsQuestionPaper;
 
 @Entity
 public class AsBatch {
@@ -26,28 +29,44 @@ public class AsBatch {
 	
 	@OneToMany(mappedBy="batch")
 //	@JsonIgnore
-	private List<AsExamineeBatch> asExamineeList;
+	private List<AsExamineeBatch> asExamineeBatchList;
 	
 	@ManyToOne
 	@JoinColumn(name="center_id")
+	@JsonIgnore
 	private AsCenter asCenter;
 	
 	@ManyToOne
-	@JoinColumn(name="course_master_id")
-	private AsCourseMaster asCourseMaster;
+	@JoinColumn(name="examdrive_id")
+	private AsExamdrive asExamdrive;
+	
+//	@ManyToOne
+//	@JoinColumn(name="course_master_id")
+//	private AsCourseMaster asCourseMaster;
+	
+	@OneToOne
+	@JoinColumn(name="qp_id")
+	@JsonIgnore
+	private AsQuestionPaper asQuestionPaper;
 
 	public AsBatch() {
 		
 	}
 	
 	public AsBatch(int batchId, String batchCode, LocalDateTime batchStartTime, LocalDateTime batchEndTime,
-			String qpStatus) {
+			String qpStatus, int centerId, int examdriveId, int qpId) {
 		super();
 		this.batchId = batchId;
 		this.batchCode = batchCode;
 		this.batchStartTime = batchStartTime;
 		this.batchEndTime = batchEndTime;
 		this.qpStatus = qpStatus;
+		this.asCenter = new AsCenter();
+		this.asCenter.setCenterId(centerId);
+		this.asExamdrive = new AsExamdrive();
+		this.asExamdrive.setExamdriveId(examdriveId);
+		this.asQuestionPaper = new AsQuestionPaper();
+		this.asQuestionPaper.setQpId(qpId);
 	}
 	
 	public int getBatchId() {
@@ -81,10 +100,10 @@ public class AsBatch {
 		this.qpStatus = qpStatus;
 	}
 	public List<AsExamineeBatch> getAsExamineeList() {
-		return asExamineeList;
+		return asExamineeBatchList;
 	}
 	public void setAsExamineeList(List<AsExamineeBatch> asExamineeList) {
-		this.asExamineeList = asExamineeList;
+		this.asExamineeBatchList = asExamineeList;
 	}
 	public AsCenter getAsCenter() {
 		return asCenter;
@@ -92,10 +111,26 @@ public class AsBatch {
 	public void setAsCenter(AsCenter asCenter) {
 		this.asCenter = asCenter;
 	}
-	public AsCourseMaster getAsCourseMaster() {
-		return asCourseMaster;
+
+	public AsExamdrive getAsExamdrive() {
+		return asExamdrive;
 	}
-	public void setAsCourseMaster(AsCourseMaster asCourseMaster) {
-		this.asCourseMaster = asCourseMaster;
+
+	public void setAsExamdrive(AsExamdrive asExamdrive) {
+		this.asExamdrive = asExamdrive;
 	}
+
+	public AsQuestionPaper getAsQuestionPaper() {
+		return asQuestionPaper;
+	}
+
+	public void setAsQuestionPaper(AsQuestionPaper asQuestionPaper) {
+		this.asQuestionPaper = asQuestionPaper;
+	}
+//	public AsCourseMaster getAsCourseMaster() {
+//		return asCourseMaster;
+//	}
+//	public void setAsCourseMaster(AsCourseMaster asCourseMaster) {
+//		this.asCourseMaster = asCourseMaster;
+//	}
 }

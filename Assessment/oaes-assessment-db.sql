@@ -39,6 +39,13 @@ ALTER TABLE as_examdrive
   ADD CONSTRAINT `fk_as_examdrive_course_master_id` FOREIGN KEY (course_master_id) REFERENCES as_course_master(course_master_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table as_examdrive
+-- --------------------------------------------------------
+INSERT INTO as_examdrive VALUES(0,"Mid_Mat","Midsemester_Maths","IN_PROGRESS",1);
+INSERT INTO as_examdrive VALUES(0,"Mid_Phy","Midsemester_Physics","IN_PROGRESS",2);
+INSERT INTO as_examdrive VALUES(0,"Mid_Chem","Midsemester_Chemistry","IN_PROGRESS",3);
+
+-- --------------------------------------------------------
 -- Table structure for table as_examinee
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_examinee(
@@ -53,12 +60,13 @@ CREATE TABLE IF NOT EXISTS as_examinee(
 );
 
 -- --------------------------------------------------------
--- Data Entry for table ea_examinee
+-- Data Entry for table as_examinee
 -- --------------------------------------------------------
 INSERT INTO as_examinee VALUES(0,"S1","ABC","abc","CSE","ABC@iiitb.org",'IIITB');
 INSERT INTO as_examinee VALUES(0,"S2","XYZ","xyz",NULL,NULL,NULL);
 INSERT INTO as_examinee VALUES(0,"S3","PQR","pqr","CSE","PQR@iiitb.org",'IITB');
 INSERT INTO as_examinee VALUES(0,"S4","UVW","uvw",NULL,NULL,NULL);
+
 -- --------------------------------------------------------
 -- Table structure for table as_center
 -- --------------------------------------------------------
@@ -73,7 +81,6 @@ CREATE TABLE IF NOT EXISTS as_center(
 -- --------------------------------------------------------
 -- Data Entry for table `as_center`
 -- --------------------------------------------------------
-
 INSERT INTO as_center VALUES(0,"CENTER_1","IIIT-Bangalore",1000);
 
 -- --------------------------------------------------------
@@ -86,20 +93,55 @@ CREATE TABLE IF NOT EXISTS as_batch(
   batch_end_time datetime NOT NULL,
   qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING') DEFAULT 'PENDING',
   center_id int(10) unsigned,
-  course_master_id int(10) unsigned,
+  examdrive_id int(10) unsigned,
+  qp_id int(10) unsigned,
   PRIMARY KEY (batch_id)
 );
 
+-- --------------------------------------------------------
+-- Table structure for table `as_question_paper`
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_question_paper(
+  qp_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_code varchar(255) UNIQUE NOT NULL,
+  batch_id int(10) unsigned,
+  maximum_marks float(24) NOT NULL DEFAULT 100,
+  duration int(10) NOT NULL DEFAULT 180,
+  PRIMARY KEY(qp_id)
+);
+
+ALTER TABLE as_question_paper
+  ADD CONSTRAINT `fk_as_question_paper_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Alter Entry for table `as_batch`
+-- --------------------------------------------------------
 ALTER TABLE as_batch
-  ADD CONSTRAINT `fk_as_batch_center_id` FOREIGN KEY (center_id) REFERENCES as_center(center_id) ON DELETE SET NULL;
+  ADD CONSTRAINT `fk_as_batch_center_id` FOREIGN KEY (center_id) REFERENCES as_center(center_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_as_batch_examdrive_id` FOREIGN KEY (examdrive_id) REFERENCES as_examdrive(examdrive_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_as_batch_qp_id` FOREIGN KEY (qp_id) REFERENCES as_question_paper(qp_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-03 09:00:00","2020-10-03 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
 
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-02 09:00:00","2020-10-02 23:00:00","RECEIVED",1,1);
-INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2);
-INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3);
+-- --------------------------------------------------------
+-- Data Entry for table `as_question_paper`
+-- --------------------------------------------------------
+INSERT INTO as_question_paper VALUES(0,"MAT_1",1,100,180);
+-- INSERT INTO as_question_paper VALUES(0,"MAT_Paper_2",1,100,180);
+INSERT INTO as_question_paper VALUES(0,"PHY_1",2,50,120);
+INSERT INTO as_question_paper VALUES(0,"CHEM_1",3,25,60);
+
+-- --------------------------------------------------------
+-- Update Data for table `as_batch`
+-- --------------------------------------------------------
+UPDATE as_batch SET qp_id = 1 WHERE batch_id = 1;
+UPDATE as_batch SET qp_id = 2 WHERE batch_id = 2;
+UPDATE as_batch SET qp_id = 3 WHERE batch_id = 3;
 
 -- --------------------------------------------------------
 -- Table structure for table `as_examinee_batch`
@@ -147,30 +189,6 @@ ALTER TABLE as_invigilator
   ADD CONSTRAINT `fk_as_invigilator_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
--- Table structure for table `as_question_paper`
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_question_paper(
-  qp_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qp_code varchar(255) UNIQUE NOT NULL,
-  batch_id int(10) unsigned,
-  maximum_marks float(24) NOT NULL DEFAULT 100,
-  duration int(10) NOT NULL DEFAULT 180,
-  PRIMARY KEY(qp_id)
-);
-
-ALTER TABLE as_question_paper
-  ADD CONSTRAINT `fk_as_question_paper_batch_id` FOREIGN KEY (batch_id) REFERENCES as_batch(batch_id) ON DELETE SET NULL;
-
--- --------------------------------------------------------
--- Data Entry for table `as_question_paper`
--- --------------------------------------------------------
-
-INSERT INTO as_question_paper VALUES(0,"MAT_Paper_1",1,100,180);
-INSERT INTO as_question_paper VALUES(0,"MAT_Paper_2",1,100,180);
-INSERT INTO as_question_paper VALUES(0,"PHY_1",2,50,120);
-INSERT INTO as_question_paper VALUES(0,"CHEM_1",3,25,60);
-
--- --------------------------------------------------------
 -- Table structure for table `as_instruction`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_instruction(
@@ -187,7 +205,6 @@ ALTER TABLE as_instruction
 -- --------------------------------------------------------
 -- Data Entry for table `as_instruction`
 -- --------------------------------------------------------
-
 INSERT INTO as_instruction VALUES(0,"Mat_Ins_1",1,"Exam duration is 3 hrs");
 INSERT INTO as_instruction VALUES(0,"Mat_Ins_2",1,"It has two sections");
 INSERT INTO as_instruction VALUES(0,"Mat_Ins_3",1,"Each section contributes to 50% of the total marks");
@@ -227,7 +244,6 @@ ALTER TABLE as_qp_item
 -- --------------------------------------------------------
 -- Data Entry for table `as_qp_item`
 -- --------------------------------------------------------
-
 INSERT INTO as_qp_item VALUES(0,"Item1_qp1","What is a database?",2,"McqSingleCorrect","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"McqMultiCorrect","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item3_qp1","What is a FK?",2,"McqMultiCorrect","UNDERSTAND",1);
@@ -256,7 +272,6 @@ ALTER TABLE as_item_mcq_options
 -- --------------------------------------------------------
 -- Data Entry for table `as_item_mcq_options`
 -- --------------------------------------------------------
-
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item1_qp1",1,"Collection of related data");
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item1_qp1",1,"Collection of data");
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item1_qp1",1,"Collection of words");
@@ -288,7 +303,7 @@ ALTER TABLE as_item_true_false
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_attempt (
   attempt_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  attempt_code varchar(255) UNIQUE NOT NULL,
+  -- attempt_code varchar(255) UNIQUE NOT NULL,
   attempt_number int(10) unsigned NOT NULL,
   attempt_start_time timestamp NOT NULL,
   attempt_end_time timestamp,
@@ -306,7 +321,6 @@ ALTER TABLE as_attempt
 -- --------------------------------------------------------
 -- Data Entry for table `as_attempt`
 -- --------------------------------------------------------
-
 -- INSERT INTO as_attempt VALUES(0,"Attempt1",1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
 
 -- --------------------------------------------------------
@@ -314,7 +328,7 @@ ALTER TABLE as_attempt
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_response (
   response_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  response_code varchar(255) UNIQUE NOT NULL,
+  -- response_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
   attempt_id int(10) unsigned,
   PRIMARY KEY (response_id)
@@ -329,7 +343,7 @@ ALTER TABLE as_response
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_response_mcq (
   response_mcq_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  response_mcq_code varchar(255) UNIQUE NOT NULL,
+  -- response_mcq_code varchar(255) UNIQUE NOT NULL,
   response_text varchar(511) NOT NULL,
   response_id int(10) unsigned,
   PRIMARY KEY (response_mcq_id)
@@ -343,7 +357,8 @@ ALTER TABLE as_response_mcq
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_response_true_false (
   response_true_false_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  response_true_false_code varchar(255) UNIQUE NOT NULL,
+  -- response_true_false_code varchar(255) UNIQUE NOT NULL,
+  response_text varchar(511) NOT NULL,
   response_id int(10) unsigned,
   PRIMARY KEY (response_true_false_id)
 );

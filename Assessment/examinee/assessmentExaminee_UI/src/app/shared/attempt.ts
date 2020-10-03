@@ -3,7 +3,7 @@ import { ExamineeBatch } from "./examineeBatch";
 
 export class Attempt{
     attemptId: number;
-    attemptCode: string;
+    // attemptCode: string;
     attemptNumber: number;
     attemptStartTime: string;
     attemptEndTime: string;
