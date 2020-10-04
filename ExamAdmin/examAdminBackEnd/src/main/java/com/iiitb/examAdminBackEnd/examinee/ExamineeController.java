@@ -36,4 +36,14 @@ public class ExamineeController {
 	public void updateExaminee(@PathVariable int id, @RequestBody Examinee examinee) {
 		examineeService.updateExaminee(id, examinee);
 	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/examinees")
+	public void addExaminee(@RequestBody Examinee examinee) {
+		examineeService.addExaminee(examinee);
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/examineesBulk")
+	public void addExaxmineeBulk(@RequestBody List<Examinee> examinees) {
+		examineeService.addExamineeBulk(examinees);
+	}
 }
