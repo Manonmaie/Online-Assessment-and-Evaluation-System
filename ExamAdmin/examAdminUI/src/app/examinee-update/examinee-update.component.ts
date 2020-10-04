@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Examinee } from '../shared/examinee';
+import { ExamineeBatch } from '../shared/examinee-batch';
 import { ExamineeService } from '../services/examinee.service';
+import { ExamineeBatchService } from '../services/examinee-batch.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -10,8 +12,9 @@ import { Params, ActivatedRoute, Router } from '@angular/router';
 })
 export class ExamineeUpdateComponent implements OnInit {
   examinee: Examinee;
+  examineeBatch: ExamineeBatch;
   examineeId: number;
-  constructor(private examineeService: ExamineeService, private route: ActivatedRoute, public router: Router) { }
+  constructor(private examineeService: ExamineeService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
     this.examineeId = this.route.snapshot.params['id'];
@@ -29,5 +32,10 @@ export class ExamineeUpdateComponent implements OnInit {
   onSubmit(){
     this.updateExaminee(this.examineeId, this.examinee);
     this.router.navigate(['/examineeupdate',this.examineeId]);
+  }
+
+  updateExamineeBatch(examineeBatch: ExamineeBatch): void{
+    this.examineeBatchService.updateExamineeBatch(examineeBatch.examineeBatchId.examineeId, examineeBatch.examineeBatchId.batchId, examineeBatch)
+        .subscribe((examineeBatch)=>this.examineeBatch=examineeBatch);
   }
 }

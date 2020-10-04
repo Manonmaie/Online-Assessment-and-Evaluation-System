@@ -50,7 +50,7 @@
             <input type="text" id="marksObtained" name="marksObtained" placeholder="Marks" [(ngModel)]="examineeBatch.marksObtained">
           </td>
           <td>
-            <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"> <font size=-1> Update Marks</font></i></button>
+            <button type="button" class="btn btn-warning float-right mr-1" (click) = "updateExamineeBatch(examineeBatch)"><i class="fa fa-pencil"> <font size=-1> Update Marks</font></i></button>
           </td>
         </tr>
       </tbody>
