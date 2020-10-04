@@ -1,1 +1,29 @@
-<p>examinee-add works!</p>
+<app-examinee-add-header></app-examinee-add-header>
+<div class="container">
+    <legend>Update Student Details</legend>
+    <form novalidate (ngSubmit)="onSubmit()">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <label for="examineeName">Student Name</label>
+                <input type="text" id="examineeName" name="examineeName" placeholder="Student's Name" [(ngModel)]="examinee.examineeName">
+            </li>
+            <li class="list-group-item">
+                <label for="examineeCode">Student Code</label>
+                <input type="text" id="examineeCode" name="examineeCode" placeholder="Student's Roll Number" [(ngModel)]="examinee.examineeCode">
+            </li>
+            <li class="list-group-item">
+                <label for="examineeBranch">Branch</label>
+                <input type="text" id="examineeBranch" name="examineeBranch" placeholder="Student's Branch" [(ngModel)]="examinee.examineeBranch">
+            </li>
+            <li class="list-group-item">
+                <label for="examineeEmail">Email-id</label>
+                <input type="text" id="examineeEmail" name="examineeEmail" placeholder="Student's Email-id" [(ngModel)]="examinee.examineeEmail">
+            </li>
+            <li class="list-group-item">
+                <label for="examineeCollege">College</label>
+                <input type="text" id="examineeCollege" name="examineeCollege" placeholder="Student's College" [(ngModel)]="examinee.examineeCollege">
+            </li> 
+            <input type="submit" value ="Add Student" (click)="onSubmit()">
+        </ul>
+    </form>
+</div>

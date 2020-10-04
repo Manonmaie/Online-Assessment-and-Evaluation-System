@@ -27,4 +27,12 @@ export class ExamineeService {
   updateExaminee(id: number, examinee: Examinee): Observable<Examinee>{
     return this.http.put<Examinee>(baseURL + 'examinees/'+id, examinee);
   }
+
+  addExaminee(examinee: Examinee): Observable<Examinee>{
+    return this.http.post<Examinee>(baseURL + 'examinees', examinee);
+  }
+  
+  addExamineeBulk(examinees: Examinee[]): Observable<Examinee[]>{
+    return this.http.post<Examinee[]>(baseURL + 'examineesBulk', examinees);
+  }
 }

@@ -9,6 +9,7 @@ import { ExamineeViewComponent } from '../examinee-view/examinee-view.component'
 import { CourseViewComponent } from '../course-view/course-view.component';
 import { CenterAddComponent } from '../center-add/center-add.component';
 import { ExamineeAddComponent } from '../examinee-add/examinee-add.component';
+import { ExamineeAddBulkComponent } from '../examinee-add-bulk/examinee-add-bulk.component';
 import { CourseAddComponent } from '../course-add/course-add.component';
 import { CenterUpdateComponent } from '../center-update/center-update.component';
 import { ExamineeUpdateComponent } from '../examinee-update/examinee-update.component';
@@ -24,6 +25,7 @@ export const routes: Routes = [
     {path: 'courseview/:id', component: CourseViewComponent},
     {path: 'centeradd', component: CenterAddComponent},
     {path: 'examineeadd', component: ExamineeAddComponent},
+    {path: 'examineeaddbulk', component: ExamineeAddBulkComponent},
     {path: 'courseadd', component: CourseAddComponent},
     {path: 'centerupdate/:id', component: CenterUpdateComponent},
     {path: 'examineeupdate/:id', component: ExamineeUpdateComponent},

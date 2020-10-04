@@ -27,6 +27,8 @@ import { InterceptorService } from './services/interceptor.service';
 import { ExamineeViewComponent } from './examinee-view/examinee-view.component';
 import { ExamineeUpdateComponent } from './examinee-update/examinee-update.component';
 import { ExamineeAddComponent } from './examinee-add/examinee-add.component';
+import { ExamineeAddBulkComponent } from './examinee-add-bulk/examinee-add-bulk.component';
+import { ExamineeAddHeaderComponent } from './examinee-add-header/examinee-add-header.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ExamineeAddComponent } from './examinee-add/examinee-add.component';
     CourseUpdateComponent,
     ExamineeViewComponent,
     ExamineeUpdateComponent,
-    ExamineeAddComponent
+    ExamineeAddComponent,
+    ExamineeAddBulkComponent,
+    ExamineeAddHeaderComponent
   ],
   imports: [
     BrowserModule,
