@@ -2,7 +2,7 @@ import { Center } from './center';
 import { Examdrive } from './examdrive';
 
 export class Batch{
-    batchId: number;
+    batchId ?: number;
     batchCode: string;
     qpStatus: string;
     batchStartTime: string;

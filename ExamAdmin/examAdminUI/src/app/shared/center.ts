@@ -1,5 +1,5 @@
 export class Center{
-    centerId: number;
+    centerId ?: number;
     centerCode: string;
     centerName: string;
     centerCapacity: number;

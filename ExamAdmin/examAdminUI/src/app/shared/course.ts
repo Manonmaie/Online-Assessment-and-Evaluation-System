@@ -1,5 +1,5 @@
 export class Course{
-    courseMasterId: number;
+    courseMasterId ?: number;
     courseCode: string;
     courseName: string;
 }
