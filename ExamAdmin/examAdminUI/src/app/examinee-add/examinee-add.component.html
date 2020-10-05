@@ -1,6 +1,6 @@
 <app-examinee-add-header></app-examinee-add-header>
 <div class="container">
-    <legend>Update Student Details</legend>
+    <legend>Add Student</legend>
     <form novalidate (ngSubmit)="onSubmit()">
         <ul class="list-group">
             <li class="list-group-item">
@@ -10,6 +10,10 @@
             <li class="list-group-item">
                 <label for="examineeCode">Student Code</label>
                 <input type="text" id="examineeCode" name="examineeCode" placeholder="Student's Roll Number" [(ngModel)]="examinee.examineeCode">
+            </li>
+            <li class="list-group-item">
+                <label for="examineePassword">Student Password</label>
+                <input type="text" id="examineePassword" name="examineePassword" placeholder="Student's Password" [(ngModel)]="examinee.examineePassword">
             </li>
             <li class="list-group-item">
                 <label for="examineeBranch">Branch</label>

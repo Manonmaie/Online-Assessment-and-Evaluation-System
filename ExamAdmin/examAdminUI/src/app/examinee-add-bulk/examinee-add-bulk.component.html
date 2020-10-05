@@ -1,2 +1,37 @@
 <app-examinee-add-header></app-examinee-add-header>
-<p>examinee-add-bulk works!</p>
+<div class="container">
+    <legend>Add Bulk of Students</legend>
+    <form novalidate (ngSubmit)="onSubmit()">
+        <ul class="list-group">  
+            <li class="list-group-item">
+                Upload an Excel Sheet with all the student details in the format given below. <font size=-2>Fields with * are compulsory</font>
+            </li>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">examineeName *</th>
+                    <th scope="col">examineeCode *</th>
+                    <th scope="col">examineePassword *</th>
+                    <th scope="col">examineeBranch</th>
+                    <th scope="col">examineeEmail</th>
+                    <th scope="col">examineeCollege</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Student's Name</td>
+                    <td>Student's Roll Number</td>
+                    <td>Student's Password</td>
+                    <td>Student's Branch</td>
+                    <td>Student's Email-id</td>
+                    <td>Student's College</td>
+                  </tr>
+                </tbody>
+              </table>
+            <input type="file" id="file" accept = ".xls, .xlsx, .odt, .csv" (change)="onFileChange($event)"/>
+            <!-- <input type="file" id="selectedFile" style="display: none;" />
+            <input type="button" value="Browse..." onclick="document.getElementById('selectedFile').click();" /> -->   
+            <input type="submit" value ="Add Students" (click)="onSubmit()">
+        </ul>  
+    </form>
+</div>
