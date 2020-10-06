@@ -1,11 +1,16 @@
-package com.iiitb.examAdminBackEnd.examDrive;
+package com.iiitb.examAdminBackEnd.examdrive;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.iiitb.examAdminBackEnd.batch.Batch;
 import com.iiitb.examAdminBackEnd.course.Course;
 
 @Entity
@@ -23,6 +28,10 @@ public class Examdrive {
 	@ManyToOne
 	@JoinColumn(name="course_master_id")
 	private Course course;
+	
+	@OneToMany(mappedBy = "examdrive")
+	@JsonIgnore
+	private List<Batch> batchList;
 	
 	public Examdrive() {
 	}
@@ -68,5 +77,13 @@ public class Examdrive {
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public List<Batch> getBatchList() {
+		return batchList;
+	}
+
+	public void setBatchList(List<Batch> batchList) {
+		this.batchList = batchList;
 	}
 }

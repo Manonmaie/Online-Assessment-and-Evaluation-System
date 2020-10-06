@@ -1,8 +1,13 @@
 package com.iiitb.examAdminBackEnd.examinee;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
 
 @Entity
 @Table(name = "ea_examinee")
@@ -10,6 +15,9 @@ public class Examinee {
 	@Id
 	private int examineeId;
 	private String examineeCode,examineeName,examineePassword,examineeBranch,examineeEmail,examineeCollege;
+	
+	@OneToMany(mappedBy = "examinee")
+	private List<ExamineeBatch> examineeBatchList;
 	
 	public Examinee() {
 	}
@@ -66,5 +74,11 @@ public class Examinee {
 	}
 	public void setExamineeCollege(String examineeCollege) {
 		this.examineeCollege = examineeCollege;
+	}
+	public List<ExamineeBatch> getExamineeBatchList() {
+		return examineeBatchList;
+	}
+	public void setExamineeBatchList(List<ExamineeBatch> examineeBatchList) {
+		this.examineeBatchList = examineeBatchList;
 	}
 }

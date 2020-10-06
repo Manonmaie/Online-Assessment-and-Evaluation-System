@@ -1,16 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
+  
 @Component({
-  selector: 'app-question-paper',
+  selector: 'my-app',
   templateUrl: './question-paper.component.html',
-  styleUrls: ['./question-paper.component.css']
+  styleUrls: [ './question-paper.component.css' ]
 })
-export class QuestionPaperComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+export class itemForm  {
+  name = 'Angular';
+  
+  productForm: FormGroup;
+   
+  constructor(private fb:FormBuilder) {
+   
+    this.productForm = this.fb.group({
+      name: '',
+      quantities: this.fb.array([]) ,
+    });
   }
   
-
+  quantities() : FormArray {
+    return this.productForm.get("quantities") as FormArray
+  }
+   
+  newQuantity(): FormGroup {
+    return this.fb.group({
+      option: '',
+      marks: '',
+    })
+  }
+   
+  addQuantity() {
+    this.quantities().push(this.newQuantity());
+  }
+   
+  removeQuantity(i:number) {
+    this.quantities().removeAt(i);
+  }
+   
+  onSubmit() {
+    console.log(this.productForm.value);
+  }
 }

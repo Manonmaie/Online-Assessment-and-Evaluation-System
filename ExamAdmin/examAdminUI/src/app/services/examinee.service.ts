@@ -15,7 +15,24 @@ export class ExamineeService {
   getExaminees(): Observable<Examinee[]>{
     return this.http.get<Examinee[]>(baseURL + 'examinees');
   }
+
   deleteExaminee(id: number): Observable<any>{
     return this.http.delete<any>(baseURL+'examinees/'+id);
+  }
+  
+  getExaminee(id: number): Observable<Examinee>{
+    return this.http.get<Examinee>(baseURL+'examinees/'+id);
+  }
+
+  updateExaminee(id: number, examinee: Examinee): Observable<Examinee>{
+    return this.http.put<Examinee>(baseURL + 'examinees/'+id, examinee);
+  }
+
+  addExaminee(examinee: Examinee): Observable<Examinee>{
+    return this.http.post<Examinee>(baseURL + 'examinees', examinee);
+  }
+  
+  addExamineeBulk(examinees: Examinee[]): Observable<Examinee[]>{
+    return this.http.post<Examinee[]>(baseURL + 'examineesBulk', examinees);
   }
 }

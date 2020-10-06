@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as $ from 'jquery'
 
@@ -12,44 +13,70 @@ import * as $ from 'jquery'
 })
 
 export class ItemFormComponent implements OnInit  {
-  // httpClient: any;
+
   countBox:number;
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient,private fb:FormBuilder) {
     this.onChange= this.onChange.bind(this);
     this.countBox=3;
+
+    this.productForm = this.fb.group({
+      name: '',
+      quantities: this.fb.array([]) ,
+    });
   }
 
-  public quantities: Array<number> = [];
+
+
+  // dynamic option add
+  // .
+  // .
+  productForm: FormGroup;
+
+  
+  quantities() : FormArray {
+    return this.productForm.get("quantities") as FormArray
+  }
+   
+  newQuantity(): FormGroup {
+    return this.fb.group({
+      option: '',
+      marks: '',
+    })
+  }
+   
+  addQuantity() {
+    this.quantities().push(this.newQuantity());
+  }
+   
+  removeQuantity(i:number) {
+    this.quantities().removeAt(i);
+  }
+
+
+
 
   ngOnInit() {
-    $("#MCQoptionsID").hide();
+    $("#MCQoptionID").hide();
     $('#TFOption').hide();
-    for (let i = 0; i <= 100; i++) {
-      this.quantities.push(i)
-    }
   }
 
-  addInput()
-  {
-       var boxName="Option "+this.countBox; 
-  document.getElementById('responce').innerHTML+='<div class="d-flex justify-content-between"><label class="block">'+boxName+'</label><div>Percentage of correctness(0-100): &nbsp;<input type="text" class="width-60 block" name="number" [(ngModel)]="totalMarks" /></div></div><div class=""><input type="text"  class="form-control" name="number" [(ngModel)]="totalMarks" /></div><br/>';
-       this.countBox += 1;
-  }
+
+
+  
 
 
   onChange() {
     console.log(this.selectedType);
     var selValue = this.selectedType;
-    if(selValue=='MCQ') {
-      console.log("HIII");
-      $("#MCQoptionsID").show();
+    if(selValue=='MCQ' || selValue=='Multi_Correct_MCQ') {
+      $("#MCQoptionID").show();
       $('#TFOption').hide();
     } else if(selValue=='TRUE/FALSE') {
-      $("#MCQoptionsID").hide();
       $('#TFOption').show();
+      $("#MCQoptionID").hide();
     } else
     {
-      $("#MCQoptionsID").hide();
+      $("#MCQoptionID").hide();
       $('#TFOption').hide();
     }
   }
@@ -60,10 +87,9 @@ export class ItemFormComponent implements OnInit  {
   totalMarks: Number;
   selectedSub: any= "";
   selectedcrct:any="";
-  option2:any="";
-  option1:any="";
-  crct2:any="";
-  crct1:any="";
+  TFmark1:any="";
+  TFmark2:any="";
+
 
 
   public Editor = ClassicEditor;
@@ -92,6 +118,7 @@ export class ItemFormComponent implements OnInit  {
     { value: '', label: 'Choose question type' },
     { value: 'MCQ', label: 'MCQ' },
     { value: 'TRUE/FALSE', label: 'TRUE/FALSE' },
+    { value: 'Multi_Correct_MCQ', label: 'Multi Correct MCQ' }
   ];
   subject = [
     { value: '', label: 'Choose question subject' },
@@ -100,14 +127,27 @@ export class ItemFormComponent implements OnInit  {
   ];
   private REST_API_SERVER = "http://localhost:8080/urest/v1/setItem";
   onSubmit(){
-    console.log(this.selectedType, this.selectedCGLvl, this.totalMarks, this.model.editorData);
-    this.httpClient.post(this.REST_API_SERVER, {
-      "question": this.model.editorData,
-      "marks": this.totalMarks,
-      "cg_lvl": this.selectedCGLvl,
-    }).subscribe((data: any[])=>{
-      console.log(data);
-    }) 
+    var selValue = this.selectedType;
+    if(selValue=='MCQ' || selValue=='Multi_Correct_MCQ')
+    {
+      console.log(this.selectedType, this.selectedCGLvl, this.totalMarks, this.model.editorData,this.selectedSub,this.selectedDifLvl);
+      console.log(this.productForm.value);
+    }
+
+    if(selValue=='TRUE/FALSE')
+    {
+      console.log(this.selectedType, this.selectedCGLvl, this.totalMarks, this.model.editorData,this.selectedSub,this.selectedDifLvl);
+      console.log(this.TFmark1,this.TFmark2);
+    }
+    
+    // this.httpClient.post(this.REST_API_SERVER, {
+    //   "question": this.model.editorData,
+    //   "marks": this.totalMarks,
+    //   "cg_lvl": this.selectedCGLvl,
+    // }).subscribe((data: any[])=>{
+    //   console.log(data);
+    // }) 
+
   };
 
 }

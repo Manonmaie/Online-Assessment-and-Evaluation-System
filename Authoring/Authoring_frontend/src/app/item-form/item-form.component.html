@@ -74,43 +74,31 @@
     ></ckeditor>
   </div>
 
+<!-- MCQ options -->
 
-  <!-- options -->
-  <div class="form-group border-top" id="MCQoptionsID">
-    <br />
-    <h2>Response Form</h2>
-    <br/><br/>
-
-    <div class="d-flex justify-content-between">
-      <label class="block">Option 1<span class="required">*</span></label>
-      <div>Percentage of correctness(0-100): &nbsp;
-        <input type="text" class="width-60 block" name="number1" id="crct1" [(ngModel)]="crct1" />
-      </div>
-    </div>
-    <div class="">
-        <input type="text"  class="form-control" name="number2" id="option1" [(ngModel)]="option1" /> 
-    </div>
-
-    <br/>
-
-
-    <div class="d-flex justify-content-between">
-      <label class="block">Option 2<span class="required">*</span></label>
-        <div>Percentage of correctness(0-100): &nbsp;
-          <input type="text" class="width-60 block" name="number3" id="crct2" [(ngModel)]="crct2" />
-        </div>
-      </div>
-    <div class="">
-        <input type="text"  class="form-control" name="number4" id="option2" [(ngModel)]="option2" />
-    </div>
-    <br/>
-
-
-
-    <span id="responce"></span>
-    <input (click)="addInput()" type="submit" value="Add Option" />
-  </div>
- 
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" id="MCQoptionID">
+      
+  <table class="table table-bordered" formArrayName="quantities" >
+    <tr>
+      <th colspan="2" scope="col">Add Option:</th>
+      <th width="150px" scope="colgroup" ><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+    </tr>
+    <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+      <td>
+          Option :
+          <input type="text" size="75" formControlName="option" class="form-control">
+      </td>
+      <td>
+          Marks:
+          <input type="text"  formControlName="marks" class="form-control">
+      </td>
+      <td>
+          <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+      </td>
+    </tr>
+  </table>
+   
+</form>
 
 
   <!-- T/F options  -->
@@ -123,8 +111,8 @@
       <input type="radio" disabled /> &nbsp;
       <label class="block">True<span class="required">*</span></label>
     </div>
-    <div style="margin-left: 200px">Percentage of correctness(0-100): &nbsp;
-      <input type="text" class="width-60 block" name="number1" id="crct1" [(ngModel)]="crct1" />
+    <div style="margin-left: 200px">marks: &nbsp;
+      <input type="text" class="width-60 block" name="number1" id="crct1" [(ngModel)]="TFmark1" />
     </div>
   </div>
   <div class="d-flex">
@@ -132,8 +120,8 @@
       <input type="radio" disabled /> &nbsp;
       <label class="block">False<span class="required">*</span></label>
     </div>
-    <div style="margin-left: 194px">Percentage of correctness(0-100): &nbsp;
-      <input type="text" class="width-60 block" name="number1" id="crct1" [(ngModel)]="crct1" />
+    <div style="margin-left: 194px">marks: &nbsp;
+      <input type="text" class="width-60 block" name="number1" id="crct2" [(ngModel)]="TFmark2" />
     </div>
   </div>
 </div>

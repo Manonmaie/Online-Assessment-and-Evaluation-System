@@ -1,12 +1,12 @@
 <div class="container">
-  <button type="button" class="btn btn-success btn-lg btn-block">
+  <button type="button" class="btn btn-success btn-lg btn-block" [routerLink]="['/examineeadd']">
     <i class="fa fa-plus-square" style="font-size:24px"></i>
     Add Student
   </button>
 </div>
     
 <div class="container">
-  <table class="table table-striped">
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">Student Name</th>
@@ -22,8 +22,8 @@
         <td>{{ examinee.examineeBranch }}</td>
         <td>
           <button type="button" class="btn btn-danger float-right" (click)="deleteExaminee(examinee)"><i class="fa fa-trash-o"></i></button>
-          <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
-          <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>
+          <button type="button" class="btn btn-warning float-right mr-1" [routerLink]="['/examineeupdate', examinee.examineeId]"><i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examineeview', examinee.examineeId]"><i class="fa fa-eye"></i></button>
         </td>
       </tr>
     </tbody>

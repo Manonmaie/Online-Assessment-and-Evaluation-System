@@ -1,8 +1,16 @@
 package com.iiitb.examAdminBackEnd.course;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.iiitb.examAdminBackEnd.examdrive.Examdrive;
 
 @Entity
 @Table(name = "ea_course_master")
@@ -10,6 +18,10 @@ public class Course {
 	@Id
 	private int courseMasterId;
 	private String courseCode,courseName;
+	
+	@OneToMany(mappedBy = "course")
+	@JsonIgnore
+	private List<Examdrive> examdriveList;
 	
 	public Course() {
 	}
@@ -37,5 +49,11 @@ public class Course {
 	}
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+	public List<Examdrive> getExamdriveList() {
+		return examdriveList;
+	}
+	public void setExamdriveList(List<Examdrive> examdriveList) {
+		this.examdriveList = examdriveList;
 	}
 }

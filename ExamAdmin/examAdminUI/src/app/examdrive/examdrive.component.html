@@ -6,7 +6,7 @@
 </div>
 
 <div class="container">
-  <table class="table table-striped">
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">Drive</th>
@@ -18,7 +18,12 @@
     <tbody>
       <tr *ngFor="let examdrive of examdrives">
         <td>{{examdrive.examdriveName}}</td>
-        <td>{{examdrive.course.courseCode}}</td>
+        <ng-container *ngIf = "examdrive.course">
+          <td>{{examdrive.course.courseCode}}</td>
+        </ng-container>
+        <ng-container *ngIf = "!examdrive.course">
+          <td>-</td>
+        </ng-container>
         <td><font size="-2">{{examdrive.status}}</font></td>
         <td>
           <button type="button" class="btn btn-danger float-right" (click)="deleteExamdrive(examdrive)"><i class="fa fa-trash-o"></i></button>
