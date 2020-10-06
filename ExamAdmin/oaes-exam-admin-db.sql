@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS ea_batch(
   batch_code varchar(255) UNIQUE NOT NULL,
   batch_start_time datetime NOT NULL,
   batch_end_time datetime NOT NULL,
-  qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING') DEFAULT 'PENDING',
+  qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING','SENT') DEFAULT 'PENDING',
   center_id int(10) unsigned,
   examdrive_id int(10) unsigned,
   qp_id int(10) unsigned,
@@ -101,6 +101,7 @@ ALTER TABLE ea_batch
 -- Data Entry for table ea_batch
 -- --------------------------------------------------------
 INSERT INTO ea_batch VALUES(0,"MID-MRNG","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",1,1,NULL);
+INSERT INTO ea_batch VALUES(0,"MID-EVNG","2020-09-23 14:00:00","2020-09-23 17:00:00","RECEIVED",1,1,NULL);
 INSERT INTO ea_batch VALUES(0,"END-MRNG","2020-10-23 10:00:00","2020-10-23 13:00:00","RECEIVED",1,2,NULL);
 INSERT INTO ea_batch VALUES(0,"IMP-MRNG","2020-12-23 10:00:00","2020-12-23 13:00:00","RECEIVED",1,3,NULL);
 
