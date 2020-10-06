@@ -4,6 +4,9 @@ import { ItemMcqOption } from "../shared/itemMcqOption";
 import { HttpClient } from "@angular/common/http";
 import { baseURL } from "../shared/baseurl";
 import { Observable, of } from "rxjs";
+import { ResponseTable } from "../shared/responseTable";
+import { ResponseMcq } from "../shared/responseMcq";
+import { Attempt } from '../shared/attempt';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +19,22 @@ export class ExaminationService {
     return this.http.get<Examination[]>(baseURL + 'questionPaper/' + qpId + '/qpItems');
   }
 
+  getLastPostedAttemptForBathAndExamineeIds(examineeId: number, batchId: number): Observable<Attempt>{
+    return this.http.get<Attempt>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/attempt');
+  }
+
+  postResponse(response: ResponseTable): Observable<ResponseTable>{
+    return this.http.post<ResponseTable>(baseURL +  '/response/setResponse', response);
+  }
+
+  // getLastPostedResponse(): Observable<ResponseTable>{
+  //   return this.http.get<ResponseTable>(baseURL + 'response/lastRow');
+  // }
+
+  // postResponseMcq(responseId: number, responseMcq: ResponseMcq): Observable<ResponseMcq>{
+  //   return this.http.post<ResponseMcq>(baseURL +  'response/' + responseId + '/responseMcq', responseMcq);
+  // }
+  
   // getMcqOptionsOfQpItem(qpItemId: number): Observable<ItemMcqOption[]>{
   //   return this.http.get<ItemMcqOption[]>(baseURL + 'qpItem/' + qpItemId + '/mcqOptions');
   // }

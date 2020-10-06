@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.assessmentBackEnd.itemMcqOptions.AsItemMcqOptions;
+import com.iiitb.assessmentBackEnd.itemTrueFalse.AsItemTrueFalse;
 import com.iiitb.assessmentBackEnd.questionPaper.AsQuestionPaper;
 
 @Entity
@@ -32,6 +33,9 @@ public class AsQpItem {
 	
 	@OneToMany(mappedBy="asQpItem")
 	private List<AsItemMcqOptions> asItemMcqOptionsList;
+	
+	@OneToMany(mappedBy="asQpItem")
+	private List<AsItemTrueFalse> asItemTrueFalseList;
 
 	public AsQpItem() {
 		
@@ -113,5 +117,12 @@ public class AsQpItem {
 	public void setAsItemMcqOptionsList(List<AsItemMcqOptions> asItemMcqOptionsList) {
 		this.asItemMcqOptionsList = asItemMcqOptionsList;
 	}
-	
+
+	public List<AsItemTrueFalse> getAsItemTrueFalseList() {
+		return asItemTrueFalseList;
+	}
+
+	public void setAsItemTrueFalseList(List<AsItemTrueFalse> asItemTrueFalseList) {
+		this.asItemTrueFalseList = asItemTrueFalseList;
+	}
 }

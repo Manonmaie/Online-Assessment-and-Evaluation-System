@@ -7,7 +7,7 @@ import { ExaminationComponent } from './examination/examination.component';
 const routes: Routes = [
   { path: 'questionPaper/1', component: QuestionPaperComponent },
   { path: 'questionPaperinstruction/:id', component: InstructionComponent },
-  { path: 'examination/:id', component: ExaminationComponent },
+  { path: 'questionPaper/:examineeId/examination/:qpId/batch/:batchId', component: ExaminationComponent },
   { path: '', redirectTo: '/questionPaper/1', pathMatch: 'full' }
 ];
 

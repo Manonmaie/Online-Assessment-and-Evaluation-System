@@ -16,11 +16,15 @@ export class QuestionPaperComponent implements OnInit {
   questionPapers: QuestionPaper[];
   showStartExamModalPopup: boolean = false;
   questionPaperPrevious: QuestionPaper;
+  lastAttemptPrmoise: Promise<Attempt>;
+  lastAttempt: Attempt;
 
   attempt: Attempt = {attemptId: 0, attemptNumber: 1, attemptStartTime: '', attemptEndTime: null, attemptStatus: 'IN_PROGRESS', asExamineeBatch: null};
   examineeBatch: ExamineeBatch = {examineeBatchId: null, examineeBatchStartTime: '', examineeBatchEndTime: null, examineeBatchStatus: 'IN_PROGRESS', examinee: null, batch: null};
 
-  constructor(private questionPaperService: QuestionPaperService, private activeRoute: ActivatedRoute, public route: Router, public datepipe: DatePipe) { }
+  constructor(private questionPaperService: QuestionPaperService, private activeRoute: ActivatedRoute, public route: Router, public datepipe: DatePipe) { 
+    this.addAttempt = this.addAttempt.bind(this);
+  }
 
   ngOnInit(): void {
     const examineeId = 1;
@@ -49,20 +53,28 @@ export class QuestionPaperComponent implements OnInit {
 
     if(currDateTime >= new Date(questionPaper.asBatch.batchStartTime) && currDateTime <= new Date(questionPaper.asBatch.batchEndTime)){
       this.showStartExamModalPopup = false;
-      this.addAttempt(examineeId, questionPaper.asBatch.batchId, this.attempt);
+      this.lastAttemptPrmoise = this.addAttempt(examineeId, questionPaper.asBatch.batchId, this.attempt);
+      this.lastAttemptPrmoise.then((res) => {
+        // console.log(res);
+        this.questionPaperService.setLastAttemptVariable(res);
+      });
       this.updateExamineeBatch(examineeId, questionPaper.asBatch.batchId, this.examineeBatch);
-      this.route.navigate(['/examination/' + questionPaper.qpId]);
-      // (<HTMLInputElement> document.getElementById("StartButton_"+questionPaper.qpId.toString())).disabled = false;
+      this.route.navigate(['/questionPaper/' + examineeId + '/examination/' + questionPaper.qpId + '/batch/' + questionPaper.asBatch.batchId]);
     }
     else{
       this.questionPaperPrevious = questionPaper;
       this.showStartExamModalPopup = true;
-      // (<HTMLInputElement> document.getElementById("StartButton_"+questionPaper.qpId.toString())).disabled = true;
     }
   }
 
-  addAttempt(examineeId: number, batchId: number, attempt: Attempt): void{
-    this.questionPaperService.postAttemptForExamineeAndBatch(examineeId, batchId, attempt).subscribe((attempt) => this.attempt = attempt);
+  async addAttempt(examineeId: number, batchId: number, attempt: Attempt): Promise<Attempt>{
+    // this.questionPaperService.postAttemptForExamineeAndBatch(examineeId, batchId, attempt).subscribe((attempt) => this.lastAttempt = attempt);
+    try {
+        this.lastAttempt = await this.questionPaperService.postAttemptForExamineeAndBatch(examineeId, batchId, attempt);
+        return this.lastAttempt;
+      } catch(e) {
+          console.log(e);
+      }
   }
 
   updateExamineeBatch(examineeId: number, batchId: number, examineeBatch: ExamineeBatch): void{
