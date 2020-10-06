@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {ItemFormComponent} from './item-form/item-form.component'
 import {AppRoutingModule,routingComponets} from './app-routing.module'
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { QuestionPaperComponent } from './question-paper/question-paper.component';
+import { itemForm } from './question-paper/question-paper.component';
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionManagementComponent } from './question-management/question-management.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     AppComponent,
     routingComponets,
-    QuestionPaperComponent,
+    itemForm,
     QuestionManagementComponent
    ],
   imports: [
@@ -23,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     CKEditorModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent],

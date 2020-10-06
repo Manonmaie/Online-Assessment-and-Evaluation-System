@@ -14,11 +14,11 @@ public class ItemService {
 	@Autowired
 	private ItemRepository itemRepository;
 	
-	private List<Item> items =  Arrays.asList(
-			new Item(1, 100, "Test", "REMEMBER","PENDING","ACTIVE",0),
-			new Item(2, 100, "Test","UNDERSTAND","PENDING","ACTIVE",0),
-			new Item(3, 100, "Test","ANALYZE","PENDING","ACTIVE",0)
-		);
+//	private List<Item> items =  Arrays.asList(
+//			new Item(1, 100, "Test", "REMEMBER","PENDING","ACTIVE",0),
+//			new Item(2, 100, "Test","UNDERSTAND","PENDING","ACTIVE",0),
+//			new Item(3, 100, "Test","ANALYZE","PENDING","ACTIVE",0)
+//		);
 	
 	public List<Item> getAllItems() {
 		List<Item> itemList = new ArrayList<>();
@@ -42,6 +42,10 @@ public class ItemService {
 		item.setReview_status("PENDING");
 		item.setItem_use_count(0);
 		item.setItem_status("ACTIVE");
+		item.setDiff_lvl(question.getDiff_lvl());
+		item.setFalseMarks(question.getFalseMarks());
+		item.setTrueMarks(question.getTrueMarks());
+		item.setItem_code(question.getItem_code());
 		itemRepository.save(item);
 
 		return item;
