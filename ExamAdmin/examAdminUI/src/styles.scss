@@ -64,3 +64,18 @@ input[type=file]:hover {
     text-align: center;
     margin: auto;
 }
+
+th, td {
+    border-bottom: 1px solid rgb(180, 180, 180);
+    padding: 10px;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: #dddbdb;
+}  
+
+th {
+    background-color: rgb(90, 91, 92);
+    color: white;
+}
