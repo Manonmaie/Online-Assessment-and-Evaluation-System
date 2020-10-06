@@ -1,4 +1,5 @@
 import { ItemMcqOption } from "./itemMcqOption";
+import { ItemTrueFalse } from "./itemTrueFalse";
 
 export class Examination{
     qpItemId: number;
@@ -8,4 +9,5 @@ export class Examination{
     itemType: string;
     cognitiveLevel: string;
     asItemMcqOptionsList: ItemMcqOption[];
+    asItemTrueFalseList: ItemTrueFalse[];
 }

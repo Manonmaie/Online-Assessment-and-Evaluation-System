@@ -12,14 +12,26 @@ import { ExamineeBatch } from '../shared/examineeBatch';
 })
 export class QuestionPaperService {
 
+  lastAttempt: Attempt;
+
   constructor(private http: HttpClient) { }
+
+  setLastAttemptVariable(attempt: Attempt): void {
+    this.lastAttempt = attempt;
+    console.log("In qp service");
+    console.log(this.lastAttempt);
+  }
+
+  getLastAttemptVariable(): Attempt {
+    return this.lastAttempt;
+  }
 
   getQuestionPapers(examineeId: number): Observable<QuestionPaper[]>{
     return this.http.get<QuestionPaper[]>(baseURL + 'examinee/' + examineeId + '/questionPapers');
   }
 
-  postAttemptForExamineeAndBatch(examineeId: number, batchId: number, attempt: Attempt): Observable<Attempt>{
-    return this.http.post<Attempt>(baseURL +  'examinee/' + examineeId + '/batch/' + batchId + '/attempt', attempt);
+  async postAttemptForExamineeAndBatch(examineeId: number, batchId: number, attempt: Attempt){
+    return await this.http.post<Attempt>(baseURL +  'examinee/' + examineeId + '/batch/' + batchId + '/attempt', attempt).toPromise();
   }
 
   updateExamineeBatchStartTimeAndStatus(examineeId: number, batchId: number, examineeBatch: ExamineeBatch): Observable<ExamineeBatch>{

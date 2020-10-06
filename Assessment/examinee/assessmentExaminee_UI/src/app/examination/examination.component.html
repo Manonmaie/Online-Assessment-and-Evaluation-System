@@ -3,30 +3,34 @@
     <ol class="list-group">
         <li class="list-group-item" *ngFor="let qpItem of qpItems">
             {{qpItem.itemText}}
-        <span class="badge badge-primary badge-pill">{{qpItem.itemMarks}} Marks</span>
+        <span class="badge badge-primary badge-pill">
+            {{qpItem.itemMarks}} Marks
+        </span>
+        <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;"><i class="fa fa-undo mr-1"></i>Reset</button>
+        
         <ol class="list-group" type="a">
             <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
                 <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="checkbox">
-                    <label><input type="checkbox" name="optCheckbox">  {{itemMcqOption.mcqOptionText}}</label>
+                        <input type="checkbox" (change)="updateResponse($event.target.checked, itemMcqOption, qpItem)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                    <!-- <label><input [ngModel]="itemMcqOption" type="checkbox" name="optCheckbox" (ngChange)="updateResponse(itemMcqOption)">  {{itemMcqOption.mcqOptionText}}</label> -->
                 </div>
                 <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
-                    <label><input type="radio" name="optRadio">  {{itemMcqOption.mcqOptionText}}</label>
+                    <!-- <input type="radio" name="optRadio" (change)="updateResponse($event.target.checked, itemMcqOption, qpItem)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}} -->
+                    <!-- <label><input type="radio" name="optRadio">  {{itemMcqOption.mcqOptionText}}</label> -->
                 </div>
             </li>
         </ol>
         
         <div *ngIf='qpItem.itemType === "True/False"' class="radio">
             <ol class="list-group" type="a">
-                <li class="list-group-item">
+                <li class="list-group-item" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
                     <label><input type="radio" name="optRadio">  True</label>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
                     <label><input type="radio" name="optRadio">  False</label>
                 </li>
             </ol>
         </div>
-       
-        
         
         <!-- <div *ngIf='qpItem.itemType === "True/False"' class="btn-group">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">True or False?</span> <span class="caret"></span>
@@ -55,8 +59,6 @@
         </div> -->
         </li>
     </ol>
-    
-</div>
 
 <!-- <script type="text/javascript">
     $(function(){

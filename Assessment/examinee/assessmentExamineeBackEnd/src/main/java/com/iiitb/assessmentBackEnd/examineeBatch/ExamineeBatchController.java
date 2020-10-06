@@ -24,7 +24,8 @@ public class ExamineeBatchController {
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/examinee/{examineeId}/batch/{batchId}/examineeBatch")
 	public void updateExamineeBatch(@PathVariable int examineeId, @PathVariable int batchId,@RequestBody AsExamineeBatch examineeBatch) {
-		ExamineeBatchKey examineeBatchKey = new ExamineeBatchKey(examineeId, batchId);
-		examineeBatchService.updateExamineeBatch(examineeBatchKey, examineeBatch);
+//		ExamineeBatchKey examineeBatchKey = new ExamineeBatchKey(examineeId, batchId);
+//		examineeBatchService.updateExamineeBatch(examineeBatchKey, examineeBatch);
+		examineeBatchService.updateExamineeBatch(examineeBatch);
 	}
 }

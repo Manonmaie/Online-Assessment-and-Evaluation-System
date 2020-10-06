@@ -14,7 +14,7 @@ public class ExamineeBatchService {
 		return examineeBatchRepository.findByExamineeBatchId(examineeBatchKey);
 	}
 
-	public void updateExamineeBatch(ExamineeBatchKey examineeBatchKey, AsExamineeBatch examineeBatch) {
+	public void updateExamineeBatch(AsExamineeBatch examineeBatch) {
 		examineeBatchRepository.save(examineeBatch);
 	}
 
