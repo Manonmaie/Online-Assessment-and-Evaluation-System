@@ -33,15 +33,27 @@
       </thead>
       <tbody>
         <tr *ngFor="let examineeBatch of examinee.examineeBatchList">
-          <td>{{examineeBatch.batch.examdrive.examdriveName}}</td>
-          <td>{{examineeBatch.batch.examdrive.course.courseCode}}</td>
-          <td>{{examineeBatch.batch.batchEndTime.substr(0,10)}}</td>
-          <td>{{examineeBatch.batch.center.centerCode}}</td>
-          <td>{{examineeBatch.marksObtained}}</td>
-          <!-- <td>
-            <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>
-          </td> -->
-        </tr>
+            <ng-container *ngIf = "examineeBatch.batch.examdrive">
+              <td>{{examineeBatch.batch.examdrive.examdriveName}}</td>
+              <ng-container *ngIf="examineeBatch.batch.examdrive.course"> 
+                <td>{{examineeBatch.batch.examdrive.course.courseCode}}</td>
+              </ng-container>
+              <ng-container *ngIf="!examineeBatch.batch.examdrive.course"> 
+                <td>-</td>
+              </ng-container>
+              <td>{{examineeBatch.batch.batchEndTime.substr(0,10)}}</td>
+              <ng-container *ngIf="examineeBatch.batch.center"> 
+                <td>{{examineeBatch.batch.center.centerCode}}</td>
+              </ng-container>
+              <ng-container *ngIf="!examineeBatch.batch.center"> 
+                <td>-</td>
+              </ng-container>
+              <td>{{examineeBatch.marksObtained}}</td>
+              <!-- <td>
+                <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>
+              </td> -->
+            </ng-container>
+          </tr>
       </tbody>
     </table>
   </div>
