@@ -37,8 +37,26 @@ export class ExamdriveAddComponent implements OnInit {
     this.getCourse(this.selectedCourse);
   }
 
+  setError(input: string,message: string){
+    const formItem = document.getElementById(input).parentElement;
+    const small = formItem.querySelector('small');
+    small.innerText = message;
+    formItem.className = 'form-item error'
+  }
+
   onSubmit(){
-    this.addExamdrive(this.examdrive);
-    this.route.navigate(['/examdrives']);
+    if(this.examdrive.examdriveName==null){
+      this.setError("examdriveName","Exam Drive name is Required");
+    }
+    if(this.examdrive.examdriveCode==null){
+      this.setError("examdriveCode","Exam Drive code is Required");
+    }
+    if(this.examdrive.course==null){
+      this.setError("examdriveCourse","Course is Required");
+    }
+    else{
+      this.addExamdrive(this.examdrive);
+      this.route.navigate(['/examdrives']);
+    }
   }
 }
