@@ -1,20 +1,21 @@
 <div class="container">
     <legend> Add Center </legend>
     <form novalidate (ngSubmit)="onSubmit()">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <label for="centerName">Center Name</label>
-                <input type="text" id="centerName" name="centerName" placeholder="Name of the center" [(ngModel)]="center.centerName">
-            </li>
-            <li class="list-group-item">
-                <label for="centerCode">Center Code</label>
-                <input type="text" id="centerCode" name="centerCode" placeholder="Unique code of the Center" [(ngModel)]="center.centerCode">
-            </li>
-            <li class="list-group-item">
-                <label for="centerCapacity">Center Capacity</label>
-                <input type="text" id="centerCapacity" name="centerCapacity" placeholder="How many students can be allotted" [(ngModel)]="center.centerCapacity">
-            </li>
-            <input type="submit" value ="Add Center" (click)="onSubmit()">
-        </ul>
+        <div class="form-item">
+            <label class="required" for="centerName">Center Name</label>
+            <input type="text" id="centerName" name="centerName" placeholder="Name of the center" [(ngModel)]="center.centerName">
+            <small>Error Message</small>        
+        </div>
+        <div class="form-item">
+            <label class="required" for="centerCode">Center Code</label>
+            <input type="text" id="centerCode" name="centerCode" placeholder="Unique code of the Center" [(ngModel)]="center.centerCode">
+            <small>Error Message</small>
+        </div>
+        <div class="form-item">
+            <label for="centerCapacity">Center Capacity</label>
+            <input type="text" id="centerCapacity" name="centerCapacity" placeholder="How many students can be allotted" [(ngModel)]="center.centerCapacity">
+            <small>Error Message</small>
+        </div>
+        <input type="submit" value ="Add Center" (click)="onSubmit()">
     </form>
 </div>

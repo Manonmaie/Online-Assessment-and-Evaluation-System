@@ -4,6 +4,7 @@ import {Course} from '../shared/course';
 import {ExamdriveService} from '../services/examdrive.service';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
+import {setError} from '../shared/error';
 
 @Component({
   selector: 'app-examdrive-add',
@@ -37,22 +38,15 @@ export class ExamdriveAddComponent implements OnInit {
     this.getCourse(this.selectedCourse);
   }
 
-  setError(input: string,message: string){
-    const formItem = document.getElementById(input).parentElement;
-    const small = formItem.querySelector('small');
-    small.innerText = message;
-    formItem.className = 'form-item error'
-  }
-
   onSubmit(){
     if(this.examdrive.examdriveName==null){
-      this.setError("examdriveName","Exam Drive name is Required");
+      setError("examdriveName","Exam Drive name is Required");
     }
     if(this.examdrive.examdriveCode==null){
-      this.setError("examdriveCode","Exam Drive code is Required");
+      setError("examdriveCode","Exam Drive code is Required");
     }
     if(this.examdrive.course==null){
-      this.setError("examdriveCourse","Course is Required");
+      setError("examdriveCourse","Course is Required");
     }
     else{
       this.addExamdrive(this.examdrive);

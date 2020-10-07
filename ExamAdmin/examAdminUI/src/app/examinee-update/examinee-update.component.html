@@ -1,30 +1,38 @@
 <div class="container">
     <legend>Update Student Details</legend>
     <form novalidate (ngSubmit)="onSubmit()">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <label for="examineeName">Student Name</label>
-                <input type="text" id="examineeName" name="examineeName" placeholder="Student's Name" [(ngModel)]="examinee.examineeName">
-            </li>
-            <li class="list-group-item">
-                <label for="examineeCode">Student Code</label>
-                <input type="text" id="examineeCode" name="examineeCode" placeholder="Student's Roll Number" [(ngModel)]="examinee.examineeCode">
-            </li>
-            <li class="list-group-item">
-                <label for="examineeBranch">Branch</label>
-                <input type="text" id="examineeBranch" name="examineeBranch" placeholder="Student's Branch" [(ngModel)]="examinee.examineeBranch">
-            </li>
-            <li class="list-group-item">
-                <label for="examineeEmail">Email-id</label>
-                <input type="text" id="examineeEmail" name="examineeEmail" placeholder="Student's Email-id" [(ngModel)]="examinee.examineeEmail">
-            </li>
-            <li class="list-group-item">
-                <label for="examineeCollege">College</label>
-                <input type="text" id="examineeCollege" name="examineeCollege" placeholder="Student's College" [(ngModel)]="examinee.examineeCollege">
-            </li> 
-            <input type="submit" value ="Update Student Details" (click)="onSubmit()">
-        </ul>
-    </form>
+      <div class="form-item">
+          <label class="required" for="examineeName">Student Name</label>
+          <input type="text" id="examineeName" name="examineeName" placeholder="Student's Name" [(ngModel)]="examinee.examineeName">
+          <small>Error Message</small>
+      </div>
+      <div class="form-item">
+          <label class="required" for="examineeCode">Student Code</label>
+          <input type="text" id="examineeCode" name="examineeCode" placeholder="Student's Roll Number" [(ngModel)]="examinee.examineeCode">
+          <small>Error Message</small>
+      </div>
+      <div class="form-item">
+          <label class="required" for="examineePassword">Student Password</label>
+          <input type="text" id="examineePassword" name="examineePassword" placeholder="Student's Password" [(ngModel)]="examinee.examineePassword">
+          <small>Error Message</small>
+      </div>
+      <div class="form-item">
+          <label for="examineeBranch">Branch</label>
+          <input type="text" id="examineeBranch" name="examineeBranch" placeholder="Student's Branch" [(ngModel)]="examinee.examineeBranch">
+          <small>Error Message</small>
+      </div>
+      <div class="form-item">
+          <label for="examineeEmail">Email-id</label>
+          <input type="text" id="examineeEmail" name="examineeEmail" placeholder="Student's Email-id" [(ngModel)]="examinee.examineeEmail">
+          <small>Error Message</small>
+      </div>
+      <div class="form-item">
+          <label for="examineeCollege">College</label>
+          <input type="text" id="examineeCollege" name="examineeCollege" placeholder="Student's College" [(ngModel)]="examinee.examineeCollege">
+          <small>Error Message</small>
+      </div>
+      <input type="submit" value ="Update Student Details" (click)="onSubmit()">
+  </form>
 </div>
 
 <div class="container">
