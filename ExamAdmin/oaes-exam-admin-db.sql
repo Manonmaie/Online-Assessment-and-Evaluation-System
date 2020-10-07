@@ -19,6 +19,9 @@ CREATE TABLE IF NOT EXISTS ea_course_master (
 -- Data Entry for table ea_course_master
 -- --------------------------------------------------------
 INSERT INTO ea_course_master VALUES(0,"DBMS","Database Management System");
+INSERT INTO ea_course_master VALUES(0,"DM","Data Modelling");
+INSERT INTO ea_course_master VALUES(0,"OS","Operating Systems");
+INSERT INTO ea_course_master VALUES(0,"DSA","Data Structures and Alogorithms");
 
 -- --------------------------------------------------------
 -- Table structure for table ea_examdrive
@@ -60,7 +63,10 @@ CREATE TABLE IF NOT EXISTS ea_examinee(
 -- Data Entry for table ea_examinee
 -- --------------------------------------------------------
 INSERT INTO ea_examinee VALUES(0,"S1","ABC","abc","CSE","ABC@iiitb.org",'IIITB');
-INSERT INTO ea_examinee VALUES(0,"S2","XYZ","xyz",NULL,NULL,NULL);
+INSERT INTO ea_examinee VALUES(0,"S2","ZYX","xyz",NULL,NULL,NULL);
+INSERT INTO ea_examinee VALUES(0,"S3","Z","z","ECE",NULL,NULL);
+INSERT INTO ea_examinee VALUES(0,"S4","Y","y",NULL,NULL,"IIITB");
+INSERT INTO ea_examinee VALUES(0,"S5","X","x",NULL,NULL,NULL);
 
 -- --------------------------------------------------------
 -- Table structure for table ea_center
@@ -77,6 +83,9 @@ CREATE TABLE IF NOT EXISTS ea_center(
 -- Data Entry for table ea_center
 -- --------------------------------------------------------
 INSERT INTO ea_center VALUES(0,"IIITB","International Institute of Information Technology, Bangalore",1000);
+INSERT INTO ea_center VALUES(0,"IIITH","International Institute of Information Technology, Hyderabad",1000);
+INSERT INTO ea_center VALUES(0,"IITB","Indian Institute of Technology, Mumbai",10000);
+INSERT INTO ea_center VALUES(0,"IITM","Indian Institute of Technology, Chennai",20000);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_batch`

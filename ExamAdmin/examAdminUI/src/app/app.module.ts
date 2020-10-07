@@ -29,6 +29,9 @@ import { ExamineeUpdateComponent } from './examinee-update/examinee-update.compo
 import { ExamineeAddComponent } from './examinee-add/examinee-add.component';
 import { ExamineeAddBulkComponent } from './examinee-add-bulk/examinee-add-bulk.component';
 import { ExamineeAddHeaderComponent } from './examinee-add-header/examinee-add-header.component';
+import { ExamdriveAddComponent } from './examdrive-add/examdrive-add.component';
+import { ExamdriveUpdateComponent } from './examdrive-update/examdrive-update.component';
+import { ExamdriveViewComponent } from './examdrive-view/examdrive-view.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { ExamineeAddHeaderComponent } from './examinee-add-header/examinee-add-h
     ExamineeUpdateComponent,
     ExamineeAddComponent,
     ExamineeAddBulkComponent,
-    ExamineeAddHeaderComponent
+    ExamineeAddHeaderComponent,
+    ExamdriveAddComponent,
+    ExamdriveUpdateComponent,
+    ExamdriveViewComponent
   ],
   imports: [
     BrowserModule,

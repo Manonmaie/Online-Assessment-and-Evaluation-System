@@ -9,7 +9,7 @@ import { Params, ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./course-add.component.scss']
 })
 export class CourseAddComponent implements OnInit {
-  course = {courseName: '',courseCode: ''}
+  course = {courseName: null,courseCode: null}
   constructor(private courseService: CourseService, public route: Router) { }
 
   ngOnInit(): void {

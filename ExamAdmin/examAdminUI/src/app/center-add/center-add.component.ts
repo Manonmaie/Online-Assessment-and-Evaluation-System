@@ -9,7 +9,7 @@ import { Params, ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./center-add.component.scss']
 })
 export class CenterAddComponent implements OnInit {
-  center = {centerName: '', centerCode: '', centerCapacity: 0}
+  center = {centerName: null, centerCode: null, centerCapacity: 0}
   constructor(private centerService: CenterService, public route: Router) { }
 
   ngOnInit(): void {

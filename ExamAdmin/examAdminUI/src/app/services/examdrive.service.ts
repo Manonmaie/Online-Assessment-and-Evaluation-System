@@ -19,4 +19,7 @@ export class ExamdriveService {
   deleteExamdrive(id: number): Observable<any>{
     return this.http.delete<any>(baseURL+'examdrives/'+id);
   }
+  addExamdrive(examdrive: Examdrive): Observable<Examdrive>{
+    return this.http.post<Examdrive>(baseURL + 'examdrives',examdrive);
+  }
 }

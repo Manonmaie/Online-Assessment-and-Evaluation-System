@@ -1,0 +1,28 @@
+<div class="container">
+    <legend> Add Exam Drive</legend>
+    <form novalidate (ngSubmit)="onSubmit()">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <label for="examdriveName">Exam Drive Name</label>
+                <input type="text" id="examdriveName" name="examdriveName" placeholder="Name of the Exam Drive" [(ngModel)]="examdrive.examdriveName">
+            </li>
+            <li class="list-group-item">
+                <label for="examdriveCode">Exam Drive Code</label>
+                <input type="text" id="examdriveCode" name="examdriveCode" placeholder="Unique code of the Exam Drive(Drive name in short + Course + Term)" [(ngModel)]="examdrive.examdriveCode">
+            </li>
+            <li class="list-group-item">
+                <label for="examdriveCourse">Course</label>
+                <br>
+                <select id="examdriveCourse" name="examdriveCourse" [(ngModel)]="selectedCourse">
+                    <option *ngFor = "let course of courses" [value]="course.courseMasterId">
+                        {{course.courseName}}
+                    </option>
+                </select>
+                <button type="button" class="btn btn-success float-right" (click)="addCourse()">
+                    Add Course
+                </button>
+            </li>
+            <input type="submit" value ="Add Drive" (click)="onSubmit()">
+        </ul>
+    </form>
+</div>
