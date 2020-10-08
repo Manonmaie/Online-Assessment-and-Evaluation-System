@@ -38,7 +38,7 @@ export class ExamdriveAddComponent implements OnInit {
     this.getCourse(this.selectedCourse);
   }
 
-  onSubmit(){
+  addDrive(){
     if(this.examdrive.examdriveName==null){
       setError("examdriveName","Exam Drive name is Required");
     }
@@ -52,5 +52,13 @@ export class ExamdriveAddComponent implements OnInit {
       this.addExamdrive(this.examdrive);
       this.route.navigate(['/examdrives']);
     }
+  }
+
+  onSubmit(){
+    this.addDrive();
+    // this.addCourse();
+    // setTimeout(() => {
+    //   this.addDrive();
+    // },5000);
   }
 }
