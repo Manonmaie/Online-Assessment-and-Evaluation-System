@@ -395,12 +395,8 @@ ALTER TABLE as_response
 --   PRIMARY KEY (response_true_false_id)
 -- );
 
-<<<<<<< HEAD
 -- ALTER TABLE as_response_true_false
 --   ADD constraint `fk_as_response_true_false_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
-=======
-ALTER TABLE as_response_true_false
-  ADD constraint `fk_as_response_true_false_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Table structure for table in_epack_header
@@ -580,4 +576,3 @@ ALTER TABLE rpack4
   ADD CONSTRAINT `fk_rpack4_qp_id` FOREIGN KEY (qp_id) REFERENCES rpack1(qp_id) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_rpack4_batch_id` FOREIGN KEY (batch_id) REFERENCES rpack1(batch_id) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_rpack4_item_id` FOREIGN KEY (item_id) REFERENCES rpack2(item_id) ON DELETE CASCADE;
->>>>>>> d3b0b1790ccc74d38ee652474cd423e05c55fa0f
