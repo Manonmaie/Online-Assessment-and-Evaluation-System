@@ -247,10 +247,10 @@ ALTER TABLE ea_item_true_false
 CREATE TABLE IF NOT EXISTS in_qpack_header(
   qpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   qpack_desc varchar(255),
-  created_on timestamp,
+  created_on datetime,
   created_by varchar(255),
   qpack_status ENUM('CREATED', 'SENT'),
-  qpack_sent_on timestamp,
+  qpack_sent_on datetime,
   qpack_path varchar(255),
   PRIMARY KEY(qpack_header_id)
 );
@@ -310,10 +310,10 @@ ALTER TABLE qpack3
 CREATE TABLE IF NOT EXISTS out_epack_header(
   epack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   epack_desc varchar(255),
-  created_on timestamp,
+  created_on datetime,
   created_by varchar(255),
   epack_status ENUM('CREATED', 'SENT'),
-  epack_sent_on timestamp,
+  epack_sent_on datetime,
   epack_path varchar(255),
   PRIMARY KEY(epack_header_id)
 );
@@ -409,10 +409,10 @@ ALTER TABLE epack4
 CREATE TABLE IF NOT EXISTS in_mpack_header(
   mpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   mpack_desc varchar(255),
-  created_on timestamp,
+  created_on datetime,
   created_by varchar(255),
   mpack_status ENUM('CREATED', 'SENT'),
-  mpack_sent_on timestamp,
+  mpack_sent_on datetime,
   mpack_path varchar(255),
   PRIMARY KEY(mpack_header_id)
 );
