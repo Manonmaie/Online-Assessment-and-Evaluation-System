@@ -16,7 +16,7 @@ public class AttemptService {
 		attemptRepository.save(attempt);
 //		AsAttempt currectAttemptOfExamineeBatch = getLastAttemptForExamineeIdAndBatchId(examineeId,batchId);
 //		System.out.println("lastAttemptOfExamineeBatch = " + lastAttemptOfExamineeBatch.getAttemptId());
-//		System.out.println("currectAttemptOfExamineeBatch = " + currectAttemptOfExamineeBatch.getAttemptId());
+//		System.out.println("lastButoneAttempt = " + lastAttemptRow);
 		return lastAttemptRow;
 	}
 	

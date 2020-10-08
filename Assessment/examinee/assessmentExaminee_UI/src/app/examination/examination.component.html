@@ -6,7 +6,9 @@
         <span class="badge badge-primary badge-pill">
             {{qpItem.itemMarks}} Marks
         </span>
-        <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;"><i class="fa fa-undo mr-1"></i>Reset</button>
+        <div *ngIf="showReset(qpItem.itemType)" style="display: inline">
+            <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;"><i class="fa fa-undo mr-1"></i>Reset</button>
+        </div>
         
         <ol class="list-group" type="a">
             <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
@@ -16,7 +18,7 @@
                 </div>
                 <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
                     <!-- <input type="radio" name="optRadio" (change)="updateResponse($event.target.checked, itemMcqOption, qpItem)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}} -->
-                    <!-- <label><input type="radio" name="optRadio">  {{itemMcqOption.mcqOptionText}}</label> -->
+                    <label><input type="radio" name="optRadio">  {{itemMcqOption.mcqOptionText}}</label>
                 </div>
             </li>
         </ol>

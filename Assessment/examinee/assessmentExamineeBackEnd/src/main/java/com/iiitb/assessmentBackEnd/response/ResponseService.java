@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iiitb.assessmentBackEnd.attempt.AttemptRepository;
 import com.iiitb.assessmentBackEnd.responseMcq.AsResponseMcq;
 import com.iiitb.assessmentBackEnd.responseMcq.ResponseMcqRepository;
 import com.iiitb.assessmentBackEnd.responseMcq.ResponseMcqService;
@@ -14,26 +15,36 @@ public class ResponseService {
 	
 	@Autowired
 	private ResponseRepository responseRepository;
-//	@Autowired
-//	private ResponseMcqRepository responseMcqRepository;
 	
-//	private ResponseMcqRepository responseMcqRepository;
+	@Autowired
+	private AttemptRepository attemptRepository;
 
 	public AsResponse getResponseFromId(int responseId) {
 		return responseRepository.findByResponseId(responseId);
 	}
 	
-	public List<AsResponse> getResponseForQpItemAndAttempt(int qpItemId, int responseId) {
-		return responseRepository.findByAsQpItemQpItemIdAndAsAttemptAttemptId(qpItemId, responseId);
+	public AsResponse getResponseForQpItemAndAttemptAndResponseText(int qpItemId, int attempId, String responseText) {
+		return responseRepository.findByAsQpItemQpItemIdAndAsAttemptAttemptIdAndResponseText(qpItemId, attempId, responseText);
 	}
 	
-	public AsResponse addResponseAndResponseMcq(AsResponse response) {
-//		AsResponse responseLocal = new AsResponse();
-//		responseLocal.setAsAttempt(response.getAsAttempt());
-//		responseLocal.setAsQpItem(response.getAsQpItem());
-//		responseLocal.setResponseText(response.getResponseText());
+	public AsResponse addResponse(AsResponse response) {
 		responseRepository.save(response);
 		return response;
+	}
+	
+	public AsResponse updateResponse(int responseId, AsResponse response) {
+		responseRepository.save(response);
+		return response;
+	}
+	
+	public void deleteResponseByQpItemIdExamineeIdBatchId(int qpItemId, int examineeId, int batchId, String responseText) {
+		int attemptId = attemptRepository.findTopByAsExamineeBatchExamineeBatchIdExamineeIdAndAsExamineeBatchExamineeBatchIdBatchIdOrderByAttemptNumberDesc(examineeId, batchId).getAttemptId();
+		int responseId = getResponseForQpItemAndAttemptAndResponseText(qpItemId, attemptId, responseText).getResponseId();
+		deleteResponse(responseId);
+	}
+	
+	public void deleteResponse(int responseId) {
+		responseRepository.deleteById(responseId);
 	}
 	
 //	public void addResponse(int qpItemtId, int attemptId, AsResponse response) {

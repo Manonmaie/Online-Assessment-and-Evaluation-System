@@ -124,7 +124,7 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-03 09:00:00","2020-10-03 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-08 07:00:00","2020-10-08 23:00:00","RECEIVED",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
 
@@ -299,6 +299,12 @@ ALTER TABLE as_item_true_false
   ADD constraint `as_item_true_false_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES as_qp_item(qp_item_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table `as_item_true_false`
+-- --------------------------------------------------------
+INSERT INTO as_item_true_false VALUES(0,"True_False_item4_qp1",4);
+INSERT INTO as_item_true_false VALUES(0,"True_False_item5_qp1",5);
+
+-- --------------------------------------------------------
 -- Table structure for table `as_attempt`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_attempt (
@@ -321,7 +327,16 @@ ALTER TABLE as_attempt
 -- --------------------------------------------------------
 -- Data Entry for table `as_attempt`
 -- --------------------------------------------------------
--- INSERT INTO as_attempt VALUES(0,"Attempt1",1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
+-- INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response`
@@ -329,6 +344,7 @@ ALTER TABLE as_attempt
 CREATE TABLE IF NOT EXISTS as_response (
   response_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   -- response_code varchar(255) UNIQUE NOT NULL,
+  response_text varchar(511) NOT NULL,
   qp_item_id int(10) unsigned,
   attempt_id int(10) unsigned,
   PRIMARY KEY (response_id)
@@ -339,29 +355,45 @@ ALTER TABLE as_response
   ADD constraint `fk_as_response_attempt_id` FOREIGN KEY (attempt_id) REFERENCES as_attempt(attempt_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table `as_response`
+-- --------------------------------------------------------
+-- INSERT INTO as_response VALUES(0,"Primary Key",1,1);
+-- INSERT INTO as_response VALUES(0,"Primary Key",1,2);
+-- INSERT INTO as_response VALUES(0,"Post Key",2,4);
+-- INSERT INTO as_response VALUES(0,"Post Key",3,4);
+-- INSERT INTO as_response VALUES(0,"Key",2,4);
+-- INSERT INTO as_response VALUES(0,"PK",3,5);
+-- INSERT INTO as_response VALUES(0,"Primary Key",3,6);
+
+-- --------------------------------------------------------
 -- Table structure for table `as_response_mcq`
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_response_mcq (
-  response_mcq_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  -- response_mcq_code varchar(255) UNIQUE NOT NULL,
-  response_text varchar(511) NOT NULL,
-  response_id int(10) unsigned,
-  PRIMARY KEY (response_mcq_id)
-);
+-- CREATE TABLE IF NOT EXISTS as_response_mcq (
+--   response_mcq_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   -- response_mcq_code varchar(255) UNIQUE NOT NULL,
+--   response_text varchar(511) NOT NULL,
+--   response_id int(10) unsigned,
+--   PRIMARY KEY (response_mcq_id)
+-- );
 
-ALTER TABLE as_response_mcq
-  ADD constraint `fk_as_response_mcq_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
+-- ALTER TABLE as_response_mcq
+--   ADD constraint `fk_as_response_mcq_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_response_mcq`
+-- --------------------------------------------------------
+-- INSERT INTO as_response_mcq VALUES(0,"Collection of related data",1);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response_true_false`
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_response_true_false (
-  response_true_false_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  -- response_true_false_code varchar(255) UNIQUE NOT NULL,
-  response_text varchar(511) NOT NULL,
-  response_id int(10) unsigned,
-  PRIMARY KEY (response_true_false_id)
-);
+-- CREATE TABLE IF NOT EXISTS as_response_true_false (
+--   response_true_false_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   -- response_true_false_code varchar(255) UNIQUE NOT NULL,
+--   response_text varchar(511) NOT NULL,
+--   response_id int(10) unsigned,
+--   PRIMARY KEY (response_true_false_id)
+-- );
 
-ALTER TABLE as_response_true_false
-  ADD constraint `fk_as_response_true_false_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
+-- ALTER TABLE as_response_true_false
+--   ADD constraint `fk_as_response_true_false_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;

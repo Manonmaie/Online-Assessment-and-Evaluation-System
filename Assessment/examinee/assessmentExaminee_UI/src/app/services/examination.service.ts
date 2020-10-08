@@ -27,6 +27,11 @@ export class ExaminationService {
     return this.http.post<ResponseTable>(baseURL +  '/response/setResponse', response);
   }
 
+  deleteResponseForQpIdAndAttemptId(qpItemId: number, examineeId: number, batchId: number, responseText: string): Observable<any>{
+    console.log(responseText);
+    return this.http.delete<any>(baseURL + 'responseUnchecked/examinee/' + examineeId + '/batch/' + batchId + '/qpItem/' + qpItemId + '/responseText/' + responseText);
+  }
+
   // getLastPostedResponse(): Observable<ResponseTable>{
   //   return this.http.get<ResponseTable>(baseURL + 'response/lastRow');
   // }
