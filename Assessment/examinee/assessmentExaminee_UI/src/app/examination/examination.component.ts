@@ -36,18 +36,30 @@ export class ExaminationComponent implements OnInit {
     // console.log(this.attempt);
   }
 
+  showReset(qpItemType: string){
+    if(qpItemType == 'McqSingleCorrect' || qpItemType == 'True/False'){
+      return true;
+    }
+    return false;
+  }
+
   updateResponse(event: boolean, itemMcqOption: ItemMcqOption, qpItem: Examination){
     let responseLocal: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
     this.response = responseLocal;
+    this.attempt = this.qpService.getLastAttemptVariable();
     if(event == true){
       let asQpItem: Examination = new Examination();
       asQpItem.qpItemId = qpItem.qpItemId;
       this.response.asQpItem = asQpItem;
-      this.attempt = this.qpService.getLastAttemptVariable();
       console.log("In examination component");
       console.log(this.attempt);
       let asAttempt: Attempt = new Attempt();
-      asAttempt.attemptId = this.attempt.attemptId;
+      if(this.attempt == null){
+        asAttempt.attemptId = 1;
+      }
+      else{
+        asAttempt.attemptId = this.attempt.attemptId + 1;
+      }
       this.response.asAttempt = asAttempt;
       this.response.responseText = itemMcqOption.mcqOptionText;
       console.log(this.response);
@@ -57,9 +69,16 @@ export class ExaminationComponent implements OnInit {
       // this.responseMcq.asResponse = this.lastResponse;
       // this.postResponseMcq(this.lastResponse.responseId, this.responseMcq);
     }
+    else{
+      this.deleteResponseForQpItemAttempExamineeBatch(qpItem.qpItemId, this.examineeId, this.batchId, itemMcqOption.mcqOptionText)
+    }
   }
 
   addResponse(response: ResponseTable): void{
     this.examinationService.postResponse(response).subscribe((response) => this.response = response);
+  }
+
+  deleteResponseForQpItemAttempExamineeBatch(qpItemId: number, examineeId: number, batchId: number, responseText: string): void{
+    this.examinationService.deleteResponseForQpIdAndAttemptId(qpItemId,examineeId,batchId,responseText).subscribe((response) => console.log("Deleted"));
   }
 }

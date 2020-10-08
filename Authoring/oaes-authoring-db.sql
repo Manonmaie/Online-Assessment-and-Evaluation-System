@@ -262,3 +262,113 @@ CREATE TABLE IF NOT EXISTS um_role_action(
 ALTER TABLE um_role_action
   ADD CONSTRAINT `fk_um_role_action_role_id` FOREIGN KEY (role_id) REFERENCES um_role_master(role_id) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_um_role_action_action_id` FOREIGN KEY (action_id) REFERENCES um_action_master(action_id) ON DELETE SET NULL;
+
+
+-- --------------------------------------------------------
+-- Table structure for table out_qpack_header
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS out_qpack_header(
+  qpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qpack_desc varchar(255),
+  created_on timestamp,
+  created_by varchar(255),
+  qpack_status ENUM('CREATED', 'SENT'),
+  qpack_sent_on timestamp,
+  qpack_path varchar(255),
+  PRIMARY KEY(qpack_header_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table qpack1
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS qpack1(
+  qpack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned UNIQUE NOT NULL,
+  qp_code varchar(255) UNIQUE NOT NULL,
+  maximum_marks float(24) NOT NULL,
+  instruction_id int(10) unsigned UNIQUE NOT NULL,
+  instruction_code varchar(255) UNIQUE NOT NULL,
+  instruction_text varchar(255) NOT NULL,
+  duration int(10) NOT NULL,
+  PRIMARY KEY(qpack_header_id)
+);
+
+ALTER TABLE qpack1
+  ADD CONSTRAINT `fk_qpack1_qpack_header_id` FOREIGN KEY (qpack_header_id) REFERENCES out_qpack_header(qpack_header_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table qpack2
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS qpack2(
+  qpack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_text varchar(255) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
+  PRIMARY KEY(qpack_id)
+);
+
+ALTER TABLE qpack2
+  ADD CONSTRAINT `fk_qpack2_qp_id` FOREIGN KEY (qp_id) REFERENCES qpack1(qp_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table qpack3
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS qpack3(
+  qpack_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned NOT NULL,
+  option_text varchar(255) NOT NULL,
+  PRIMARY KEY(qpack_id)
+);
+
+ALTER TABLE qpack3
+  ADD CONSTRAINT `fk_qpack3_qpack_id` FOREIGN KEY (qpack_id) REFERENCES qpack2(qpack_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_qpack3_item_id` FOREIGN KEY (item_id) REFERENCES qpack2(item_id) ON DELETE CASCADE;
+
+
+-- --------------------------------------------------------
+-- Table structure for table out_apack_header
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS out_apack_header(
+  apack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  apack_desc varchar(255),
+  created_on timestamp,
+  created_by varchar(255),
+  apack_status ENUM('CREATED', 'SENT'),
+  apack_sent_on timestamp,
+  apack_path varchar(255),
+  PRIMARY KEY(apack_header_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table apack1
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS apack1(
+  apack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  qp_code varchar(255) NOT NULL,
+  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_text varchar(255) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  PRIMARY KEY(apack_header_id)
+);
+
+ALTER TABLE apack1
+  ADD CONSTRAINT `fk_apack1_apack_header_id` FOREIGN KEY (apack_header_id) REFERENCES out_apack_header(apack_header_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table apack2
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS apack2(
+  apack_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned NOT NULL,
+  option_text varchar(255) NOT NULL,
+  option_percentage float(24),
+  PRIMARY KEY(apack_id)
+);
+
+ALTER TABLE apack2
+  ADD CONSTRAINT `fk_apack2_item_id` FOREIGN KEY (item_id) REFERENCES apack1(item_id) ON DELETE CASCADE;
