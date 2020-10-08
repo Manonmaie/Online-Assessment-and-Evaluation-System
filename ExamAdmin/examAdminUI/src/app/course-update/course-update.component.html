@@ -1,16 +1,16 @@
 <div class="container">
     <legend> Update Course Details </legend>
     <form novalidate (ngSubmit)="onSubmit()">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <label for="courseName">Course Name</label>
-                <input type="text" id="courseName" name="courseName" placeholder="Name of Course" [(ngModel)]="course.courseName">
-            </li>
-            <li class="list-group-item">
-                <label for="courseCode">Course Code</label>
-                <input type="text" id="courseCode" name="courseCode" placeholder="Unique code of the Course" [(ngModel)]="course.courseCode">
-            </li>
-            <input type="submit" value ="Update Course Details" (click)="onSubmit()">
-        </ul>
+        <div class="form-item">
+            <label class="required" for="courseName">Course Name</label>
+            <input type="text" id="courseName" name="courseName" placeholder="Name of Course" [(ngModel)]="course.courseName">
+            <small>Error Message</small>
+        </div>
+        <div class="form-item">
+            <label class="required" for="courseCode">Course Code</label>
+            <input type="text" id="courseCode" name="courseCode" placeholder="Unique code of the Course" [(ngModel)]="course.courseCode">
+            <small>Error Message</small>
+        </div>
+        <input type="submit" value ="Update Course Details" (click)="onSubmit()">
     </form>
 </div>

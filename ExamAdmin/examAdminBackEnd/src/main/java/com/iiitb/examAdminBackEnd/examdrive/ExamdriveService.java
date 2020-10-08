@@ -27,4 +27,8 @@ public class ExamdriveService {
 	public void deleteExamdrive(int id) {
 		examdriveRepository.deleteById(id);
 	}
+	
+	public void addExamdrive(Examdrive examdrive) {
+		examdriveRepository.save(examdrive);
+	}
 }

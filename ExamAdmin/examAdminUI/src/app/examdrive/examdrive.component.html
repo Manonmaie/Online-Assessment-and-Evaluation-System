@@ -1,5 +1,5 @@
 <div class="container">
-<button type="button" class="btn btn-success btn-lg btn-block">
+<button type="button" class="btn btn-success btn-lg btn-block" [routerLink]="['/examdriveadd']">
     <i class="fa fa-plus-square" style="font-size:24px"></i>
     Add Exam Drive
   </button>
@@ -27,8 +27,8 @@
         <td><font size="-2">{{examdrive.status}}</font></td>
         <td>
           <button type="button" class="btn btn-danger float-right" (click)="deleteExamdrive(examdrive)"><i class="fa fa-trash-o"></i></button>
-          <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
-          <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>
+          <button type="button" class="btn btn-warning float-right mr-1" [routerLink]="['/examdriveupdate', examdrive.examdriveId]"><i class="fa fa-pencil"></i></button>
+          <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview', examdrive.examdriveId]"><i class="fa fa-eye"></i></button>
         </td>
       </tr>
     </tbody>

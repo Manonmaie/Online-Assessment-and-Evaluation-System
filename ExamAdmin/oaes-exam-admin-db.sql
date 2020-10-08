@@ -19,6 +19,9 @@ CREATE TABLE IF NOT EXISTS ea_course_master (
 -- Data Entry for table ea_course_master
 -- --------------------------------------------------------
 INSERT INTO ea_course_master VALUES(0,"DBMS","Database Management System");
+INSERT INTO ea_course_master VALUES(0,"DM","Data Modelling");
+INSERT INTO ea_course_master VALUES(0,"OS","Operating Systems");
+INSERT INTO ea_course_master VALUES(0,"DSA","Data Structures and Alogorithms");
 
 -- --------------------------------------------------------
 -- Table structure for table ea_examdrive
@@ -60,7 +63,10 @@ CREATE TABLE IF NOT EXISTS ea_examinee(
 -- Data Entry for table ea_examinee
 -- --------------------------------------------------------
 INSERT INTO ea_examinee VALUES(0,"S1","ABC","abc","CSE","ABC@iiitb.org",'IIITB');
-INSERT INTO ea_examinee VALUES(0,"S2","XYZ","xyz",NULL,NULL,NULL);
+INSERT INTO ea_examinee VALUES(0,"S2","ZYX","xyz",NULL,NULL,NULL);
+INSERT INTO ea_examinee VALUES(0,"S3","Z","z","ECE",NULL,NULL);
+INSERT INTO ea_examinee VALUES(0,"S4","Y","y",NULL,NULL,"IIITB");
+INSERT INTO ea_examinee VALUES(0,"S5","X","x",NULL,NULL,NULL);
 
 -- --------------------------------------------------------
 -- Table structure for table ea_center
@@ -77,6 +83,9 @@ CREATE TABLE IF NOT EXISTS ea_center(
 -- Data Entry for table ea_center
 -- --------------------------------------------------------
 INSERT INTO ea_center VALUES(0,"IIITB","International Institute of Information Technology, Bangalore",1000);
+INSERT INTO ea_center VALUES(0,"IIITH","International Institute of Information Technology, Hyderabad",1000);
+INSERT INTO ea_center VALUES(0,"IITB","Indian Institute of Technology, Mumbai",10000);
+INSERT INTO ea_center VALUES(0,"IITM","Indian Institute of Technology, Chennai",20000);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_batch`
@@ -86,7 +95,7 @@ CREATE TABLE IF NOT EXISTS ea_batch(
   batch_code varchar(255) UNIQUE NOT NULL,
   batch_start_time datetime NOT NULL,
   batch_end_time datetime NOT NULL,
-  qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING') DEFAULT 'PENDING',
+  qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING','SENT') DEFAULT 'PENDING',
   center_id int(10) unsigned,
   examdrive_id int(10) unsigned,
   qp_id int(10) unsigned,
@@ -101,6 +110,7 @@ ALTER TABLE ea_batch
 -- Data Entry for table ea_batch
 -- --------------------------------------------------------
 INSERT INTO ea_batch VALUES(0,"MID-MRNG","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",1,1,NULL);
+INSERT INTO ea_batch VALUES(0,"MID-EVNG","2020-09-23 14:00:00","2020-09-23 17:00:00","RECEIVED",1,1,NULL);
 INSERT INTO ea_batch VALUES(0,"END-MRNG","2020-10-23 10:00:00","2020-10-23 13:00:00","RECEIVED",1,2,NULL);
 INSERT INTO ea_batch VALUES(0,"IMP-MRNG","2020-12-23 10:00:00","2020-12-23 13:00:00","RECEIVED",1,3,NULL);
 
@@ -230,3 +240,229 @@ CREATE TABLE IF NOT EXISTS ea_item_true_false(
 
 ALTER TABLE ea_item_true_false
   ADD constraint `ea_item_true_false_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ea_qp_item(qp_item_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Table structure for table in_qpack_header
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS in_qpack_header(
+  qpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qpack_desc varchar(255),
+  created_on timestamp,
+  created_by varchar(255),
+  qpack_status ENUM('CREATED', 'SENT'),
+  qpack_sent_on timestamp,
+  qpack_path varchar(255),
+  PRIMARY KEY(qpack_header_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table qpack1
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS qpack1(
+  qpack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned UNIQUE NOT NULL,
+  qp_code varchar(255) UNIQUE NOT NULL,
+  maximum_marks float(24) NOT NULL,
+  instruction_id int(10) unsigned UNIQUE NOT NULL,
+  instruction_code varchar(255) UNIQUE NOT NULL,
+  instruction_text varchar(255) NOT NULL,
+  duration int(10) NOT NULL,
+  PRIMARY KEY(qpack_header_id)
+);
+
+ALTER TABLE qpack1
+  ADD CONSTRAINT `fk_qpack1_qpack_header_id` FOREIGN KEY (qpack_header_id) REFERENCES in_qpack_header(qpack_header_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table qpack2
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS qpack2(
+  qpack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_text varchar(255) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
+  PRIMARY KEY(qpack_id)
+);
+
+ALTER TABLE qpack2
+  ADD CONSTRAINT `fk_qpack2_qp_id` FOREIGN KEY (qp_id) REFERENCES qpack1(qp_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table qpack3
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS qpack3(
+  qpack_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned NOT NULL,
+  option_text varchar(255) NOT NULL,
+  PRIMARY KEY(qpack_id)
+);
+
+ALTER TABLE qpack3
+  ADD CONSTRAINT `fk_qpack3_qpack_id` FOREIGN KEY (qpack_id) REFERENCES qpack2(qpack_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_qpack3_item_id` FOREIGN KEY (item_id) REFERENCES qpack2(item_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table out_epack_header
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS out_epack_header(
+  epack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack_desc varchar(255),
+  created_on timestamp,
+  created_by varchar(255),
+  epack_status ENUM('CREATED', 'SENT'),
+  epack_sent_on timestamp,
+  epack_path varchar(255),
+  PRIMARY KEY(epack_header_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table epack1
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack1(
+  epack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned UNIQUE NOT NULL,
+  qp_code varchar(255) UNIQUE NOT NULL,
+  maximum_marks float(24) NOT NULL,
+  instruction_id int(10) unsigned UNIQUE NOT NULL,
+  instruction_code varchar(255) UNIQUE NOT NULL,
+  instruction_text varchar(255) NOT NULL,
+  duration int(10) NOT NULL,
+  batch_id int(10) unsigned UNIQUE NOT NULL,
+  batch_code varchar(255) UNIQUE NOT NULL,
+  batch_start_time datetime NOT NULL,
+  batch_end_time datetime NOT NULL,
+  center_id int(10) unsigned NOT NULL,
+  center_code varchar(255) NOT NULL,
+  center_name varchar(255) NOT NULL,
+  examdrive_id int(10) unsigned NOT NULL,
+  examdrive_code varchar(255) NOT NULL,
+  examdrive_name varchar(255) NOT NULL,
+  course_master_id int(10) unsigned NOT NULL,
+  course_code varchar(255) NOT NULL,
+  course_name varchar(255) NOT NULL,
+  PRIMARY KEY(epack_header_id)
+);
+
+ALTER TABLE epack1
+  ADD CONSTRAINT `fk_epack1_epack_header_id` FOREIGN KEY (epack_header_id) REFERENCES out_epack_header(epack_header_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table epack2
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack2(
+  epack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_text varchar(255) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
+  PRIMARY KEY(epack_id)
+);
+
+ALTER TABLE epack2
+  ADD CONSTRAINT `fk_epack2_qp_id` FOREIGN KEY (qp_id) REFERENCES epack1(qp_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table epack3
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack3(
+  epack_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned NOT NULL,
+  option_text varchar(255) NOT NULL,
+  PRIMARY KEY(epack_id)
+);
+
+ALTER TABLE epack3
+  ADD CONSTRAINT `fk_epack3_epack_id` FOREIGN KEY (epack_id) REFERENCES epack2(epack_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_epack3_item_id` FOREIGN KEY (item_id) REFERENCES epack2(item_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table epack4
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack4(
+  epack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_id int(10) unsigned NOT NULL,
+  batch_id int(10) unsigned NOT NULL,
+  examinee_batch_id int(10) unsigned NOT NULL,
+  examinee_id int(10) unsigned NOT NULL,
+  examinee_code varchar(255) NOT NULL,
+  examinee_name varchar(255) NOT NULL,
+  examinee_password varchar(255) NOT NULL,
+  examinee_branch varchar(255),
+  examinee_email varchar(255),
+  examinee_college varchar(255),
+  PRIMARY KEY(epack_id)
+);
+
+ALTER TABLE epack4
+  ADD CONSTRAINT `fk_epack4_qp_id` FOREIGN KEY (qp_id) REFERENCES epack1(qp_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_epack4_batch_id` FOREIGN KEY (batch_id) REFERENCES epack1(batch_id) ON DELETE CASCADE;
+
+
+-- --------------------------------------------------------
+-- Table structure for table in_mpack_header
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS in_mpack_header(
+  mpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  mpack_desc varchar(255),
+  created_on timestamp,
+  created_by varchar(255),
+  mpack_status ENUM('CREATED', 'SENT'),
+  mpack_sent_on timestamp,
+  mpack_path varchar(255),
+  PRIMARY KEY(mpack_header_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table mpack1
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS mpack1(
+  mpack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned UNIQUE NOT NULL,
+  qp_code varchar(255) UNIQUE NOT NULL,
+  maximum_marks float(24) NOT NULL,
+  marks_obtained float(24) NOT NULL,
+  duration int(10) NOT NULL,
+  PRIMARY KEY(mpack_header_id)
+);
+
+ALTER TABLE mpack1
+  ADD CONSTRAINT `fk_mpack1_mpack_header_id` FOREIGN KEY (mpack_header_id) REFERENCES in_mpack_header(mpack_header_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table mpack2
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS mpack2(
+  mpack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_text varchar(255) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
+  PRIMARY KEY(mpack_id)
+);
+
+ALTER TABLE mpack2
+  ADD CONSTRAINT `fk_mpack2_qp_id` FOREIGN KEY (qp_id) REFERENCES mpack1(qp_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table mpack3
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS mpack3(
+  mpack_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  examinee_batch_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_marks_obtained float(24) unsigned NOT NULL,
+  PRIMARY KEY(mpack_id)
+);
+
+ALTER TABLE mpack3
+  ADD CONSTRAINT `fk_mpack3_qp_id` FOREIGN KEY (qp_id) REFERENCES mpack1(qp_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_mpack3_mpack_id` FOREIGN KEY (mpack_id) REFERENCES mpack2(mpack_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_mpack3_item_id` FOREIGN KEY (item_id) REFERENCES mpack2(item_id) ON DELETE CASCADE;

@@ -395,5 +395,189 @@ ALTER TABLE as_response
 --   PRIMARY KEY (response_true_false_id)
 -- );
 
+<<<<<<< HEAD
 -- ALTER TABLE as_response_true_false
 --   ADD constraint `fk_as_response_true_false_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
+=======
+ALTER TABLE as_response_true_false
+  ADD constraint `fk_as_response_true_false_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Table structure for table in_epack_header
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS in_epack_header(
+  epack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack_desc varchar(255),
+  created_on timestamp,
+  created_by varchar(255),
+  epack_status ENUM('CREATED', 'SENT'),
+  epack_sent_on timestamp,
+  epack_path varchar(255),
+  PRIMARY KEY(epack_header_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table epack1
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack1(
+  epack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned UNIQUE NOT NULL,
+  qp_code varchar(255) UNIQUE NOT NULL,
+  maximum_marks float(24) NOT NULL,
+  instruction_id int(10) unsigned UNIQUE NOT NULL,
+  instruction_code varchar(255) UNIQUE NOT NULL,
+  instruction_text varchar(255) NOT NULL,
+  duration int(10) NOT NULL,
+  batch_id int(10) unsigned UNIQUE NOT NULL,
+  batch_code varchar(255) UNIQUE NOT NULL,
+  batch_start_time datetime NOT NULL,
+  batch_end_time datetime NOT NULL,
+  center_id int(10) unsigned NOT NULL,
+  center_code varchar(255) NOT NULL,
+  center_name varchar(255) NOT NULL,
+  examdrive_id int(10) unsigned NOT NULL,
+  examdrive_code varchar(255) NOT NULL,
+  examdrive_name varchar(255) NOT NULL,
+  course_master_id int(10) unsigned NOT NULL,
+  course_code varchar(255) NOT NULL,
+  course_name varchar(255) NOT NULL,
+  PRIMARY KEY(epack_header_id)
+);
+
+ALTER TABLE epack1
+  ADD CONSTRAINT `fk_epack1_epack_header_id` FOREIGN KEY (epack_header_id) REFERENCES in_epack_header(epack_header_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table epack2
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack2(
+  epack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_text varchar(255) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
+  PRIMARY KEY(epack_id)
+);
+
+ALTER TABLE epack2
+  ADD CONSTRAINT `fk_epack2_qp_id` FOREIGN KEY (qp_id) REFERENCES epack1(qp_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table epack3
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack3(
+  epack_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned NOT NULL,
+  option_text varchar(255) NOT NULL,
+  PRIMARY KEY(epack_id)
+);
+
+ALTER TABLE epack3
+  ADD CONSTRAINT `fk_epack3_epack_id` FOREIGN KEY (epack_id) REFERENCES epack2(epack_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_epack3_item_id` FOREIGN KEY (item_id) REFERENCES epack2(item_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table epack4
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack4(
+  epack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_id int(10) unsigned NOT NULL,
+  batch_id int(10) unsigned NOT NULL,
+  examinee_batch_id int(10) unsigned NOT NULL,
+  examinee_id int(10) unsigned NOT NULL,
+  examinee_code varchar(255) NOT NULL,
+  examinee_name varchar(255) NOT NULL,
+  examinee_password varchar(255) NOT NULL,
+  examinee_branch varchar(255),
+  examinee_email varchar(255),
+  examinee_college varchar(255),
+  PRIMARY KEY(epack_id)
+);
+
+ALTER TABLE epack4
+  ADD CONSTRAINT `fk_epack4_qp_id` FOREIGN KEY (qp_id) REFERENCES epack1(qp_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_epack4_batch_id` FOREIGN KEY (batch_id) REFERENCES epack1(batch_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table out_rpack_header
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS out_rpack_header(
+  rpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  rpack_desc varchar(255),
+  created_on timestamp,
+  created_by varchar(255),
+  rpack_status ENUM('CREATED', 'SENT'),
+  rpack_sent_on timestamp,
+  rpack_path varchar(255),
+  PRIMARY KEY(rpack_header_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table rpack1
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS rpack1(
+  rpack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned UNIQUE NOT NULL,
+  qp_code varchar(255) UNIQUE NOT NULL,
+  maximum_marks float(24) NOT NULL,
+  duration int(10) NOT NULL,
+  batch_id int(10) unsigned UNIQUE NOT NULL,
+  PRIMARY KEY(rpack_header_id)
+);
+
+ALTER TABLE rpack1
+  ADD CONSTRAINT `fk_rpack1_rpack_header_id` FOREIGN KEY (rpack_header_id) REFERENCES out_rpack_header(rpack_header_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table rpack2
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS rpack2(
+  rpack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  qp_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_text varchar(255) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
+  PRIMARY KEY(rpack_id)
+);
+
+ALTER TABLE rpack2
+  ADD CONSTRAINT `fk_rpack2_qp_id` FOREIGN KEY (qp_id) REFERENCES rpack1(qp_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table epack3
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS rpack3(
+  rpack_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned NOT NULL,
+  option_text varchar(255) NOT NULL,
+  PRIMARY KEY(rpack_id)
+);
+
+ALTER TABLE rpack3
+  ADD CONSTRAINT `fk_rpack3_rpack_id` FOREIGN KEY (rpack_id) REFERENCES rpack2(rpack_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rpack3_item_id` FOREIGN KEY (item_id) REFERENCES rpack2(item_id) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Table structure for table rpack4
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS rpack4(
+  rpack_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  batch_id int(10) unsigned NOT NULL,
+  examinee_batch_id int(10) unsigned NOT NULL,
+  examinee_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned NOT NULL,
+  response_id int(10) unsigned NOT NULL,
+  response_text varchar(511) NOT NULL,
+  PRIMARY KEY(rpack_id)
+);
+
+ALTER TABLE rpack4
+  ADD CONSTRAINT `fk_rpack4_qp_id` FOREIGN KEY (qp_id) REFERENCES rpack1(qp_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rpack4_batch_id` FOREIGN KEY (batch_id) REFERENCES rpack1(batch_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rpack4_item_id` FOREIGN KEY (item_id) REFERENCES rpack2(item_id) ON DELETE CASCADE;
+>>>>>>> d3b0b1790ccc74d38ee652474cd423e05c55fa0f
