@@ -55,10 +55,9 @@ export class ExamdriveAddComponent implements OnInit {
   }
 
   onSubmit(){
-    this.addDrive();
-    // this.addCourse();
-    // setTimeout(() => {
-    //   this.addDrive();
-    // },5000);
+    this.addCourse();
+    setTimeout(() => {
+      this.addDrive();
+    },2000);
   }
 }
