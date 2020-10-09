@@ -1,20 +1,23 @@
 <app-examinee-add-header></app-examinee-add-header>
 <div class="container">
     <legend>Add Bulk of Students</legend>
-    <form novalidate (ngSubmit)="onSubmit()">
+    <form novalidate>
         <ul class="list-group">  
             <li class="list-group-item">
-                Upload an Excel Sheet with all the student details in the format given below. <font size=-2>Fields with * are compulsory</font>
+                Upload an Excel Sheet with all the student details by downloading the template file, the required details of the students are in the format given below. <font size=-2>Fields with * are mandatory</font>
+                <button class="btn btn-info float-right" (click)="exportexcel()">
+                  Template File <i class="fa fa-file-excel-o fa-lg" aria-hidden="true" style="margin-left: 10px;"></i>
+                </button>
             </li>
             <table class="table">
                 <thead>
                   <tr>
-                    <th scope="col">examineeName *</th>
-                    <th scope="col">examineeCode *</th>
-                    <th scope="col">examineePassword *</th>
-                    <th scope="col">examineeBranch</th>
-                    <th scope="col">examineeEmail</th>
-                    <th scope="col">examineeCollege</th>
+                    <th scope="col" class="required">Name</th>
+                    <th scope="col" class="required">Code</th>
+                    <th scope="col" class="required">Password</th>
+                    <th scope="col">Branch</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">College</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -27,7 +30,7 @@
                     <td>Student's College</td>
                   </tr>
                 </tbody>
-              </table>
+            </table>
             <input type="file" id="file" accept = ".xls, .xlsx, .odt, .csv" (change)="onFileChange($event)"/>
             <!-- <input type="file" id="selectedFile" style="display: none;" />
             <input type="button" value="Browse..." onclick="document.getElementById('selectedFile').click();" /> -->   
