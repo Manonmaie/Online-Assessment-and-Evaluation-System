@@ -11,7 +11,7 @@ import {resetError, setError} from '../shared/error';
 })
 export class CenterAddComponent implements OnInit {
   center = {centerName: null, centerCode: null, centerCapacity: 0}
-  constructor(private centerService: CenterService, public route: Router) { }
+  constructor(private centerService: CenterService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,7 +32,7 @@ export class CenterAddComponent implements OnInit {
       else{
         this.addCenter(this.center);
         setTimeout(() => {
-          this.route.navigate(['/centers']);
+          this.router.navigate(['/centers']);
         },500);
       }
     }

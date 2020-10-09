@@ -16,7 +16,7 @@ export class ExamdriveAddComponent implements OnInit {
   courses: Course[];
   selectedCourse: number;
 
-  constructor(private examdriveService: ExamdriveService, private courseService: CourseService, public route: Router) { }
+  constructor(private examdriveService: ExamdriveService, private courseService: CourseService, public router: Router) { }
 
   ngOnInit(): void {
     this.getCourses();
@@ -55,7 +55,7 @@ export class ExamdriveAddComponent implements OnInit {
         else{
           this.addExamdrive(this.examdrive);
           setTimeout(() => {
-            this.route.navigate(['/examdrives']);
+            this.router.navigate(['/examdrives']);
           },500);
         }
       }

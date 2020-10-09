@@ -11,7 +11,7 @@ import {resetError, setError} from '../shared/error';
 })
 export class CourseAddComponent implements OnInit {
   course = {courseName: null,courseCode: null}
-  constructor(private courseService: CourseService, public route: Router) { }
+  constructor(private courseService: CourseService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,7 +32,7 @@ export class CourseAddComponent implements OnInit {
       else{
         this.addCourse(this.course);
         setTimeout(() => {
-          this.route.navigate(['/courses']);
+          this.router.navigate(['/courses']);
         },500);
       }
     }
