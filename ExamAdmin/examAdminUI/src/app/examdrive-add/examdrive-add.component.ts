@@ -50,7 +50,9 @@ export class ExamdriveAddComponent implements OnInit {
     }
     else{
       this.addExamdrive(this.examdrive);
-      this.route.navigate(['/examdrives']);
+      setTimeout(() => {
+        this.route.navigate(['/examdrives']);
+      },500);
     }
   }
 
@@ -58,6 +60,6 @@ export class ExamdriveAddComponent implements OnInit {
     this.addCourse();
     setTimeout(() => {
       this.addDrive();
-    },2000);
+    },500);
   }
 }

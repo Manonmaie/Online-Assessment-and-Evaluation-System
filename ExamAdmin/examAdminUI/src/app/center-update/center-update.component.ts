@@ -36,7 +36,9 @@ export class CenterUpdateComponent implements OnInit {
     }
     else{
       this.updateCenter(this.centerId,this.center);
-      this.router.navigate(['/centers']);
+      setTimeout(() => {
+        this.router.navigate(['/centers']);
+      },500);
     }
   }  
 }

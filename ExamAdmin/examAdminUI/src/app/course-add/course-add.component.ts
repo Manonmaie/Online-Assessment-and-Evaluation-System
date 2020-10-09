@@ -29,7 +29,9 @@ export class CourseAddComponent implements OnInit {
     }
     else{
       this.addCourse(this.course);
-      this.route.navigate(['/courses']);
+      setTimeout(() => {
+        this.route.navigate(['/courses']);
+      },500);
     }
   }
 }

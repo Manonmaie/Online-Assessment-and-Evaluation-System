@@ -36,7 +36,9 @@ export class CourseUpdateComponent implements OnInit {
     }
     else{
       this.updateCourse(this.courseMasterId,this.course);
-      this.router.navigate(['/courses']);
+      setTimeout(() => {
+        this.router.navigate(['/courses']);
+      },500);
     }
   }
 }

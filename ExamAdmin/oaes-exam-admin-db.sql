@@ -110,9 +110,9 @@ ALTER TABLE ea_batch
 -- Data Entry for table ea_batch
 -- --------------------------------------------------------
 INSERT INTO ea_batch VALUES(0,"MID-MRNG","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",1,1,NULL);
-INSERT INTO ea_batch VALUES(0,"MID-EVNG","2020-09-23 14:00:00","2020-09-23 17:00:00","RECEIVED",1,1,NULL);
 INSERT INTO ea_batch VALUES(0,"END-MRNG","2020-10-23 10:00:00","2020-10-23 13:00:00","RECEIVED",1,2,NULL);
 INSERT INTO ea_batch VALUES(0,"IMP-MRNG","2020-12-23 10:00:00","2020-12-23 13:00:00","RECEIVED",1,3,NULL);
+INSERT INTO ea_batch VALUES(0,"MID-EVNG","2020-09-23 14:00:00","2020-09-23 17:00:00","RECEIVED",1,1,NULL);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_examinee_batch`

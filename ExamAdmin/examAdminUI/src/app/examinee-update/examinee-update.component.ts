@@ -42,7 +42,9 @@ export class ExamineeUpdateComponent implements OnInit {
     }
     else{
       this.updateExaminee(this.examineeId, this.examinee);
-      this.router.navigate(['/examinees']);
+      setTimeout(() => {
+        this.router.navigate(['/examinees']);
+      },500);
     }
   }
 

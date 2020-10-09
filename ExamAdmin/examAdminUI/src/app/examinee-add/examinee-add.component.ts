@@ -31,7 +31,9 @@ export class ExamineeAddComponent implements OnInit {
     }
     else{
       this.addExaminee(this.examinee);
-      this.route.navigate(['/examinees']);
+      setTimeout(() => {
+        this.route.navigate(['/examinees']);
+      },500);
     }
   }
 }

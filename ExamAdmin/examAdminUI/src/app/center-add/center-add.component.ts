@@ -29,7 +29,9 @@ export class CenterAddComponent implements OnInit {
     }
     else{
       this.addCenter(this.center);
-      this.route.navigate(['/centers']);
+      setTimeout(() => {
+        this.route.navigate(['/centers']);
+      },500);
     }
   }
 }
