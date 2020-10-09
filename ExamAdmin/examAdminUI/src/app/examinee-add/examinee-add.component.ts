@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Examinee } from '../shared/examinee';
 import { ExamineeService } from '../services/examinee.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
-import {setError} from '../shared/error';
+import {resetError, setError} from '../shared/error';
 
 @Component({
   selector: 'app-examinee-add',
@@ -23,17 +23,23 @@ export class ExamineeAddComponent implements OnInit {
     if(this.examinee.examineeName==null){
       setError("examineeName","Student Name is Required");
     }
-    if(this.examinee.examineeCode==null){
-      setError("examineeCode","Student Code is Required");
-    }
-    if(this.examinee.examineePassword==null){
-      setError("examineePassword","Student Password is Required");
-    }
     else{
-      this.addExaminee(this.examinee);
-      setTimeout(() => {
-        this.route.navigate(['/examinees']);
-      },500);
+      resetError("examineeName");
+      if(this.examinee.examineeCode==null){
+        setError("examineeCode","Student Code is Required");
+      }
+      else{
+        resetError("examineeCode");
+        if(this.examinee.examineePassword==null){
+          setError("examineePassword","Student Password is Required");
+        }
+        else{
+          this.addExaminee(this.examinee);
+          setTimeout(() => {
+            this.route.navigate(['/examinees']);
+          },500);
+        }
+      }
     }
   }
 }

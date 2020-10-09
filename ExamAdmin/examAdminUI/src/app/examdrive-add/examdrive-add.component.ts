@@ -4,7 +4,7 @@ import {Course} from '../shared/course';
 import {ExamdriveService} from '../services/examdrive.service';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
-import {setError} from '../shared/error';
+import {resetError, setError} from '../shared/error';
 
 @Component({
   selector: 'app-examdrive-add',
@@ -42,22 +42,30 @@ export class ExamdriveAddComponent implements OnInit {
     if(this.examdrive.examdriveName==null){
       setError("examdriveName","Exam Drive name is Required");
     }
-    if(this.examdrive.examdriveCode==null){
-      setError("examdriveCode","Exam Drive code is Required");
-    }
-    if(this.examdrive.course==null){
-      setError("examdriveCourse","Course is Required");
-    }
     else{
-      this.addExamdrive(this.examdrive);
-      setTimeout(() => {
-        this.route.navigate(['/examdrives']);
-      },500);
+      resetError("examdriveName");
+      if(this.examdrive.examdriveCode==null){
+        setError("examdriveCode","Exam Drive code is Required");
+      }
+      else{
+        resetError("examdriveCode");
+        if(this.examdrive.course==null){
+          setError("examdriveCourse","Course is Required");
+        }
+        else{
+          this.addExamdrive(this.examdrive);
+          setTimeout(() => {
+            this.route.navigate(['/examdrives']);
+          },500);
+        }
+      }
     }
   }
 
   onSubmit(){
-    this.addCourse();
+    if(this.selectedCourse!=null){
+      this.addCourse();
+    }
     setTimeout(() => {
       this.addDrive();
     },500);

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from '../shared/course';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
-import {setError} from '../shared/error';
+import {resetError, setError} from '../shared/error';
 
 @Component({
   selector: 'app-course-add',
@@ -24,14 +24,17 @@ export class CourseAddComponent implements OnInit {
     if(this.course.courseName==null){
       setError("courseName","Course Name is Required");
     }
-    if(this.course.courseCode==null){
-      setError("courseCode","Course Code is Required");
-    }
     else{
-      this.addCourse(this.course);
-      setTimeout(() => {
-        this.route.navigate(['/courses']);
-      },500);
+      resetError("courseName");
+      if(this.course.courseCode==null){
+        setError("courseCode","Course Code is Required");
+      }
+      else{
+        this.addCourse(this.course);
+        setTimeout(() => {
+          this.route.navigate(['/courses']);
+        },500);
+      }
     }
   }
 }
