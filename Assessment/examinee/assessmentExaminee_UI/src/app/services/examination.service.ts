@@ -5,7 +5,6 @@ import { HttpClient } from "@angular/common/http";
 import { baseURL } from "../shared/baseurl";
 import { Observable, of } from "rxjs";
 import { ResponseTable } from "../shared/responseTable";
-import { ResponseMcq } from "../shared/responseMcq";
 import { Attempt } from '../shared/attempt';
 
 @Injectable({
@@ -23,6 +22,14 @@ export class ExaminationService {
     return this.http.get<Attempt>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/attempt');
   }
 
+  getResponseForBathAndExamineeIdsForRadioButton(qpItemId: number, examineeId: number, batchId: number): Observable<ResponseTable>{
+    return this.http.get<ResponseTable>(baseURL + 'response/qpItem/' + qpItemId + '/examinee/' + examineeId + '/batch/' + batchId);
+  }
+
+  updateResponse(responseId: number, response: ResponseTable): Observable<ResponseTable>{
+    return this.http.put<ResponseTable>(baseURL + 'response/' + responseId, response);
+  }
+
   postResponse(response: ResponseTable): Observable<ResponseTable>{
     return this.http.post<ResponseTable>(baseURL +  '/response/setResponse', response);
   }
@@ -30,6 +37,10 @@ export class ExaminationService {
   deleteResponseForQpIdAndAttemptId(qpItemId: number, examineeId: number, batchId: number, responseText: string): Observable<any>{
     console.log(responseText);
     return this.http.delete<any>(baseURL + 'responseUnchecked/examinee/' + examineeId + '/batch/' + batchId + '/qpItem/' + qpItemId + '/responseText/' + responseText);
+  }
+
+  deleteResponseById(responseId: number): Observable<any>{
+    return this.http.delete<any>(baseURL + 'response/' + responseId);
   }
 
   // getLastPostedResponse(): Observable<ResponseTable>{

@@ -33,6 +33,11 @@ public class ResponseController {
 		return responseService.getLastRowFromResponse();
 	}
 	
+	@RequestMapping("/response/qpItem/{qpItemId}/examinee/{examineeId}/batch/{batchId}")
+	public AsResponse getResponseForQpItemAndAttemptForRadioButton(@PathVariable int qpItemId,@PathVariable int examineeId, @PathVariable int batchId){
+		return responseService.getResponseForQpItemAndAttemptForRadioButton(qpItemId, examineeId, batchId);
+	}
+	
 	@RequestMapping(value = "/response/setResponse", headers="Content-Type=application/json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<AsResponse> addResponse(@RequestBody AsResponse response) {
