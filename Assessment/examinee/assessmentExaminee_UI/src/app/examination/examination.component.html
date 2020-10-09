@@ -7,74 +7,49 @@
             {{qpItem.itemMarks}} Marks
         </span>
         <div *ngIf="showReset(qpItem.itemType)" style="display: inline">
-            <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;"><i class="fa fa-undo mr-1"></i>Reset</button>
+            <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;" (click) = "updateResponseTableWhenOptionSelected(true, 'Reset', qpItem, 'Reset')"><i class="fa fa-undo mr-1"></i>Reset</button>
         </div>
         
         <ol class="list-group" type="a">
             <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
                 <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="checkbox">
-                        <input type="checkbox" (change)="updateResponse($event.target.checked, itemMcqOption, qpItem)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                        <input type="checkbox" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
                     <!-- <label><input [ngModel]="itemMcqOption" type="checkbox" name="optCheckbox" (ngChange)="updateResponse(itemMcqOption)">  {{itemMcqOption.mcqOptionText}}</label> -->
                 </div>
                 <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
-                    <!-- <input type="radio" name="optRadio" (change)="updateResponse($event.target.checked, itemMcqOption, qpItem)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}} -->
-                    <label><input type="radio" name="optRadio">  {{itemMcqOption.mcqOptionText}}</label>
+                    <input type="radio" name="optRadio" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
                 </div>
             </li>
         </ol>
         
         <div *ngIf='qpItem.itemType === "True/False"' class="radio">
-            <ol class="list-group" type="a">
-                <li class="list-group-item" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
-                    <label><input type="radio" name="optRadio">  True</label>
+            <ol class="list-group" type="a" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
+                <li class="list-group-item">
+                    <input type="radio" name="{{itemTrueFalse.itemTrueFalseCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> True
                 </li>
-                <li class="list-group-item" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
-                    <label><input type="radio" name="optRadio">  False</label>
+                <li class="list-group-item">
+                    <input type="radio" name="{{itemTrueFalse.itemTrueFalseCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> False
                 </li>
             </ol>
         </div>
-        
-        <!-- <div *ngIf='qpItem.itemType === "True/False"' class="btn-group">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" id="options"> <span id="opt">True or False?</span> <span class="caret"></span>
-            </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" id="1" href="#" >True</a></li>
-                <li><a class="dropdown-item" id="2" href="#">False</a></li>
-              </ul>
-        </div> -->
-        <!-- <div *ngIf='qpItem.itemType === "True/False"' class="dropdown">
-            <a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <span id="selected">True or False?</span><span class="caret"></span></a>
-            <ul class="dropdown-menu">
-            <li><a href="#">True</a></li>
-            <li><a href="#">False</a></li>
-            </ul>
-        </div> -->
-        <!-- <div *ngIf='qpItem.itemType === "True/False"' class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <li><a href="#">HTML</a></li>
-              <li><a href="#">CSS</a></li>
-              <li><a href="#">JavaScript</a></li>
-            </ul>
-        </div> -->
         </li>
     </ol>
-
-<!-- <script type="text/javascript">
-    $(function(){
-        $("#1").click(function () {
-            $("#opt").text($(this).text());
-        });
-        $("#2").click(function () {
-            $("#opt").text($(this).text());
-        });
+</div>
+<!-- <div>
+    <ol class="list-group">
+        <li>
+            <input type="radio" name="flip" autocomplete="off" checked="checked"> Front
+        </li>
+        <li>
+            <input type="radio" name="flip" autocomplete="off" checked="checked"> Back
+        </li>
+    </ol>
+    <button type="button" class="btn btn-primary" id="Reset">Reset</button>
+</div> -->
+<!-- <script>
+    // $('input[name="flip"]').prop('checked', false);
+    // $('input[name="flip"]').attr('checked', false);
+    $('#Reset').click(function(){
+        $("#option1").click();
     });
-    // $('.dropdown-menu a').click(function(){
-    //     $('#selected').text($(this).text());
-    // });
-    // $(document).on('click', 'someyourContainer .dropdown-menu', function (e) {
-    //     e.stopPropagation();
-    // });
 </script> -->

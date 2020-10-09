@@ -27,6 +27,11 @@ public class ResponseService {
 		return responseRepository.findByAsQpItemQpItemIdAndAsAttemptAttemptIdAndResponseText(qpItemId, attempId, responseText);
 	}
 	
+	public AsResponse getResponseForQpItemAndAttemptForRadioButton(int qpItemId, int examineeId, int batchId) {
+		int attemptId = attemptRepository.findTopByAsExamineeBatchExamineeBatchIdExamineeIdAndAsExamineeBatchExamineeBatchIdBatchIdOrderByAttemptNumberDesc(examineeId, batchId).getAttemptId();
+		return responseRepository.findByAsQpItemQpItemIdAndAsAttemptAttemptId(qpItemId, attemptId);
+	}
+	
 	public AsResponse addResponse(AsResponse response) {
 		responseRepository.save(response);
 		return response;
