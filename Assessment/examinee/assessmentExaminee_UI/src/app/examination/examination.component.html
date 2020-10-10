@@ -17,7 +17,7 @@
                     <!-- <label><input [ngModel]="itemMcqOption" type="checkbox" name="optCheckbox" (ngChange)="updateResponse(itemMcqOption)">  {{itemMcqOption.mcqOptionText}}</label> -->
                 </div>
                 <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
-                    <input type="radio" name="optRadio" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                    <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
                 </div>
             </li>
         </ol>
@@ -25,31 +25,13 @@
         <div *ngIf='qpItem.itemType === "True/False"' class="radio">
             <ol class="list-group" type="a" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
                 <li class="list-group-item">
-                    <input type="radio" name="{{itemTrueFalse.itemTrueFalseCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> True
+                    <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> True
                 </li>
                 <li class="list-group-item">
-                    <input type="radio" name="{{itemTrueFalse.itemTrueFalseCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> False
+                    <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> False
                 </li>
             </ol>
         </div>
         </li>
     </ol>
 </div>
-<!-- <div>
-    <ol class="list-group">
-        <li>
-            <input type="radio" name="flip" autocomplete="off" checked="checked"> Front
-        </li>
-        <li>
-            <input type="radio" name="flip" autocomplete="off" checked="checked"> Back
-        </li>
-    </ol>
-    <button type="button" class="btn btn-primary" id="Reset">Reset</button>
-</div> -->
-<!-- <script>
-    // $('input[name="flip"]').prop('checked', false);
-    // $('input[name="flip"]').attr('checked', false);
-    $('#Reset').click(function(){
-        $("#option1").click();
-    });
-</script> -->

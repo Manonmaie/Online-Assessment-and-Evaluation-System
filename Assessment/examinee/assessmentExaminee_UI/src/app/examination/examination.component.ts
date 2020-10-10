@@ -53,11 +53,14 @@ export class ExaminationComponent implements OnInit {
           this.deleteResponseById(response.responseId);
         }
       });
+      let qpItemCode: string = qpItem.itemCode;
+      console.log(qpItemCode);
+      $('input[name="' + qpItemCode + '"]').prop('checked', false);
     }
     if(qpItemType == 'McqMultiCorrect' && event == false){
       this.deleteResponseForQpItemAttempExamineeBatch(qpItem.qpItemId, this.examineeId, this.batchId, itemOptionText);
     }
-    // else if(event == true){
+    else if(event == true){
       let responseLocal: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
       this.response = responseLocal;
       this.attempt = this.qpService.getLastAttemptVariable();
@@ -82,28 +85,18 @@ export class ExaminationComponent implements OnInit {
         this.addResponse(this.response);
       }
       else if(qpItemType == 'McqSingleCorrect' || qpItemType == 'True/False'){
-        if(event == true){
-          this.examinationService.getResponseForBathAndExamineeIdsForRadioButton(qpItem.qpItemId, this.examineeId, this.batchId).subscribe((response) => {
-            if(response==null){
-              this.addResponse(this.response);
-            }
-            else{
-              console.log(response.responseId);
-              this.response.responseId = response.responseId;
-              this.updateResponse(response.responseId, this.response);
-            }
-          });
-        }
-        else{
-          if(qpItemType == 'McqSingleCorrect'){
-            $('input[name="optRadio"]').prop('checked', false);
+        this.examinationService.getResponseForBathAndExamineeIdsForRadioButton(qpItem.qpItemId, this.examineeId, this.batchId).subscribe((response) => {
+          if(response==null){
+            this.addResponse(this.response);
           }
-          // else{
-          //   $('input[name="flip"]').prop('checked', false);
-          // }
-        }
+          else{
+            console.log(response.responseId);
+            this.response.responseId = response.responseId;
+            this.updateResponse(response.responseId, this.response);
+          }
+        });
       }
-    // }
+    }
   }
 
   addResponse(response: ResponseTable): void{
@@ -122,6 +115,12 @@ export class ExaminationComponent implements OnInit {
     this.examinationService.deleteResponseById(responseId).subscribe((response) => console.log("Deleted"));
   }
 
+  // updateResponse2(){
+  //   alert("reset");
+  //   console.log($('input[name=optRadio]'));
+  //   // $('input[name=optRadio]').attr('checked',false);
+  //   $('input[name="optRadio"]').prop('checked', false);
+  // }
   // updateResponseCheckbox(event: boolean, itemMcqOptionText: string, qpItem: Examination){
   //   let responseLocal: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
   //   this.response = responseLocal;

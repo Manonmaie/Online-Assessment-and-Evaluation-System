@@ -124,7 +124,7 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-09 07:00:00","2020-10-09 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-10 07:00:00","2020-10-10 23:00:00","RECEIVED",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
 
@@ -245,7 +245,7 @@ ALTER TABLE as_qp_item
 -- Data Entry for table `as_qp_item`
 -- --------------------------------------------------------
 INSERT INTO as_qp_item VALUES(0,"Item1_qp1","What is a database?",2,"McqSingleCorrect","UNDERSTAND",1);
-INSERT INTO as_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"McqMultiCorrect","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"McqSingleCorrect","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item3_qp1","What is a FK?",2,"McqMultiCorrect","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item4_qp1","UK and PK are same.",1,"True/False","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item5_qp1","Uk with no null values is Pk.",2,"True/False","UNDERSTAND",1);
