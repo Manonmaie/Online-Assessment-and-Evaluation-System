@@ -23,7 +23,7 @@ export class ExamineeAddBulkComponent implements OnInit {
     }
   ];
   fileName = 'StudentDetails'
-  constructor(private examineeService: ExamineeService, private excelService:ExcelServicesService, public route: Router) { }
+  constructor(private examineeService: ExamineeService, private excelService:ExcelServicesService, public router: Router) { }
   ngOnInit(): void {
   }
 
@@ -56,7 +56,7 @@ export class ExamineeAddBulkComponent implements OnInit {
   onSubmit(){
     this.addExamineeBulk(this.examineeList);
     setTimeout(() => {
-      this.route.navigate(['/examinees']);
+      this.router.navigate(['/examinees']);
     },2000);
   }
 }

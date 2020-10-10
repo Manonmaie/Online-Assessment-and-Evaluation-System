@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Center } from '../shared/center';
 import {CenterService} from '../services/center.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
-import {setError} from '../shared/error';
+import {resetError, setError} from '../shared/error';
 
 @Component({
   selector: 'app-center-add',
@@ -11,7 +11,7 @@ import {setError} from '../shared/error';
 })
 export class CenterAddComponent implements OnInit {
   center = {centerName: null, centerCode: null, centerCapacity: 0}
-  constructor(private centerService: CenterService, public route: Router) { }
+  constructor(private centerService: CenterService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,12 +24,17 @@ export class CenterAddComponent implements OnInit {
     if(this.center.centerName==null){
       setError("centerName","Center Name is Required");
     }
-    if(this.center.centerCode==null){
-      setError("centerCode","Center Code is Required");
-    }
     else{
-      this.addCenter(this.center);
-      this.route.navigate(['/centers']);
+      resetError("centerName");
+      if(this.center.centerCode==null){
+        setError("centerCode","Center Code is Required");
+      }
+      else{
+        this.addCenter(this.center);
+        setTimeout(() => {
+          this.router.navigate(['/centers']);
+        },500);
+      }
     }
   }
 }
