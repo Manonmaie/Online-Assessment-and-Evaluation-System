@@ -31,4 +31,11 @@ public class AttemptService {
 	public AsAttempt getLastAttemptRow() {
 		return attemptRepository.findTopByOrderByAttemptIdDesc();
 	}
+
+	public void updateAttempt(int examineeId, int batchId, AsAttempt attempt) {
+		AsAttempt highestAttempt = getLastAttemptForExamineeIdAndBatchId(examineeId, batchId);
+		highestAttempt.setAttemptEndTime(attempt.getAttemptEndTime());
+		highestAttempt.setAttemptStatus(attempt.getAttemptStatus());
+		attemptRepository.save(highestAttempt);
+	}
 }

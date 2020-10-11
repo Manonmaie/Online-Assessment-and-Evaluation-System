@@ -124,7 +124,7 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-10 07:00:00","2020-10-10 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-11 07:00:00","2020-10-11 23:00:00","RECEIVED",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
 
@@ -327,11 +327,11 @@ ALTER TABLE as_attempt
 -- --------------------------------------------------------
 -- Data Entry for table `as_attempt`
 -- --------------------------------------------------------
--- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
--- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
--- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
--- INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
--- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
+-- INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","IN_PROGRESS",1,1);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,2);
 -- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
 -- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
 -- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
