@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Examination } from "../shared/examination";
 import { ItemMcqOption } from "../shared/itemMcqOption";
 import { ExaminationService } from "../services/examination.service";
-import { Params, ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { ResponseTable } from '../shared/responseTable';
 import { ResponseMcq } from "../shared/responseMcq";
 import { Attempt } from '../shared/attempt';
@@ -29,13 +29,21 @@ export class ExaminationComponent implements OnInit {
   attempt: Attempt;
   examineeBatch: ExamineeBatch;
 
-  constructor(private qpService: QuestionPaperService, private examinationService: ExaminationService, private route: ActivatedRoute, public datepipe: DatePipe) { }
+  constructor(private qpService: QuestionPaperService, private examinationService: ExaminationService, 
+    // private route: ActivatedRoute,
+     public datepipe: DatePipe, private activeRoute: ActivatedRoute, public route: Router,) { }
 
   ngOnInit(): void {
-    this.qpId = this.route.snapshot.params['qpId'];
-    this.batchId = this.route.snapshot.params['batchId'];
-    this.examineeId = this.route.snapshot.params['examineeId'];
-    this.examinationService.getQpItemsOfQuestionPaper(this.qpId).subscribe((qpItems) => this.qpItems = qpItems);
+    this.qpId = this.activeRoute.snapshot.params['qpId'];
+    this.batchId = this.activeRoute.snapshot.params['batchId'];
+    this.examineeId = this.activeRoute.snapshot.params['examineeId'];
+    this.examinationService.getQpItemsOfQuestionPaper(this.qpId).subscribe((qpItems) => {
+      this.qpItems = qpItems;
+      for (let i = 0; i < qpItems.length; i++) {
+        this.shuffle(qpItems[i].asItemMcqOptionsList);
+      }
+      this.shuffle(qpItems);
+    });
     // this.examinationService.getLastPostedAttemptForBathAndExamineeIds(this.examineeId, this.batchId).subscribe((attempt) => this.attempt = attempt);
     // this.attempt = this.qpService.getLastAttemptVariable();
     // console.log("In examination component");
@@ -47,6 +55,18 @@ export class ExaminationComponent implements OnInit {
       return true;
     }
     return false;
+  }
+
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
   }
 
   updateResponseTableWhenOptionSelected(event: boolean, itemOptionText: string, qpItem: Examination, qpItemType: string){
@@ -131,6 +151,7 @@ export class ExaminationComponent implements OnInit {
       examineeBatch.examineeBatchStatus = 'COMPLETED';
       this.updateExamineeBatchEndTimeAndStatus(this.examineeId, this.batchId, examineeBatch);
     });
+    this.route.navigate(['/questionPaper/' + this.examineeId]);
   }
 
   updateAttemptWhenExamIsFinished(examineeId: number, batchId: number, attempt: Attempt): void{

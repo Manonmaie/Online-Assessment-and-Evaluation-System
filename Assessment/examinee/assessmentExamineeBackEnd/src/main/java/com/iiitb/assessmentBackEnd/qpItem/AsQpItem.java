@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -20,6 +21,8 @@ public class AsQpItem {
 	private int qpItemId;
 	
 	private String itemCode;
+	
+	@Lob
 	private String itemText;
 	private float itemMarks;
 	private String itemType;
