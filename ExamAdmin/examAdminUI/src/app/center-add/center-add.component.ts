@@ -21,12 +21,12 @@ export class CenterAddComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.center.centerName==null){
+    if(this.center.centerName==null || this.center.centerName==""){
       setError("centerName","Center Name is Required");
     }
     else{
       resetError("centerName");
-      if(this.center.centerCode==null){
+      if(this.center.centerCode==null || this.center.centerCode==""){
         setError("centerCode","Center Code is Required");
       }
       else{

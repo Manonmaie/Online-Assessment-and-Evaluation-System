@@ -39,12 +39,12 @@ export class ExamdriveAddComponent implements OnInit {
   }
 
   addDrive(){
-    if(this.examdrive.examdriveName==null){
+    if(this.examdrive.examdriveName==null || this.examdrive.examdriveName==""){
       setError("examdriveName","Exam Drive name is Required");
     }
     else{
       resetError("examdriveName");
-      if(this.examdrive.examdriveCode==null){
+      if(this.examdrive.examdriveCode==null || this.examdrive.examdriveCode==""){
         setError("examdriveCode","Exam Drive code is Required");
       }
       else{

@@ -20,17 +20,17 @@ export class ExamineeAddComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.examinee.examineeName==null){
+    if(this.examinee.examineeName==null || this.examinee.examineeName==""){
       setError("examineeName","Student Name is Required");
     }
     else{
       resetError("examineeName");
-      if(this.examinee.examineeCode==null){
+      if(this.examinee.examineeCode==null || this.examinee.examineeCode==""){
         setError("examineeCode","Student Code is Required");
       }
       else{
         resetError("examineeCode");
-        if(this.examinee.examineePassword==null){
+        if(this.examinee.examineePassword==null || this.examinee.examineePassword==""){
           setError("examineePassword","Student Password is Required");
         }
         else{
