@@ -8,5 +8,4 @@ export class Batch{
     batchStartTime: string;
     batchEndTime: string;
     center: Center;
-    examdrive: Examdrive;
 }

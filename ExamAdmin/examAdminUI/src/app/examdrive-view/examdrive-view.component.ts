@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ExamdriveService } from '../services/examdrive.service';
+import { Params, ActivatedRoute } from '@angular/router';
+import { Examdrive } from '../shared/examdrive';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-examdrive-view',
@@ -6,10 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./examdrive-view.component.scss']
 })
 export class ExamdriveViewComponent implements OnInit {
-
-  constructor() { }
+  examdrive: Examdrive;
+  constructor(private examdriveService:ExamdriveService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const examdriveId = this.route.snapshot.params['id'];
+    this.getExamdrive(examdriveId);
   }
 
+  getExamdrive(id: number): void{
+    this.examdriveService.getExamdrive(id).subscribe((examdrive) => this.examdrive=examdrive);
+  }
 }

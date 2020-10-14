@@ -22,4 +22,7 @@ export class ExamdriveService {
   addExamdrive(examdrive: Examdrive): Observable<Examdrive>{
     return this.http.post<Examdrive>(baseURL + 'examdrives',examdrive);
   }
+  getExamdrive(id: number): Observable<Examdrive>{
+    return this.http.get<Examdrive>(baseURL+'examdrives/'+id);
+  }
 }
