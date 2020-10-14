@@ -34,7 +34,7 @@
                     <td>{{center.centerCapacity}}</td>
                     <td>
                         <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-send-o"></i></button>
-                        <button type="button" class="btn btn-info float-right mr-1"><i class="fa fa-eye"></i></button>
+                        <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button>
                     </td>
                 </ng-container>
             </tr>
