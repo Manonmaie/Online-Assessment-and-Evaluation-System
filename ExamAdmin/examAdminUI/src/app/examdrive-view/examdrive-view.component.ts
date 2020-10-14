@@ -35,16 +35,4 @@ export class ExamdriveViewComponent implements OnInit {
       (thing, i, arr) => arr.findIndex(t => t.centerId === thing.centerId) === i
     );
   }
-
-  parseObject(obj)
-  {
-    for(var key in obj)
-    {
-        console.log("key: " + key + ", value: " + obj[key])
-        if(obj[key] instanceof Object)
-        {
-          this.parseObject(obj[key]);
-        }
-    }
-  }
 }
