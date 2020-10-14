@@ -9,3 +9,15 @@
     background:gray;
     color:white;
 }
+
+.center {
+    margin: 5px;
+    margin-bottom: 5px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+// .container-dummy{
+//     margin-left: 20px;
+// }

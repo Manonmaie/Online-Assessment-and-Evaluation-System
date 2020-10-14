@@ -6,6 +6,7 @@ import { baseURL } from "../shared/baseurl";
 import { Observable, of } from "rxjs";
 import { ResponseTable } from "../shared/responseTable";
 import { Attempt } from '../shared/attempt';
+import { ExamineeBatch } from '../shared/examineeBatch';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,18 @@ export class ExaminationService {
 
   deleteResponseById(responseId: number): Observable<any>{
     return this.http.delete<any>(baseURL + 'response/' + responseId);
+  }
+
+  updateAttemptWhenExamIsFinished(examineeId: number, batchId: number, attempt: Attempt): Observable<Attempt>{
+    return this.http.put<Attempt>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/attempt', attempt);
+  }
+
+  getExamineeBatchFromExamineeBatchIds(examineeId: number, batchId: number): Observable<ExamineeBatch>{
+    return this.http.get<ExamineeBatch>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/examineeBatch');
+  }
+
+  updateExamineeBatchEndTimeAndStatus(examineeId: number, batchId: number, examineeBatch: ExamineeBatch): Observable<ExamineeBatch>{
+    return this.http.put<ExamineeBatch>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/examineeBatch', examineeBatch);
   }
 
   // getLastPostedResponse(): Observable<ResponseTable>{

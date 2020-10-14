@@ -1,55 +1,59 @@
 <div class="container">
     <h2 style="text-align:center;"> Examination </h2>
-    <ol class="list-group">
-        <li class="list-group-item" *ngFor="let qpItem of qpItems">
-            {{qpItem.itemText}}
-        <span class="badge badge-primary badge-pill">
-            {{qpItem.itemMarks}} Marks
-        </span>
-        <div *ngIf="showReset(qpItem.itemType)" style="display: inline">
-            <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;" (click) = "updateResponseTableWhenOptionSelected(true, 'Reset', qpItem, 'Reset')"><i class="fa fa-undo mr-1"></i>Reset</button>
-        </div>
-        
-        <ol class="list-group" type="a">
-            <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
-                <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="checkbox">
-                        <input type="checkbox" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
-                    <!-- <label><input [ngModel]="itemMcqOption" type="checkbox" name="optCheckbox" (ngChange)="updateResponse(itemMcqOption)">  {{itemMcqOption.mcqOptionText}}</label> -->
+    <!-- <div class="row"> -->
+        <!-- <div class="col-md-2">
+            <div class="sidenav">
+                <button type="button" class="btn btn-sm">1</button>
+                <button type="button" class="btn btn-sm">2</button>
+                <button type="button" class="btn btn-sm">3</button>
+                <button type="button" class="btn btn-sm">4</button>
+                <button type="button" class="btn btn-sm">5</button>
+                <button type="button" class="btn btn-sm">6</button>
+                <button type="button" class="btn btn-sm">7</button>
+                <button type="button" class="btn btn-sm">8</button>
+                <button type="button" class="btn btn-sm">9</button>
+                <button type="button" class="btn btn-sm">10</button>
+            </div>
+        </div> -->
+        <!-- <div class="col-md-9 col-md-offset-1"> -->
+        <div>
+            <ol class="list-group">
+                <li class="list-group-item" *ngFor="let qpItem of qpItems">
+                    {{qpItem.itemText}}
+                <span class="badge badge-primary badge-pill">
+                    {{qpItem.itemMarks}} Marks
+                </span>
+                <div *ngIf="showReset(qpItem.itemType)" style="display: inline">
+                    <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;" (click) = "updateResponseTableWhenOptionSelected(true, 'Reset', qpItem, 'Reset')"><i class="fa fa-undo mr-1"></i>Reset</button>
                 </div>
-                <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
-                    <input type="radio" name="optRadio" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                
+                <ol class="list-group" type="a">
+                    <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
+                        <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="checkbox">
+                                <input type="checkbox" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                            <!-- <label><input [ngModel]="itemMcqOption" type="checkbox" name="optCheckbox" (ngChange)="updateResponse(itemMcqOption)">  {{itemMcqOption.mcqOptionText}}</label> -->
+                        </div>
+                        <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
+                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                        </div>
+                    </li>
+                </ol>
+                
+                <div *ngIf='qpItem.itemType === "True/False"' class="radio">
+                    <ol class="list-group" type="a" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
+                        <li class="list-group-item">
+                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> True
+                        </li>
+                        <li class="list-group-item">
+                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> False
+                        </li>
+                    </ol>
                 </div>
-            </li>
-        </ol>
-        
-        <div *ngIf='qpItem.itemType === "True/False"' class="radio">
-            <ol class="list-group" type="a" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
-                <li class="list-group-item">
-                    <input type="radio" name="{{itemTrueFalse.itemTrueFalseCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> True
-                </li>
-                <li class="list-group-item">
-                    <input type="radio" name="{{itemTrueFalse.itemTrueFalseCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> False
                 </li>
             </ol>
+            <div class="center">
+                <button type="button" class="btn btn-success btn-lg" (click) = "finishExam()"><i class="fa fa-check-circle mr-1"></i>Finish Exam</button>
+            </div>
         </div>
-        </li>
-    </ol>
+    <!-- </div> -->
 </div>
-<!-- <div>
-    <ol class="list-group">
-        <li>
-            <input type="radio" name="flip" autocomplete="off" checked="checked"> Front
-        </li>
-        <li>
-            <input type="radio" name="flip" autocomplete="off" checked="checked"> Back
-        </li>
-    </ol>
-    <button type="button" class="btn btn-primary" id="Reset">Reset</button>
-</div> -->
-<!-- <script>
-    // $('input[name="flip"]').prop('checked', false);
-    // $('input[name="flip"]').attr('checked', false);
-    $('#Reset').click(function(){
-        $("#option1").click();
-    });
-</script> -->
