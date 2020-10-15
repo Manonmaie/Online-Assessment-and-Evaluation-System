@@ -30,7 +30,7 @@ public class Batch {
 	
 	@ManyToOne
 	@JoinColumn(name="examdrive_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private Examdrive examdrive;
 	
 	@OneToMany(mappedBy = "batch")

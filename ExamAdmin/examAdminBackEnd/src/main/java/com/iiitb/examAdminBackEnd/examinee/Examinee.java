@@ -2,7 +2,9 @@ package com.iiitb.examAdminBackEnd.examinee;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -16,7 +18,7 @@ public class Examinee {
 	private int examineeId;
 	private String examineeCode,examineeName,examineePassword,examineeBranch,examineeEmail,examineeCollege;
 	
-	@OneToMany(mappedBy = "examinee")
+	@OneToMany(mappedBy = "examinee", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	private List<ExamineeBatch> examineeBatchList;
 	
 	public Examinee() {

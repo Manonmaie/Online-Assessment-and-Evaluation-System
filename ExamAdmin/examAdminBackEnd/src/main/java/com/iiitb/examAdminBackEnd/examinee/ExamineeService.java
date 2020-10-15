@@ -7,10 +7,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchRepository;
+
 @Service
 public class ExamineeService {
 	@Autowired
 	private ExamineeRepository examineeRepository;
+	
+	@Autowired
+	private ExamineeBatchRepository examineeBatchRepository;
 	
 	public List<Examinee> getAllExaminees() {
 		List<Examinee> examinees = new ArrayList<>();
@@ -31,6 +37,7 @@ public class ExamineeService {
 	}
 	
 	public void addExaminee(Examinee examinee) {
+//		examinee.setExamineeBatchList((List<ExamineeBatch>) examineeBatchRepository.saveAll(examinee.getExamineeBatchList()));
 		examineeRepository.save(examinee);
 	}
 	

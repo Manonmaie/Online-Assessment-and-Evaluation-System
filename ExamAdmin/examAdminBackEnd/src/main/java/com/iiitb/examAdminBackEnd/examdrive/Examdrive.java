@@ -30,7 +30,7 @@ public class Examdrive {
 	private Course course;
 	
 	@OneToMany(mappedBy = "examdrive")
-//	@JsonIgnore
+	@JsonIgnore
 	private List<Batch> batchList;
 	
 	public Examdrive() {
