@@ -10,9 +10,16 @@
         <li class="list-group-item">
           Status: <span style="color:rgb(95, 93, 93)">{{examdrive.status}}</span> 
         </li>
-        <li class="list-group-item">
-          Course: <span style="color:rgb(95, 93, 93)">{{examdrive.course.courseName}} <font size="-2">[{{examdrive.course.courseCode}}]</font></span> 
-        </li>
+        <ng-container *ngIf="examdrive.course">
+            <li class="list-group-item">
+            Course: <span style="color:rgb(95, 93, 93)">{{examdrive.course.courseName}} <font size="-2">[{{examdrive.course.courseCode}}]</font></span> 
+            </li>
+        </ng-container>
+        <ng-container *ngIf="!examdrive.course">
+            <li class="list-group-item">
+            Course: -
+            </li>
+        </ng-container>
     </ul>
 </div>
 

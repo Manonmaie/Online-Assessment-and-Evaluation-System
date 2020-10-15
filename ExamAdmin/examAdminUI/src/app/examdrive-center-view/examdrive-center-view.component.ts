@@ -6,6 +6,7 @@ import { Batch } from '../shared/batch';
 import {Observable, of} from 'rxjs';
 import { CenterService } from '../services/center.service';
 import { Center } from '../shared/center';
+import { BatchService } from '../services/batch.service';
 
 @Component({
   selector: 'app-examdrive-center-view',
@@ -16,7 +17,7 @@ export class ExamdriveCenterViewComponent implements OnInit {
   examdrive: Examdrive;
   batches: Batch[] = new Array();
   center: Center;
-  constructor(private examdriveService:ExamdriveService, private centerService: CenterService, private route: ActivatedRoute) { }
+  constructor(private examdriveService:ExamdriveService, private batchService:BatchService, private centerService: CenterService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const examdriveId = this.route.snapshot.params['eid'];
@@ -30,6 +31,7 @@ export class ExamdriveCenterViewComponent implements OnInit {
 
   getExamdrive(id: number): void{
     this.examdriveService.getExamdrive(id).subscribe((examdrive) => this.examdrive=examdrive);
+    this.setBatches(id);
   }
 
   getCenter(id: number): void{
@@ -39,5 +41,9 @@ export class ExamdriveCenterViewComponent implements OnInit {
   getBatches(id: number): void{
     this.batches = this.examdrive.batchList;
     this.batches = this.batches.filter(b => b.center.centerId==id);
+  }
+
+  setBatches(id: number): void{
+    this.batchService.getBatchesByExamdrive(id).subscribe((batches) => this.examdrive.batchList=batches);
   }
 }
