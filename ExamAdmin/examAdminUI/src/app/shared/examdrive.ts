@@ -1,3 +1,4 @@
+import { Batch } from './batch';
 import { Course } from './course';
 
 export class Examdrive{
@@ -6,4 +7,5 @@ export class Examdrive{
     examdriveName: string;
     status: string;
     course: Course;
+    batchList ?: Batch[];
 }

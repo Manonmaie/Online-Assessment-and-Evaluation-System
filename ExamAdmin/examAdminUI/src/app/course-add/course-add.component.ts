@@ -21,12 +21,12 @@ export class CourseAddComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.course.courseName==null){
+    if(this.course.courseName==null || this.course.courseName==""){
       setError("courseName","Course Name is Required");
     }
     else{
       resetError("courseName");
-      if(this.course.courseCode==null){
+      if(this.course.courseCode==null || this.course.courseCode==""){
         setError("courseCode","Course Code is Required");
       }
       else{

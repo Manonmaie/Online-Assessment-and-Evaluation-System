@@ -2,6 +2,7 @@ package com.iiitb.examAdminBackEnd.examdrive;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,5 +31,9 @@ public class ExamdriveService {
 	
 	public void addExamdrive(Examdrive examdrive) {
 		examdriveRepository.save(examdrive);
+	}
+	
+	public Optional<Examdrive> getExamdrive(int id){
+		return examdriveRepository.findById(id);
 	}
 }

@@ -1,1 +1,50 @@
-<p>examdrive-view works!</p>
+<div class="container">
+    <legend>Exam Drive Details</legend>
+    <ul class="list-group">
+        <li class="list-group-item">
+          <h4>Exam Drive Name: <span style="color:rgb(95, 93, 93)">{{examdrive.examdriveName}}</span> </h4>
+        </li>
+        <li class="list-group-item">
+          Exam Drive Code: <span style="color:rgb(95, 93, 93)">{{examdrive.examdriveCode}}</span> 
+        </li>
+        <li class="list-group-item">
+          Status: <span style="color:rgb(95, 93, 93)">{{examdrive.status}}</span> 
+        </li>
+        <ng-container *ngIf="examdrive.course">
+            <li class="list-group-item">
+            Course: <span style="color:rgb(95, 93, 93)">{{examdrive.course.courseName}} <font size="-2">[{{examdrive.course.courseCode}}]</font></span> 
+            </li>
+        </ng-container>
+        <ng-container *ngIf="!examdrive.course">
+            <li class="list-group-item">
+            Course: -
+            </li>
+        </ng-container>
+    </ul>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Center Name</th>
+                <th scope="col">Center Code</th>
+                <th scope="col">Center Capacity</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor = "let center of centers">
+                <ng-container *ngIf="center">
+                    <td>{{center.centerName}}</td>
+                    <td>{{center.centerCode}}</td>
+                    <td>{{center.centerCapacity}}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-send-o"></i></button>
+                        <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button>
+                    </td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+</div>
