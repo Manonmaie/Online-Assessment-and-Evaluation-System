@@ -29,9 +29,13 @@ export class ExaminationComponent implements OnInit {
   attempt: Attempt;
   examineeBatch: ExamineeBatch;
 
+  timerTime: number;
+  display: string;
+  interval;
+  qpDuration: number;
+
   constructor(private qpService: QuestionPaperService, private examinationService: ExaminationService, 
-    // private route: ActivatedRoute,
-     public datepipe: DatePipe, private activeRoute: ActivatedRoute, public route: Router,) { }
+    public datepipe: DatePipe, private activeRoute: ActivatedRoute, public route: Router) { }
 
   ngOnInit(): void {
     this.qpId = this.activeRoute.snapshot.params['qpId'];
@@ -48,6 +52,30 @@ export class ExaminationComponent implements OnInit {
     // this.attempt = this.qpService.getLastAttemptVariable();
     // console.log("In examination component");
     // console.log(this.attempt);
+    this.qpDuration = this.qpService.getSelectedQuestionPaper().duration;
+    this.startTimer();
+  }
+
+  startTimer() {
+    console.log(this.qpDuration);
+    this.timerTime = this.qpDuration * 60;
+    console.log(this.timerTime);
+    this.interval = setInterval(() => {
+      if (this.timerTime === 0) {
+        this.finishExam();
+      } else {
+        this.timerTime--;
+      }
+      this.display = this.transform(this.timerTime)
+    }, 1000);
+  }
+  transform(value: number): string {
+    var sec_num = value; 
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+    console.log(hours + " " + minutes + " " + seconds);
+    return hours+':'+minutes+':'+seconds;
   }
 
   showReset(qpItemType: string){

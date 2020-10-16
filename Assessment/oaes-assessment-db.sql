@@ -124,7 +124,7 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-13 07:00:00","2020-10-13 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-16 07:00:00","2020-10-16 23:00:00","RECEIVED",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
 
@@ -249,6 +249,11 @@ INSERT INTO as_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"McqSingleCorrect
 INSERT INTO as_qp_item VALUES(0,"Item3_qp1","What is a FK?",2,"McqMultiCorrect","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item4_qp1","UK and PK are same.",1,"True/False","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item5_qp1","Uk with no null values is Pk.",2,"True/False","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item6_qp1","What is a database?",2,"McqSingleCorrect","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item7_qp1","What is a  PK?",1,"McqSingleCorrect","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item8_qp1","What is a FK?",2,"McqMultiCorrect","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item9_qp1","UK and PK are same.",1,"True/False","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item10_qp1","Uk with no null values is Pk.",2,"True/False","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item1_qp2","What is a database?",2,"McqSingleCorrect","UNDERSTAND",2);
 INSERT INTO as_qp_item VALUES(0,"Item2_qp2","What is a  PK?",1,"McqSingleCorrect","UNDERSTAND",2);
 INSERT INTO as_qp_item VALUES(0,"Item3_qp2","What is a FK?",2,"McqMultiCorrect","UNDERSTAND",2);
@@ -284,6 +289,18 @@ INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item3_qp1",3,"Foreign Key");
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item3_qp1",3,"Foreign Keyword");
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item3_qp1",3,"Fashion Key");
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item3_qp1",3,"Forward Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item6_qp1",6,"Collection of related data");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item6_qp1",6,"Collection of data");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item6_qp1",6,"Collection of words");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item6_qp1",6,"Collection of people");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item7_qp1",7,"Primary Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item7_qp1",7,"Personal Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item7_qp1",7,"Person Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item7_qp1",7,"Primary Keyword");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item8_qp1",8,"Foreign Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item8_qp1",8,"Foreign Keyword");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item8_qp1",8,"Fashion Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item8_qp1",8,"Forward Key");
 
 -- --------------------------------------------------------
 -- Table structure for table `as_item_true_false`
@@ -303,6 +320,8 @@ ALTER TABLE as_item_true_false
 -- --------------------------------------------------------
 INSERT INTO as_item_true_false VALUES(0,"True_False_item4_qp1",4);
 INSERT INTO as_item_true_false VALUES(0,"True_False_item5_qp1",5);
+INSERT INTO as_item_true_false VALUES(0,"True_False_item9_qp1",9);
+INSERT INTO as_item_true_false VALUES(0,"True_False_item10_qp1",10);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_attempt`
