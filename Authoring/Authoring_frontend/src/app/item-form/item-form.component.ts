@@ -18,13 +18,11 @@ export class ItemFormComponent implements OnInit  {
   constructor(private httpClient: HttpClient,private fb:FormBuilder) {
     this.onChange= this.onChange.bind(this);
     this.countBox=3;
-
+    this.fb.array([])
     this.productForm = this.fb.group({
-      name: '',
-      quantities: this.fb.array([]) ,
+      quantities: this.fb.array([])
     });
   }
-
 
 
   // dynamic option add
@@ -39,7 +37,7 @@ export class ItemFormComponent implements OnInit  {
    
   newQuantity(): FormGroup {
     return this.fb.group({
-      option: '',
+      opt: '',
       marks: '',
     })
   }
@@ -59,7 +57,6 @@ export class ItemFormComponent implements OnInit  {
     $("#MCQoptionID").hide();
     $('#TFOption').hide();
   }
-
 
 
   
@@ -85,11 +82,11 @@ export class ItemFormComponent implements OnInit  {
   selectedCGLvl: any = "";
   selectedDifLvl: any = "";
   totalMarks: Number;
+  author_id: Number=1;
   selectedSub: any= "";
   selectedcrct:any="";
   TFmark1:any="";
   TFmark2:any="";
-
 
 
   public Editor = ClassicEditor;
@@ -125,29 +122,50 @@ export class ItemFormComponent implements OnInit  {
     { value: 'DBMS', label: 'DBMS' },
     { value: 'Data-Modelling', label: 'Data-Modelling' },
   ];
-  private REST_API_SERVER = "http://localhost:8080/urest/v1/setItem";
+  private REST_API_SERVER_MCQ = "http://localhost:8080/urest/v1/setItemMCQ";
+  private REST_API_SERVER_TF = "http://localhost:8080/urest/v1/setItemTF";
   onSubmit(){
     var selValue = this.selectedType;
     if(selValue=='MCQ' || selValue=='Multi_Correct_MCQ')
     {
       console.log(this.selectedType, this.selectedCGLvl, this.totalMarks, this.model.editorData,this.selectedSub,this.selectedDifLvl);
-      console.log(this.productForm.value);
+      console.log(typeof this.productForm.value.quantities);
+      console.log(this.productForm.value.quantities);
+
+      this.httpClient.post(this.REST_API_SERVER_MCQ, {
+      "question": this.model.editorData,
+      "marks": this.totalMarks,
+      "cg_lvl": this.selectedCGLvl,
+      "options": this.productForm.value.quantities,
+      "diff_lvl": this.selectedDifLvl,
+      "item_code":"ABCD",
+      "author_id": this.author_id
+      }).subscribe((data: any[])=>{
+      console.log(data);
+    }) 
+
     }
 
     if(selValue=='TRUE/FALSE')
     {
       console.log(this.selectedType, this.selectedCGLvl, this.totalMarks, this.model.editorData,this.selectedSub,this.selectedDifLvl);
       console.log(this.TFmark1,this.TFmark2);
+
+      this.httpClient.post(this.REST_API_SERVER_TF, {
+        "itemText": this.model.editorData,
+        "marks": this.totalMarks,
+        "cgLvl": this.selectedCGLvl,
+        "diffLvl": this.selectedDifLvl,
+        "falseMarks":this.TFmark2,
+        "trueMarks":this.TFmark1,
+        "authorId": this.author_id
+        }).subscribe((data: any[])=>{
+        console.log(data);
+      }) 
     }
     
-    // this.httpClient.post(this.REST_API_SERVER, {
-    //   "question": this.model.editorData,
-    //   "marks": this.totalMarks,
-    //   "cg_lvl": this.selectedCGLvl,
-    // }).subscribe((data: any[])=>{
-    //   console.log(data);
-    // }) 
-
+    
   };
 
 }
+

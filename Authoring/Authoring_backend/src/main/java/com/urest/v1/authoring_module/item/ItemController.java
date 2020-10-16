@@ -21,23 +21,28 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping("/urest/v1/getallitems")
+	@RequestMapping("/urest/v1/getallitemsTF")
 	public List<Item> getAllItems() {
 		return itemService.getAllItems();
 	}
-	@RequestMapping("/urest/v1/check")
+	@RequestMapping("/urest/v1/checkTF")
 	public String index() {
 		return "Successfully retrieved the item";
 	}
-	@RequestMapping("/urest/v1/getitem/{id}")
-	public Optional<Item> getItem(@PathVariable Integer id) {
-		return itemService.getItem(id);
+	@RequestMapping("/urest/v1/getitem_byAuthor/{id}")
+	public List<Item> getItem(@PathVariable Integer id) {
+		return itemService.getAllQpItemsForAuthor(id);
 	}
-	@RequestMapping(value = "/urest/v1/setItem", headers="Content-Type=application/json", method = RequestMethod.POST)
+	@RequestMapping(value = "/urest/v1/setItemTF", headers="Content-Type=application/json", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Item> saveData(@RequestBody Item question) {
-        return new ResponseEntity<Item>(itemService.createItem(question),HttpStatus.OK);
-
+    public ResponseEntity<ResponseStruct> saveDataTF(@RequestBody ResponseStruct question) {
+        return new ResponseEntity<ResponseStruct>(itemService.createItemTF(question),HttpStatus.OK);
+    }
+	
+	@RequestMapping(value = "/urest/v1/setItemMCQ", headers="Content-Type=application/json", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ResponseStruct> saveDataMCQ(@RequestBody ResponseStruct question) {
+        return new ResponseEntity<ResponseStruct>(itemService.createItemMCQ(question),HttpStatus.OK);
     }
 
 }
