@@ -18,6 +18,32 @@
     transform: translate(-50%, 0%);
 }
 
-// .container-dummy{
-//     margin-left: 20px;
-// }
+.container-dummy{
+    margin-left: 20px;
+}
+
+.navbar {
+    width: 200px;
+    position: fixed;
+    // z-index: 1;
+    // top: 20px;
+    // left: 10px;
+    background: #eee;
+    // overflow-x: hidden;
+    // padding: 8px 0;
+}
+
+.navbar .btn-secondary {
+    // padding: 6px 8px 6px 6px;
+    // text-decoration: none;
+    font-size: 20px;
+    // color: #2196F3;
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-color: #e7e7e7;
+    color: black;
+  }

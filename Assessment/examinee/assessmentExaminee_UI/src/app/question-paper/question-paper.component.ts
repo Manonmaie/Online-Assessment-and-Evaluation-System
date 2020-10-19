@@ -59,6 +59,7 @@ export class QuestionPaperComponent implements OnInit {
         this.questionPaperService.setLastAttemptVariable(res);
       });
       this.updateExamineeBatch(examineeId, questionPaper.asBatch.batchId, this.examineeBatch);
+      this.questionPaperService.setSelectedQuestionPaper(questionPaper);
       this.route.navigate(['/questionPaper/' + examineeId + '/examination/' + questionPaper.qpId + '/batch/' + questionPaper.asBatch.batchId]);
     }
     else{
