@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +21,7 @@ import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
 @Table (name ="ea_batch")
 public class Batch {
 	
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int batchId;
 	private String batchCode,qpStatus;
 	private LocalDateTime batchStartTime, batchEndTime;

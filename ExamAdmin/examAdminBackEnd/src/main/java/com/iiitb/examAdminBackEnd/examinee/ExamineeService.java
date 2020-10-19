@@ -42,15 +42,15 @@ public class ExamineeService {
 	}
 	
 	public void addExamineeBulk(List<Examinee> examinees) {
-		Integer maxIntId = examineeRepository.findMaxId();
-		int maxId = 0;
-		if(maxIntId!=null) {
-			maxId = maxIntId;
-		}
-		for(int i=0;i<examinees.size();i++) {
-			examinees.get(i).setExamineeId(maxId+1);
-			maxId++;
-		}
+//		Integer maxIntId = examineeRepository.findMaxId();
+//		int maxId = 0;
+//		if(maxIntId!=null) {
+//			maxId = maxIntId;
+//		}
+//		for(int i=0;i<examinees.size();i++) {
+//			examinees.get(i).setExamineeId(maxId+1);
+//			maxId++;
+//		}
 		examineeRepository.saveAll(examinees);
 	}
 }
