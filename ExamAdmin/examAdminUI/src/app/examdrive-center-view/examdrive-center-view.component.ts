@@ -40,7 +40,7 @@ export class ExamdriveCenterViewComponent implements OnInit {
 
   getBatches(id: number): void{
     this.batches = this.examdrive.batchList;
-    this.batches = this.batches.filter(b => b.center.centerId==id);
+    this.batches = this.batches.filter(b => b.center!=null && b.center.centerId==id);
   }
 
   setBatches(id: number): void{
