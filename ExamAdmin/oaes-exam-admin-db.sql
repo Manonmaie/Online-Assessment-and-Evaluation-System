@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS ea_examinee_batch (
   examinee_batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   batch_id int(10) unsigned,
   examinee_id int(10) unsigned,
-  marks_obtained float(24),
+  -- marks_obtained float(24),
   PRIMARY KEY (examinee_batch_id)
 );
 
@@ -133,11 +133,11 @@ ALTER TABLE ea_examinee_batch
 -- --------------------------------------------------------
 -- Data Entry for table ea_examinee_batch
 -- --------------------------------------------------------
-INSERT INTO ea_examinee_batch VALUES(0,1,1,100);
-INSERT INTO ea_examinee_batch VALUES(0,2,1,80);
-INSERT INTO ea_examinee_batch VALUES(0,1,2,30);
-INSERT INTO ea_examinee_batch VALUES(0,2,2,40);
-INSERT INTO ea_examinee_batch VALUES(0,3,2,70);
+INSERT INTO ea_examinee_batch VALUES(0,1,1);
+INSERT INTO ea_examinee_batch VALUES(0,2,1);
+INSERT INTO ea_examinee_batch VALUES(0,1,2);
+INSERT INTO ea_examinee_batch VALUES(0,2,2);
+INSERT INTO ea_examinee_batch VALUES(0,3,2);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_question_paper`
@@ -156,6 +156,13 @@ ALTER TABLE ea_question_paper
 
 ALTER TABLE ea_batch
   ADD CONSTRAINT `fk_ea_batch_qp_id` FOREIGN KEY (qp_id) REFERENCES ea_question_paper(qp_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table ea_question_paper
+-- --------------------------------------------------------
+INSERT INTO ea_question_paper VALUES(0,"dbMid",1,100,180);
+INSERT INTO ea_question_paper VALUES(0,"dbEnd",2,100,180);
+INSERT INTO ea_question_paper VALUES(0,"dbImp",3,100,180);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_instruction`
@@ -200,6 +207,16 @@ ALTER TABLE ea_qp_item
   ADD constraint `fk_ea_qp_item_qp_id` FOREIGN KEY (qp_id) REFERENCES ea_question_paper(qp_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table ea_qp_item
+-- --------------------------------------------------------
+INSERT INTO ea_qp_item VALUES(0,"1.1","1stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+INSERT INTO ea_qp_item VALUES(0,"1.2","2stQuestion-Mid-DB",10,"MCQ",'APPLY',1);
+INSERT INTO ea_qp_item VALUES(0,"1.3","3stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+INSERT INTO ea_qp_item VALUES(0,"2.1","1stQuestion-End-DB",5,"MCQ",'REMEMBER',2);
+INSERT INTO ea_qp_item VALUES(0,"2.2","2stQuestion-End-DB",10,"TF",'APPLY',2);
+INSERT INTO ea_qp_item VALUES(0,"3.1","1stQuestion-IMP-DB",30,"MCQ",'EVALUATE',3);
+
+-- --------------------------------------------------------
 -- Table structure for table `ea_examinee_item_marks`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_examinee_item_marks (
@@ -214,6 +231,30 @@ CREATE TABLE IF NOT EXISTS ea_examinee_item_marks (
 ALTER TABLE ea_examinee_item_marks
   ADD constraint `fk_ea_examinee_item_marks_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ea_qp_item(qp_item_id) ON DELETE SET NULL,
   ADD constraint `fk_ea_examinee_item_marks_examinee_batch_id` FOREIGN KEY (examinee_batch_id) REFERENCES ea_examinee_batch(examinee_batch_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table ea_examinee_item_marks
+-- --------------------------------------------------------
+INSERT INTO ea_examinee_item_marks VALUES(0,1,1,5);
+INSERT INTO ea_examinee_item_marks VALUES(0,2,1,8);
+INSERT INTO ea_examinee_item_marks VALUES(0,3,1,4);
+INSERT INTO ea_examinee_item_marks VALUES(0,1,3,0);
+INSERT INTO ea_examinee_item_marks VALUES(0,2,3,3);
+INSERT INTO ea_examinee_item_marks VALUES(0,3,3,1);
+INSERT INTO ea_examinee_item_marks VALUES(0,4,2,5);
+INSERT INTO ea_examinee_item_marks VALUES(0,5,2,10);
+INSERT INTO ea_examinee_item_marks VALUES(0,4,4,0);
+INSERT INTO ea_examinee_item_marks VALUES(0,5,4,5);
+INSERT INTO ea_examinee_item_marks VALUES(0,6,5,20);
+
+-- ALTER TABLE `ea_examinee_batch` MODIFY COLUMN marks_obtained GENERATED ALWAYS AS (SUM(marks_obtained) FROM `ea_examinee_item_marks` GROUP BY examinee_batch_id) STORED;
+
+-- --------------------------------------------------------
+-- View structure for table `ea_examinee_batch_marks`
+-- --------------------------------------------------------
+CREATE view `ea_examinee_batch_marks` as (
+  SELECT eb.*, SUM(eim.marks_obtained) as marks_obtained from `ea_examinee_batch` eb JOIN `ea_examinee_item_marks` eim ON eb.examinee_batch_id = eim.examinee_batch_id GROUP BY examinee_batch_id
+);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_item_mcq_options`
