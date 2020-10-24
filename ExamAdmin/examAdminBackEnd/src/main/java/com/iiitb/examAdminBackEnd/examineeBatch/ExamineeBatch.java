@@ -7,12 +7,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Immutable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.batch.Batch;
 import com.iiitb.examAdminBackEnd.examinee.Examinee;
 
 @Entity
-@Table (name = "ea_examinee_batch")
+@Immutable
+@Table (name = "ea_examinee_batch_marks")
 public class ExamineeBatch {
 
 	@EmbeddedId
