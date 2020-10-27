@@ -270,10 +270,10 @@ ALTER TABLE um_role_action
 CREATE TABLE IF NOT EXISTS out_qpack_header(
   qpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   qpack_desc varchar(255),
-  created_on timestamp,
+  created_on datetime,
   created_by varchar(255),
   qpack_status ENUM('CREATED', 'SENT'),
-  qpack_sent_on timestamp,
+  qpack_sent_on datetime,
   qpack_path varchar(255),
   PRIMARY KEY(qpack_header_id)
 );
@@ -334,10 +334,10 @@ ALTER TABLE qpack3
 CREATE TABLE IF NOT EXISTS out_apack_header(
   apack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   apack_desc varchar(255),
-  created_on timestamp,
+  created_on datetime,
   created_by varchar(255),
   apack_status ENUM('CREATED', 'SENT'),
-  apack_sent_on timestamp,
+  apack_sent_on datetime,
   apack_path varchar(255),
   PRIMARY KEY(apack_header_id)
 );

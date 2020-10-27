@@ -189,10 +189,10 @@ ALTER TABLE ev_response_true_false
 CREATE TABLE IF NOT EXISTS in_apack_header(
   apack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   apack_desc varchar(255),
-  created_on timestamp,
+  created_on datetime,
   created_by varchar(255),
   apack_status ENUM('CREATED', 'SENT'),
-  apack_sent_on timestamp,
+  apack_sent_on datetime,
   apack_path varchar(255),
   PRIMARY KEY(apack_header_id)
 );
@@ -234,10 +234,10 @@ ALTER TABLE apack2
 CREATE TABLE IF NOT EXISTS out_mpack_header(
   mpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   mpack_desc varchar(255),
-  created_on timestamp,
+  created_on datetime,
   created_by varchar(255),
   mpack_status ENUM('CREATED', 'SENT'),
-  mpack_sent_on timestamp,
+  mpack_sent_on datetime,
   mpack_path varchar(255),
   PRIMARY KEY(mpack_header_id)
 );
@@ -298,10 +298,10 @@ ALTER TABLE mpack3
 CREATE TABLE IF NOT EXISTS in_rpack_header(
   rpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   rpack_desc varchar(255),
-  created_on timestamp,
+  created_on datetime,
   created_by varchar(255),
   rpack_status ENUM('CREATED', 'SENT'),
-  rpack_sent_on timestamp,
+  rpack_sent_on datetime,
   rpack_path varchar(255),
   PRIMARY KEY(rpack_header_id)
 );
