@@ -124,7 +124,7 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-03 09:00:00","2020-10-03 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-16 07:00:00","2020-10-16 23:00:00","RECEIVED",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
 
@@ -245,10 +245,15 @@ ALTER TABLE as_qp_item
 -- Data Entry for table `as_qp_item`
 -- --------------------------------------------------------
 INSERT INTO as_qp_item VALUES(0,"Item1_qp1","What is a database?",2,"McqSingleCorrect","UNDERSTAND",1);
-INSERT INTO as_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"McqMultiCorrect","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"McqSingleCorrect","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item3_qp1","What is a FK?",2,"McqMultiCorrect","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item4_qp1","UK and PK are same.",1,"True/False","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item5_qp1","Uk with no null values is Pk.",2,"True/False","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item6_qp1","What is a database?",2,"McqSingleCorrect","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item7_qp1","What is a  PK?",1,"McqSingleCorrect","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item8_qp1","What is a FK?",2,"McqMultiCorrect","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item9_qp1","UK and PK are same.",1,"True/False","UNDERSTAND",1);
+INSERT INTO as_qp_item VALUES(0,"Item10_qp1","Uk with no null values is Pk.",2,"True/False","UNDERSTAND",1);
 INSERT INTO as_qp_item VALUES(0,"Item1_qp2","What is a database?",2,"McqSingleCorrect","UNDERSTAND",2);
 INSERT INTO as_qp_item VALUES(0,"Item2_qp2","What is a  PK?",1,"McqSingleCorrect","UNDERSTAND",2);
 INSERT INTO as_qp_item VALUES(0,"Item3_qp2","What is a FK?",2,"McqMultiCorrect","UNDERSTAND",2);
@@ -284,6 +289,18 @@ INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item3_qp1",3,"Foreign Key");
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item3_qp1",3,"Foreign Keyword");
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item3_qp1",3,"Fashion Key");
 INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item3_qp1",3,"Forward Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item6_qp1",6,"Collection of related data");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item6_qp1",6,"Collection of data");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item6_qp1",6,"Collection of words");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item6_qp1",6,"Collection of people");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item7_qp1",7,"Primary Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item7_qp1",7,"Personal Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item7_qp1",7,"Person Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item7_qp1",7,"Primary Keyword");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq1_item8_qp1",8,"Foreign Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq2_item8_qp1",8,"Foreign Keyword");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq3_item8_qp1",8,"Fashion Key");
+INSERT INTO as_item_mcq_options VALUES(0,"Mcq4_item8_qp1",8,"Forward Key");
 
 -- --------------------------------------------------------
 -- Table structure for table `as_item_true_false`
@@ -297,6 +314,14 @@ CREATE TABLE IF NOT EXISTS as_item_true_false(
 
 ALTER TABLE as_item_true_false
   ADD constraint `as_item_true_false_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES as_qp_item(qp_item_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_item_true_false`
+-- --------------------------------------------------------
+INSERT INTO as_item_true_false VALUES(0,"True_False_item4_qp1",4);
+INSERT INTO as_item_true_false VALUES(0,"True_False_item5_qp1",5);
+INSERT INTO as_item_true_false VALUES(0,"True_False_item9_qp1",9);
+INSERT INTO as_item_true_false VALUES(0,"True_False_item10_qp1",10);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_attempt`
@@ -321,7 +346,16 @@ ALTER TABLE as_attempt
 -- --------------------------------------------------------
 -- Data Entry for table `as_attempt`
 -- --------------------------------------------------------
--- INSERT INTO as_attempt VALUES(0,"Attempt1",1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,1);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
+-- INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","IN_PROGRESS",1,1);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,2);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response`
@@ -329,6 +363,7 @@ ALTER TABLE as_attempt
 CREATE TABLE IF NOT EXISTS as_response (
   response_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   -- response_code varchar(255) UNIQUE NOT NULL,
+  response_text varchar(511) NOT NULL,
   qp_item_id int(10) unsigned,
   attempt_id int(10) unsigned,
   PRIMARY KEY (response_id)
@@ -339,32 +374,48 @@ ALTER TABLE as_response
   ADD constraint `fk_as_response_attempt_id` FOREIGN KEY (attempt_id) REFERENCES as_attempt(attempt_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table `as_response`
+-- --------------------------------------------------------
+-- INSERT INTO as_response VALUES(0,"Primary Key",1,1);
+-- INSERT INTO as_response VALUES(0,"Primary Key",1,1;
+-- INSERT INTO as_response VALUES(0,"Post Key",2,2);
+-- INSERT INTO as_response VALUES(0,"Post Key",3,1);
+-- INSERT INTO as_response VALUES(0,"Key",2,4);
+-- INSERT INTO as_response VALUES(0,"PK",3,1);
+-- INSERT INTO as_response VALUES(0,"Primary Key",3,1);
+
+-- --------------------------------------------------------
 -- Table structure for table `as_response_mcq`
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_response_mcq (
-  response_mcq_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  -- response_mcq_code varchar(255) UNIQUE NOT NULL,
-  response_text varchar(511) NOT NULL,
-  response_id int(10) unsigned,
-  PRIMARY KEY (response_mcq_id)
-);
+-- CREATE TABLE IF NOT EXISTS as_response_mcq (
+--   response_mcq_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   -- response_mcq_code varchar(255) UNIQUE NOT NULL,
+--   response_text varchar(511) NOT NULL,
+--   response_id int(10) unsigned,
+--   PRIMARY KEY (response_mcq_id)
+-- );
 
-ALTER TABLE as_response_mcq
-  ADD constraint `fk_as_response_mcq_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
+-- ALTER TABLE as_response_mcq
+--   ADD constraint `fk_as_response_mcq_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_response_mcq`
+-- --------------------------------------------------------
+-- INSERT INTO as_response_mcq VALUES(0,"Collection of related data",1);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response_true_false`
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS as_response_true_false (
-  response_true_false_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  -- response_true_false_code varchar(255) UNIQUE NOT NULL,
-  response_text varchar(511) NOT NULL,
-  response_id int(10) unsigned,
-  PRIMARY KEY (response_true_false_id)
-);
+-- CREATE TABLE IF NOT EXISTS as_response_true_false (
+--   response_true_false_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   -- response_true_false_code varchar(255) UNIQUE NOT NULL,
+--   response_text varchar(511) NOT NULL,
+--   response_id int(10) unsigned,
+--   PRIMARY KEY (response_true_false_id)
+-- );
 
-ALTER TABLE as_response_true_false
-  ADD constraint `fk_as_response_true_false_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
+-- ALTER TABLE as_response_true_false
+--   ADD constraint `fk_as_response_true_false_response_id` FOREIGN KEY (response_id) REFERENCES as_response(response_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
 -- Table structure for table in_epack_header

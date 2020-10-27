@@ -1,6 +1,6 @@
 <div class="container">
     <legend> Add Exam Drive</legend>
-    <form novalidate (ngSubmit)="onSubmit()" id="examdriveAdd">
+    <form id="examdriveAdd">
         <div class="form-item">
             <label class="required" for="examdriveName">Exam Drive Name</label>
             <input type="text" id="examdriveName" name="examdriveName" placeholder="Name of the Exam Drive" [(ngModel)]="examdrive.examdriveName">
@@ -19,9 +19,9 @@
                     {{course.courseName}}
                 </option>
             </select>
-            <button type="button" class="btn btn-success float-right" (click)="addCourse()">
+            <!-- <button type="button" class="btn btn-success float-right" (click)="addCourse()">
                 Add Course
-            </button>
+            </button> -->
             <br>
             <small>Error Message</small>
         </div>

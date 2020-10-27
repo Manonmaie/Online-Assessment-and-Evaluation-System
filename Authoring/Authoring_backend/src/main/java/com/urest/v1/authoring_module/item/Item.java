@@ -1,178 +1,187 @@
 package com.urest.v1.authoring_module.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
+import com.urest.v1.authoring_module.TF.TF;
+import com.urest.v1.authoring_module.options.Options;
+
 @Entity // This tells Hibernate to make a table out of this class
 
 @Table(name = "item")
-@SecondaryTable(name = "item_true_false", pkJoinColumns =@PrimaryKeyJoinColumn(name="item_id"))
 
 
 public class Item {
 	
 	public Item() {
-		
+		System.out.println("vani");
 	}
-
-	public Item(Integer id, Integer marks, String question, String cg_lvl,String review_status,String item_status,Integer item_use_count,String diff_lvl,String subject,String trueMarks,String falseMarks) {
+	public Item(Integer itemId, Integer marks, String itemText, String cgLvl,String reviewStatus,String itemStatus,Integer itemUseCount,String diffLvl,String subject,Integer authorId,String itemType) {
 		super();
+		
 		// TODO Auto-generated constructor stub
-		this.item_id = id;
+		this.itemId = itemId;
 		this.marks = marks;
-		this.question = question;
-		this.cg_lvl = cg_lvl;
-		this.review_status=review_status;
-		this.item_status=item_status;
-		this.item_use_count=item_use_count;
-		this.diff_lvl=diff_lvl;
-		this.falseMarks=falseMarks;
-		this.trueMarks=trueMarks;
+		this.itemText = itemText;
+		this.cgLvl = cgLvl;
+		this.reviewStatus=reviewStatus;
+		this.itemStatus=itemStatus;
+		this.itemUseCount=itemUseCount;
+		this.diffLvl=diffLvl;
+		this.authorId=authorId;
 	}
 	
-	public Item(Integer id, Integer marks, String question, String cg_lvl,String review_status,String item_status,Integer item_use_count,String item_code) {
-		super();
-		// TODO Auto-generated constructor stub
-		this.item_id = id;
-		this.marks = marks;
-		this.question = question;
-		this.cg_lvl = cg_lvl;
-		this.review_status=review_status;
-		this.item_status=item_status;
-		this.item_use_count=item_use_count;
-		this.item_code=item_code;
-	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(updatable = false, nullable = false)
-	private Integer item_id;
-	private Integer marks;
+	private Integer itemId;
+	
 	@Lob
 	@Column(length=8192)
-	private String question;
-	private String cg_lvl;
-	private String diff_lvl;
-	private String item_code;
-	public Integer getItem_id() {
-		return item_id;
-	}
-
-	public void setItem_id(Integer item_id) {
-		this.item_id = item_id;
-	}
-
-	public String getItem_code() {
-		return item_code;
-	}
-
-	public void setItem_code(String item_code) {
-		this.item_code = item_code;
-	}
-
-	private String review_status="PENDING";
-	private Integer item_use_count=0;
-	private String item_status="ACTIVE";
-	@Column(table = "item_true_false")
-	private String trueMarks;
-	@Column(table = "item_true_false")
-	private String falseMarks;
+	private String itemText;
+	private String cgLvl;
+	private String diffLvl;
+	private Integer authorId;
+	private Integer marks;
+	private String reviewStatus="PENDING";
+	private Integer itemUseCount=0;
+	private String itemStatus="ACTIVE";
+	private String itemType;
 	
-	public Integer getItem_use_count() {
-		return item_use_count;
+	@OneToMany(mappedBy="itemTF", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<TF> asItemTF=new ArrayList<TF>();
+	
+	
+	@OneToMany(mappedBy="itemMCQ", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<Options> asItemMCQ=new ArrayList<Options>();
+	
+	
+	public String getItemType() {
+		return itemType;
+	}
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
+	}
+	public List<Options> getAsItemMCQ() {
+		return asItemMCQ;
+	}
+	public void setAsItemMCQ(List<Options> asItemMCQ) {
+		this.asItemMCQ = asItemMCQ;
+	}
+	public List<TF> getAsItemTF() {
+		return asItemTF;
+	}
+	public void setAsItemTF(List<TF> asItemTF) {
+		this.asItemTF = asItemTF;
 	}
 
-	public void setItem_use_count(Integer item_use_count) {
-		this.item_use_count = item_use_count;
+	public Integer getItemId() {
+		return itemId;
 	}
-
-	public String getItem_status() {
-		return item_status;
+	public void setItemId(Integer itemId) {
+		this.itemId = itemId;
 	}
-
-	public void setItem_status(String item_status) {
-		this.item_status = item_status;
+	public String getItemText() {
+		return itemText;
 	}
-
-	public Integer getId() {
-		return item_id;
+	public void setItemText(String itemText) {
+		this.itemText = itemText;
 	}
-
-	public void setId(Integer id) {
-		this.item_id = id;
+	public String getCgLvl() {
+		return cgLvl;
 	}
-
+	public void setCgLvl(String cgLvl) {
+		this.cgLvl = cgLvl;
+	}
+	public String getDiffLvl() {
+		return diffLvl;
+	}
+	public void setDiffLvl(String diffLvl) {
+		this.diffLvl = diffLvl;
+	}
+	public Integer getAuthorId() {
+		return authorId;
+	}
+	public void setAuthorId(Integer authorId) {
+		this.authorId = authorId;
+	}
 	public Integer getMarks() {
 		return marks;
 	}
-
 	public void setMarks(Integer marks) {
 		this.marks = marks;
 	}
-
-	public String getQuestion() {
-		return question;
+	public String getReviewStatus() {
+		return reviewStatus;
 	}
-
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setReviewStatus(String reviewStatus) {
+		this.reviewStatus = reviewStatus;
 	}
-
-	public String getCg_lvl() {
-		return cg_lvl;
+	public Integer getItemUseCount() {
+		return itemUseCount;
 	}
-
-	public String getReview_status() {
-		return review_status;
+	public void setItemUseCount(Integer itemUseCount) {
+		this.itemUseCount = itemUseCount;
 	}
-
-	public void setReview_status(String review_status) {
-		this.review_status = review_status;
+	public String getItemStatus() {
+		return itemStatus;
 	}
-
-	public void setCg_lvl(String cg_lvl) {
-		this.cg_lvl = cg_lvl;
-	}
-	
-	public String getDiff_lvl() {
-		return diff_lvl;
-	}
-
-	public void setDiff_lvl(String diff_lvl) {
-		this.diff_lvl = diff_lvl;
-	}
-
-	public String getTrueMarks() {
-		return trueMarks;
-	}
-
-	public void setTrueMarks(String trueMarks) {
-		this.trueMarks = trueMarks;
-	}
-
-	public String getFalseMarks() {
-		return falseMarks;
-	}
-
-	public void setFalseMarks(String falseMarks) {
-		this.falseMarks = falseMarks;
+	public void setItemStatus(String itemStatus) {
+		this.itemStatus = itemStatus;
 	}
 
 }
 
 
 
-
-//CREATE TABLE IF NOT EXISTS `item` (     `item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,     `item_code` varchar(255) UNIQUE NOT NULL,     `item_text` varchar(1024) NOT NULL,     `cognitive_level` ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE') DEFAULT 'UNDERSTAND',     `marks` int(4) unsigned NOT NULL,     `review_status` ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',     `item_status` ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',     `item_use_count` int(10) unsigned DEFAULT 0,     PRIMARY KEY (`item_id`) );
+//CREATE TABLE IF NOT EXISTS `item` (     
+//		`item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//		`item_text` varchar(1024) NOT NULL,
+//		`cognitive_level` ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE') DEFAULT 'UNDERSTAND',
+//		`marks` int(4) unsigned NOT NULL,
+//		`review_status` ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',
+//		`item_status` ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
+//		`item_use_count` int(10) unsigned DEFAULT 0,
+//		`author_id` int(10)unsigned,
+//		PRIMARY KEY (`item_id`) );
+//
+//CREATE TABLE IF NOT EXISTS `item_true_false` (
+//	    `item_true_false_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//	    `item_id` int(10) unsigned,
+//	    `true_marks` int(10) unsigned,
+//	    `false_marks` int(10) unsigned,
+//	    PRIMARY KEY (`item_true_false_id`)
 //	);
-
+//
 //ALTER TABLE item_true_false
 //ADD CONSTRAINT `fk_itemTrueFalse_item` FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE SET NULL;
+//
+//
+//CREATE TABLE IF NOT EXISTS `item_mcq_options` (
+//	    `item_mcq_options_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+//	    `item_id` int(10) unsigned,
+//	    `mcq_option_text` varchar(255) NOT NULL,
+//	    `mcq_option_marks` int(10),
+//	    PRIMARY KEY (`item_mcq_options_id`)
+//	);
+//
+//	ALTER TABLE item_mcq_options
+//	  ADD CONSTRAINT `fk_itemMcqOptions_item` FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE SET NULL;

@@ -5,6 +5,7 @@ import { CenterComponent } from '../center/center.component';
 import { ExamineeComponent } from '../examinee/examinee.component';
 import { CourseComponent } from '../course/course.component';
 import { ExamdriveViewComponent } from '../examdrive-view/examdrive-view.component';
+import { ExamdriveCenterViewComponent } from '../examdrive-center-view/examdrive-center-view.component';
 import { CenterViewComponent } from '../center-view/center-view.component';
 import { ExamineeViewComponent } from '../examinee-view/examinee-view.component';
 import { CourseViewComponent } from '../course-view/course-view.component';
@@ -24,6 +25,7 @@ export const routes: Routes = [
     {path: 'examinees', component: ExamineeComponent},
     {path: 'courses', component: CourseComponent},
     {path: 'examdriveview/:id', component: ExamdriveViewComponent},
+    {path: 'examdriveview/:eid/centerview/:cid', component: ExamdriveCenterViewComponent},
     {path: 'centerview/:id', component: CenterViewComponent},
     {path: 'examineeview/:id', component: ExamineeViewComponent},
     {path: 'courseview/:id', component: CourseViewComponent},

@@ -16,7 +16,7 @@ public class AttemptService {
 		attemptRepository.save(attempt);
 //		AsAttempt currectAttemptOfExamineeBatch = getLastAttemptForExamineeIdAndBatchId(examineeId,batchId);
 //		System.out.println("lastAttemptOfExamineeBatch = " + lastAttemptOfExamineeBatch.getAttemptId());
-//		System.out.println("currectAttemptOfExamineeBatch = " + currectAttemptOfExamineeBatch.getAttemptId());
+//		System.out.println("lastButoneAttempt = " + lastAttemptRow);
 		return lastAttemptRow;
 	}
 	
@@ -30,5 +30,12 @@ public class AttemptService {
 	
 	public AsAttempt getLastAttemptRow() {
 		return attemptRepository.findTopByOrderByAttemptIdDesc();
+	}
+
+	public void updateAttempt(int examineeId, int batchId, AsAttempt attempt) {
+		AsAttempt highestAttempt = getLastAttemptForExamineeIdAndBatchId(examineeId, batchId);
+		highestAttempt.setAttemptEndTime(attempt.getAttemptEndTime());
+		highestAttempt.setAttemptStatus(attempt.getAttemptStatus());
+		attemptRepository.save(highestAttempt);
 	}
 }

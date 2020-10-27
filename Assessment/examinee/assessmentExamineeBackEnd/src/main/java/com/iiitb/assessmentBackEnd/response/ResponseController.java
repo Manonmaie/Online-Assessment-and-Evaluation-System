@@ -33,11 +33,34 @@ public class ResponseController {
 		return responseService.getLastRowFromResponse();
 	}
 	
+	@RequestMapping("/response/qpItem/{qpItemId}/examinee/{examineeId}/batch/{batchId}")
+	public AsResponse getResponseForQpItemAndAttemptForRadioButton(@PathVariable int qpItemId,@PathVariable int examineeId, @PathVariable int batchId){
+		return responseService.getResponseForQpItemAndAttemptForRadioButton(qpItemId, examineeId, batchId);
+	}
+	
 	@RequestMapping(value = "/response/setResponse", headers="Content-Type=application/json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<AsResponse> addResponse(@RequestBody AsResponse response) {
-        return new ResponseEntity<AsResponse>(responseService.addResponseAndResponseMcq(response),HttpStatus.OK);
+        return new ResponseEntity<AsResponse>(responseService.addResponse(response),HttpStatus.OK);
 
+    }
+	
+	@RequestMapping(value = "/response/{responseId}", headers="Content-Type=application/json", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity<AsResponse> updateResponse(@PathVariable int responseId, @RequestBody AsResponse response) {
+        return new ResponseEntity<AsResponse>(responseService.updateResponse(responseId, response),HttpStatus.OK);
+
+    }
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/response/{responseId}")
+    public void deleteResponse(@PathVariable int responseId) {
+        responseService.deleteResponse(responseId);
+
+    }
+	
+	@RequestMapping(method = RequestMethod.DELETE, value = "/responseUnchecked/examinee/{examineeId}/batch/{batchId}/qpItem/{qpItemId}/responseText/{responseText}")
+    public void deleteResponseByQpItemIdExamineeIdBatchId(@PathVariable int qpItemId, @PathVariable int examineeId, @PathVariable int batchId, @PathVariable String responseText) {
+        responseService.deleteResponseByQpItemIdExamineeIdBatchId(qpItemId, examineeId, batchId, responseText);
     }
 	
 //	@RequestMapping(method=RequestMethod.POST, value="/qpItem/{qpItemId}/attempt/{attemptId}/response")

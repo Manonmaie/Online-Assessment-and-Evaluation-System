@@ -4,7 +4,7 @@ import { ExamineeBatch } from '../shared/examinee-batch';
 import { ExamineeService } from '../services/examinee.service';
 import { ExamineeBatchService } from '../services/examinee-batch.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
-import {setError} from '../shared/error';
+import {resetError, setError} from '../shared/error';
 
 @Component({
   selector: 'app-examinee-update',
@@ -34,15 +34,23 @@ export class ExamineeUpdateComponent implements OnInit {
     if(this.examinee.examineeName==null||this.examinee.examineeName==""){
       setError("examineeName","Student Name is Required");
     }
-    if(this.examinee.examineeCode==null||this.examinee.examineeCode==""){
-      setError("examineeCode","Student Code is Required");
-    }
-    if(this.examinee.examineePassword==null||this.examinee.examineePassword==""){
-      setError("examineePassword","Student Password is Required");
-    }
     else{
-      this.updateExaminee(this.examineeId, this.examinee);
-      this.router.navigate(['/examinees']);
+      resetError("examineeName");
+      if(this.examinee.examineeCode==null||this.examinee.examineeCode==""){
+        setError("examineeCode","Student Code is Required");
+      }
+      else{
+        resetError("examineeCode");
+        if(this.examinee.examineePassword==null||this.examinee.examineePassword==""){
+          setError("examineePassword","Student Password is Required");
+        }
+        else{
+          this.updateExaminee(this.examineeId, this.examinee);
+          setTimeout(() => {
+            this.router.navigate(['/examinees']);
+          },500);
+        }
+      }
     }
   }
 

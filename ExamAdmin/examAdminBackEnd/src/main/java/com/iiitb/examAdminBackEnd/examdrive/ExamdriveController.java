@@ -1,6 +1,7 @@
 package com.iiitb.examAdminBackEnd.examdrive;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,5 +31,10 @@ public class ExamdriveController {
 	@RequestMapping (method=RequestMethod.POST, value="/examdrives")
 	public void addExamdrive(@RequestBody Examdrive examdrive) {
 		examdriveService.addExamdrive(examdrive);
+	}
+	
+	@RequestMapping("/examdrives/{id}")
+	public Optional<Examdrive> getExamdrive(@PathVariable int id){
+		return examdriveService.getExamdrive(id);
 	}
 }

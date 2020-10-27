@@ -20,17 +20,15 @@ import com.iiitb.assessmentBackEnd.qpItem.AsQpItem;
 import com.iiitb.assessmentBackEnd.responseMcq.AsResponseMcq;
 
 @Entity
-@Table(name="as_response")
-@SecondaryTable(name = "as_response_mcq", pkJoinColumns=@PrimaryKeyJoinColumn(name="response_id"))
+//@Table(name="as_response")
+//@SecondaryTable(name = "as_response_mcq", pkJoinColumns=@PrimaryKeyJoinColumn(name="response_id"))
 public class AsResponse {
-	
-//	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-//	private int responseId;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int responseId;
+	
+	private String responseText;
 	
 	@ManyToOne
 	@JoinColumn(name="qp_item_id")
@@ -40,21 +38,14 @@ public class AsResponse {
 	@JoinColumn(name="attempt_id")
 	private AsAttempt asAttempt;
 	
-//	@OneToOne(cascade = CascadeType.ALL, mappedBy="asResponse")
-//	@JsonIgnore
-////	@JsonIgnoreProperties("asResponse")
-//	private AsResponseMcq asResponseMcq;
-	
-	@Column(table = "as_response_mcq")
-	String responseText;
-	
 	public AsResponse() {
 		
 	}
 
-	public AsResponse(int responseId, int qpItemId, int attemptId) {
+	public AsResponse(int responseId, String responseText, int qpItemId, int attemptId) {
 		super();
 		this.responseId = responseId;
+		this.responseText = responseText;
 		this.asQpItem = new AsQpItem();
 		this.asQpItem.setQpItemId(qpItemId);
 		this.asAttempt = new AsAttempt();
@@ -68,7 +59,7 @@ public class AsResponse {
 	public void setResponseId(int responseId) {
 		this.responseId = responseId;
 	}
-
+	
 	public AsQpItem getAsQpItem() {
 		return asQpItem;
 	}
@@ -92,11 +83,4 @@ public class AsResponse {
 	public void setResponseText(String responseText) {
 		this.responseText = responseText;
 	}
-//	public AsResponseMcq getAsResponseMcq() {
-//		return asResponseMcq;
-//	}
-//
-//	public void setAsResponseMcq(AsResponseMcq asResponseMcq) {
-//		this.asResponseMcq = asResponseMcq;
-//	}
 }

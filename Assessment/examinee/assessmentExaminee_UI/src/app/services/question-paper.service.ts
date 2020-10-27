@@ -13,6 +13,7 @@ import { ExamineeBatch } from '../shared/examineeBatch';
 export class QuestionPaperService {
 
   lastAttempt: Attempt;
+  selectedQuestionPaper: QuestionPaper;
 
   constructor(private http: HttpClient) { }
 
@@ -24,6 +25,14 @@ export class QuestionPaperService {
 
   getLastAttemptVariable(): Attempt {
     return this.lastAttempt;
+  }
+
+  setSelectedQuestionPaper(qp: QuestionPaper): void {
+    this.selectedQuestionPaper = qp;
+  }
+
+  getSelectedQuestionPaper(): QuestionPaper {
+    return this.selectedQuestionPaper;
   }
 
   getQuestionPapers(examineeId: number): Observable<QuestionPaper[]>{

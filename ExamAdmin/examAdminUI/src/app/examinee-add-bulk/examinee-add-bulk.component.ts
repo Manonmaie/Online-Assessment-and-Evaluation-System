@@ -3,6 +3,7 @@ import { Examinee } from '../shared/examinee';
 import { ExamineeService } from '../services/examinee.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import * as XLSX from 'xlsx';
+import { ExcelServicesService } from '../services/excel-services.service';  
 
 @Component({
   selector: 'app-examinee-add-bulk',
@@ -11,8 +12,23 @@ import * as XLSX from 'xlsx';
 })
 export class ExamineeAddBulkComponent implements OnInit {
   examineeList:Examinee[] = [];
-  constructor(private examineeService: ExamineeService, public route: Router) { }
+  examineeTemplateList:Examinee[] = [
+    {
+      'examineeName': null, 
+      'examineeCode':null,
+      'examineePassword': null,
+      'examineeBranch':null,
+      'examineeEmail':null,
+      'examineeCollege':null
+    }
+  ];
+  fileName = 'StudentDetails'
+  constructor(private examineeService: ExamineeService, private excelService:ExcelServicesService, public router: Router) { }
   ngOnInit(): void {
+  }
+
+  exportexcel(): void{
+    this.excelService.exportAsExcelFile(this.examineeTemplateList,this.fileName);
   }
 
   onFileChange(ev){
@@ -39,6 +55,8 @@ export class ExamineeAddBulkComponent implements OnInit {
 
   onSubmit(){
     this.addExamineeBulk(this.examineeList);
-    this.route.navigate(['/examinees']);
+    setTimeout(() => {
+      this.router.navigate(['/examinees']);
+    },2000);
   }
 }

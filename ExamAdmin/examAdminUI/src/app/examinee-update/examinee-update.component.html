@@ -1,6 +1,6 @@
 <div class="container">
     <legend>Update Student Details</legend>
-    <form novalidate (ngSubmit)="onSubmit()">
+    <form>
       <div class="form-item">
           <label class="required" for="examineeName">Student Name</label>
           <input type="text" id="examineeName" name="examineeName" placeholder="Student's Name" [(ngModel)]="examinee.examineeName">
@@ -13,7 +13,7 @@
       </div>
       <div class="form-item">
           <label class="required" for="examineePassword">Student Password</label>
-          <input type="text" id="examineePassword" name="examineePassword" placeholder="Student's Password" [(ngModel)]="examinee.examineePassword">
+          <input type="password" id="examineePassword" name="examineePassword" placeholder="Student's Password" [(ngModel)]="examinee.examineePassword">
           <small>Error Message</small>
       </div>
       <div class="form-item">
@@ -31,7 +31,6 @@
           <input type="text" id="examineeCollege" name="examineeCollege" placeholder="Student's College" [(ngModel)]="examinee.examineeCollege">
           <small>Error Message</small>
       </div>
-      <input type="submit" value ="Update Student Details" (click)="onSubmit()">
   </form>
 </div>
 
@@ -44,7 +43,7 @@
           <th scope="col">Exam Date</th>
           <th scope="col">Exam Center</th>
           <th scope="col">Marks Obtained</th>
-          <th scope="col"></th>
+          <!-- <th scope="col"></th> -->
         </tr>
       </thead>
       <tbody>
@@ -64,14 +63,18 @@
             <ng-container *ngIf="!examineeBatch.batch.center"> 
               <td>-</td>
             </ng-container>
-            <td>
+            <!-- <td>
               <input type="text" id="marksObtained" name="marksObtained" placeholder="Marks" [(ngModel)]="examineeBatch.marksObtained">
-            </td>
+            </td> -->
             <td>
-              <button type="button" class="btn btn-warning float-right mr-1" (click) = "updateExamineeBatch(examineeBatch)"><i class="fa fa-pencil"> <font size=-1> Update Marks</font></i></button>
+              {{examineeBatch.marksObtained}}
             </td>
+            <!-- <td>
+              <button type="button" class="btn btn-warning float-right mr-1" (click) = "updateExamineeBatch(examineeBatch)"><i class="fa fa-pencil"> <font size=-1> Update Marks</font></i></button>
+            </td> -->
           </ng-container>
         </tr>
       </tbody>
     </table>
+    <input type="submit" value ="Update Student Details" (click)="onSubmit()">
   </div>

@@ -1,7 +1,7 @@
 <app-examinee-add-header></app-examinee-add-header>
 <div class="container">
     <legend>Add Student</legend>
-    <form novalidate (ngSubmit)="onSubmit()">
+    <form>
         <div class="form-item">
             <label class="required" for="examineeName">Student Name</label>
             <input type="text" id="examineeName" name="examineeName" placeholder="Student's Name" [(ngModel)]="examinee.examineeName">
@@ -14,7 +14,7 @@
         </div>
         <div class="form-item">
             <label class="required" for="examineePassword">Student Password</label>
-            <input type="text" id="examineePassword" name="examineePassword" placeholder="Student's Password" [(ngModel)]="examinee.examineePassword">
+            <input type="password" id="examineePassword" name="examineePassword" placeholder="Student's Password" [(ngModel)]="examinee.examineePassword">
             <small>Error Message</small>
         </div>
         <div class="form-item">

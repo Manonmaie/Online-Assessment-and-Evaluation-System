@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.iiitb.assessmentBackEnd.examineeBatch.AsExamineeBatch;
-import com.iiitb.assessmentBackEnd.examineeBatch.ExamineeBatchKey;
-import com.iiitb.assessmentBackEnd.response.AsResponse;
-
 @RestController
 //@CrossOrigin(origins = "*", allowedHeaders = "*")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -50,5 +46,10 @@ public class AttemptController {
 	@RequestMapping("/examinee/{examineeId}/batch/{batchId}/attempt")
 	public AsAttempt getLastAttemptForExamineeIdAndBatchId(@PathVariable int examineeId, @PathVariable int batchId) {
 		return attemptService.getLastAttemptForExamineeIdAndBatchId(examineeId,batchId);
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT, value="/examinee/{examineeId}/batch/{batchId}/attempt")
+	public void updateAttempt(@PathVariable int examineeId, @PathVariable int batchId,@RequestBody AsAttempt attempt) {
+		attemptService.updateAttempt(examineeId, batchId, attempt);
 	}
 }

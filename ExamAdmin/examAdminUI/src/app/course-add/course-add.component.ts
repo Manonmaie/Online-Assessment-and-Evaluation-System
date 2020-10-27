@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from '../shared/course';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
-import {setError} from '../shared/error';
+import {resetError, setError} from '../shared/error';
 
 @Component({
   selector: 'app-course-add',
@@ -11,7 +11,7 @@ import {setError} from '../shared/error';
 })
 export class CourseAddComponent implements OnInit {
   course = {courseName: null,courseCode: null}
-  constructor(private courseService: CourseService, public route: Router) { }
+  constructor(private courseService: CourseService, public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,15 +21,20 @@ export class CourseAddComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.course.courseName==null){
+    if(this.course.courseName==null || this.course.courseName==""){
       setError("courseName","Course Name is Required");
     }
-    if(this.course.courseCode==null){
-      setError("courseCode","Course Code is Required");
-    }
     else{
-      this.addCourse(this.course);
-      this.route.navigate(['/courses']);
+      resetError("courseName");
+      if(this.course.courseCode==null || this.course.courseCode==""){
+        setError("courseCode","Course Code is Required");
+      }
+      else{
+        this.addCourse(this.course);
+        setTimeout(() => {
+          this.router.navigate(['/courses']);
+        },500);
+      }
     }
   }
 }

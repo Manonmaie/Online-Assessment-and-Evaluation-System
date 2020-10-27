@@ -24,6 +24,16 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
+input[type=password], select {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
 input[type=submit]{
     background-color: #44bd48;
     border: none;
@@ -70,6 +80,10 @@ th, td {
     border-bottom: 1px solid rgb(180, 180, 180);
     padding: 10px;
     text-align: left;
+}
+
+select{
+    text-indent: 5px;
 }
 
 tr:hover {

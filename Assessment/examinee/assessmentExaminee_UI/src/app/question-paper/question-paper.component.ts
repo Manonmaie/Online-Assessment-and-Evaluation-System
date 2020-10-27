@@ -4,7 +4,7 @@ import { QuestionPaperService } from "../services/question-paper.service";
 import { ExamineeBatch, ExamineeBatchId } from "../shared/examineeBatch";
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { Attempt } from '../shared/attempt';
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-question-paper',
@@ -23,7 +23,7 @@ export class QuestionPaperComponent implements OnInit {
   examineeBatch: ExamineeBatch = {examineeBatchId: null, examineeBatchStartTime: '', examineeBatchEndTime: null, examineeBatchStatus: 'IN_PROGRESS', examinee: null, batch: null};
 
   constructor(private questionPaperService: QuestionPaperService, private activeRoute: ActivatedRoute, public route: Router, public datepipe: DatePipe) { 
-    this.addAttempt = this.addAttempt.bind(this);
+    
   }
 
   ngOnInit(): void {
@@ -59,6 +59,7 @@ export class QuestionPaperComponent implements OnInit {
         this.questionPaperService.setLastAttemptVariable(res);
       });
       this.updateExamineeBatch(examineeId, questionPaper.asBatch.batchId, this.examineeBatch);
+      this.questionPaperService.setSelectedQuestionPaper(questionPaper);
       this.route.navigate(['/questionPaper/' + examineeId + '/examination/' + questionPaper.qpId + '/batch/' + questionPaper.asBatch.batchId]);
     }
     else{

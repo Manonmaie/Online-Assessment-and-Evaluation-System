@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Course} from '../shared/course';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
-import {setError} from '../shared/error';
+import {setError,resetError} from '../shared/error';
 
 @Component({
   selector: 'app-course-update',
@@ -31,12 +31,17 @@ export class CourseUpdateComponent implements OnInit {
     if(this.course.courseName==null||this.course.courseName==""){
       setError("courseName","Course Name is Required");
     }
-    if(this.course.courseCode==null||this.course.courseCode==""){
-      setError("courseCode","Course Code is Required");
-    }
     else{
-      this.updateCourse(this.courseMasterId,this.course);
-      this.router.navigate(['/courses']);
+      resetError("courseName");
+      if(this.course.courseCode==null||this.course.courseCode==""){
+        setError("courseCode","Course Code is Required");
+      }
+      else{
+        this.updateCourse(this.courseMasterId,this.course);
+        setTimeout(() => {
+          this.router.navigate(['/courses']);
+        },500);
+      }
     }
   }
 }
