@@ -157,6 +157,8 @@ INSERT INTO ev_response VALUES(0,"Mcq3_Item13_qp1","Fashion Key",1,3);
 INSERT INTO ev_response VALUES(0,"Mcq1_Item21_qp1","Collection of related data",2,1);
 INSERT INTO ev_response VALUES(0,"Mcq1_Item22_qp1","Primary Key",2,2);
 INSERT INTO ev_response VALUES(0,"Mcq3_Item23_qp1","Fashion Key",2,3);
+
+
  
 -- --------------------------------------------------------
 -- Table structure for table `ev_response_mcq`
@@ -177,6 +179,8 @@ INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item2_qp1","Primary Key",2);
 INSERT INTO ev_response_mcq VALUES(0,"Mcq4_item2_qp1","Primary Keyword",2);
 INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item3_qp1","Foreign Key",3);
 INSERT INTO ev_response_mcq VALUES(0,"Mcq3_item3_qp1","Fashion Key",3);
+
+
 
 -- --------------------------------------------------------
 -- Table structure for table `ev_response_true_false`
