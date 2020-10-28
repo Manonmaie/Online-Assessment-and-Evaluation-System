@@ -1,5 +1,7 @@
 package com.iiitb.evaluationBackend.response;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +18,8 @@ public class ResponseController {
 	@Autowired
 	private ResponseService responseService;
 	
-	@RequestMapping("/qpItem/{qpItemId}/response/{responseId}")
-	public EvResponse getResponseFromId(@PathVariable int responseId){
-		return responseService.getResponseFromId(responseId);
+	@RequestMapping("/qpItem/{qpItemId}/responses")
+	public List<EvResponse> getEvQpItemQpItemId(@PathVariable int qpItemId){
+		return responseService.getEvQpItemQpItemId(qpItemId);
 	}
 }

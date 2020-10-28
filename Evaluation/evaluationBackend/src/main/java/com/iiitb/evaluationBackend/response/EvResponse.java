@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
+import com.iiitb.evaluationBackend.examineeBatch.EvExamineeBatch;
 import com.iiitb.evaluationBackend.qpItem.EvQpItem;
 
 @Entity
@@ -22,6 +22,10 @@ public class EvResponse {
 	@ManyToOne
 	@JoinColumn(name="qp_item_id")
 	private EvQpItem evQpItem;
+	
+	@ManyToOne
+	@JoinColumn(name="examinee_batch_id")
+	private EvExamineeBatch evExamineeBatchId;
 	
 	public EvResponse() {
 		
