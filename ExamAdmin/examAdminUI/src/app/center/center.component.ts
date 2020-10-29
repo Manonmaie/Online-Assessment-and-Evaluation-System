@@ -10,6 +10,9 @@ import {Observable, of} from 'rxjs';
 })
 export class CenterComponent implements OnInit {
   centers: Center[];
+  searchText: any;
+  pageNo: number = 1;
+  itemsPage: number = 25;
   constructor(private centerService:CenterService) { }
 
   ngOnInit(): void {

@@ -18,6 +18,10 @@ export class ExamdriveViewComponent implements OnInit {
   centers: Center[] = new Array();
   isShow: boolean[];
   batches: Batch[][];
+  searchText: any;
+  pageNo: number = 1;
+  itemsPage: number = 25;
+  // minVal = Math.min(this.itemsPage,this.centers.length);
   constructor(private examdriveService:ExamdriveService, private batchService:BatchService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -26,8 +30,8 @@ export class ExamdriveViewComponent implements OnInit {
     setTimeout(() => {
       this.getCenters();
     },1000);
-    this.isShow = new Array(this.centers.length);
-    this.batches = new Array(this.centers.length);
+    this.isShow = new Array();
+    this.batches = new Array();
   }
 
   getExamdrive(id: number): void{
@@ -48,17 +52,17 @@ export class ExamdriveViewComponent implements OnInit {
     this.batchService.getBatchesByExamdrive(id).subscribe((batches) => this.examdrive.batchList=batches);
   }
 
-  showBatches(id: number, center: Center) {
-    this.isShow[id] = !this.isShow[id];
-    if(this.batches[id]==null){
-      this.getBatches(id,center);
+  showBatches(center: Center) {
+    this.isShow[center.centerId] = !this.isShow[center.centerId];
+    if(this.batches[center.centerId]==null){
+      this.getBatches(center);
     }
     setTimeout(() => {
       console.log(this.batches);
     },500);
   }
 
-  getBatches(i: number, center: Center): void{
-    this.batches[i] = this.examdrive.batchList.filter(b => b.center!=null && b.center.centerId==center.centerId);
+  getBatches(center: Center): void{
+    this.batches[center.centerId] = this.examdrive.batchList.filter(b => b.center!=null && b.center.centerId==center.centerId);
   }
 }

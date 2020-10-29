@@ -15,6 +15,9 @@ export class ExamineeUpdateComponent implements OnInit {
   examinee: Examinee;
   examineeBatch: ExamineeBatch;
   examineeId: number;
+  searchText: any;
+  pageNo: number = 1;
+  itemsPage: number = 25;
   constructor(private examineeService: ExamineeService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {

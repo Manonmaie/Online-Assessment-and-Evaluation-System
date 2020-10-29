@@ -6,6 +6,9 @@
 </div>
 
 <div class="container">
+  <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search here..." [(ngModel)]="searchText"/>
+</div>
+<div class="container">
   <table class="table">
     <thead>
       <tr>
@@ -15,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let course of courses">
+      <tr *ngFor="let course of courses | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
         <td>{{ course.courseName }}</td>
         <td>{{ course.courseCode }}</td>
         <td>
@@ -26,4 +29,12 @@
       </tr>
     </tbody>
   </table>
+</div>
+<div class="container">
+  <div class="center">
+    <pagination-controls (pageChange)="pageNo = $event"></pagination-controls>
+  </div>
+  <div class="float-right">
+    Items Per Page : <input type="text" name="items"  [(ngModel)]="itemsPage"/>
+  </div>
 </div>

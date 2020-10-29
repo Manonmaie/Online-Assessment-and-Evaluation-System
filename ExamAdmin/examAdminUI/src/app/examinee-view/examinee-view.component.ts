@@ -11,6 +11,9 @@ import { Examinee } from '../shared/examinee';
 })
 export class ExamineeViewComponent implements OnInit {
   examinee: Examinee;
+  searchText: any;
+  pageNo: number = 1;
+  itemsPage: number = 25;
   constructor(private examineeService: ExamineeService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
