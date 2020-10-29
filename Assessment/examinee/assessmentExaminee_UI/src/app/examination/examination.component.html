@@ -5,7 +5,7 @@
             <div class="navbar">
                 <div>
                     <div *ngFor="let qpItem of qpItems;let indexOfelement=index;" style="display: inline">
-                        <button type="button" class="btn btn-secondary btn-sm">{{indexOfelement+1}}</button>
+                        <button type="button" class="btn btn-secondary btn-sm" [ngClass]="{'white' : flagged[indexOfelement]==false, 'red': flagged[indexOfelement]==true}">{{indexOfelement+1}}</button>
                     </div>
                 </div>
                 <div class="mt-2 col-md-12">
@@ -17,9 +17,8 @@
             </div>
         </div>
         <div class="col-md-9 col-md-offset-1">
-        <!-- <div> -->
             <ol class="list-group">
-                <li class="list-group-item" *ngFor="let qpItem of qpItems">
+                <li class="list-group-item" *ngFor="let qpItem of qpItems;let indexOfelement=index;">
                     {{qpItem.itemText}}
                 <span class="badge badge-primary badge-pill">
                     {{qpItem.itemMarks}} Marks
@@ -28,7 +27,7 @@
                     <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;" (click) = "updateResponseTableWhenOptionSelected(true, 'Reset', qpItem, 'Reset')"><i class="fa fa-undo mr-1"></i>Reset</button>
                 </div>
                 <div style="display: inline">
-                    <button type="button" class="btn btn-danger btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;"><i class="fa fa-flag mr-1"></i>Flag</button>
+                    <button type="button" class="btn btn-danger btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;" (click) = "flagRespectiveItem($event, indexOfelement)"><i class="fa fa-flag mr-1"></i>{{flagName[indexOfelement]}}</button>
                 </div>
                 
                 <ol class="list-group" type="a">
