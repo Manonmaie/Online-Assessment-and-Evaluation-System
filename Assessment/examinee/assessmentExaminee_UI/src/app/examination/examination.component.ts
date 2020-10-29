@@ -18,6 +18,7 @@ declare var $:any;
   templateUrl: './examination.component.html',
   styleUrls: ['./examination.component.scss']
 })
+
 export class ExaminationComponent implements OnInit {
 
   qpItems: Examination[];
@@ -34,6 +35,9 @@ export class ExaminationComponent implements OnInit {
   interval;
   qpDuration: number;
 
+  flagged: boolean[];
+  flagName: string[];
+
   constructor(private qpService: QuestionPaperService, private examinationService: ExaminationService, 
     public datepipe: DatePipe, private activeRoute: ActivatedRoute, public route: Router) { }
 
@@ -47,6 +51,16 @@ export class ExaminationComponent implements OnInit {
         this.shuffle(qpItems[i].asItemMcqOptionsList);
       }
       this.shuffle(qpItems);
+      
+      this.flagged = [];
+      for (let i = 0; i < qpItems.length; i++) {
+        this.flagged.push(false);
+      }
+
+      this.flagName = [];
+      for (let i = 0; i < qpItems.length; i++) {
+        this.flagName.push("Flag");
+      }
     });
     // this.examinationService.getLastPostedAttemptForBathAndExamineeIds(this.examineeId, this.batchId).subscribe((attempt) => this.attempt = attempt);
     // this.attempt = this.qpService.getLastAttemptVariable();
@@ -57,9 +71,9 @@ export class ExaminationComponent implements OnInit {
   }
 
   startTimer() {
-    console.log(this.qpDuration);
+    // console.log(this.qpDuration);
     this.timerTime = this.qpDuration * 60;
-    console.log(this.timerTime);
+    // console.log(this.timerTime);
     this.interval = setInterval(() => {
       if (this.timerTime === 0) {
         this.finishExam();
@@ -69,12 +83,13 @@ export class ExaminationComponent implements OnInit {
       this.display = this.transform(this.timerTime)
     }, 1000);
   }
+
   transform(value: number): string {
     var sec_num = value; 
     var hours   = Math.floor(sec_num / 3600);
     var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
     var seconds = sec_num - (hours * 3600) - (minutes * 60);
-    console.log(hours + " " + minutes + " " + seconds);
+    // console.log(hours + " " + minutes + " " + seconds);
     return hours+':'+minutes+':'+seconds;
   }
 
@@ -95,6 +110,16 @@ export class ExaminationComponent implements OnInit {
       array[randomIndex] = temporaryValue;
     }
     return array;
+  }
+
+  flagRespectiveItem(event: boolean, index: number){
+    this.flagged[index] = !this.flagged[index];
+    if(this.flagged[index] == true){
+      this.flagName[index] = "Flagged";
+    }
+    else{
+      this.flagName[index] = "Flag";
+    }
   }
 
   updateResponseTableWhenOptionSelected(event: boolean, itemOptionText: string, qpItem: Examination, qpItemType: string){
