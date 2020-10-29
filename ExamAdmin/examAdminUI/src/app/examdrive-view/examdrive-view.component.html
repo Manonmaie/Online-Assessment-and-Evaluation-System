@@ -34,17 +34,43 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor = "let center of centers">
+            <ng-container *ngFor = "let center of centers; let i = index">
                 <ng-container *ngIf="center">
-                    <td>{{center.centerName}}</td>
-                    <td>{{center.centerCode}}</td>
-                    <td>{{center.centerCapacity}}</td>
-                    <td>
-                        <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-send-o"></i></button>
-                        <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button>
+                    <tr>
+                        <td>{{center.centerName}}</td>
+                        <td>{{center.centerCode}}</td>
+                        <td>{{center.centerCapacity}}</td>
+                        <td>
+                            <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-send-o"></i></button>
+                            <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button>
+                            <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(i, center)" [hidden] = "isShow[i]"><i class="fa fa-eye"></i></button>
+                            <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(i, center)" [hidden] = "!isShow[i]"><i class="fa fa-eye-slash"></i></button>
+                        </td>
+                    </tr>
+                    <td colspan="4" [hidden] = "!isShow[i]">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Batch Code</th>
+                                    <th scope="col">Exam Start Time</th>
+                                    <th scope="col">Exam End Time</th>
+                                    <th scope="col">Paper Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor = "let batch of batches[i]">
+                                    <ng-container *ngIf="batch">
+                                        <td>{{batch.batchCode}}</td>
+                                        <td>{{batch.batchStartTime.substr(0,10)}} <font color="grey">{{batch.batchStartTime.substr(11)}}</font></td>
+                                        <td>{{batch.batchEndTime.substr(0,10)}} <font color="grey">{{batch.batchEndTime.substr(11)}}</font></td>
+                                        <td><font size="-2">{{batch.qpStatus}}</font></td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
                     </td>
                 </ng-container>
-            </tr>
+            </ng-container>
         </tbody>
     </table>
 </div>

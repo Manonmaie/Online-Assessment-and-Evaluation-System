@@ -16,6 +16,7 @@ public class EvItemMcqOptions {
 	
 	private String itemMcqOptionsCode;
 	private String mcqOptionText;
+	private int mcqOptionPercentage;
 	
 	@ManyToOne
 	@JoinColumn(name="qp_item_id")
@@ -25,14 +26,15 @@ public class EvItemMcqOptions {
 	public EvItemMcqOptions() {
 		
 	}
-	
-	public EvItemMcqOptions(int itemMcqId, String itemMcqOptionsCode, String mcqOptionText, int qpItemId) {
+
+	public EvItemMcqOptions(int itemMcqId, String itemMcqOptionsCode, String mcqOptionText, int mcqOptionPercentage,
+			EvQpItem evQpItem) {
 		super();
 		this.itemMcqId = itemMcqId;
 		this.itemMcqOptionsCode = itemMcqOptionsCode;
 		this.mcqOptionText = mcqOptionText;
-		this.evQpItem = new EvQpItem();
-		this.evQpItem.setQpItemId(qpItemId);
+		this.mcqOptionPercentage = mcqOptionPercentage;
+		this.evQpItem = evQpItem;
 	}
 
 	public int getItemMcqId() {
@@ -59,6 +61,14 @@ public class EvItemMcqOptions {
 		this.mcqOptionText = mcqOptionText;
 	}
 
+	public int getMcqOptionPercentage() {
+		return mcqOptionPercentage;
+	}
+
+	public void setMcqOptionPercentage(int mcqOptionPercentage) {
+		this.mcqOptionPercentage = mcqOptionPercentage;
+	}
+
 	public EvQpItem getEvQpItem() {
 		return evQpItem;
 	}
@@ -66,4 +76,6 @@ public class EvItemMcqOptions {
 	public void setEvQpItem(EvQpItem evQpItem) {
 		this.evQpItem = evQpItem;
 	}
+	
+	
 }

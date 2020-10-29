@@ -139,16 +139,26 @@ ALTER TABLE ev_examinee_item_marks
 CREATE TABLE IF NOT EXISTS ev_response (
   response_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   response_code varchar(255) UNIQUE NOT NULL,
+  response_text varchar(511) NOT NULL,
+  examinee_batch_id int(10) unsigned,
   qp_item_id int(10) unsigned,
   PRIMARY KEY (response_id)
 );
 
 ALTER TABLE ev_response
+  ADD CONSTRAINT `fk_ev_response_examinee_batch_id` FOREIGN KEY (examinee_batch_id) REFERENCES ev_examinee_batch(examinee_batch_id) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_ev_response_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
-INSERT INTO ev_response VALUES(0,"Item1_qp1",1);
-INSERT INTO ev_response VALUES(0,"Item2_qp1",2);
-INSERT INTO ev_response VALUES(0,"Item3_qp1",3);
+INSERT INTO ev_response VALUES(0,"Mcq1_Item11_qp1","Collection of related data",1,1);
+INSERT INTO ev_response VALUES(0,"Mcq1_Item12_qp1","Primary Key",1,2);
+INSERT INTO ev_response VALUES(0,"Mcq4_Item12_qp1","Primary Keyword",1,2);
+INSERT INTO ev_response VALUES(0,"Mcq1_Item13_qp1","Foreign Key",1,3);
+INSERT INTO ev_response VALUES(0,"Mcq3_Item13_qp1","Fashion Key",1,3);
+INSERT INTO ev_response VALUES(0,"Mcq1_Item21_qp1","Collection of related data",2,1);
+INSERT INTO ev_response VALUES(0,"Mcq1_Item22_qp1","Primary Key",2,2);
+INSERT INTO ev_response VALUES(0,"Mcq3_Item23_qp1","Fashion Key",2,3);
+
+
  
 -- --------------------------------------------------------
 -- Table structure for table `ev_response_mcq`
@@ -169,6 +179,8 @@ INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item2_qp1","Primary Key",2);
 INSERT INTO ev_response_mcq VALUES(0,"Mcq4_item2_qp1","Primary Keyword",2);
 INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item3_qp1","Foreign Key",3);
 INSERT INTO ev_response_mcq VALUES(0,"Mcq3_item3_qp1","Fashion Key",3);
+
+
 
 -- --------------------------------------------------------
 -- Table structure for table `ev_response_true_false`

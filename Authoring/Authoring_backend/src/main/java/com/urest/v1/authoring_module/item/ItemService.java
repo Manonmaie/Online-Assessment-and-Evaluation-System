@@ -8,17 +8,21 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
+import com.urest.v1.authoring_module.TF.TFRepository;
+import com.urest.v1.authoring_module.options.Options;
+import com.urest.v1.authoring_module.options.OptionsRepository;
+import com.urest.v1.authoring_module.options.OptionsStruct;
+import com.urest.v1.authoring_module.TF.TF;
 
 @Service
 public class ItemService {
 	@Autowired
 	private ItemRepository itemRepository;
+	@Autowired
+	private TFRepository tFRepository;
+	@Autowired
+	private OptionsRepository optRepository;
 	
-//	private List<Item> items =  Arrays.asList(
-//			new Item(1, 100, "Test", "REMEMBER","PENDING","ACTIVE",0),
-//			new Item(2, 100, "Test","UNDERSTAND","PENDING","ACTIVE",0),
-//			new Item(3, 100, "Test","ANALYZE","PENDING","ACTIVE",0)
-//		);
 	
 	public List<Item> getAllItems() {
 		List<Item> itemList = new ArrayList<>();
@@ -27,27 +31,55 @@ public class ItemService {
 		return itemList;
 	}
 	
-	public Optional<Item> getItem(Integer id) {
-		Optional<Item> item = itemRepository.findById(id);
-		if (!item.isPresent())
-			throw new RuntimeException("Item not found id-" + id);
-		return item;
+	public List<Item> getAllQpItemsForAuthor(int qpId) {
+		return itemRepository.findByAuthorId(qpId);
 	}
 	
-	public Item createItem(Item question) {
+	public ResponseStruct createItemTF(ResponseStruct question) {		
 		Item item = new Item();
-		item.setQuestion(question.getQuestion());
+		
+		item.setItemText(question.getItemText());
 		item.setMarks(question.getMarks());
-		item.setCg_lvl(question.getCg_lvl());
-		item.setReview_status("PENDING");
-		item.setItem_use_count(0);
-		item.setItem_status("ACTIVE");
-		item.setDiff_lvl(question.getDiff_lvl());
-		item.setFalseMarks(question.getFalseMarks());
-		item.setTrueMarks(question.getTrueMarks());
-		item.setItem_code(question.getItem_code());
+		item.setCgLvl(question.getCgLvl());
+		item.setReviewStatus("PENDING");
+		item.setItemUseCount(question.getItemUseCount());
+		item.setItemStatus(question.getItemStatus());
+		item.setDiffLvl(question.getDiffLvl());
+		item.setAuthorId(question.getAuthorId());
+		item.setItemType("TF");
 		itemRepository.save(item);
-
-		return item;
+		
+		
+		TF tf =new TF(question.getFalseMarks(),question.getTrueMarks());
+		tf.setItemTF(item);
+		item.getAsItemTF().add(tFRepository.save(tf));
+		
+		
+		return question;
+	}
+	
+	
+	public ResponseStruct createItemMCQ(ResponseStruct question) {		
+		Item item = new Item();
+		
+		item.setItemText(question.getItemText());
+		item.setMarks(question.getMarks());
+		item.setCgLvl(question.getCgLvl());
+		item.setReviewStatus("PENDING");
+		item.setItemUseCount(question.getItemUseCount());
+		item.setItemStatus(question.getItemStatus());
+		item.setDiffLvl(question.getDiffLvl());
+		item.setAuthorId(question.getAuthorId());
+		item.setItemType("MCQ");
+		itemRepository.save(item);
+		ArrayList<OptionsStruct> options=question.getOptions();
+		for(int i=0;i<options.size();i++)
+		{
+			Options opt =new Options(options.get(i).opt,options.get(i).marks);
+			opt.setItemMCQ(item);
+			item.getAsItemMCQ().add(optRepository.save(opt));
+		}
+		
+		return question;
 	}
 }

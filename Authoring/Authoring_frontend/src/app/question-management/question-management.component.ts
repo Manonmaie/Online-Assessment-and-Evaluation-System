@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {Item_TF} from '../shared/item_TF';
+import { ItemTFServiceService } from '../service/item-tfservice.service';
+
+
 
 interface Country {
   id?: number;
@@ -285,13 +290,15 @@ const COUNTRIES: Country[] = [
   templateUrl: './question-management.component.html'
 })
 export class QuestionManagementComponent {
-
   page = 1;
   pageSize = 10;
   collectionSize = COUNTRIES.length;
+
+  items: Item_TF[];
+
   countries: Country[];
 
-  constructor() {
+  constructor(private ItemTFService: ItemTFServiceService) {
     this.refreshCountries();
   }
 
@@ -300,4 +307,10 @@ export class QuestionManagementComponent {
       .map((country, i) => ({id: i + 1, ...country}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
+  author_id: Number=1;
+
+  getitem_TF(author_id: number): void{
+    this.ItemTFService.getitem_TF(author_id).subscribe((items)=> this.items=items);
+  }
+
 }

@@ -6,23 +6,23 @@ import javax.persistence.Id;
 public class EvExamineeBatch {
 	
 	@Id
-	private int examinee_batch_id;
+	private int examineeBatchId;
 	private String status;
 	public EvExamineeBatch() {
 	
 		
 	}
 	public EvExamineeBatch(int drive_id,String status) {
-		this.examinee_batch_id = drive_id;
+		this.examineeBatchId = drive_id;
 		this.setStatus_id(status);
 	}
 	
 	public int getexaminee_batch_id() {
-		return examinee_batch_id;
+		return examineeBatchId;
 	}
 
 	public void setexaminee_batch_id(int examinee_batch_id) {
-		this.examinee_batch_id = examinee_batch_id;
+		this.examineeBatchId = examinee_batch_id;
 	}
 	public String getStatus_id() {
 		return status;
