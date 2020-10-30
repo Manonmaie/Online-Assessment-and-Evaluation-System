@@ -10,6 +10,9 @@ import {Observable, of} from 'rxjs';
 })
 export class ExamineeComponent implements OnInit {
   examinees: Examinee[];
+  searchText: any;
+  pageNo: number = 1;
+  itemsPage: number = 25;
   constructor(private examineeService:ExamineeService) { }
 
   ngOnInit(): void {

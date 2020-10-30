@@ -24,6 +24,9 @@
 </div>
 
 <div class="container">
+    <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search centers here..." [(ngModel)]="searchText"/>
+  </div>
+<div class="container">
     <table class="table">
         <thead>
             <tr>
@@ -34,7 +37,7 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor = "let center of centers; let i = index">
+            <ng-container *ngFor = "let center of centers | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
                 <ng-container *ngIf="center">
                     <tr>
                         <td>{{center.centerName}}</td>
@@ -42,12 +45,12 @@
                         <td>{{center.centerCapacity}}</td>
                         <td>
                             <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-send-o"></i></button>
-                            <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button>
-                            <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(i, center)" [hidden] = "isShow[i]"><i class="fa fa-eye"></i></button>
-                            <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(i, center)" [hidden] = "!isShow[i]"><i class="fa fa-eye-slash"></i></button>
+                            <!-- <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button> -->
+                            <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "isShow[center.centerId]"><i class="fa fa-eye"></i></button>
+                            <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "!isShow[center.centerId]"><i class="fa fa-eye-slash"></i></button>
                         </td>
                     </tr>
-                    <td colspan="4" [hidden] = "!isShow[i]">
+                    <td colspan="4" [hidden] = "!isShow[center.centerId]">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -58,7 +61,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor = "let batch of batches[i]">
+                                <tr *ngFor = "let batch of batches[center.centerId]">
                                     <ng-container *ngIf="batch">
                                         <td>{{batch.batchCode}}</td>
                                         <td>{{batch.batchStartTime.substr(0,10)}} <font color="grey">{{batch.batchStartTime.substr(11)}}</font></td>
@@ -74,3 +77,11 @@
         </tbody>
     </table>
 </div>
+<div class="container">
+    <div class="center">
+      <pagination-controls (pageChange)="pageNo = $event"></pagination-controls>
+    </div>
+    <div class="float-right">
+      Items Per Page : <input type="text" name="items"  [(ngModel)]="itemsPage"/>
+    </div>
+  </div>

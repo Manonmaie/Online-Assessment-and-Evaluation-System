@@ -10,6 +10,9 @@ import {Observable, of} from 'rxjs';
 })
 export class ExamdriveComponent implements OnInit {
   examdrives: Examdrive[];
+  searchText: any;
+  pageNo: number = 1;
+  itemsPage: number = 25;
   constructor(private examdriveService:ExamdriveService) { }
 
   ngOnInit(): void {

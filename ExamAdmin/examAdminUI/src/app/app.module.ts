@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
@@ -68,7 +70,9 @@ import { ExamdriveCenterViewComponent } from './examdrive-center-view/examdrive-
     // HttpModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [
     BatchService,
