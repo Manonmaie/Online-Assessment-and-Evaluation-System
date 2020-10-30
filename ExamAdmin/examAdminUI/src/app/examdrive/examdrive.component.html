@@ -32,6 +32,7 @@
           <button type="button" class="btn btn-danger float-right" (click)="deleteExamdrive(examdrive)"><i class="fa fa-trash-o"></i></button>
           <button type="button" class="btn btn-warning float-right mr-1" [routerLink]="['/examdriveupdate', examdrive.examdriveId]"><i class="fa fa-pencil"></i></button>
           <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview', examdrive.examdriveId]"><i class="fa fa-eye"></i></button>
+          <button type="button" class="btn btn-success float-right mr-1" title="Marks Reports" [routerLink]="['/examdrivemarksreport', examdrive.examdriveId]"><i class="fa fa-bar-chart"></i></button>
         </td>
       </tr>
     </tbody>
