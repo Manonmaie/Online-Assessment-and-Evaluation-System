@@ -1,12 +1,14 @@
 <div class="container-dummy">
     <h2 style="text-align:center;"> Examination </h2>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2">        
             <div class="navbar">
                 <div>
                     <div *ngFor="let qpItem of qpItems;let indexOfelement=index;" style="display: inline">
-                        <button type="button" class="btn btn-secondary btn-sm" [ngClass]="{'red': flaggedItems[indexOfelement]==true, 'white' : attemptedItems[indexOfelement]==false, 'green' : attemptedItems[indexOfelement]==true}">{{indexOfelement+1}}</button>
+                        <button type="button" class="btn btn-secondary btn-sm" [ngClass]="{'red': flaggedItems[indexOfelement]==true, 'white' : attemptedItems[indexOfelement]==false, 'green' : attemptedItems[indexOfelement]==true}">
+                            <a fragment="{{indexOfelement}}" (click)="navigateToSection(indexOfelement)" style="color:inherit">{{indexOfelement+1}}</a></button>
                     </div>
+
                 </div>
                 <div class="mt-2 col-md-12">
                     <p>Timer - {{display}}</p> 
@@ -19,7 +21,8 @@
         <div class="col-md-9 col-md-offset-1">
             <ol class="list-group">
                 <li class="list-group-item" *ngFor="let qpItem of qpItems;let indexOfelement=index;">
-                    {{qpItem.itemText}}
+                    <!-- {{qpItem.itemText}} -->
+                    <div id="{{indexOfelement}}" class="ck-content" [innerHtml]='qpItem.itemText' style="display: inline"></div>
                 <span class="badge badge-primary badge-pill">
                     {{qpItem.itemMarks}} Marks
                 </span>
@@ -33,7 +36,7 @@
                 <ol class="list-group" type="a">
                     <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
                         <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="checkbox">
-                                <input type="checkbox" id="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType, indexOfelement)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                                <input type="checkbox" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType, indexOfelement)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
                             <!-- <label><input [ngModel]="itemMcqOption" type="checkbox" name="optCheckbox" (ngChange)="updateResponse(itemMcqOption)">  {{itemMcqOption.mcqOptionText}}</label> -->
                         </div>
                         <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">

@@ -136,6 +136,12 @@ export class ExaminationComponent implements OnInit {
     // }
   }
 
+  navigateToSection(section: string) {
+    // alert(section);
+    window.location.hash = '';
+    window.location.hash = section;
+}
+
   updateResponseTableWhenOptionSelected(event: boolean, itemOptionText: string, qpItem: Examination, qpItemType: string, index: number){
     
     if(qpItemType == 'Reset'){
