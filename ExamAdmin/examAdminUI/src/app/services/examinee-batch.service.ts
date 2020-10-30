@@ -16,4 +16,12 @@ export class ExamineeBatchService {
   updateExamineeBatch(examineeId: number, batchId: number, examineeBatch: ExamineeBatch): Observable<ExamineeBatch>{
     return this.http.put<ExamineeBatch>(baseURL + "examineeBatch/examinee/"+examineeId+"/batch/"+batchId, examineeBatch);
   }
+
+  getExamineeBatchByExamdriveId(examdriveId: number): Observable<ExamineeBatch[]>{
+    return this.http.get<ExamineeBatch[]>(baseURL + "examineeBatchByExamdrive/" + examdriveId);
+  }
+
+  getExamineeBatchByExamineeId(examineeId: number): Observable<ExamineeBatch[]>{
+    return this.http.get<ExamineeBatch[]>(baseURL + "examineeBatchByExaminee/" + examineeId);
+  }
 }

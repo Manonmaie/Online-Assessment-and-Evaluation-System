@@ -15,6 +15,7 @@ export class ExamineeUpdateComponent implements OnInit {
   examinee: Examinee;
   examineeBatch: ExamineeBatch;
   examineeId: number;
+  examineeBatchList: ExamineeBatch[];
   searchText: any;
   pageNo: number = 1;
   itemsPage: number = 25;
@@ -23,6 +24,7 @@ export class ExamineeUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.examineeId = this.route.snapshot.params['id'];
     this.getExaminee(this.examineeId);
+    this.setExamineeBatchList(this.examineeId);
   }
 
   getExaminee(id: number): void{
@@ -60,5 +62,9 @@ export class ExamineeUpdateComponent implements OnInit {
   updateExamineeBatch(examineeBatch: ExamineeBatch): void{
     this.examineeBatchService.updateExamineeBatch(examineeBatch.examineeBatchId.examineeId, examineeBatch.examineeBatchId.batchId, examineeBatch)
         .subscribe((examineeBatch)=>this.examineeBatch=examineeBatch);
+  }
+
+  setExamineeBatchList(id: number): void{
+    this.examineeBatchService.getExamineeBatchByExamineeId(id).subscribe((examineeBatchList)=> this.examineeBatchList=examineeBatchList);
   }
 }

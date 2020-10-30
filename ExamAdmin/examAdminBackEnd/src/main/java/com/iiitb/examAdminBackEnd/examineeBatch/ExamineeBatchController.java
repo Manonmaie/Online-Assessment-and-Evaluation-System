@@ -1,5 +1,7 @@
 package com.iiitb.examAdminBackEnd.examineeBatch;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,5 +21,15 @@ public class ExamineeBatchController {
 	public void updateExamineeBatch(@PathVariable int examineeId, @PathVariable int batchId, @RequestBody ExamineeBatch examineeBatch) {
 		ExamineeBatchKey key = new ExamineeBatchKey(examineeId, batchId);
 		examineeBatchService.updateExamineeBatch(key, examineeBatch);
+	}
+	
+	@RequestMapping("examineeBatchByExamdrive/{id}")
+	public List<ExamineeBatch> getExamineeBatchByExamdriveId(@PathVariable int id){
+		return examineeBatchService.getExamineeBatchByExamdriveId(id);
+	}
+	
+	@RequestMapping("examineeBatchByExaminee/{id}")
+	public List<ExamineeBatch> getExamineeBatchByExamineeId(@PathVariable int id){
+		return examineeBatchService.getExamineeBatchByExamineeId(id);
 	}
 }

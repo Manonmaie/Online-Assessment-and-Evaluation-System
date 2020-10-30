@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
 
 @Entity
@@ -21,6 +22,7 @@ public class Examinee {
 	private String examineeCode,examineeName,examineePassword,examineeBranch,examineeEmail,examineeCollege;
 	
 	@OneToMany(mappedBy = "examinee", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<ExamineeBatch> examineeBatchList;
 	
 	public Examinee() {
