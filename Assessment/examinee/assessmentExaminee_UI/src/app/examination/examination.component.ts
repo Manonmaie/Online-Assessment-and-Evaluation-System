@@ -35,8 +35,10 @@ export class ExaminationComponent implements OnInit {
   interval;
   qpDuration: number;
 
-  flagged: boolean[];
-  flagName: string[];
+  flaggedItems: boolean[];
+  attemptedItems: boolean[];
+  noOfOptionsCheckedForItem: number[]; 
+  // flagName: string[];
 
   constructor(private qpService: QuestionPaperService, private examinationService: ExaminationService, 
     public datepipe: DatePipe, private activeRoute: ActivatedRoute, public route: Router) { }
@@ -52,15 +54,25 @@ export class ExaminationComponent implements OnInit {
       }
       this.shuffle(qpItems);
       
-      this.flagged = [];
+      this.flaggedItems = [];
       for (let i = 0; i < qpItems.length; i++) {
-        this.flagged.push(false);
+        this.flaggedItems.push(false);
       }
 
-      this.flagName = [];
+      this.attemptedItems = [];
       for (let i = 0; i < qpItems.length; i++) {
-        this.flagName.push("Flag");
+        this.attemptedItems.push(false);
       }
+
+      this.noOfOptionsCheckedForItem = [];
+      for (let i = 0; i < qpItems.length; i++) {
+        this.noOfOptionsCheckedForItem.push(0);
+      }
+
+      // this.flagName = [];
+      // for (let i = 0; i < qpItems.length; i++) {
+      //   this.flagName.push("Flag");
+      // }
     });
     // this.examinationService.getLastPostedAttemptForBathAndExamineeIds(this.examineeId, this.batchId).subscribe((attempt) => this.attempt = attempt);
     // this.attempt = this.qpService.getLastAttemptVariable();
@@ -113,17 +125,26 @@ export class ExaminationComponent implements OnInit {
   }
 
   flagRespectiveItem(event: boolean, index: number){
-    this.flagged[index] = !this.flagged[index];
-    if(this.flagged[index] == true){
-      this.flagName[index] = "Flagged";
-    }
-    else{
-      this.flagName[index] = "Flag";
-    }
+    this.flaggedItems[index] = !this.flaggedItems[index];
+    console.log(this.flaggedItems);
+    console.log(this.attemptedItems);
+    // if(this.flaggedItems[index] == true){
+    //   this.flagName[index] = "Flagged";
+    // }
+    // else{
+    //   this.flagName[index] = "Flag";
+    // }
   }
 
-  updateResponseTableWhenOptionSelected(event: boolean, itemOptionText: string, qpItem: Examination, qpItemType: string){
+  updateResponseTableWhenOptionSelected(event: boolean, itemOptionText: string, qpItem: Examination, qpItemType: string, index: number){
+    
     if(qpItemType == 'Reset'){
+      this.noOfOptionsCheckedForItem[index] = 0;
+      this.attemptedItems[index] = false;
+      if(this.flaggedItems[index] == true){
+        this.flaggedItems[index] = false;
+        // this.flagName[index] = "Flag";
+      }
       this.examinationService.getResponseForBathAndExamineeIdsForRadioButton(qpItem.qpItemId, this.examineeId, this.batchId).subscribe((response) => {
         if(response!=null){
           console.log('Reset' + response.responseId);
@@ -134,44 +155,60 @@ export class ExaminationComponent implements OnInit {
       console.log(qpItemCode);
       $('input[name="' + qpItemCode + '"]').prop('checked', false);
     }
-    if(qpItemType == 'McqMultiCorrect' && event == false){
-      this.deleteResponseForQpItemAttempExamineeBatch(qpItem.qpItemId, this.examineeId, this.batchId, itemOptionText);
-    }
-    else if(event == true){
-      let responseLocal: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
-      this.response = responseLocal;
-      this.attempt = this.qpService.getLastAttemptVariable();
-      let asQpItem: Examination = new Examination();
-      asQpItem.qpItemId = qpItem.qpItemId;
-      this.response.asQpItem = asQpItem;
-      console.log("In examination component");
-      console.log(this.attempt);
-      let asAttempt: Attempt = new Attempt();
-      if(this.attempt == null){
-        asAttempt.attemptId = 1;
+    else{
+      if(qpItemType == 'McqMultiCorrect' && event == false){
+        // var element = <HTMLInputElement> document.getElementById(qpItem.itemCode);
+        // var isChecked = element.checked;
+        // if(isChecked == false){
+        //   this.attemptedItems[index] = false;
+        // }
+        // alert(isChecked);
+        this.noOfOptionsCheckedForItem[index]--;
+        if(this.noOfOptionsCheckedForItem[index]<=0){
+          this.attemptedItems[index] = false;
+        }
+        this.deleteResponseForQpItemAttempExamineeBatch(qpItem.qpItemId, this.examineeId, this.batchId, itemOptionText);
       }
-      else{
-        asAttempt.attemptId = this.attempt.attemptId + 1;
-      }
-      this.response.asAttempt = asAttempt;
-      this.response.responseText = itemOptionText;
-      console.log(this.response);
-      console.log(itemOptionText);
-      console.log(this.response.responseText);
-      if(qpItemType == 'McqMultiCorrect' && event == true){
-        this.addResponse(this.response);
-      }
-      else if(qpItemType == 'McqSingleCorrect' || qpItemType == 'True/False'){
-        this.examinationService.getResponseForBathAndExamineeIdsForRadioButton(qpItem.qpItemId, this.examineeId, this.batchId).subscribe((response) => {
-          if(response==null){
-            this.addResponse(this.response);
-          }
-          else{
-            console.log(response.responseId);
-            this.response.responseId = response.responseId;
-            this.updateResponse(response.responseId, this.response);
-          }
-        });
+      else if(event == true){
+        this.noOfOptionsCheckedForItem[index]++;
+        if(this.attemptedItems[index]==false){
+          this.attemptedItems[index] = true;
+        }
+        let responseLocal: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
+        this.response = responseLocal;
+        this.attempt = this.qpService.getLastAttemptVariable();
+        let asQpItem: Examination = new Examination();
+        asQpItem.qpItemId = qpItem.qpItemId;
+        this.response.asQpItem = asQpItem;
+        console.log("In examination component");
+        console.log(this.attempt);
+        let asAttempt: Attempt = new Attempt();
+        if(this.attempt == null){
+          asAttempt.attemptId = 1;
+        }
+        else{
+          asAttempt.attemptId = this.attempt.attemptId + 1;
+        }
+        this.response.asAttempt = asAttempt;
+        this.response.responseText = itemOptionText;
+        console.log(this.response);
+        console.log(itemOptionText);
+        console.log(this.response.responseText);
+        if(qpItemType == 'McqMultiCorrect' && event == true){
+          this.addResponse(this.response);
+        }
+        else if(qpItemType == 'McqSingleCorrect' || qpItemType == 'True/False'){
+          this.examinationService.getResponseForBathAndExamineeIdsForRadioButton(qpItem.qpItemId, this.examineeId, this.batchId).subscribe((response) => {
+            if(response==null){
+              this.addResponse(this.response);
+            }
+            else{
+              console.log(response.responseId);
+              this.response.responseId = response.responseId;
+              this.updateResponse(response.responseId, this.response);
+            }
+          });
+        }
       }
     }
   }

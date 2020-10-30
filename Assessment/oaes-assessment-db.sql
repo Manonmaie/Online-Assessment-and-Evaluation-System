@@ -124,7 +124,7 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-29 07:00:00","2020-10-29 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-30 07:00:00","2020-10-30 23:00:00","RECEIVED",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
 
