@@ -1,1 +1,100 @@
-<p>examdrive-update works!</p>
+<div class="container">
+    <legend> Update Exam Drive</legend>
+    <form id="examdriveAdd">
+        <div class="form-item">
+            <label class="required" for="examdriveName">Exam Drive Name</label>
+            <input type="text" id="examdriveName" name="examdriveName" placeholder="Name of the Exam Drive" [(ngModel)]="examdrive.examdriveName">
+            <small>Error Message</small>
+        </div> 
+        <div class="form-item">
+            <label class="required" for="examdriveCode">Exam Drive Code</label>
+            <input type="text" id="examdriveCode" name="examdriveCode" placeholder="Unique code of the Exam Drive(Drive name in short + Course + Term)" [(ngModel)]="examdrive.examdriveCode">
+            <small>Error Message</small>
+        </div>
+        <div class="form-item">
+            Status : {{examdrive.status}}
+        </div>
+        <br>
+        <div class="form-item">
+            <label class="required" for="examdriveCourse">Course</label>
+            <br>
+            <select id="examdriveCourse" name="examdriveCourse" [(ngModel)]="selectedCourse">
+                <option *ngFor = "let course of courses" [value]="course.courseMasterId">
+                    {{course.courseName}} - {{course.courseCode}}
+                </option>
+            </select>
+            <br>
+            <small>Error Message</small>
+        </div>
+    </form>
+</div>
+
+<div class="container">
+    <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search centers here..." [(ngModel)]="searchText"/>
+    <br>
+    <button type="button" title="Add new center to this drive" class="btn btn-success float-right"> <i class="fa fa-plus-square"></i> Add Center </button>
+</div>
+<br>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Center Name</th>
+                <th scope="col">Center Code</th>
+                <th scope="col">Center Capacity</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor = "let center of centers | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
+                <ng-container *ngIf="center">
+                    <tr>
+                        <td>{{center.centerName}}</td>
+                        <td>{{center.centerCode}}</td>
+                        <td>{{center.centerCapacity}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger float-right"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "isShow[center.centerId]"><i class="fa fa-eye"></i></button>
+                            <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "!isShow[center.centerId]"><i class="fa fa-eye-slash"></i></button>
+                        </td>
+                    </tr>
+                    <td colspan="4" [hidden] = "!isShow[center.centerId]">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Batch Code</th>
+                                    <th scope="col">Exam Start Time</th>
+                                    <th scope="col">Exam End Time</th>
+                                    <th scope="col">Paper Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor = "let batch of batches[center.centerId]">
+                                    <ng-container *ngIf="batch">
+                                        <td>{{batch.batchCode}}</td>
+                                        <td>{{batch.batchStartTime.substr(0,10)}} <font color="grey">{{batch.batchStartTime.substr(11)}}</font></td>
+                                        <td>{{batch.batchEndTime.substr(0,10)}} <font color="grey">{{batch.batchEndTime.substr(11)}}</font></td>
+                                        <td><font size="-2">{{batch.qpStatus}}</font></td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <div class="center">
+      <pagination-controls (pageChange)="pageNo = $event"></pagination-controls>
+    </div>
+    <div class="float-right">
+      Items Per Page : <input type="text" name="items"  [(ngModel)]="itemsPage"/>
+    </div>
+</div>
+
+<div class="container">
+    <input type="submit" value ="Update Drive" (click)="onSubmit()">
+</div>
