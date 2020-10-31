@@ -24,7 +24,7 @@ public class AsBatch {
 	
 	private String batchCode;
 	private LocalDateTime batchStartTime, batchEndTime;
-	private enum qpStatusList { PENDING, RECEIVED, ERROR_SENDING};
+	private enum qpStatusList { PENDING, RECEIVED, ERROR_SENDING, SENT};
 	private String qpStatus;
 	
 	@OneToMany(mappedBy="batch")

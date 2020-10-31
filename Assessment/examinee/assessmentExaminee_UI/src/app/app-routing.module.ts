@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { InstructionComponent } from './instruction/instruction.component';
 import { QuestionPaperComponent } from './question-paper/question-paper.component';
 import { ExaminationComponent } from './examination/examination.component';
+import { PackageManagementComponent } from './package-management/package-management.component';
 
 const routes: Routes = [
   { path: 'questionPaper/1', component: QuestionPaperComponent },
   { path: 'questionPaperinstruction/:id', component: InstructionComponent },
   { path: 'questionPaper/:examineeId/examination/:qpId/batch/:batchId', component: ExaminationComponent },
+  { path: 'centerAdmin/packageManagement', component: PackageManagementComponent },
   { path: '', redirectTo: '/questionPaper/1', pathMatch: 'full' }
 ];
 

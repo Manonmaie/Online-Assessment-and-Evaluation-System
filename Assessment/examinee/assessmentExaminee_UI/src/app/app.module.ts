@@ -14,14 +14,19 @@ import { DatePipe } from '@angular/common'
 
 import { QuestionPaperService } from "./services/question-paper.service";
 import { InstructionService } from "./services/instruction.service";
+import { ExaminationService } from "./services/examination.service";
 import { ExaminationComponent } from './examination/examination.component';
+import { HeaderComponent } from './header/header.component';
+import { PackageManagementComponent } from './package-management/package-management.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionPaperComponent,
     InstructionComponent,
-    ExaminationComponent
+    ExaminationComponent,
+    HeaderComponent,
+    PackageManagementComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,7 @@ import { ExaminationComponent } from './examination/examination.component';
   providers: [
     QuestionPaperService,
     InstructionService,
+    ExaminationService,
     DatePipe,
     { provide: 'BaseURL', useValue: baseURL }
   ],

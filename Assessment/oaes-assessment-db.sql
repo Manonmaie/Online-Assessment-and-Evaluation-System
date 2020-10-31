@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS as_batch(
   batch_code varchar(255) UNIQUE NOT NULL,
   batch_start_time datetime NOT NULL,
   batch_end_time datetime NOT NULL,
-  qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING') DEFAULT 'PENDING',
+  qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING','SENT') DEFAULT 'PENDING',
   center_id int(10) unsigned,
   examdrive_id int(10) unsigned,
   qp_id int(10) unsigned,
@@ -164,10 +164,10 @@ ALTER TABLE as_examinee_batch
 -- --------------------------------------------------------
 -- Data Entry for table as_examinee_batch
 -- --------------------------------------------------------
-INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,1);
-INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,2);
+INSERT INTO as_examinee_batch VALUES(0,"2020-10-30 07:00:00","2020-10-30 23:00:00","COMPLETED",1,1);
+INSERT INTO as_examinee_batch VALUES(0,"2020-10-30 07:00:00","2020-10-30 23:00:00","COMPLETED",1,2);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,3);
-INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,1);
+INSERT INTO as_examinee_batch VALUES(0,"2020-10-30 07:00:00","2020-10-30 23:00:00","COMPLETED",2,1);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,2);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,4);
 

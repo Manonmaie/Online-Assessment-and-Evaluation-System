@@ -1,0 +1,12 @@
+<div class="container">
+    <h2 style="text-align:center;"> Center Admin - Package Management </h2>
+    <div class="center">
+        <button type="button" class="btn btn-success btn-lg btn-block"><i class="fa fa-download"></i> Import question paper and examinee details Pack (E-Pack)</button>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let batch of batches">
+            {{batch.asExamdrive.courseMaster.courseName}} Exam <span style="color:rgb(153, 146, 146);font-size:15px;"> - Completed at {{batch.batchEndTime | date : "MMM d, y HH:mm:ss"}}</span>
+            <button type="button" class="btn btn-primary float-right mr-1" (click) = "exportRPack()"><i class="fa fa-paper-plane"></i> Export Response Pack</button>
+        </li>
+    </ul>
+</div>
