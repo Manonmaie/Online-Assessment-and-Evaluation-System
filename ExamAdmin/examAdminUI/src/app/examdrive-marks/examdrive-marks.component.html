@@ -1,0 +1,47 @@
+<div class="container">
+    <legend class="center">{{examdrive.examdriveName}} - {{examdrive.course.courseName}} [{{examdrive.course.courseCode}}]</legend>
+</div>
+<div class="container">
+    <button class="btn btn-success float-right mr-1" title="Export to Excel"> <i class="fa fa-file-excel-o fa-lg"></i> .xlsx</button>
+    <button class="btn btn-success float-right mr-1" title="Export to PDF"> <i class="fa fa-file-pdf-o fa-lg"></i> .pdf</button>
+    <button class="btn btn-success float-right mr-1" title="Export to HTML"> <i class="fa fa-code fa-lg"></i> .html</button>
+</div>
+<div class="container">
+    <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search students here..." [(ngModel)]="searchText"/>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Roll Number</th>
+                <th scope="col">Name</th>
+                <th scope="col">Mail Id</th>
+                <th scope="col">College</th>
+                <th scope="col">Branch</th>
+                <th scope="col">Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor = "let examineeBatch of examineeBatchList | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
+                <ng-container *ngIf = "examineeBatch.examinee">
+                    <tr>
+                        <td>{{examineeBatch.examinee.examineeCode}}</td>
+                        <td>{{examineeBatch.examinee.examineeName}}</td>
+                        <td>{{examineeBatch.examinee.examineeEmail}}</td>
+                        <td>{{examineeBatch.examinee.examineeCollege}}</td>
+                        <td>{{examineeBatch.examinee.examineeBranch}}</td>
+                        <td>{{examineeBatch.marksObtained}}</td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+<div class="container">
+    <div class="center">
+      <pagination-controls (pageChange)="pageNo = $event"></pagination-controls>
+    </div>
+    <div class="float-right">
+      Items Per Page : <input type="text" name="items"  [(ngModel)]="itemsPage"/>
+    </div>
+</div>

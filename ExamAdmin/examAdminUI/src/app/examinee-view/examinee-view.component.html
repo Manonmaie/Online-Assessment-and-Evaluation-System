@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let examineeBatch of examinee.examineeBatchList | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
+        <tr *ngFor="let examineeBatch of examineeBatchList | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
             <ng-container *ngIf = "examineeBatch.batch.examdrive">
               <td>{{examineeBatch.batch.examdrive.examdriveName}}</td>
               <ng-container *ngIf="examineeBatch.batch.examdrive.course"> 
