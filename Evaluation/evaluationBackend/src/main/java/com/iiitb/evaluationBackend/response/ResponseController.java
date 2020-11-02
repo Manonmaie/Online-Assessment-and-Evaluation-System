@@ -22,4 +22,10 @@ public class ResponseController {
 	public List<EvResponse> getEvQpItemQpItemId(@PathVariable int qpItemId){
 		return responseService.getEvQpItemQpItemId(qpItemId);
 	}
+	
+	@RequestMapping("/examdrive/{examineeBatchId}/responses")
+	public List<EvResponse> getResponseFromExamineeBatchId(@PathVariable int examineeBatchId){
+		return responseService.getResponseFromExamineeBatchId(examineeBatchId);
+	}
+	
 }
