@@ -1,6 +1,7 @@
 package com.iiitb.evaluationBackend.examineeItemMarks;
 
 import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -10,12 +11,13 @@ import com.iiitb.evaluationBackend.qpItem.EvQpItem;
 
 import com.iiitb.evaluationBackend.examineeBatch.EvExamineeBatch;
 
+@Entity
 public class EvExamineeItemMarks {
 	
 	@EmbeddedId
     private ExamineeItemMarksKey examineeItemMarksId;
 	
-	private float examineeItemMarks;
+	private double examineeItemMarks;
 	 
     @ManyToOne
     @MapsId("qpItemId")
@@ -23,7 +25,19 @@ public class EvExamineeItemMarks {
     @JsonIgnore
     private EvQpItem qpItemId;
  
-    @ManyToOne
+    public ExamineeItemMarksKey getExamineeItemMarksId() {
+		return examineeItemMarksId;
+	}
+
+	public void setExamineeItemMarksId(ExamineeItemMarksKey examineeItemMarksId) {
+		this.examineeItemMarksId = examineeItemMarksId;
+	}
+
+	public void setExamineeItemMarks(double examineeItemMarks) {
+		this.examineeItemMarks = examineeItemMarks;
+	}
+
+	@ManyToOne
     @MapsId("examineeBatchId")
     @JoinColumn(name = "examinee_batch_id")
     @JsonIgnore
@@ -40,7 +54,7 @@ public class EvExamineeItemMarks {
 		this.examineeBatchId = examineeBatchId;
 	}
 
-	public float getExamineeItemMarks() {
+	public double getExamineeItemMarks() {
 		return examineeItemMarks;
 	}
 

@@ -133,6 +133,8 @@ ALTER TABLE ev_examinee_item_marks
   ADD CONSTRAINT `fk_ev_examinee_item_marks_examinee_batch_id` FOREIGN KEY (examinee_batch_id) REFERENCES ev_examinee_batch(examinee_batch_id) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_ev_examinee_item_marks_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
+INSERT INTO ev_examinee_item_marks VALUES(0,10.0,1,1);
+
 -- --------------------------------------------------------
 -- Table structure for table `ev_response`
 -- --------------------------------------------------------
