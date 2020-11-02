@@ -1,0 +1,22 @@
+<div class="container">
+    <h2 style="text-align:center;"> Sign-In Form </h2>
+    <!-- <form method="post"> -->
+      <div>
+          <div>
+            <label for="uname" class="required-field"><b>Username:</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+          </div>
+          <div>
+            <label for="psw" class="required-field"><b>Password:</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+          </div>
+        <div class="center">
+            <button type="button" class="btn btn-success btn-lg" (click)="loginButtonClick('Student','psw')">Login</button>
+        </div>
+      </div>
+      <div class="container">
+        <label><input type="checkbox" checked="checked" name="remember"> Remember me</label>
+        <span class="psw float-right"><a href="#">Forgot password?</a></span>
+    </div>
+    <!-- </form> -->
+</div>
