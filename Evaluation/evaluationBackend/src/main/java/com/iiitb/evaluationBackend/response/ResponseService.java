@@ -24,4 +24,5 @@ public class ResponseService {
 	public List<EvResponse> getResponseFromExamineeBatchId(int examineeBatchId){
 		return responseRepository.findByEvExamineeBatchExamineeBatchId(examineeBatchId);
 	}
+	
 }
