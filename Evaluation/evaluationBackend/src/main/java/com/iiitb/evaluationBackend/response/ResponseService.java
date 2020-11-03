@@ -20,4 +20,9 @@ public class ResponseService {
 	public List<EvResponse> getEvQpItemQpItemId(int qpItemId){
 		return responseRepository.findByEvQpItemQpItemId(qpItemId);
 	}
+	
+	public List<EvResponse> getResponseFromExamineeBatchId(int examineeBatchId){
+		return responseRepository.findByEvExamineeBatchExamineeBatchId(examineeBatchId);
+	}
+	
 }

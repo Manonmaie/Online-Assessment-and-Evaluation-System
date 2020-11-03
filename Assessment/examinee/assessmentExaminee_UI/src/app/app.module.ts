@@ -18,6 +18,7 @@ import { ExaminationService } from "./services/examination.service";
 import { ExaminationComponent } from './examination/examination.component';
 import { HeaderComponent } from './header/header.component';
 import { PackageManagementComponent } from './package-management/package-management.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PackageManagementComponent } from './package-management/package-managem
     InstructionComponent,
     ExaminationComponent,
     HeaderComponent,
-    PackageManagementComponent
+    PackageManagementComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

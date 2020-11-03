@@ -1,10 +1,12 @@
 package com.iiitb.evaluationBackend.examineeItemMarks;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class ExamineeItemMarksKey {
+public class ExamineeItemMarksKey implements Serializable{
 	
 	@Column(name = "qp_item_id")
     private int qpItemId;
