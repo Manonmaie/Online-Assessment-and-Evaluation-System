@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Item_TF} from '../shared/item_TF';
-import { ItemTFServiceService } from '../service/item-tfservice.service';
+import {Item} from '../shared/item';
+import { ItemServiceService } from '../service/itemService.service';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {Router} from '@angular/router'
+
 
 
 
@@ -12,305 +15,61 @@ interface Country {
   isReviewed: boolean;
 }
 
-const COUNTRIES: Country[] = [
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'What are the keys present?',
-    isReviewed: true,
-  },
-  {
-    subject: 'Data Modelling',
-    question: 'Which is the best databse?',
-    isReviewed: false,
-  },
-  {
-    subject: 'Data Modelling',
-    question: 'Question 3',
-    isReviewed: true,
-  },
-  {
-    subject: 'Data Modelling',
-    question: 'Which is the best databse?',
-    isReviewed: false,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Question 8',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-  {
-    subject: 'DBMS',
-    question: 'Which is the best databse?',
-    isReviewed: true,
-  },
-];
-
 @Component({
   selector: 'question-management-table',
-  templateUrl: './question-management.component.html'
+  templateUrl: './question-management.component.html',
+  styleUrls: ['./question-management.component.css']
 })
+
+
+
 export class QuestionManagementComponent {
+
   page = 1;
   pageSize = 10;
-  collectionSize = COUNTRIES.length;
-
-  items: Item_TF[];
+  collectionSize=3;
+  author_id: Number=1;
+  items=[];
+  public Editor = ClassicEditor;
+  public model = {
+    editorData: '<p></p>'
+  };
 
   countries: Country[];
 
-  constructor(private ItemTFService: ItemTFServiceService) {
-    this.refreshCountries();
+  constructor(private ItemService: ItemServiceService,private router:Router) {
+    this.getitem(this.author_id);
+    this.refreshItems();
   }
 
-  refreshCountries() {
-    this.countries = COUNTRIES
-      .map((country, i) => ({id: i + 1, ...country}))
+  ngOnChanges() {
+    console.log(this.items);
+  }
+
+  stringToHTML(id, str) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(str, 'text/html');
+    console.log(str);
+    document.getElementById(id).innerHTML = str;
+  };
+
+  refreshItems() {
+    this.items
+    .map((item, i) => ({id: i + 1, ...item}))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
-  author_id: Number=1;
 
-  getitem_TF(author_id: number): void{
-    this.ItemTFService.getitem_TF(author_id).subscribe((items)=> this.items=items);
+
+  editItem(){
+    this.router.navigate(['/itemadd']);
   }
 
+  getitem(author_id: Number): void{
+    this.ItemService.getitem(author_id).subscribe((items)=> this.items=items);
+    console.log(this.items);
+    // this.collectionSize = this.items.length;
+  }
+
+
 }
+

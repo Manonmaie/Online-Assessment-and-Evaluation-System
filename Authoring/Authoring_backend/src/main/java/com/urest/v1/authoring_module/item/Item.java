@@ -29,7 +29,7 @@ import com.urest.v1.authoring_module.options.Options;
 public class Item {
 	
 	public Item() {
-		System.out.println("vani");
+//		System.out.println("vani");
 	}
 	public Item(Integer itemId, Integer marks, String itemText, String cgLvl,String reviewStatus,String itemStatus,Integer itemUseCount,String diffLvl,String subject,Integer authorId,String itemType) {
 		super();
@@ -149,39 +149,3 @@ public class Item {
 	}
 
 }
-
-
-
-//CREATE TABLE IF NOT EXISTS `item` (     
-//		`item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//		`item_text` varchar(1024) NOT NULL,
-//		`cognitive_level` ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE') DEFAULT 'UNDERSTAND',
-//		`marks` int(4) unsigned NOT NULL,
-//		`review_status` ENUM('PENDING', 'APPROVED', 'REJECTED') DEFAULT 'PENDING',
-//		`item_status` ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
-//		`item_use_count` int(10) unsigned DEFAULT 0,
-//		`author_id` int(10)unsigned,
-//		PRIMARY KEY (`item_id`) );
-//
-//CREATE TABLE IF NOT EXISTS `item_true_false` (
-//	    `item_true_false_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//	    `item_id` int(10) unsigned,
-//	    `true_marks` int(10) unsigned,
-//	    `false_marks` int(10) unsigned,
-//	    PRIMARY KEY (`item_true_false_id`)
-//	);
-//
-//ALTER TABLE item_true_false
-//ADD CONSTRAINT `fk_itemTrueFalse_item` FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE SET NULL;
-//
-//
-//CREATE TABLE IF NOT EXISTS `item_mcq_options` (
-//	    `item_mcq_options_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-//	    `item_id` int(10) unsigned,
-//	    `mcq_option_text` varchar(255) NOT NULL,
-//	    `mcq_option_marks` int(10),
-//	    PRIMARY KEY (`item_mcq_options_id`)
-//	);
-//
-//	ALTER TABLE item_mcq_options
-//	  ADD CONSTRAINT `fk_itemMcqOptions_item` FOREIGN KEY (item_id) REFERENCES item(item_id) ON DELETE SET NULL;
