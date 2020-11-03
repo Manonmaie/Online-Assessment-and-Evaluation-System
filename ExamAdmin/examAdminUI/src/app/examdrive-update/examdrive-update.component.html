@@ -53,7 +53,7 @@
                         <td>{{center.centerCode}}</td>
                         <td>{{center.centerCapacity}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger float-right"><i class="fa fa-trash-o"></i></button>
+                            <button type="button" class="btn btn-danger float-right" (click)="deleteCenter(center)"><i class="fa fa-trash-o"></i></button>
                             <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "isShow[center.centerId]"><i class="fa fa-eye"></i></button>
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "!isShow[center.centerId]"><i class="fa fa-eye-slash"></i></button>

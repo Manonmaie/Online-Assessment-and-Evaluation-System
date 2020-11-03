@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,5 +20,10 @@ public class BatchController {
 	@RequestMapping("batchByExamdrive/{id}")
 	public List<Batch> getBatchesByExamdrive(@PathVariable int id){
 		return batchService.getBatchesByExamdrive(id);
+	}
+	
+	@RequestMapping(method=RequestMethod.DELETE,value="/batches")
+	public void deleteBatches(@RequestBody List<Batch> batches) {
+		batchService.deleteBatches(batches);
 	}
 }

@@ -122,4 +122,21 @@ export class ExamdriveUpdateComponent implements OnInit {
       this.updateDrive();
     },500);
   }
+
+  deleteCenter(center:Center){
+    if(this.batches[center.centerId]==null){
+      this.getBatches(center);
+    }
+    setTimeout(() => {
+      if(confirm("Are you sure to delete the "+center.centerName+" center from the examdrive")){
+        this.centers = this.centers.filter(item => item !== center);
+        this.batchService.deleteBatches(this.batches[center.centerId]).subscribe( response => {
+          setTimeout(() => {
+            this.batches[center.centerId]==null;
+            this.ngOnInit();
+          },200);
+        });
+      }
+    },500);
+  }
 }
