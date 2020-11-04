@@ -5,7 +5,7 @@
   <!-- Subject -->
   <div class="form-group">
     <label for="exampleFormControlSelect1">Subject<span class="required">*</span></label>
-    <select id="sub_id" name="sub" class="form-control" [(ngModel)]="selectedSub">
+    <select id="sub_id" name="sub" class="form-control" [(ngModel)]="selectedSub" >
       <option *ngFor="let sub of subject" [ngValue]="sub.value"> 
           {{ sub.label }}
       </option>
@@ -89,7 +89,7 @@
           <input type="text" size="75" formControlName="opt" class="form-control">
       </td>
       <td>
-          Marks:
+        % correctness:
           <input type="text"  formControlName="marks" class="form-control">
       </td>
       <td>
@@ -111,7 +111,7 @@
       <input type="radio" disabled /> &nbsp;
       <label class="block">True<span class="required">*</span></label>
     </div>
-    <div style="margin-left: 200px">marks: &nbsp;
+    <div style="margin-left: 200px">% correctness: &nbsp;
       <input type="text" class="width-60 block" name="number1" id="crct1" [(ngModel)]="TFmark1" />
     </div>
   </div>
@@ -120,7 +120,7 @@
       <input type="radio" disabled /> &nbsp;
       <label class="block">False<span class="required">*</span></label>
     </div>
-    <div style="margin-left: 194px">marks: &nbsp;
+    <div style="margin-left: 194px">% correctness: &nbsp;
       <input type="text" class="width-60 block" name="number1" id="crct2" [(ngModel)]="TFmark2" />
     </div>
   </div>

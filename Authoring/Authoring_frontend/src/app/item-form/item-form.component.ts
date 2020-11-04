@@ -133,13 +133,12 @@ export class ItemFormComponent implements OnInit  {
       console.log(this.productForm.value.quantities);
 
       this.httpClient.post(this.REST_API_SERVER_MCQ, {
-      "question": this.model.editorData,
+      "itemText": this.model.editorData,
       "marks": this.totalMarks,
-      "cg_lvl": this.selectedCGLvl,
+      "cgLvl": this.selectedCGLvl,
       "options": this.productForm.value.quantities,
-      "diff_lvl": this.selectedDifLvl,
-      "item_code":"ABCD",
-      "author_id": this.author_id
+      "diffLvl": this.selectedDifLvl,
+      "authorId": this.author_id
       }).subscribe((data: any[])=>{
       console.log(data);
     }) 
