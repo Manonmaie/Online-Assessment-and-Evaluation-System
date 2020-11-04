@@ -21,6 +21,7 @@ export class ExamdriveUpdateComponent implements OnInit {
   selectedCourse: number;
   centers: Center[] = new Array();
   isShow: boolean[];
+  isUpdate: boolean[];
   batches: Batch[][];
   searchText: any;
   pageNo: number = 1;
@@ -39,6 +40,7 @@ export class ExamdriveUpdateComponent implements OnInit {
       this.getCourse(this.examdrive.course.courseMasterId);
     },1000);
     this.isShow = new Array();
+    this.isUpdate = new Array();
     this.batches = new Array();
   }
 
@@ -77,7 +79,19 @@ export class ExamdriveUpdateComponent implements OnInit {
   }
 
   showBatches(center: Center) {
+    this.isUpdate[center.centerId] = false;
     this.isShow[center.centerId] = !this.isShow[center.centerId];
+    if(this.batches[center.centerId]==null){
+      this.getBatches(center);
+    }
+    setTimeout(() => {
+      console.log(this.batches);
+    },500);
+  }
+
+  updateBatches(center: Center) {
+    this.isShow[center.centerId] = false;
+    this.isUpdate[center.centerId] = true;
     if(this.batches[center.centerId]==null){
       this.getBatches(center);
     }
@@ -138,5 +152,18 @@ export class ExamdriveUpdateComponent implements OnInit {
         });
       }
     },500);
+  }
+
+  updateBatch(id: number, batch: Batch, ind: number): void{
+    this.isUpdate[batch.center.centerId] = false;
+    this.batchService.updateBatch(id,batch).subscribe(batch => this.batches[batch.center.centerId][ind]=batch)
+  }
+
+  deleteBatch(batch: Batch): void{
+    if(confirm("Are you sure to delete this batch")){
+      this.batchService.deleteBatch(batch.batchId).subscribe( response => {
+        this.batches[batch.center.centerId] = this.batches[batch.center.centerId].filter(item => item!=batch);
+      }); 
+    }
   }
 }

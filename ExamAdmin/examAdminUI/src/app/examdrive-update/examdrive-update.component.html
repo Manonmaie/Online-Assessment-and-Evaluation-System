@@ -28,7 +28,7 @@
         </div>
     </form>
 </div>
-
+{{batches | json}}
 <div class="container">
     <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search centers here..." [(ngModel)]="searchText"/>
     <br>
@@ -54,7 +54,7 @@
                         <td>{{center.centerCapacity}}</td>
                         <td>
                             <button type="button" class="btn btn-danger float-right" (click)="deleteCenter(center)"><i class="fa fa-trash-o"></i></button>
-                            <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-pencil"></i></button>
+                            <button type="button" class="btn btn-warning float-right mr-1" (click)="updateBatches(center)"><i class="fa fa-pencil"></i></button>
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "isShow[center.centerId]"><i class="fa fa-eye"></i></button>
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "!isShow[center.centerId]"><i class="fa fa-eye-slash"></i></button>
                         </td>
@@ -76,6 +76,40 @@
                                         <td>{{batch.batchStartTime.substr(0,10)}} <font color="grey">{{batch.batchStartTime.substr(11)}}</font></td>
                                         <td>{{batch.batchEndTime.substr(0,10)}} <font color="grey">{{batch.batchEndTime.substr(11)}}</font></td>
                                         <td><font size="-2">{{batch.qpStatus}}</font></td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td colspan="4" [hidden] = "!isUpdate[center.centerId]">
+                        <button type="button" title="Add new batch to this center" class="btn btn-success float-right"> <i class="fa fa-plus-square"></i> Add Batch </button>
+                        <br><br>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Batch Code</th>
+                                    <th scope="col">Exam Start Time</th>
+                                    <th scope="col">Exam End Time</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor = "let batch of batches[center.centerId]; let ind=index;">
+                                    <ng-container *ngIf="batch">
+                                        <td>
+                                            <input type="text" id="centerBatch" name="batchCode" placeholder="Unique code for the Exam Drive" [(ngModel)]="batch.batchCode">
+                                        </td>
+                                        <td>
+                                            <input type="datetime-local" ng-model="string" id="batchStartTime" name="batchStartTime" placeholder="Examination Start Time" [(ngModel)]="batch.batchStartTime">
+                                        </td>
+                                        <td>
+                                            <input type="datetime-local" ng-model="string" id="batchEndTime" name="batchEndTime" placeholder="Examination End Time" [(ngModel)]="batch.batchEndTime">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger float-right" (click)="deleteBatch(batch)"><i class="fa fa-trash-o"></i></button>
+                                            <button type="button" class="btn btn-primary float-right mr-1"><i class="fa fa-upload"></i></button>
+                                            <button type="button" class="btn btn-success float-right mr-1" (click)="updateBatch(batch.batchId,batch,ind)">Update</button>
+                                        </td>
                                     </ng-container>
                                 </tr>
                             </tbody>

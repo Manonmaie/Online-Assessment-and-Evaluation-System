@@ -18,4 +18,12 @@ public class BatchService {
 	public void deleteBatches(List<Batch> batches) {
 		batchRepository.deleteAll(batches);
 	}
+	
+	public void deleteBatch(int id) {
+		batchRepository.deleteById(id);
+	}
+	
+	public void updateBatch(int id, Batch batch) {
+		batchRepository.save(batch);
+	}
 }

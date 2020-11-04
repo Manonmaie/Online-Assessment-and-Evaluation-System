@@ -26,4 +26,14 @@ public class BatchController {
 	public void deleteBatches(@RequestBody List<Batch> batches) {
 		batchService.deleteBatches(batches);
 	}
+	
+	@RequestMapping(method=RequestMethod.DELETE, value="/batches/{id}")
+	public void deleteBatch(@PathVariable int id) {
+		batchService.deleteBatch(id);
+	}
+	
+	@RequestMapping(method=RequestMethod.PUT, value="/batches/{id}")
+	public void updateBatch(@PathVariable int id, @RequestBody Batch batch) {
+		batchService.updateBatch(id, batch);
+	}
 }
