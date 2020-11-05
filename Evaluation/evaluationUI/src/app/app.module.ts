@@ -11,12 +11,14 @@ import { baseURL } from "./shared/baseurl";
 import { DriveCenterService } from "./services/drive-center.service";
 import { QpItemComponent } from './qp-item/qp-item.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { ResponseComponent } from './response/response.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DriveCenterComponent,
-    QpItemComponent
+    QpItemComponent,
+    ResponseComponent
   ],
   imports: [
     BrowserModule,

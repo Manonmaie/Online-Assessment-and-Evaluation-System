@@ -1,0 +1,16 @@
+<div class="container">
+    <h2 style="text-align:center;"> Examinee Batch Response Details </h2>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let response of responses">
+            <ul class="list-group">
+                <li>Question: {{response.evQpItem.itemText}}</li>
+                <li>Marks: {{response.evQpItem.itemMarks}}</li>
+            </ul>
+            Code: {{response.responseCode}}
+        <a class="col-md-6">ID: {{response.responseId}}</a>
+        <span style="text-align: right;">Given: {{response.responseText}}</span>
+        
+        </li>
+    </ul>
+</div>
+
