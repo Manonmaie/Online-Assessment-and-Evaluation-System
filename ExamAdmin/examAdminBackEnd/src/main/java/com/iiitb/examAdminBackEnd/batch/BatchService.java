@@ -14,4 +14,16 @@ public class BatchService {
 	public List<Batch> getBatchesByExamdrive(int id){
 		return batchRepository.findByExamdriveExamdriveId(id);
 	}
+	
+	public void deleteBatches(List<Batch> batches) {
+		batchRepository.deleteAll(batches);
+	}
+	
+	public void deleteBatch(int id) {
+		batchRepository.deleteById(id);
+	}
+	
+	public void updateBatch(int id, Batch batch) {
+		batchRepository.save(batch);
+	}
 }

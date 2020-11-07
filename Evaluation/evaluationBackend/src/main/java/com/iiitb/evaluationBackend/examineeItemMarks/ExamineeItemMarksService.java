@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.iiitb.evaluationBackend.response.EvResponse;
 import com.iiitb.evaluationBackend.response.ResponseRepository;
-import com.iiitb.evaluationBackend.examineeBatch.ExamineeBatchRepository;
 import com.iiitb.evaluationBackend.itemMcqOptions.EvItemMcqOptions;
 
 @Service
@@ -16,9 +15,6 @@ public class ExamineeItemMarksService {
 	
 	@Autowired
 	private ExamineeItemMarksRepository examineeItemMarksRepository;
-	
-	@Autowired
-	private ExamineeBatchRepository examineebatchRepository;
 	
 	@Autowired
 	private ResponseRepository responseRepository;

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@SuppressWarnings("serial")
 @Embeddable
 public class ExamineeItemMarksKey implements Serializable{
 	
