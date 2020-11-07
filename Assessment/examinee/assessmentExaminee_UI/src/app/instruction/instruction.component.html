@@ -1,3 +1,5 @@
+<div>
+<app-header></app-header>
 <div class="container">
     <h2 style="text-align:center;"> Instructions for the Exam </h2>
     <div>
@@ -9,8 +11,8 @@
     </div>
     
     <div class="text-center">
-        <button type="button" class="btn btn-success btn-lg btn-space" routerLink="/questionPaper/1">OK</button>
+        <!-- <button type="button" class="btn btn-success btn-lg btn-space" routerLink="/questionPaper/1">OK</button> -->
+        <button type="button" class="btn btn-success btn-lg btn-space" [routerLink]="['/questionPaper', examineeId]">OK</button>
     </div>
-    
 </div>
-
+</div>

@@ -27,7 +27,8 @@ export class QuestionPaperComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const examineeId = 1;
+    // const examineeId = 1;
+    const examineeId = this.activeRoute.snapshot.params['userId'];
     this.questionPaperService.getQuestionPapers(examineeId).subscribe((questionPapers) => this.questionPapers = questionPapers);
   }
 

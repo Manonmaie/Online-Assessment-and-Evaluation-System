@@ -7,6 +7,88 @@ USE oaes_assessment_db;
 --
 
 -- --------------------------------------------------------
+-- Table structure for table as_user
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_user(
+  user_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_name varchar(255) UNIQUE NOT NULL,
+  password varchar(255) NOT NULL,
+  status ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
+  PRIMARY KEY(user_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_user`
+-- --------------------------------------------------------
+INSERT INTO as_user VALUES(0,"person1@gmail.com","a","ACTIVE");
+INSERT INTO as_user VALUES(0,"person2@gmail.com","a","ACTIVE");
+INSERT INTO as_user VALUES(0,"person3@gmail.com","a","ACTIVE");
+INSERT INTO as_user VALUES(0,"person4@gmail.com","a","ACTIVE");
+
+-- --------------------------------------------------------
+-- Table structure for table as_role_master
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_role_master(
+  role_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  role_name varchar(255) UNIQUE NOT NULL,
+  module_name ENUM('AU', 'AS', 'EVAL', 'EA'),
+  PRIMARY KEY(role_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_role_master`
+-- --------------------------------------------------------
+INSERT INTO as_role_master VALUES(0,"Student","AS");
+INSERT INTO as_role_master VALUES(0,"Center Admin","AS");
+INSERT INTO as_role_master VALUES(0,"Invizilator","AS");
+
+-- --------------------------------------------------------
+-- Table structure for table as_user_role
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_user_role(
+  user_role_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_id int(10) unsigned,
+  role_id int(10) unsigned,
+  PRIMARY KEY(user_role_id)
+);
+
+ALTER TABLE as_user_role
+  ADD CONSTRAINT `fk_as_user_role_user_id` FOREIGN KEY (user_id) REFERENCES as_user(user_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_as_user_role_role_id` FOREIGN KEY (role_id) REFERENCES as_role_master(role_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_user_role`
+-- --------------------------------------------------------
+INSERT INTO as_user_role VALUES(0,1,1);
+INSERT INTO as_user_role VALUES(0,2,1);
+INSERT INTO as_user_role VALUES(0,3,2);
+INSERT INTO as_user_role VALUES(0,4,2);
+
+-- --------------------------------------------------------
+-- Table structure for table as_action_master
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_action_master(
+  action_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  action_name varchar(255) UNIQUE NOT NULL,
+  module_name ENUM('AU', 'AS', 'EVAL', 'EA'),
+  PRIMARY KEY(action_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table as_role_action
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS as_role_action(
+  role_action_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  role_id int(10) unsigned,
+  action_id int(10) unsigned,
+  PRIMARY KEY(role_action_id)
+);
+
+ALTER TABLE as_role_action
+  ADD CONSTRAINT `fk_as_role_action_role_id` FOREIGN KEY (role_id) REFERENCES as_role_master(role_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_as_role_action_action_id` FOREIGN KEY (action_id) REFERENCES as_action_master(action_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
 -- Table structure for table `as_course_master`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_course_master (
