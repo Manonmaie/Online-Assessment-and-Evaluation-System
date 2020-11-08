@@ -158,14 +158,14 @@ export class QuestionPaperComponent implements OnInit {
     if(this.startMark!=null)
     params = params.set('startMark',JSON.stringify(this.startMark));
     else
-    params = params.set('startMark',JSON.stringify("0"));
+    params = params.set('startMark',JSON.stringify(0));
 
 
     // end marks;
     if(this.endMark!=null)
     params = params.set('endMark',JSON.stringify(this.endMark));
     else
-    params = params.set('endMark',JSON.stringify("0"));
+    params = params.set('endMark',JSON.stringify(100));
     
     this.getItemFilter(params);
   }
@@ -208,6 +208,6 @@ export class QuestionPaperComponent implements OnInit {
   setQP(): void{
     // this.ItemFilterService.setQP().subscribe((items)=> this.items=items);
     console.log(this.selectedSub);
-    this.QPService.setQP(this.selectedSub,this.totalMarks,this.testDuration,this.instructions,Array.from(this.myQPSet.values()));
+    this.QPService.setQP(this.selectedSub,this.totalMarks,this.testDuration,this.instructions,Array.from(this.myQPSet.values())).subscribe((items)=> console.log(items));
   }
 }

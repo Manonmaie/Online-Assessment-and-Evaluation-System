@@ -37,7 +37,7 @@ public class ItemController {
 		return itemService.getAllQpItemsForAuthor(id);
 	}
 	
-	
+	// get item_by filter
 	@RequestMapping(value = "/urest/v1/getitem_byFilter", method = RequestMethod.GET)
 	public List<Item> getItemByFilter(@RequestParam  Map<String, String> p){
 		return itemService.getAllQpItemsFiltered(p);
