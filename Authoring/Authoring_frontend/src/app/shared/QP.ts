@@ -1,7 +1,7 @@
 export class QP{
-    subject :string;
-    TotalMarks: Number;
-    TestDuration: Number;
-    Instructions: string;
-    itemIds: Number[];
+    course :string;
+    totalMarks: Number;
+    timeDuration: Number;
+    instructions: string;
+    asitemIds: Number[];
 }

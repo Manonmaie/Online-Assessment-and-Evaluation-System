@@ -42,17 +42,26 @@ public class ItemService {
 	public List<Item> getAllQpItemsFiltered(Map<String, String> m) {
 //		System.out.println("customQuery " + p.toString());
 		List<String> cgLvlList = new ArrayList<String>(Arrays.asList(m.get("cgLvl").split(",")));
-		System.out.println(cgLvlList.toString());
+//		System.out.println(cgLvlList.toString());
 		List<String> difLvlList = new ArrayList<String>(Arrays.asList(m.get("difLvl").split(",")));
 		System.out.println(difLvlList.toString());
 		List<String> typesList = new ArrayList<String>(Arrays.asList(m.get("types").split(",")));
-		System.out.println(typesList.toString());
-		int startMarkInteger=Integer.valueOf(m.get("startMark"));
-		int endMarkInteger=Integer.valueOf(m.get("endMark"));
+		System.out.println(m.get("startMark"));
+		System.out.println(m.get("endMark"));
+//		int startMarkInteger=Integer.valueOf(m.get("startMark"));
+		int startMarkInteger = 0;
+		if(m.get("startMark")!=null)
+			startMarkInteger=Integer.parseInt(m.get("startMark").trim());
+//		int endMarkInteger=Integer.valueOf(m.get("endMark"));
+		int endMarkInteger=100;
+		if(m.get("endMark")!=null)
+			endMarkInteger=Integer.parseInt(m.get("endMark").trim());
+		System.out.println("----------------");
 		System.out.println(startMarkInteger);
 		System.out.println(endMarkInteger);
-			
+		System.out.println("----------------");
 		List<Item> t= itemRepository.findByItemId(cgLvlList,difLvlList,typesList,startMarkInteger,endMarkInteger);
+		System.out.println("heyy");
 		System.out.println(t.toString());
 		return t;
 	}
