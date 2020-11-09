@@ -28,6 +28,8 @@ export class ExamdriveUpdateComponent implements OnInit {
   itemsPage: number = 25;
   examdriveId = this.route.snapshot.params['id'];
   validStatus: any[] = ['NOT_STARTED','IN_PROGRESS','COMPLETED'];
+  isAddBatch: boolean = false;
+  newBatch: Batch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
 
   constructor(private examdriveService:ExamdriveService, private courseService: CourseService, private batchService:BatchService, private route: ActivatedRoute, public router: Router) { }
 
@@ -38,7 +40,7 @@ export class ExamdriveUpdateComponent implements OnInit {
       this.getCenters();
       this.selectedCourse = this.examdrive.course.courseMasterId;
       this.getCourse(this.examdrive.course.courseMasterId);
-    },1000);
+    },500);
     this.isShow = new Array();
     this.isUpdate = new Array();
     this.batches = new Array();
@@ -165,5 +167,24 @@ export class ExamdriveUpdateComponent implements OnInit {
         this.batches[batch.center.centerId] = this.batches[batch.center.centerId].filter(item => item!=batch);
       }); 
     }
+  }
+
+  addNewBatch(): void{
+    this.isAddBatch = true;
+  }
+
+  addBatch(center: Center): void{
+    this.isAddBatch = false;
+    this.newBatch.center = center;
+    this.newBatch.examdrive = this.examdrive;
+    this.batchService.addBatch(this.newBatch).subscribe( response => {
+      this.batches[center.centerId].push(this.newBatch);
+      setTimeout(()=>{
+        window.location.reload();
+      },200);
+    });
+    setTimeout(() => {
+      this.newBatch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
+    },200);
   }
 }

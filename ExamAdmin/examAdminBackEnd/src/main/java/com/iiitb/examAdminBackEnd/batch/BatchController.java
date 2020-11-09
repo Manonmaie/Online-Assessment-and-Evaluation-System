@@ -36,4 +36,9 @@ public class BatchController {
 	public void updateBatch(@PathVariable int id, @RequestBody Batch batch) {
 		batchService.updateBatch(id, batch);
 	}
+	
+	@RequestMapping(method =RequestMethod.POST, value="/batches")
+	public void addBatch(@RequestBody Batch batch) {
+		batchService.addBatch(batch);
+	}
 }
