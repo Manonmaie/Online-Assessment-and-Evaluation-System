@@ -32,7 +32,7 @@
 <div class="container">
     <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search centers here..." [(ngModel)]="searchText"/>
     <br>
-    <button type="button" title="Add new center to this drive" class="btn btn-success float-right"> <i class="fa fa-plus-square"></i> Add Center </button>
+    <button type="button" title="Add new center to this drive" class="btn btn-success float-right" [routerLink]="['/examdriveupdateaddcenter', examdrive.examdriveId]"> <i class="fa fa-plus-square"></i> Add Center </button>
 </div>
 <br>
 <div class="container">

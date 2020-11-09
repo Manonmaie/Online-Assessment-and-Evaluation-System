@@ -41,4 +41,9 @@ public class BatchController {
 	public void addBatch(@RequestBody Batch batch) {
 		batchService.addBatch(batch);
 	}
+	
+	@RequestMapping(method = RequestMethod.POST, value="/batchesBulk")
+	public void addBatches(@RequestBody List<Batch> batches) {
+		batchService.addBatches(batches);
+	}
 }

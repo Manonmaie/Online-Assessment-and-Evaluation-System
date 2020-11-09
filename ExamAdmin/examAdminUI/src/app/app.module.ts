@@ -40,6 +40,7 @@ import { ExamdriveUpdateComponent } from './examdrive-update/examdrive-update.co
 import { ExamdriveViewComponent } from './examdrive-view/examdrive-view.component';
 import { ExamdriveCenterViewComponent } from './examdrive-center-view/examdrive-center-view.component';
 import { ExamdriveMarksComponent } from './examdrive-marks/examdrive-marks.component';
+import { ExamdriveUpdateCenterAddComponent } from './examdrive-update-center-add/examdrive-update-center-add.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ExamdriveMarksComponent } from './examdrive-marks/examdrive-marks.compo
     ExamdriveUpdateComponent,
     ExamdriveViewComponent,
     ExamdriveCenterViewComponent,
-    ExamdriveMarksComponent
+    ExamdriveMarksComponent,
+    ExamdriveUpdateCenterAddComponent
   ],
   imports: [
     BrowserModule,
