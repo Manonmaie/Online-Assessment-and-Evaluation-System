@@ -357,6 +357,7 @@ CREATE TABLE IF NOT EXISTS out_epack_header(
   epack_status ENUM('CREATED', 'SENT'),
   epack_sent_on datetime,
   epack_path varchar(255),
+  centre_id int(10) unsigned UNIQUE NOT NULL,
   PRIMARY KEY(epack_header_id)
 );
 
@@ -364,6 +365,7 @@ CREATE TABLE IF NOT EXISTS out_epack_header(
 -- Table structure for table epack1
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS epack1(
+  epack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   epack_header_id int(10) unsigned NOT NULL,
   qp_id int(10) unsigned UNIQUE NOT NULL,
   qp_code varchar(255) UNIQUE NOT NULL,
@@ -385,11 +387,12 @@ CREATE TABLE IF NOT EXISTS epack1(
   course_master_id int(10) unsigned NOT NULL,
   course_code varchar(255) NOT NULL,
   course_name varchar(255) NOT NULL,
-  PRIMARY KEY(epack_header_id)
+  PRIMARY KEY(epack_id)
 );
 
 ALTER TABLE epack1
-  ADD CONSTRAINT `fk_epack1_epack_header_id` FOREIGN KEY (epack_header_id) REFERENCES out_epack_header(epack_header_id) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_epack1_epack_header_id` FOREIGN KEY (epack_header_id) REFERENCES out_epack_header(epack_header_id) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_epack1_centre_id` FOREIGN KEY (centre_id) REFERENCES out_epack_header(centre_id) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
 -- Table structure for table epack2
