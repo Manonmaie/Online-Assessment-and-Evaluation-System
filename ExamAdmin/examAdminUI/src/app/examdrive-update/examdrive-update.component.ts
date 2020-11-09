@@ -40,7 +40,7 @@ export class ExamdriveUpdateComponent implements OnInit {
       this.getCenters();
       this.selectedCourse = this.examdrive.course.courseMasterId;
       this.getCourse(this.examdrive.course.courseMasterId);
-    },500);
+    },1000);
     this.isShow = new Array();
     this.isUpdate = new Array();
     this.batches = new Array();
