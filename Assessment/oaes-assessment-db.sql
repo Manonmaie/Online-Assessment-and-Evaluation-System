@@ -20,10 +20,11 @@ CREATE TABLE IF NOT EXISTS as_user(
 -- --------------------------------------------------------
 -- Data Entry for table `as_user`
 -- --------------------------------------------------------
-INSERT INTO as_user VALUES(0,"person1@gmail.com","a","ACTIVE");
-INSERT INTO as_user VALUES(0,"person2@gmail.com","a","ACTIVE");
+INSERT INTO as_user VALUES(0,"S1","abc","ACTIVE");
+INSERT INTO as_user VALUES(0,"S2","xyz","ACTIVE");
 INSERT INTO as_user VALUES(0,"person3@gmail.com","a","ACTIVE");
 INSERT INTO as_user VALUES(0,"person4@gmail.com","a","ACTIVE");
+INSERT INTO as_user VALUES(0,"person5@gmail.com","a","ACTIVE");
 
 -- --------------------------------------------------------
 -- Table structure for table as_role_master
@@ -38,7 +39,7 @@ CREATE TABLE IF NOT EXISTS as_role_master(
 -- --------------------------------------------------------
 -- Data Entry for table `as_role_master`
 -- --------------------------------------------------------
-INSERT INTO as_role_master VALUES(0,"Student","AS");
+INSERT INTO as_role_master VALUES(0,"Examinee","AS");
 INSERT INTO as_role_master VALUES(0,"Center Admin","AS");
 INSERT INTO as_role_master VALUES(0,"Invizilator","AS");
 
@@ -63,6 +64,7 @@ INSERT INTO as_user_role VALUES(0,1,1);
 INSERT INTO as_user_role VALUES(0,2,1);
 INSERT INTO as_user_role VALUES(0,3,2);
 INSERT INTO as_user_role VALUES(0,4,2);
+INSERT INTO as_user_role VALUES(0,5,3);
 
 -- --------------------------------------------------------
 -- Table structure for table as_action_master
@@ -206,7 +208,7 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-10-30 07:00:00","2020-10-30 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-11-09 07:00:00","2020-11-09 23:00:00","RECEIVED",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
 
@@ -246,10 +248,10 @@ ALTER TABLE as_examinee_batch
 -- --------------------------------------------------------
 -- Data Entry for table as_examinee_batch
 -- --------------------------------------------------------
-INSERT INTO as_examinee_batch VALUES(0,"2020-10-30 07:00:00","2020-10-30 23:00:00","COMPLETED",1,1);
-INSERT INTO as_examinee_batch VALUES(0,"2020-10-30 07:00:00","2020-10-30 23:00:00","COMPLETED",1,2);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,1);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,2);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,3);
-INSERT INTO as_examinee_batch VALUES(0,"2020-10-30 07:00:00","2020-10-30 23:00:00","COMPLETED",2,1);
+INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,1);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,2);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,4);
 

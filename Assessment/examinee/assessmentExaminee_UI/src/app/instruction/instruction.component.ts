@@ -18,7 +18,7 @@ export class InstructionComponent implements OnInit {
 
   ngOnInit(): void {
     const qpId = this.route.snapshot.params['id'];
-    this.examineeId = this.loginService.getUserRole().user.userId;
+    this.examineeId = this.loginService.getExaminee().examineeId;
     this.instructionService.getInstructionOfQuestionPaper(qpId).subscribe((instructions) => this.instructions = instructions);
   }
 

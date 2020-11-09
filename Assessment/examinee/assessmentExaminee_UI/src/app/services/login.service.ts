@@ -4,6 +4,7 @@ import { Observable, of } from "rxjs";
 import { UserRole, UserRoleId } from "../shared/userRole";
 import { baseURL } from "../shared/baseurl";
 import { User } from '../shared/user';
+import { Examinee } from '../shared/examinee';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { User } from '../shared/user';
 export class LoginService {
 
   userRole: UserRole;
+  examinee: Examinee;
 
   constructor(private http: HttpClient) { }
 
@@ -24,5 +26,17 @@ export class LoginService {
 
   getUserRole(): UserRole{
     return this.userRole;
+  }
+
+  getExamineeFromRegistrationNoAndPassword(examineeCode: string, password: string): Observable<Examinee>{
+    return this.http.get<Examinee>(baseURL + 'registrationNo/' + examineeCode + '/password/' + password + '/examinee');
+  }
+  
+  setExaminee(examinee: Examinee): void{
+    this.examinee = examinee;
+  }
+
+  getExaminee(): Examinee{
+    return this.examinee;
   }
 }

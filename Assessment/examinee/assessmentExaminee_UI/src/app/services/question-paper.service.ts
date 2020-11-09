@@ -47,6 +47,10 @@ export class QuestionPaperService {
     return this.http.put<ExamineeBatch>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/examineeBatch', examineeBatch);
   }
 
+  getExamineeBatchFromExamineeAndBatchIds(examineeId: number, batchId: number): Observable<ExamineeBatch>{
+    return this.http.get<ExamineeBatch>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/examineeBatch');
+  }
+  
   // getQuestionPapers(): QuestionPaper[]{
   //   return QUESTIONPAPERS;
   // }

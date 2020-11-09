@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from "../services/login.service";
+import { Examinee } from '../shared/examinee';
 import { UserRole } from '../shared/userRole';
 
 @Component({
@@ -10,9 +11,10 @@ import { UserRole } from '../shared/userRole';
 })
 export class LoginComponent implements OnInit {
 
-  emailId: string;
+  userName: string;
   password: string;
   userRole: UserRole;
+  examinee: Examinee;
 
   constructor(private loginService: LoginService, private activeRoute: ActivatedRoute, public route: Router) { }
 
@@ -27,10 +29,15 @@ export class LoginComponent implements OnInit {
       alert("Please enter Password. It is a mandatory field");
     }
     else{
-      this.loginService.getUserRoleFromUsernameAndPassword(this.emailId, this.password).subscribe((userRole) =>{
+      this.loginService.getUserRoleFromUsernameAndPassword(this.userName, this.password).subscribe((userRole) =>{
         this.loginService.setUserRole(userRole);
-        if(userRole.role.roleName == "Student"){
-          this.route.navigate(['/questionPaper/' + userRole.user.userId]);
+        if(userRole.role.roleName == "Examinee"){
+          // let examinee: Examinee = ;id
+          this.loginService.getExamineeFromRegistrationNoAndPassword(this.userName, this.password).subscribe((examinee) => {
+            this.loginService.setExaminee(examinee);
+            this.route.navigate(['/questionPaper/' + examinee.examineeId]);
+          });
+          // this.route.navigate(['/questionPaper/' + userRole.user.userId]);
         }
         else if(userRole.role.roleName == "Center Admin"){
           this.route.navigate(['/centerAdmin/packageManagement']);
