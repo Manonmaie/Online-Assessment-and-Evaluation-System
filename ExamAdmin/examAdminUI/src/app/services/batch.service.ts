@@ -15,4 +15,16 @@ export class BatchService {
   getBatchesByExamdrive(id: number): Observable<Batch[]>{
     return this.http.get<Batch[]>(baseURL + 'batchByExamdrive/'+id);
   }
+
+  deleteBatches(batches: Batch[]): Observable<any>{
+    return this.http.request('delete', baseURL+ 'batches/', {body: batches});
+  }
+
+  deleteBatch(id: number): Observable<any>{
+    return this.http.delete<any>(baseURL + 'batches/'+id);
+  }
+
+  updateBatch(id: number, batch: Batch): Observable<Batch>{
+    return this.http.put<Batch>(baseURL + 'batches/'+id, batch);
+  }
 }

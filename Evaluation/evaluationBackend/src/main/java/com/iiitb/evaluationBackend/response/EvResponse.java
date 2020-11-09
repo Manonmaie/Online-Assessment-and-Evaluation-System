@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
 import com.iiitb.evaluationBackend.qpItem.EvQpItem;
+import com.iiitb.evaluationBackend.examineeBatch.EvExamineeBatch;
 
 @Entity
 public class EvResponse {
@@ -19,20 +19,28 @@ public class EvResponse {
 	
 	private String responseCode;
 	
+	private String responseText;
+	
 	@ManyToOne
 	@JoinColumn(name="qp_item_id")
 	private EvQpItem evQpItem;
 	
+	@ManyToOne
+	@JoinColumn(name="examinee_batch_id")
+	private EvExamineeBatch evExamineeBatch;
+	
 	public EvResponse() {
 		
 	}
-	
-	public EvResponse(int responseId, String responseText, int qpItemId, int attemptId) {
+
+	public EvResponse(int responseId, String responseCode, String responseText, EvQpItem evQpItem,
+			EvExamineeBatch evExamineeBatch) {
 		super();
 		this.responseId = responseId;
-		this.responseCode = responseText;
-		this.evQpItem = new EvQpItem();
-		this.evQpItem.setQpItemId(qpItemId);
+		this.responseCode = responseCode;
+		this.responseText = responseText;
+		this.evQpItem = evQpItem;
+		this.evExamineeBatch = evExamineeBatch;
 	}
 
 	public int getResponseId() {
@@ -47,8 +55,16 @@ public class EvResponse {
 		return responseCode;
 	}
 
-	public void setResponseCode(String responseText) {
-		this.responseCode = responseText;
+	public void setResponseCode(String responseCode) {
+		this.responseCode = responseCode;
+	}
+
+	public String getResponseText() {
+		return responseText;
+	}
+
+	public void setResponseText(String responseText) {
+		this.responseText = responseText;
 	}
 
 	public EvQpItem getEvQpItem() {
@@ -58,6 +74,16 @@ public class EvResponse {
 	public void setEvQpItem(EvQpItem evQpItem) {
 		this.evQpItem = evQpItem;
 	}
+
+	public EvExamineeBatch getEvExamineeBatch() {
+		return evExamineeBatch;
+	}
+
+	public void setEvExamineeBatch(EvExamineeBatch evExamineeBatch) {
+		this.evExamineeBatch = evExamineeBatch;
+	}
+	
+	
 	
 	
 }

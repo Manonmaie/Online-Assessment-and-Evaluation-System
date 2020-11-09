@@ -18,6 +18,7 @@ import { ExamdriveUpdateComponent } from '../examdrive-update/examdrive-update.c
 import { CenterUpdateComponent } from '../center-update/center-update.component';
 import { ExamineeUpdateComponent } from '../examinee-update/examinee-update.component';
 import { CourseUpdateComponent } from '../course-update/course-update.component';
+import { ExamdriveMarksComponent } from '../examdrive-marks/examdrive-marks.component';
 
 export const routes: Routes = [
     {path: 'examdrives', component: ExamdriveComponent},
@@ -38,5 +39,6 @@ export const routes: Routes = [
     {path: 'centerupdate/:id', component: CenterUpdateComponent},
     {path: 'examineeupdate/:id', component: ExamineeUpdateComponent},
     {path: 'courseupdate/:id', component: CourseUpdateComponent},
+    {path: 'examdrivemarksreport/:id', component: ExamdriveMarksComponent},
     {path: '', redirectTo: '/examdrives', pathMatch: 'full'}
 ];

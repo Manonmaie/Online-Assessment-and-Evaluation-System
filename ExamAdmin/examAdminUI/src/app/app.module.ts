@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
@@ -37,6 +39,7 @@ import { ExamdriveAddComponent } from './examdrive-add/examdrive-add.component';
 import { ExamdriveUpdateComponent } from './examdrive-update/examdrive-update.component';
 import { ExamdriveViewComponent } from './examdrive-view/examdrive-view.component';
 import { ExamdriveCenterViewComponent } from './examdrive-center-view/examdrive-center-view.component';
+import { ExamdriveMarksComponent } from './examdrive-marks/examdrive-marks.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,8 @@ import { ExamdriveCenterViewComponent } from './examdrive-center-view/examdrive-
     ExamdriveAddComponent,
     ExamdriveUpdateComponent,
     ExamdriveViewComponent,
-    ExamdriveCenterViewComponent
+    ExamdriveCenterViewComponent,
+    ExamdriveMarksComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +72,9 @@ import { ExamdriveCenterViewComponent } from './examdrive-center-view/examdrive-
     // HttpModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule
   ],
   providers: [
     BatchService,

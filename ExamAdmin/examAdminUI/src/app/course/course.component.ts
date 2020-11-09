@@ -10,6 +10,9 @@ import {Observable, of} from 'rxjs';
 })
 export class CourseComponent implements OnInit {
   courses: Course[];
+  searchText: any;
+  pageNo: number = 1;
+  itemsPage: number = 25;
   constructor(private courseService:CourseService) { }
 
   ngOnInit(): void {

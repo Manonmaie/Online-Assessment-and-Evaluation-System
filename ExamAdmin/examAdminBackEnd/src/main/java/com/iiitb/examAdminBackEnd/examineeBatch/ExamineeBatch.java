@@ -26,7 +26,7 @@ public class ExamineeBatch {
 	@ManyToOne
 	@MapsId("examineeId")
 	@JoinColumn(name = "examinee_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private Examinee examinee;
 	
 	@ManyToOne

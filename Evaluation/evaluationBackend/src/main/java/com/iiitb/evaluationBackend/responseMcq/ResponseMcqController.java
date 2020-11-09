@@ -18,7 +18,7 @@ public class ResponseMcqController {
 	@Autowired
 	private ResponseMcqService responseMcqService;
 	
-	@RequestMapping("/response/{responseId}/responseMcq/{responseMcqId}")
+	@RequestMapping("/qpItem/{qpItemId}//response/{responseId}/responseMcq/{responseMcqId}")
 	public EvResponseMcq getResponseMcqForResponseId(@PathVariable int responseMcqId){
 		return responseMcqService.getResponseMcqForResponseId(responseMcqId);
 	}

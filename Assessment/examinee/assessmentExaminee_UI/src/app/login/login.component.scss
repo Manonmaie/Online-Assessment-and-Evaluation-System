@@ -1,0 +1,27 @@
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 85%;
+    padding: 12px 20px 10px 10px;
+    margin: 8px 12px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.center {
+    margin: 5px;
+    margin-bottom: 5px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.container{
+    padding-top: 100px;
+}
+
+.required-field::after {
+    content: "*";
+    color: red;
+    margin-left:2px
+}

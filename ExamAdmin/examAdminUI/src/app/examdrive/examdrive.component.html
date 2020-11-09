@@ -6,6 +6,9 @@
 </div>
 
 <div class="container">
+  <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search here..." [(ngModel)]="searchText"/>
+</div>
+<div class="container">
   <table class="table">
     <thead>
       <tr>
@@ -16,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let examdrive of examdrives">
+      <tr *ngFor="let examdrive of examdrives | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
         <td>{{examdrive.examdriveName}}</td>
         <ng-container *ngIf = "examdrive.course">
           <td>{{examdrive.course.courseCode}}</td>
@@ -29,8 +32,17 @@
           <button type="button" class="btn btn-danger float-right" (click)="deleteExamdrive(examdrive)"><i class="fa fa-trash-o"></i></button>
           <button type="button" class="btn btn-warning float-right mr-1" [routerLink]="['/examdriveupdate', examdrive.examdriveId]"><i class="fa fa-pencil"></i></button>
           <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview', examdrive.examdriveId]"><i class="fa fa-eye"></i></button>
+          <button type="button" class="btn btn-success float-right mr-1" title="Marks Reports" [routerLink]="['/examdrivemarksreport', examdrive.examdriveId]"><i class="fa fa-bar-chart"></i></button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>
+<div class="container">
+  <div class="center">
+    <pagination-controls (pageChange)="pageNo = $event"></pagination-controls>
+  </div>
+  <div class="float-right">
+    Items Per Page : <input type="text" name="items"  [(ngModel)]="itemsPage"/>
+  </div>
 </div>

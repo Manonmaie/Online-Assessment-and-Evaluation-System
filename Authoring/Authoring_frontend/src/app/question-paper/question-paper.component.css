@@ -1,0 +1,16 @@
+.editDropDown {
+    height: 28px;
+    width: 28px;
+}
+
+
+body {
+    background: #f8f9fa;
+    
+  }
+
+.price-filter-control {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}

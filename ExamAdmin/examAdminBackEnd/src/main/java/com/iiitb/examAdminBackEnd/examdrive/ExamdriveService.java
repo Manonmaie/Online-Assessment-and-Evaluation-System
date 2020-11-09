@@ -36,4 +36,8 @@ public class ExamdriveService {
 	public Optional<Examdrive> getExamdrive(int id){
 		return examdriveRepository.findById(id);
 	}
+	
+	public void updateExamdrive(int id,Examdrive examdrive) {
+		examdriveRepository.save(examdrive);
+	}
 }

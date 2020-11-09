@@ -37,4 +37,9 @@ public class ExamdriveController {
 	public Optional<Examdrive> getExamdrive(@PathVariable int id){
 		return examdriveService.getExamdrive(id);
 	}
+	
+	@RequestMapping(method=RequestMethod.PUT, value="/examdrives/{id}")
+	public void updateExamdrive(@PathVariable int id, @RequestBody Examdrive examdrive) {
+		examdriveService.updateExamdrive(id, examdrive);
+	}
 }

@@ -35,6 +35,9 @@
 </div>
 
 <div class="container">
+  <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search examdrives here..." [(ngModel)]="searchText"/>
+</div>
+<div class="container">
     <table class="table">
       <thead>
         <tr>
@@ -47,7 +50,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let examineeBatch of examinee.examineeBatchList">
+        <tr *ngFor="let examineeBatch of examineeBatchList | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
           <ng-container *ngIf = "examineeBatch.batch.examdrive">
             <td>{{examineeBatch.batch.examdrive.examdriveName}}</td>
             <ng-container *ngIf="examineeBatch.batch.examdrive.course"> 
@@ -77,4 +80,12 @@
       </tbody>
     </table>
     <input type="submit" value ="Update Student Details" (click)="onSubmit()">
+</div>
+<div class="container">
+  <div class="center">
+    <pagination-controls (pageChange)="pageNo = $event"></pagination-controls>
   </div>
+  <div class="float-right">
+    Items Per Page : <input type="text" name="items"  [(ngModel)]="itemsPage"/>
+  </div>
+</div>  

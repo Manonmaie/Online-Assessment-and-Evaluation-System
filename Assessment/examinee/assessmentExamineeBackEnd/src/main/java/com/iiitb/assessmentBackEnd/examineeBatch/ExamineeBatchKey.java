@@ -8,6 +8,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ExamineeBatchKey implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "examinee_id")
     private int examineeId;
  

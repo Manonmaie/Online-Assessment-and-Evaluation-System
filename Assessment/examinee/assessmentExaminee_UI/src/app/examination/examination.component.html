@@ -1,12 +1,16 @@
+<div>
+<app-header></app-header>
 <div class="container-dummy">
     <h2 style="text-align:center;"> Examination </h2>
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2">        
             <div class="navbar">
                 <div>
                     <div *ngFor="let qpItem of qpItems;let indexOfelement=index;" style="display: inline">
-                        <button type="button" class="btn btn-secondary btn-sm">{{indexOfelement+1}}</button>
+                        <button type="button" class="btn btn-secondary btn-sm" [ngClass]="{'red': flaggedItems[indexOfelement]==true, 'white' : attemptedItems[indexOfelement]==false, 'green' : attemptedItems[indexOfelement]==true}">
+                            <a fragment="{{indexOfelement}}" (click)="navigateToSection(indexOfelement)" style="color:inherit">{{indexOfelement+1}}</a></button>
                     </div>
+
                 </div>
                 <div class="mt-2 col-md-12">
                     <p>Timer - {{display}}</p> 
@@ -17,28 +21,28 @@
             </div>
         </div>
         <div class="col-md-9 col-md-offset-1">
-        <!-- <div> -->
             <ol class="list-group">
-                <li class="list-group-item" *ngFor="let qpItem of qpItems">
-                    {{qpItem.itemText}}
+                <li class="list-group-item" *ngFor="let qpItem of qpItems;let indexOfelement=index;">
+                    <!-- {{qpItem.itemText}} -->
+                    <div id="{{indexOfelement}}" class="ck-content" [innerHtml]='qpItem.itemText' style="display: inline"></div>
                 <span class="badge badge-primary badge-pill">
                     {{qpItem.itemMarks}} Marks
                 </span>
                 <div *ngIf="showReset(qpItem.itemType)" style="display: inline">
-                    <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;" (click) = "updateResponseTableWhenOptionSelected(true, 'Reset', qpItem, 'Reset')"><i class="fa fa-undo mr-1"></i>Reset</button>
+                    <button type="button" class="btn btn-primary btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;" (click) = "updateResponseTableWhenOptionSelected(true, 'Reset', qpItem, 'Reset', indexOfelement)"><i class="fa fa-undo mr-1"></i>Reset</button>
                 </div>
                 <div style="display: inline">
-                    <button type="button" class="btn btn-danger btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;"><i class="fa fa-flag mr-1"></i>Flag</button>
+                    <button type="button" class="btn btn-danger btn-sm float-right mr-1 d-flex align-items-center" style="height:20px;" (click) = "flagRespectiveItem($event, indexOfelement)"><i class="fa fa-flag mr-1"></i>{{flaggedItems[indexOfelement] == false ? 'Flag' : 'Flagged'}}</button>
                 </div>
                 
                 <ol class="list-group" type="a">
                     <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
                         <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="checkbox">
-                                <input type="checkbox" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                                <input type="checkbox" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType, indexOfelement)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
                             <!-- <label><input [ngModel]="itemMcqOption" type="checkbox" name="optCheckbox" (ngChange)="updateResponse(itemMcqOption)">  {{itemMcqOption.mcqOptionText}}</label> -->
                         </div>
                         <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
-                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType, indexOfelement)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
                         </div>
                     </li>
                 </ol>
@@ -46,10 +50,10 @@
                 <div *ngIf='qpItem.itemType === "True/False"' class="radio">
                     <ol class="list-group" type="a" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
                         <li class="list-group-item">
-                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> True
+                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType, indexOfelement)" [value]="itemTrueFalse"> True
                         </li>
                         <li class="list-group-item">
-                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType)" [value]="itemTrueFalse"> False
+                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType, indexOfelement)" [value]="itemTrueFalse"> False
                         </li>
                     </ol>
                 </div>
@@ -60,4 +64,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

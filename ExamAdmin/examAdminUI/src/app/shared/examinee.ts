@@ -8,5 +8,5 @@ export class Examinee{
     examineeBranch: string;
     examineeEmail: string;
     examineeCollege: string;
-    examineeBatchList ?: ExamineeBatch[];
+    // examineeBatchList ?: ExamineeBatch[];
 }

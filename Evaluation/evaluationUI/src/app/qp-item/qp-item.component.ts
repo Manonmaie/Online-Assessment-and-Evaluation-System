@@ -14,11 +14,11 @@ export class QpItemComponent implements OnInit {
   constructor(private QpItemService: QpItemService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const courseId = this.route.snapshot.params['id'];
-    this.getCourses(courseId);
+    const qpId = this.route.snapshot.params['id'];
+    this.getQpItems(qpId);
   }
 
-  getCourses(id:number): void{
+  getQpItems(id:number): void{
     this.QpItemService.getAllQpItemsForQuestionPaper(id).subscribe((qpitems) => this.qpitems = qpitems);
   }
 

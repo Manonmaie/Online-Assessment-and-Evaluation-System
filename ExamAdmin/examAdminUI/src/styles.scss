@@ -24,6 +24,25 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
+input[type=datetime-local], select {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[name=search] {
+    border-radius: 100px;
+    outline: none;
+}
+
+input[name=items] {
+    width: 100px;
+}
+
 input[type=password], select {
     width: 100%;
     padding: 8px 20px;
@@ -113,3 +132,7 @@ th {
     border-color: red;
 }
 
+.center {
+    display: flex;
+    justify-content: center;
+  }
