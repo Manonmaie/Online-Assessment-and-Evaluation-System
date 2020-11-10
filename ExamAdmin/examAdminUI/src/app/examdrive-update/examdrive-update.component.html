@@ -32,7 +32,7 @@
 <div class="container">
     <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search centers here..." [(ngModel)]="searchText"/>
     <br>
-    <button type="button" title="Add new center to this drive" class="btn btn-success float-right"> <i class="fa fa-plus-square"></i> Add Center </button>
+    <button type="button" title="Add new center to this drive" class="btn btn-success float-right" [routerLink]="['/examdriveupdateaddcenter', examdrive.examdriveId]"> <i class="fa fa-plus-square"></i> Add Center </button>
 </div>
 <br>
 <div class="container">
@@ -82,22 +82,36 @@
                         </table>
                     </td>
                     <td colspan="4" [hidden] = "!isUpdate[center.centerId]">
-                        <button type="button" title="Add new batch to this center" class="btn btn-success float-right"> <i class="fa fa-plus-square"></i> Add Batch </button>
+                        <button type="button" title="Add new batch to this center" class="btn btn-success float-right" (click)="addNewBatch()"> <i class="fa fa-plus-square"></i> Add Batch </button>
                         <br><br>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Batch Code</th>
-                                    <th scope="col">Exam Start Time</th>
-                                    <th scope="col">Exam End Time</th>
+                                    <th class="required" scope="col">Batch Code</th>
+                                    <th class="required" scope="col">Exam Start Time</th>
+                                    <th class="required" scope="col">Exam End Time</th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <ng-container *ngIf="isAddBatch">
+                                    <td>
+                                        <input type="text" id="centerBatch" name="batchCode" placeholder="BatchCode(Examdrive Code-Time-Center)" [(ngModel)]="newBatch.batchCode">
+                                    </td>
+                                    <td>
+                                        <input type="datetime-local" ng-model="string" id="batchStartTime" name="batchStartTime" placeholder="Examination Start Time" [(ngModel)]="newBatch.batchStartTime">
+                                    </td>
+                                    <td>
+                                        <input type="datetime-local" ng-model="string" id="batchEndTime" name="batchEndTime" placeholder="Examination End Time" [(ngModel)]="newBatch.batchEndTime">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success float-right mr-1" (click)="addBatch(center)">Add Batch</button>
+                                    </td>
+                                </ng-container>
                                 <tr *ngFor = "let batch of batches[center.centerId]; let ind=index;">
                                     <ng-container *ngIf="batch">
                                         <td>
-                                            <input type="text" id="centerBatch" name="batchCode" placeholder="Unique code for the Exam Drive" [(ngModel)]="batch.batchCode">
+                                            <input type="text" id="centerBatch" name="batchCode" placeholder="BatchCode(Examdrive Code-Time-Center)" [(ngModel)]="batch.batchCode">
                                         </td>
                                         <td>
                                             <input type="datetime-local" ng-model="string" id="batchStartTime" name="batchStartTime" placeholder="Examination Start Time" [(ngModel)]="batch.batchStartTime">

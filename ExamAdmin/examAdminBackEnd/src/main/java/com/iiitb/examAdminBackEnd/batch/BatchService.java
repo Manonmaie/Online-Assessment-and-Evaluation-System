@@ -26,4 +26,12 @@ public class BatchService {
 	public void updateBatch(int id, Batch batch) {
 		batchRepository.save(batch);
 	}
+	
+	public void addBatch(Batch batch) {
+		batchRepository.save(batch);
+	}
+	
+	public void addBatches(List<Batch> batches) {
+		batchRepository.saveAll(batches);
+	}
 }

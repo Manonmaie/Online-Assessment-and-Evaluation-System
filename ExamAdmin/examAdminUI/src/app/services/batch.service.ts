@@ -27,4 +27,12 @@ export class BatchService {
   updateBatch(id: number, batch: Batch): Observable<Batch>{
     return this.http.put<Batch>(baseURL + 'batches/'+id, batch);
   }
+
+  addBatch(batch: Batch): Observable<Batch>{
+    return this.http.post<Batch>(baseURL + 'batches/', batch);
+  }
+
+  addBatches(batches: Batch[]): Observable<Batch[]>{
+    return this.http.post<Batch[]>(baseURL + 'batchesBulk', batches);
+  }
 }

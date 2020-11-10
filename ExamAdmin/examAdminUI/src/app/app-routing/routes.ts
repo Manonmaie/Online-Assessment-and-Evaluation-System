@@ -15,6 +15,7 @@ import { ExamineeAddComponent } from '../examinee-add/examinee-add.component';
 import { ExamineeAddBulkComponent } from '../examinee-add-bulk/examinee-add-bulk.component';
 import { CourseAddComponent } from '../course-add/course-add.component';
 import { ExamdriveUpdateComponent } from '../examdrive-update/examdrive-update.component';
+import { ExamdriveUpdateCenterAddComponent } from '../examdrive-update-center-add/examdrive-update-center-add.component';
 import { CenterUpdateComponent } from '../center-update/center-update.component';
 import { ExamineeUpdateComponent } from '../examinee-update/examinee-update.component';
 import { CourseUpdateComponent } from '../course-update/course-update.component';
@@ -36,6 +37,7 @@ export const routes: Routes = [
     {path: 'examineeaddbulk', component: ExamineeAddBulkComponent},
     {path: 'courseadd', component: CourseAddComponent},
     {path: 'examdriveupdate/:id', component: ExamdriveUpdateComponent},
+    {path: 'examdriveupdateaddcenter/:id', component: ExamdriveUpdateCenterAddComponent},
     {path: 'centerupdate/:id', component: CenterUpdateComponent},
     {path: 'examineeupdate/:id', component: ExamineeUpdateComponent},
     {path: 'courseupdate/:id', component: CourseUpdateComponent},
