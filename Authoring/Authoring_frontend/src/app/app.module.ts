@@ -9,6 +9,8 @@ import { QuestionPaperComponent } from './question-paper/question-paper.componen
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionManagementComponent } from './question-management/question-management.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { QpPreviewComponent } from './qp-preview/qp-preview.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     routingComponets,
     ItemFormComponent,
     QuestionManagementComponent,
-    QuestionPaperComponent
+    QuestionPaperComponent,
+    QpPreviewComponent
    ],
   imports: [
     BrowserModule,

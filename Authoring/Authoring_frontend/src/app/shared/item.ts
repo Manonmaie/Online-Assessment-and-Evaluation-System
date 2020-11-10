@@ -1,3 +1,5 @@
+import { option } from "../shared/option";
+
 export class Item{
     itemText :string;
     cgLvl: string;
@@ -6,4 +8,6 @@ export class Item{
     itemId: number;
     itemType:string;
     itemStatus:string;
+    asitemIds: Number[];
+    asItemMCQ: option[];
 }

@@ -1,3 +1,4 @@
+
 export class QP{
     course :string;
     totalMarks: Number;
