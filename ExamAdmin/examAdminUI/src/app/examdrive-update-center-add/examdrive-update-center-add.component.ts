@@ -7,6 +7,7 @@ import {BatchService} from '../services/batch.service';
 import {ExamdriveService} from '../services/examdrive.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import {resetError, setError} from '../shared/error';
+import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
 
 @Component({
   selector: 'app-examdrive-update-center-add',
@@ -17,18 +18,23 @@ export class ExamdriveUpdateCenterAddComponent implements OnInit {
   examdrive: Examdrive;
   center: Center;
   centers: Center[];
-  batches: Batch[];
   oldCenters: number[] = new Array();
-  newBatch: Batch = {batchCode: null, batchEndTime: null, batchStartTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
   examdriveId: number = this.route.snapshot.params['id'];
   selectedCenter: number;
+  batchList: Batch[];
 
-  constructor(private examdriveService: ExamdriveService, private centerService: CenterService, private batchService: BatchService, public route: ActivatedRoute, public router: Router) { }
+  productForm: FormGroup;
+
+  constructor(private examdriveService: ExamdriveService, private centerService: CenterService, private batchService: BatchService, public route: ActivatedRoute, public router: Router, private fb:FormBuilder) {
+    this.productForm = this.fb.group({
+      name: '',
+      batches: this.fb.array([]) ,
+    });
+  }
 
   ngOnInit(): void {
     this.getExamdrive(this.examdriveId);
     setTimeout(() => {
-      this.newBatch.examdrive = this.examdrive;
       this.getOldCenters();
       setTimeout(() =>{
         this.filterCenters();
@@ -41,7 +47,7 @@ export class ExamdriveUpdateCenterAddComponent implements OnInit {
   }
 
   getOldCenters(): void{
-    for( var batch of this.examdrive.batchList){
+    for( var batch of this.batchList){
       this.oldCenters.push(batch.center.centerId);
     }
     this.oldCenters = this.oldCenters.filter(
@@ -62,7 +68,7 @@ export class ExamdriveUpdateCenterAddComponent implements OnInit {
   }
   
   setBatches(id: number): void{
-    this.batchService.getBatchesByExamdrive(id).subscribe((batches) => this.examdrive.batchList=batches);
+    this.batchService.getBatchesByExamdrive(id).subscribe((batches) => this.batchList=batches);
   }
 
   selectCenter(): void{
@@ -76,6 +82,32 @@ export class ExamdriveUpdateCenterAddComponent implements OnInit {
   }
 
   editCenter(): void{
-    this.center = null;
+    if(confirm(" Are you sure to change the center. All the entered batches information will be lost")){
+      this.center = null;
+      this.productForm.value.batches = null; //NOT WORKING
+    }
+  }
+
+  batches() : FormArray {
+    return this.productForm.get("batches") as FormArray
+  }
+
+  newBatch(): FormGroup {
+    return this.fb.group({batchCode: null, batchStartTime: null, qpStatus:'PENDING', batchEndTime: null, center: this.center, examdrive: this.examdrive});
+  }
+
+  addBatch() {
+    this.batches().push(this.newBatch());
+  }
+
+  removeBatch(i:number) {
+    this.batches().removeAt(i);
+  }
+
+  addCenter() {
+    this.batchService.addBatches(this.productForm.value.batches).subscribe((batches) => this.productForm.value.batches=batches);
+    setTimeout(()=>{
+      this.router.navigate(['/examdriveupdate',this.examdriveId]);
+    },500);
   }
 }

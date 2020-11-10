@@ -6,7 +6,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 import {baseURL} from './shared/baseurl';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { BatchService } from './services/batch.service';
 import { CenterService } from './services/center.service';
@@ -75,6 +75,7 @@ import { ExamdriveUpdateCenterAddComponent } from './examdrive-update-center-add
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     Ng2SearchPipeModule,
     NgxPaginationModule
   ],
