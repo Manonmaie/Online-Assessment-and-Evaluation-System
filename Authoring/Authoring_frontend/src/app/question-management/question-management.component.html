@@ -14,8 +14,12 @@
       {{ item.itemType }}
     </td>
     <td>
-      <div class="ck-content" [innerHtml]='item.itemText'>
-
+      <!-- question -->
+      <div class="ck-content" [innerHtml]='item.itemText'></div>
+      <!-- option -->
+      <div *ngFor="let sub of item.asItemMCQ">
+        <input type="radio" disabled /> &nbsp;
+        <label class="block">{{sub.mcqOptionText}}</label>
       </div>
     </td>
     <td>{{ item.itemStatus}}</td>

@@ -44,6 +44,13 @@ public class ItemController {
 	}
 	
 	
+	// get item_by item_id
+		@RequestMapping(value = "/urest/v1/getitem_ids", method = RequestMethod.GET)
+		public List<Item> getItemByItemId(@RequestParam  Map<String, String> p){
+			return itemService.getItemByItemId(p);
+		}
+	
+	
 	// set question type TF
 	@RequestMapping(value = "/urest/v1/setItemTF", headers="Content-Type=application/json", method = RequestMethod.POST)
     @ResponseBody
