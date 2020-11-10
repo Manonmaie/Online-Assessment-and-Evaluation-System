@@ -32,6 +32,7 @@ public class UserRoleService {
 	
 	public List<AsUserRole> getUserRoleFromUsernameAndPassword(String userName, String password) {
 		AsUser user = userRepository.findByUserNameAndPassword(userName, password);
+//		System.out.println("user = " + user);
 		if(user == null) {
 			return null;
 		}
