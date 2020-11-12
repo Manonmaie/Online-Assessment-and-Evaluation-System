@@ -6,6 +6,7 @@ const EXCEL_EXTENSION = '.xlsx';
 @Injectable({  
   providedIn: 'root'  
 })  
+
 export class ExcelServicesService {  
   constructor() { }  
   public exportAsExcelFile(json: any[], excelFileName: string): void {  
@@ -14,8 +15,18 @@ export class ExcelServicesService {
     const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });  
     this.saveAsExcelFile(excelBuffer, excelFileName);  
   }  
+  
   private saveAsExcelFile(buffer: any, fileName: string): void {  
      const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});  
      FileSaver.saveAs(data, fileName + EXCEL_EXTENSION);  
   }  
+
+  public tableToExcel(tableId: string, name?: string) {
+    let timeSpan = new Date().toISOString();
+    let prefix = name || "ExportResult";
+    let fileName = `${prefix} - ${timeSpan}`;
+    let targetTableElm = document.getElementById(tableId);
+    let wb = XLSX.utils.table_to_book(targetTableElm, <XLSX.Table2SheetOpts>{ sheet: prefix });
+    XLSX.writeFile(wb, `${fileName}.xlsx`);
+  }
 }  
