@@ -46,4 +46,14 @@ public class ExamineeController {
 	public void addExaxmineeBulk(@RequestBody List<Examinee> examinees) {
 		examineeService.addExamineeBulk(examinees);
 	}
+	
+	@RequestMapping("/examineeByCode")
+	public List<Examinee> getExamineeByCode(@RequestBody String code){
+		return examineeService.getExamineeByCode(code);
+	}
+	
+	@RequestMapping("/examineesByCode")
+	public List<Examinee> getExamineesByCode(@RequestBody List<String> code){
+		return examineeService.getExamineesByCode(code);
+	}
 }
