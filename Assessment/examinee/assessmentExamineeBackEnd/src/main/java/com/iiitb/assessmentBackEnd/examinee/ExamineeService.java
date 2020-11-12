@@ -11,6 +11,10 @@ public class ExamineeService {
 	@Autowired
 	private ExamineeRepository examineeRepository;
 	
+	public AsExaminee getExamineeForRegistrationNumberAndPassword(String examineeCode, String password) {
+		return examineeRepository.findByExamineeCodeAndExamineePassword(examineeCode, password);
+	}
+	
 //	public List<AsExaminee> getAllExaminees() {
 //		List<AsExaminee> examinees = new ArrayList<>();
 //		examineeRepository.findAll().forEach(examinees::add);

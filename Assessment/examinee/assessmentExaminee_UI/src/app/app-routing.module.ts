@@ -7,7 +7,7 @@ import { PackageManagementComponent } from './package-management/package-managem
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: 'questionPaper/:userId', component: QuestionPaperComponent },
+  { path: 'questionPaper/:examineeId', component: QuestionPaperComponent },
   { path: 'questionPaperinstruction/:id', component: InstructionComponent },
   { path: 'questionPaper/:examineeId/examination/:qpId/batch/:batchId', component: ExaminationComponent },
   { path: 'centerAdmin/packageManagement', component: PackageManagementComponent },

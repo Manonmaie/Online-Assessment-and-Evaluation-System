@@ -1,0 +1,85 @@
+<div class="container">
+    <legend>Add Center in a Drive</legend>
+    <ul class="list-group">
+        <li class="list-group-item">
+          Exam Drive : {{examdrive.examdriveName}} <font size="-1">[{{examdrive.examdriveCode}}]</font> in 
+            <ng-container *ngIf="examdrive.course">
+                {{examdrive.course.courseName}} Course
+            </ng-container>
+            <ng-container *ngIf="!examdrive.course">
+                - Course
+            </ng-container>
+        </li>
+        <ng-container *ngIf="!center">
+            <br>
+            <form>
+                <div class="form-item">
+                    <label class="required" for="examdriveCenter">Center</label>
+                    <br>
+                    <select id="examdriveCenter" name="examdriveCenter" [(ngModel)]="selectedCenter">
+                        <option *ngFor = "let center of centers" [value]="center.centerId">
+                            {{center.centerName}}
+                        </option>
+                    </select>
+                    <br>
+                    <small>Error Message</small>
+                    <button type="button" class="btn btn-success float-right" (click)="selectCenter()">
+                        Select Center
+                    </button>
+                </div>
+            </form>
+        </ng-container>
+        <ng-container *ngIf="center">
+            <li class="list-group-item">
+            Center : {{center.centerName}} <font size="-1">[{{center.centerCode}}]</font>
+                <!-- <button type="button" class="btn btn-warning float-right" (click)="editCenter()">
+                    <i class="fa fa-pencil"></i>
+                </button>     -->
+            </li>
+            <br>
+            <button type="button" class="btn btn-success" (click)="addBatch()">
+                <i class="fa fa-plus-square"></i>
+                Add Batch
+            </button>
+            <br>
+            <!-- Table of all the batches here -->
+            <form [formGroup]="productForm">
+                <table class="table" formArrayName="batches">
+                    <thead>
+                        <tr>
+                            <th class="required" scope="col">Batch Code</th>
+                            <th class="required" scope="col">Start Time</th>
+                            <th class="required" scope="col">End Time</th>
+                            <th scope="col">
+                                
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let batch of batches().controls; let i=index" [formGroupName]="i">
+                            <td>
+                                <input type="text" formControlName="batchCode" class="form-control">
+                            </td>
+                            <td>
+                                <input type="datetime-local" ng-model="string" formControlName="batchStartTime" class="form-control">
+                            </td>
+                            <td>
+                                <input type="datetime-local" ng-model="string" formControlName="batchEndTime" class="form-control">
+                            </td>
+                            <td>
+                                <button (click)="removeBatch(i)" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>                
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </ng-container>  
+        <ng-container *ngIf="center">
+            <button type="button" class="btn btn-success" (click)="addCenter()"> 
+                Add Center
+            </button>
+        </ng-container>
+    </ul>
+</div>

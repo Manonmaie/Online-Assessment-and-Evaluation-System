@@ -1,17 +1,16 @@
 <div class="container">
-    <h2 style="text-align:center;"> Sign-In Form </h2>
-    <form role="form" name="signIn">
+  <div *ngIf="displayErrorMessage" class="alert alert-danger" role="alert">
+    <strong>Error!</strong> {{errorMessage}}
+  </div>
+  <h2 style="text-align:center;"> Sign-In Form </h2>
+  <form role="form" name="signIn">
     <div class="form-group">
-      <label class="control-label required-field">Username: </label>
-      <!-- <div class=""> -->
-          <input type="text" class="form-control" placeholder="Enter Username" name="username" [(ngModel)]="emailId" required="true"/>
-        <!-- </div> -->
+      <label class="control-label required-field">Username/Registration No: </label>
+      <input type="text" class="form-control" placeholder="Enter Username/Registration No" name="username" [(ngModel)]="userName" required="true"/>
     </div>
     <div class="form-group">
       <label class="control-label required-field">Password: </label>
-      <!-- <div class=""> -->
-          <input type="password" class="form-control" placeholder="Enter Password" name="password" [(ngModel)]="password"/>
-      <!-- </div> -->
+      <input type="password" class="form-control" placeholder="Enter Password" name="password" [(ngModel)]="password"/>
     </div>
     <div class="control center">
       <button type="submit" class="btn btn-success" (click)="loginButtonClick()">Submit</button>

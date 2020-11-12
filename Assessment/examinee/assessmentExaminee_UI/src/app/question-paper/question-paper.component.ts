@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class QuestionPaperComponent implements OnInit {
 
+  examineeId: number;
   questionPapers: QuestionPaper[];
   showStartExamModalPopup: boolean = false;
   questionPaperPrevious: QuestionPaper;
@@ -28,12 +29,13 @@ export class QuestionPaperComponent implements OnInit {
 
   ngOnInit(): void {
     // const examineeId = 1;
-    const examineeId = this.activeRoute.snapshot.params['userId'];
-    this.questionPaperService.getQuestionPapers(examineeId).subscribe((questionPapers) => this.questionPapers = questionPapers);
+    // const examineeId = this.activeRoute.snapshot.params['examineeId'];
+    this.examineeId = this.activeRoute.snapshot.params['examineeId'];
+    this.questionPaperService.getQuestionPapers(this.examineeId).subscribe((questionPapers) => this.questionPapers = questionPapers);
   }
 
   onSelect(questionPaper: QuestionPaper) {
-    let examineeId: number = 1;
+    let examineeId: number = this.examineeId;
     let examineeBatchId: ExamineeBatchId = new ExamineeBatchId();
     examineeBatchId.examineeId = examineeId;
     examineeBatchId.batchId = questionPaper.asBatch.batchId;
@@ -53,15 +55,24 @@ export class QuestionPaperComponent implements OnInit {
     this.examineeBatch.examineeBatchStartTime = currDateTimeFormatted;
 
     if(currDateTime >= new Date(questionPaper.asBatch.batchStartTime) && currDateTime <= new Date(questionPaper.asBatch.batchEndTime)){
-      this.showStartExamModalPopup = false;
-      this.lastAttemptPrmoise = this.addAttempt(examineeId, questionPaper.asBatch.batchId, this.attempt);
-      this.lastAttemptPrmoise.then((res) => {
-        // console.log(res);
-        this.questionPaperService.setLastAttemptVariable(res);
+      this.questionPaperService.getExamineeBatchFromExamineeAndBatchIds(examineeId,questionPaper.asBatch.batchId).subscribe((examineeBatch) => {
+        if(examineeBatch.examineeBatchStatus == 'COMPLETED'){
+          this.questionPaperPrevious = questionPaper;
+          this.showStartExamModalPopup = true;
+        }
+        else{
+          this.showStartExamModalPopup = false;
+          this.lastAttemptPrmoise = this.addAttempt(examineeId, questionPaper.asBatch.batchId, this.attempt);
+          this.lastAttemptPrmoise.then((res) => {
+            // console.log(res);
+            this.questionPaperService.setLastAttemptVariable(res);
+          });
+          this.updateExamineeBatch(examineeId, questionPaper.asBatch.batchId, this.examineeBatch);
+          this.questionPaperService.setSelectedQuestionPaper(questionPaper);
+          this.route.navigate(['/questionPaper/' + examineeId + '/examination/' + questionPaper.qpId + '/batch/' + questionPaper.asBatch.batchId]);
+          // alert(this.showStartExamModalPopup);
+        }
       });
-      this.updateExamineeBatch(examineeId, questionPaper.asBatch.batchId, this.examineeBatch);
-      this.questionPaperService.setSelectedQuestionPaper(questionPaper);
-      this.route.navigate(['/questionPaper/' + examineeId + '/examination/' + questionPaper.qpId + '/batch/' + questionPaper.asBatch.batchId]);
     }
     else{
       this.questionPaperPrevious = questionPaper;

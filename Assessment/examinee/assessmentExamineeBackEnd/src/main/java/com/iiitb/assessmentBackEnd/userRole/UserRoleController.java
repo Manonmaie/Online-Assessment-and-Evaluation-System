@@ -21,6 +21,10 @@ public class UserRoleController {
 	
 	@RequestMapping("/username/{userName}/password/{password}/userRole")
 	public AsUserRole getUserRoleFromUsernameAndPassword(@PathVariable String userName, @PathVariable String password){
-		return userRoleService.getUserRoleFromUsernameAndPassword(userName, password).get(0);
+		List<AsUserRole> userRoles = userRoleService.getUserRoleFromUsernameAndPassword(userName, password);
+		if(userRoles == null) {
+			return null;
+		}
+		return userRoles.get(0);
 	}
 }

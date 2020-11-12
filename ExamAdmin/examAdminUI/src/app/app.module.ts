@@ -6,7 +6,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 import {baseURL} from './shared/baseurl';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { BatchService } from './services/batch.service';
 import { CenterService } from './services/center.service';
@@ -40,6 +40,7 @@ import { ExamdriveUpdateComponent } from './examdrive-update/examdrive-update.co
 import { ExamdriveViewComponent } from './examdrive-view/examdrive-view.component';
 import { ExamdriveCenterViewComponent } from './examdrive-center-view/examdrive-center-view.component';
 import { ExamdriveMarksComponent } from './examdrive-marks/examdrive-marks.component';
+import { ExamdriveUpdateCenterAddComponent } from './examdrive-update-center-add/examdrive-update-center-add.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ExamdriveMarksComponent } from './examdrive-marks/examdrive-marks.compo
     ExamdriveUpdateComponent,
     ExamdriveViewComponent,
     ExamdriveCenterViewComponent,
-    ExamdriveMarksComponent
+    ExamdriveMarksComponent,
+    ExamdriveUpdateCenterAddComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +75,7 @@ import { ExamdriveMarksComponent } from './examdrive-marks/examdrive-marks.compo
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     Ng2SearchPipeModule,
     NgxPaginationModule
   ],

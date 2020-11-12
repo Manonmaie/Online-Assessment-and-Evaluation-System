@@ -66,6 +66,19 @@ public class ItemService {
 		return t;
 	}
 	
+//	getItemByItemId
+	public List<Item> getItemByItemId(Map<String, String> m) {
+		List<String> t1 = new ArrayList<String>(Arrays.asList(m.get("itemId").split(",")));
+	    int size = t1.size();
+	    List<Integer> t2= new ArrayList<Integer>();
+	    for(int i=0; i<size; i++) {
+	         t2.add(Integer.parseInt(t1.get(i)));
+	      }
+		List<Item> t= itemRepository.findByItemIdIn(t2);
+		System.out.println("meee");
+		return t;
+	}
+	
 	public ResponseStruct createItemTF(ResponseStruct question) {		
 		Item item = new Item();
 		
