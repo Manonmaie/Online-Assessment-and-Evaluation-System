@@ -11,34 +11,50 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.urest.v1.authoring_module.item.Item;
 import com.urest.v1.authoring_module.questionPaper.questionPaper;
 
-@JsonIgnoreProperties(value = { "questionPaper" })
+@JsonIgnoreProperties({ "QPItemId" })
 
 @Entity // This tells Hibernate to make a table out of this class
 
-@Table(name = "question_paper_item")
+@Table(name = "au_qp_item")
 public class questionPaperItem {
 	
-	public questionPaperItem(int itemId) {
-		this.itemId=itemId;
+	public questionPaperItem() {
+		super();
 	}
 
-
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	@JoinColumn(name="question_paper_id")
+	@JoinColumn(name="item_id")
+	@JsonIgnore
+	private Item item;
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name="qp_id")
 	@JsonIgnore
 	private questionPaper QPItemId;
 
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "question_paper_item_id",updatable = false, nullable = false)
+	@Column(name = "qp_item_id",updatable = false, nullable = false)
 	private Integer questionPaperItemId;
-	private Integer itemId;
 
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	@JsonIgnore
 	public questionPaper getQPItemId() {
 		return QPItemId;
 	}
@@ -55,14 +71,6 @@ public class questionPaperItem {
 		this.questionPaperItemId = questionPaperItemId;
 	}
 
-	public Integer getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(Integer itemId) {
-		this.itemId = itemId;
-	}
-	
 	
 }
 
