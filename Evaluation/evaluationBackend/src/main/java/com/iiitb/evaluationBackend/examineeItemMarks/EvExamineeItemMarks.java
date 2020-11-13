@@ -17,7 +17,7 @@ public class EvExamineeItemMarks {
 	@EmbeddedId
     private ExamineeItemMarksKey examineeItemMarksId;
 	
-	private double examineeItemMarks;
+	private float examineeItemMarks;
 	 
     @ManyToOne
     @MapsId("qpItemId")
@@ -33,7 +33,7 @@ public class EvExamineeItemMarks {
 		this.examineeItemMarksId = examineeItemMarksId;
 	}
 
-	public void setExamineeItemMarks(double examineeItemMarks) {
+	public void setExamineeItemMarks(float examineeItemMarks) {
 		this.examineeItemMarks = examineeItemMarks;
 	}
 
@@ -47,14 +47,14 @@ public class EvExamineeItemMarks {
     	
     }
 
-	public EvExamineeItemMarks(double examineeItemMarks, EvQpItem qpItem, EvExamineeBatch examineeBatch) {
+	public EvExamineeItemMarks(float examineeItemMarks, EvQpItem qpItem, EvExamineeBatch examineeBatch) {
 		super();
 		this.examineeItemMarks = examineeItemMarks;
 		this.qpItem = qpItem;
 		this.examineeBatch = examineeBatch;
 	}
 
-	public double getExamineeItemMarks() {
+	public float getExamineeItemMarks() {
 		return examineeItemMarks;
 	}
 

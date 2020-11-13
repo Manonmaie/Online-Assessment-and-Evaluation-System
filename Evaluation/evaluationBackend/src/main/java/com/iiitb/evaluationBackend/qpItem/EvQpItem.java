@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.evaluationBackend.itemMcqOptions.EvItemMcqOptions;
+import com.iiitb.evaluationBackend.itemTrueFalse.EvItemTrueFalse;
 import com.iiitb.evaluationBackend.questionPaper.EvQuestionPaper;
 
 @Entity
@@ -30,13 +31,15 @@ public class EvQpItem {
 	
 	@OneToMany(mappedBy="evQpItem")
 	private List<EvItemMcqOptions> evItemMcqOptionsList;
+	
+	@OneToMany(mappedBy="QpItemId")
+	private List<EvItemTrueFalse> evItemTrueFalseList;
 
 	public EvQpItem() {
 		
 	}
 	
-	public EvQpItem(int qpItemId, String itemCode, String itemText, float itemMarks, String itemType,
-			String cognitiveLevel, int qpId) {
+	public EvQpItem(int qpItemId, String itemCode, String itemText, float itemMarks, String itemType,int qpId) {
 		super();
 		this.qpItemId = qpItemId;
 		this.itemCode = itemCode;
@@ -101,6 +104,14 @@ public class EvQpItem {
 
 	public void setEvItemMcqOptionsList(List<EvItemMcqOptions> evItemMcqOptionsList) {
 		this.evItemMcqOptionsList = evItemMcqOptionsList;
+	}
+	
+	public List<EvItemTrueFalse> getEvItemTrueFalseList() {
+		return evItemTrueFalseList;
+	}
+
+	public void setEvItemTrueFalseList(List<EvItemTrueFalse> evItemTrueFalseList) {
+		this.evItemTrueFalseList = evItemTrueFalseList;
 	}
 	
 }
