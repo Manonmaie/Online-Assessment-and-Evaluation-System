@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.urest.v1.authoring_module.item.Item;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -33,4 +36,9 @@ public class questionPaperController {
         return new ResponseEntity<questionPaper>(qpService.createQP(q),HttpStatus.OK);
     }
 
+    // get all qp
+    @RequestMapping("/urest/v1/getallQps")
+	public List<questionPaper> getAllQps() {
+		return qpService.getAllQp();
+	}
 }

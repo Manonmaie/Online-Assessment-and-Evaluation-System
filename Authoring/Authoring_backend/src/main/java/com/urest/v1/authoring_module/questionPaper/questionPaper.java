@@ -13,46 +13,45 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.urest.v1.authoring_module.TF.TF;
 import com.urest.v1.authoring_module.questionPaperItem.questionPaperItem;
 
+
+
 @Entity // This tells Hibernate to make a table out of this class
 
-@Table(name = "question_Paper")
+@Table(name = "au_question_paper")
 public class questionPaper {
 	questionPaper(){
-		
+		super();
 	}
-	questionPaper(int timeDuration,int totalMarks,String course,String Instructions){
+	questionPaper(int timeDuration,int totalMarks,String course,String batchCode){
 		this.timeDuration=timeDuration;
 		this.totalMarks=totalMarks;
 		this.course=course;
-		this.instructions=Instructions;
+		this.batchCode=batchCode;
 	}
-	
-	public String getInstructions() {
-		return instructions;
-	}
-	public void setInstructions(String instructions) {
-		this.instructions = instructions;
-	}
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="question_paper_id", updatable = false, nullable = false)
+	@Column(name="qp_id", updatable = false, nullable = false)
 	private Integer questionPaperId;
 	
-	@Column(name="time_duration")
+	@Column(name="duration")
 	private int timeDuration;
-	@Column(name="total_marks")
+	@Column(name="maximum_marks")
 	private int totalMarks;
+	@Column(name="course_code")
 	private String course;
-	private String instructions;
+	@Column(name="batch_code")
+	private String batchCode;
 	
+		
 	@OneToMany(mappedBy="QPItemId", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<questionPaperItem> asitemIds=new ArrayList<questionPaperItem>();
-		
+	
+	
 	public Integer getQuestionPaperId() {
 		return questionPaperId;
 	}
@@ -91,7 +90,12 @@ public class questionPaper {
 		this.asitemIds = asitemIds;
 	}
 	
-
+	public String getBatchCode() {
+		return batchCode;
+	}
+	public void setBatchCode(String batchCode) {
+		this.batchCode = batchCode;
+	}
 
 	
 }

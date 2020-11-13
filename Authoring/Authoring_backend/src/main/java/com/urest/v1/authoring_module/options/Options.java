@@ -25,7 +25,7 @@ import com.urest.v1.authoring_module.item.Item;
 
 @Entity // This tells Hibernate to make a table out of this class
 
-@Table(name = "item_mcq_options")
+@Table(name = "au_item_mcq_options")
 public class Options {
 	
 	public Options() {
@@ -57,9 +57,11 @@ public class Options {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "item_mcq_options_id",updatable = false, nullable = false)
+	@Column(name = "item_mcq_id",updatable = false, nullable = false)
 	private Integer item_mcq_options_id;
+	@Column(name = "mcq_option_marks")
 	private Integer mcqOptionMarks;
+	@Column(name = "mcq_option_text")
 	private String mcqOptionText;
 	public Integer getItem_mcq_options_id() {
 		return item_mcq_options_id;
