@@ -22,13 +22,13 @@ public class ExamineeItemMarksService {
 	
 	public EvExamineeItemMarks addMarks(EvExamineeItemMarks examineeItemMarks) {
 //		EvExamineeItemMarks itemMarks = new EvExamineeItemMarks();
-//		ExamineeItemMarksKey examineeMarksId = new ExamineeItemMarksKey(examineeItemMarks.getQpItemId().getQpItemId(),examineeItemMarks.getExamineeBatchId().getexaminee_batch_id());
+//		ExamineeItemMarksKey examineeMarksId = new ExamineeItemMarksKey(examineeItemMarks.getQpItem().getQpItemId(),examineeItemMarks.getExamineeBatch().getexaminee_batch_id());
 //		itemMarks.setExamineeItemMarksId(examineeMarksId);
 //		itemMarks.setExamineeItemMarks(10);
 ////		itemMarks.getQpItemId().setQpItemId(examineeItemMarks.getQpItemId().getQpItemId());
 ////		itemMarks.getExamineeBatchId().setexaminee_batch_id(examineeItemMarks.getExamineeBatchId().getexaminee_batch_id());
-//		itemMarks.setQpItemId(examineeItemMarks.getQpItemId());
-//		itemMarks.setExamineeBatchId(examineeItemMarks.getExamineeBatchId());
+//		itemMarks.setQpItem(examineeItemMarks.getQpItem());
+//		itemMarks.setExamineeBatch(examineeItemMarks.getExamineeBatch());
 		examineeItemMarksRepository.save(examineeItemMarks);
 		return examineeItemMarks;
 	}
@@ -49,8 +49,8 @@ public class ExamineeItemMarksService {
 					ExamineeItemMarksKey examineeMarksId = new ExamineeItemMarksKey(response.getEvQpItem().getQpItemId(),examineeBatchId);
 					itemMarks.setExamineeItemMarksId(examineeMarksId);
 					itemMarks.setExamineeItemMarks(marks);
-					itemMarks.setQpItemId(response.getEvQpItem());
-					itemMarks.setExamineeBatchId(response.getEvExamineeBatch());
+					itemMarks.setQpItem(response.getEvQpItem());
+					itemMarks.setExamineeBatch(response.getEvExamineeBatch());
 					examineeItemMarksRepository.save(itemMarks);
 				}
 			}	
