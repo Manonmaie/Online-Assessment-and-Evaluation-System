@@ -1,5 +1,7 @@
 package com.iiitb.assessmentBackEnd.response;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +38,11 @@ public class ResponseController {
 	@RequestMapping("/response/qpItem/{qpItemId}/examinee/{examineeId}/batch/{batchId}")
 	public AsResponse getResponseForQpItemAndAttemptForRadioButton(@PathVariable int qpItemId,@PathVariable int examineeId, @PathVariable int batchId){
 		return responseService.getResponseForQpItemAndAttemptForRadioButton(qpItemId, examineeId, batchId);
+	}
+	
+	@RequestMapping("/batch/{batchId}/allResponsesForBatch")
+	public List<AsResponse> getAllResponsesForBatchId(@PathVariable int batchId){
+		return responseService.getAllResponsesForBatchId(batchId);
 	}
 	
 	@RequestMapping(value = "/response/setResponse", headers="Content-Type=application/json", method = RequestMethod.POST)
