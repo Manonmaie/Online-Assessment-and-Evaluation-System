@@ -11,7 +11,7 @@ import { Observable, of } from "rxjs";
 export class DriveCenterComponent implements OnInit {
 
   driveCenterExaminee : DriveCenterExaminee[];  
-
+  searchText: any;
   constructor(private driveCenterService: DriveCenterService) { }
 
   ngOnInit(): void {
