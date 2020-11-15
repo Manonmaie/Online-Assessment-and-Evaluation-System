@@ -14,4 +14,16 @@ export class PackageManagementService {
   getAllCompletedBatchesToExport(): Observable<Batch[]>{
     return this.http.get<Batch[]>(baseURL + 'completedBatchesResponses');
   }
+
+  getAllSentBatchesForBatchHistory(): Observable<Batch[]>{
+    return this.http.get<Batch[]>(baseURL + 'batchesWithSendResponses/SENT');
+  }
+
+  getAllResponsesForBatchId(batchId: number): Observable<Response[]>{
+    return this.http.get<Response[]>(baseURL + 'batch/' + batchId + '/allResponsesForBatch');
+  }
+
+  updateBatchQpStatus(batchId: number, batch: Batch): Observable<Batch>{
+    return this.http.put<Batch>(baseURL + '/batch/' + batchId , batch);
+  }
 }
