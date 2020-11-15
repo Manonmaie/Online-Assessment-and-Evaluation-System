@@ -11,12 +11,12 @@ export class TriggerService {
 
   constructor(private http: HttpClient) { }
 
-  startTrigger(id: number,examineeMarks: ExamineeItemMarks): Observable<ExamineeItemMarks>{
-    return this.http.post<ExamineeItemMarks>(baseURL + 'trigger/examineeBatch/' + id,examineeMarks);
+  startTrigger(id: number): Observable<any>{
+    return this.http.post<any>(baseURL + 'trigger/examineeBatch/' + id,id);
   }
   
-  evaluateMarks(id: number,examineeMarks: ExamineeItemMarks): Observable<ExamineeItemMarks>{
-    return this.http.post<ExamineeItemMarks>(baseURL + 'response/examineeBatch/' + id,examineeMarks);
+  evaluateMarks(id: number): Observable<any>{
+    return this.http.put<any>(baseURL + 'response/examineeBatch/' + id,id);
   }
 
 }
