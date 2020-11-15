@@ -24,7 +24,7 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping("/urest/v1/getallitemsTF")
+	@RequestMapping("/urest/v1/getallitems")
 	public List<Item> getAllItems() {
 		return itemService.getAllItems();
 	}
@@ -41,6 +41,13 @@ public class ItemController {
 	@RequestMapping(value = "/urest/v1/getitem_byFilter", method = RequestMethod.GET)
 	public List<Item> getItemByFilter(@RequestParam  Map<String, String> p){
 		return itemService.getAllQpItemsFiltered(p);
+	}
+	
+	
+	// get item_by item_ids
+	@RequestMapping(value = "/urest/v1/getitem_ids", method = RequestMethod.GET)
+	public List<Item> getItemByItemId(@RequestParam  Map<String, String> p){
+		return itemService.getItemByItemId(p);
 	}
 	
 	

@@ -53,4 +53,12 @@ public class ExamineeService {
 //		}
 		examineeRepository.saveAll(examinees);
 	}
+	
+	public List<Examinee> getExamineeByCode(String code){
+		return examineeRepository.findByExamineeCode(code);
+	}
+	
+	public List<Examinee> getExamineesByCode(List<String> codes){
+		return examineeRepository.findByExamineeCodeIn(codes);
+	}
 }

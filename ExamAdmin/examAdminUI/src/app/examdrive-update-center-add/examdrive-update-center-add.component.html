@@ -32,20 +32,52 @@
         <ng-container *ngIf="center">
             <li class="list-group-item">
             Center : {{center.centerName}} <font size="-1">[{{center.centerCode}}]</font>
-                <button type="button" class="btn btn-warning float-right" (click)="editCenter()">
+                <!-- <button type="button" class="btn btn-warning float-right" (click)="editCenter()">
                     <i class="fa fa-pencil"></i>
-                </button>    
+                </button>     -->
             </li>
             <br>
-            <button type="button" class="btn btn-success">
-                <i class="fa fa-plus-square" style="font-size:24px"></i>
+            <button type="button" class="btn btn-success" (click)="addBatch()">
+                <i class="fa fa-plus-square"></i>
                 Add Batch
             </button>
-        </ng-container>
-        <!-- Table of all the batches here -->
-        <ng-container *ngIf="center && batches?.length">
             <br>
-            <button type="button" class="btn btn-success">
+            <!-- Table of all the batches here -->
+            <form [formGroup]="productForm">
+                <table class="table" formArrayName="batches">
+                    <thead>
+                        <tr>
+                            <th class="required" scope="col">Batch Code</th>
+                            <th class="required" scope="col">Start Time</th>
+                            <th class="required" scope="col">End Time</th>
+                            <th scope="col">
+                                
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let batch of batches().controls; let i=index" [formGroupName]="i">
+                            <td>
+                                <input type="text" formControlName="batchCode" class="form-control">
+                            </td>
+                            <td>
+                                <input type="datetime-local" ng-model="string" formControlName="batchStartTime" class="form-control">
+                            </td>
+                            <td>
+                                <input type="datetime-local" ng-model="string" formControlName="batchEndTime" class="form-control">
+                            </td>
+                            <td>
+                                <button (click)="removeBatch(i)" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>                
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </ng-container>  
+        <ng-container *ngIf="center">
+            <button type="button" class="btn btn-success" (click)="addCenter()"> 
                 Add Center
             </button>
         </ng-container>

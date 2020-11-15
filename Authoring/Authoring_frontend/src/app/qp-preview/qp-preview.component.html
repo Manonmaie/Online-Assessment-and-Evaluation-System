@@ -1,0 +1,41 @@
+
+<div>
+    <div class="container-dummy">
+        <h2 style="text-align:center;"> Question Paper Preview </h2>
+        <div class="row customMain">
+            <div class="col-md-7 col-md-offset-1">
+                <ol class="list-group">
+                    <li class="list-group-item" *ngFor="let qpItem of qpItems;">
+                        <div id="{{indexOfelement}}" class="ck-content" [innerHtml]='qpItem.itemText' style="display: inline"></div>
+                    <span class="badge badge-primary badge-pill">
+                        {{qpItem.marks}} Marks
+                    </span>
+                    <ol class="list-group" type="a">
+                        <li class="list-group-item"  *ngFor="let itemMcq of qpItem.asItemMCQ">
+                            <div *ngIf='qpItem.itemType === "MCQ"' class="checkbox">
+                                    <input type="checkbox" name="{{itemMcq.itemCode}}"  [value]="itemMcqOption"> {{itemMcq.mcqOptionText}}
+                            </div>
+                            <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
+                                <input type="radio" name="{{qpItem.itemCode}}"  [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                            </div>
+                        </li>
+                    </ol>
+                    
+                    <div *ngIf='qpItem.itemType === "TF"' class="radio">
+                        <div>
+                            <input type="radio" disabled /> &nbsp;
+                            <label class="block">True<span class="required">*</span></label>
+                          </div>
+                          <div>
+                            <input type="radio" disabled /> &nbsp;
+                            <label class="block">False<span class="required">*</span></label>
+                          </div>
+                    </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <button type="button" (click)="printS()">Click Me!</button>

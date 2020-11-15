@@ -61,7 +61,6 @@ export class QuestionPaperComponent implements OnInit {
   }
 
   page = 1;
-  myQPSet: Set<number> = new Set<number>();
   pageSize = 10;
   collectionSize=3;
   author_id: Number=1;
@@ -77,6 +76,7 @@ export class QuestionPaperComponent implements OnInit {
     this.getitem(this.author_id);
     this.refreshItems();
     this.onFilterChange = this.onFilterChange.bind(this);
+    this.editQPList = this.editQPList.bind(this);
   }
 
   // params = params.set('name', name);
@@ -86,18 +86,19 @@ export class QuestionPaperComponent implements OnInit {
   }
 
   editQPList(itemId: number){
-    // for (let currentNumber of this.myQPSet) {
-    //   console.log(currentNumber);     //1 2 3 4 5 6
-    //   }
-    // console.log(this.myQPSet.size);
-      if(this.myQPSet.has(itemId))
+    console.log(itemId);
+    var myQPSet=this.QPService.getQpSelected();
+
+      if(myQPSet.has(itemId))
       {
-        this.myQPSet.delete(itemId);  
+        myQPSet.delete(itemId);  
+        this.QPService.setQpSelected(myQPSet);
         return false;
       }
       else
       {
-        this.myQPSet.add(itemId);  
+        myQPSet.add(itemId); 
+        this.QPService.setQpSelected(myQPSet); 
         return true;
       }
   }
@@ -208,6 +209,12 @@ export class QuestionPaperComponent implements OnInit {
   setQP(): void{
     // this.ItemFilterService.setQP().subscribe((items)=> this.items=items);
     console.log(this.selectedSub);
-    this.QPService.setQP(this.selectedSub,this.totalMarks,this.testDuration,this.instructions,Array.from(this.myQPSet.values())).subscribe((items)=> console.log(items));
+    var myQPSet=this.QPService.getQpSelected();
+    this.QPService.setQP(this.selectedSub,this.totalMarks,this.testDuration,this.instructions,Array.from(myQPSet.values())).subscribe((items)=> console.log(items));
+  }
+
+
+  routeToQpPreview(){
+    this.router.navigate(['/qpPreview']);
   }
 }

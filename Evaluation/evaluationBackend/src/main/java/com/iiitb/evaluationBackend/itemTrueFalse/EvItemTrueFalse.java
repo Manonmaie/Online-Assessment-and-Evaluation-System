@@ -2,11 +2,6 @@ package com.iiitb.evaluationBackend.itemTrueFalse;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.iiitb.evaluationBackend.qpItem.EvQpItem;
 
 @Entity
 public class EvItemTrueFalse {
@@ -16,21 +11,48 @@ public class EvItemTrueFalse {
 	
 	private String itemTrueFalseCode;
 	
-	@ManyToOne
-	@JoinColumn(name="qp_item_id")
-	@JsonIgnore
-	private EvQpItem evQpItem;
+	private int QpItemId;
+	
+	private float TruePercentage;
+	
+	private float FalsePercentage;
 
 	public EvItemTrueFalse() {
 		
 	}
-	
-	public EvItemTrueFalse(int itemTrueFalseId, String itemTrueFalseCode, int qpItemId) {
+
+	public EvItemTrueFalse(int itemTrueFalseId, String itemTrueFalseCode, int qpItemId, float truePercentage,
+			float falsePercentage) {
 		super();
 		this.itemTrueFalseId = itemTrueFalseId;
 		this.itemTrueFalseCode = itemTrueFalseCode;
-		this.evQpItem = new EvQpItem();
-		this.evQpItem.setQpItemId(qpItemId);
+		QpItemId = qpItemId;
+		TruePercentage = truePercentage;
+		FalsePercentage = falsePercentage;
+	}
+
+	public int getQpItemId() {
+		return QpItemId;
+	}
+
+	public void setQpItemId(int qpItemId) {
+		QpItemId = qpItemId;
+	}
+
+	public float getTruePercentage() {
+		return TruePercentage;
+	}
+
+	public void setTruePercentage(float truePercentage) {
+		TruePercentage = truePercentage;
+	}
+
+	public float getFalsePercentage() {
+		return FalsePercentage;
+	}
+
+	public void setFalsePercentage(float falsePercentage) {
+		FalsePercentage = falsePercentage;
 	}
 
 	public int getItemTrueFalseId() {
@@ -49,11 +71,5 @@ public class EvItemTrueFalse {
 		this.itemTrueFalseCode = itemFrueFalseCode;
 	}
 
-	public EvQpItem getAsQpItem() {
-		return evQpItem;
-	}
-
-	public void setAsQpItem(EvQpItem evQpItem) {
-		this.evQpItem = evQpItem;
-	}
+	
 }

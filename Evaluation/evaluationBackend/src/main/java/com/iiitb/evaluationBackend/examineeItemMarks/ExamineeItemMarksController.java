@@ -29,8 +29,12 @@ public class ExamineeItemMarksController {
 		return examineeItemMarksService.getExamineeItemMarks(qpItemId,examineeBatchId);
 	}
 	
+	@RequestMapping(value = "/trigger/examineeBatch/{examineeBatchId}", headers="Content-Type=application/json", method = RequestMethod.POST)
+    public ResponseEntity<Integer> Trigger(@PathVariable int examineeBatchId){
+		return new ResponseEntity<Integer>(examineeItemMarksService.Trigger(examineeBatchId),HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/response/examineeBatch/{examineeBatchId}", headers="Content-Type=application/json", method = RequestMethod.POST)
-    @ResponseBody
     public ResponseEntity<Integer> EvaluateQpItems(@PathVariable int examineeBatchId){
 		return new ResponseEntity<Integer>(examineeItemMarksService.EvaluateQpItems(examineeBatchId),HttpStatus.OK);
 	}

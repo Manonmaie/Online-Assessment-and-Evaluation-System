@@ -41,7 +41,7 @@
   <br/>
 
   <!-- Preview of Question Paper -->
-  <button type="button" class="btn btn-primary">Question Paper Preview</button>
+  <button type="button" class="btn btn-primary" (click)="routeToQpPreview()">Question Paper Preview</button>
 
 
 
@@ -87,7 +87,7 @@
             <thead>
             <tr>
               <th scope="col">Marks</th>
-              <th scope="col">Subject</th>
+              <th scope="col">Type</th>
               <th scope="col">Question</th>
               <th scope="col">Selected</th>
             </tr>
@@ -101,8 +101,12 @@
                 </div>
               </td>
               <td>
-                <div class="ck-content" [innerHtml]='item.itemText'>
-          
+                <!-- question -->
+                <div class="ck-content" [innerHtml]='item.itemText'> </div>
+                <!-- option -->
+                <div *ngFor="let sub of item.asItemMCQ">
+                  <input type="radio" disabled /> &nbsp;
+                  <label class="block">{{sub.mcqOptionText}}</label>
                 </div>
               </td>
               <td>

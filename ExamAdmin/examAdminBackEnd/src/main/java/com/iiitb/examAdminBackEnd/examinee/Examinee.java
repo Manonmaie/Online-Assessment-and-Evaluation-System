@@ -3,6 +3,7 @@ package com.iiitb.examAdminBackEnd.examinee;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +20,9 @@ import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
 public class Examinee {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int examineeId;
-	private String examineeCode,examineeName,examineePassword,examineeBranch,examineeEmail,examineeCollege;
+	@Column(name = "examinee_code")
+	private String examineeCode;
+	private String examineeName,examineePassword,examineeBranch,examineeEmail,examineeCollege;
 	
 	@OneToMany(mappedBy = "examinee", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JsonIgnore

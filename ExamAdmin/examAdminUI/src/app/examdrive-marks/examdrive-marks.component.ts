@@ -5,6 +5,7 @@ import { Examdrive } from '../shared/examdrive';
 import {Observable, of} from 'rxjs';
 import {ExamineeBatchService } from '../services/examinee-batch.service';
 import { ExamineeBatch } from '../shared/examinee-batch';
+import {ExcelServicesService} from '../services/excel-services.service';
 
 @Component({
   selector: 'app-examdrive-marks',
@@ -17,7 +18,7 @@ export class ExamdriveMarksComponent implements OnInit {
   searchText: any;
   pageNo: number = 1;
   itemsPage: number = 25;
-  constructor(private examdriveService: ExamdriveService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute) { }
+  constructor(private examdriveService: ExamdriveService, private examineeBatchService: ExamineeBatchService, private excelService: ExcelServicesService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const examdriveId = this.route.snapshot.params['id'];
@@ -31,5 +32,14 @@ export class ExamdriveMarksComponent implements OnInit {
 
   getExamineeBatchByExamdriveId(id: number): void{
     this.examineeBatchService.getExamineeBatchByExamdriveId(id).subscribe((examineeBatchList) => this.examineeBatchList=examineeBatchList);
+  }
+
+  fileName: string;
+
+  exportAsExcel(): void{
+    this.fileName = "Marks Reports of ".concat(this.examdrive.examdriveCode.toString());
+    this.fileName = this.fileName.concat(" in ");
+    this.fileName = this.fileName.concat(this.examdrive.course.courseCode.toString());
+    this.excelService.tableToExcel("drive-marks-list",this.fileName);
   }
 }

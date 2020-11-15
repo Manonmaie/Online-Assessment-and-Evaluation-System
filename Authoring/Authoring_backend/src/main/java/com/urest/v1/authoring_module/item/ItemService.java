@@ -40,29 +40,29 @@ public class ItemService {
 	}
 	
 	public List<Item> getAllQpItemsFiltered(Map<String, String> m) {
-//		System.out.println("customQuery " + p.toString());
 		List<String> cgLvlList = new ArrayList<String>(Arrays.asList(m.get("cgLvl").split(",")));
-//		System.out.println(cgLvlList.toString());
 		List<String> difLvlList = new ArrayList<String>(Arrays.asList(m.get("difLvl").split(",")));
-		System.out.println(difLvlList.toString());
 		List<String> typesList = new ArrayList<String>(Arrays.asList(m.get("types").split(",")));
-		System.out.println(m.get("startMark"));
-		System.out.println(m.get("endMark"));
-//		int startMarkInteger=Integer.valueOf(m.get("startMark"));
 		int startMarkInteger = 0;
 		if(m.get("startMark")!=null)
 			startMarkInteger=Integer.parseInt(m.get("startMark").trim());
-//		int endMarkInteger=Integer.valueOf(m.get("endMark"));
 		int endMarkInteger=100;
 		if(m.get("endMark")!=null)
 			endMarkInteger=Integer.parseInt(m.get("endMark").trim());
-		System.out.println("----------------");
-		System.out.println(startMarkInteger);
-		System.out.println(endMarkInteger);
-		System.out.println("----------------");
-		List<Item> t= itemRepository.findByItemId(cgLvlList,difLvlList,typesList,startMarkInteger,endMarkInteger);
-		System.out.println("heyy");
-		System.out.println(t.toString());
+		List<Item> itemList= itemRepository.findByItemId(cgLvlList,difLvlList,typesList,startMarkInteger,endMarkInteger);
+		return itemList;
+	}
+	
+//	getItemByItemId
+	public List<Item> getItemByItemId(Map<String, String> m) {
+		List<String> t1 = new ArrayList<String>(Arrays.asList(m.get("itemId").split(",")));
+	    int size = t1.size();
+	    List<Integer> t2= new ArrayList<Integer>();
+	    for(int i=0; i<size; i++) {
+	         t2.add(Integer.parseInt(t1.get(i)));
+	      }
+		List<Item> t= itemRepository.findByItemIdIn(t2);
+		System.out.println("meee");
 		return t;
 	}
 	

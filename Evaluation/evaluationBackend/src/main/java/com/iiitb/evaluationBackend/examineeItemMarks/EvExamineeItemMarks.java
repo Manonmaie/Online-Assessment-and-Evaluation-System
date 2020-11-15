@@ -17,13 +17,13 @@ public class EvExamineeItemMarks {
 	@EmbeddedId
     private ExamineeItemMarksKey examineeItemMarksId;
 	
-	private double examineeItemMarks;
+	private float examineeItemMarks;
 	 
     @ManyToOne
     @MapsId("qpItemId")
     @JoinColumn(name = "qp_item_id")
     @JsonIgnore
-    private EvQpItem qpItemId;
+    private EvQpItem qpItem;
  
     public ExamineeItemMarksKey getExamineeItemMarksId() {
 		return examineeItemMarksId;
@@ -33,7 +33,7 @@ public class EvExamineeItemMarks {
 		this.examineeItemMarksId = examineeItemMarksId;
 	}
 
-	public void setExamineeItemMarks(double examineeItemMarks) {
+	public void setExamineeItemMarks(float examineeItemMarks) {
 		this.examineeItemMarks = examineeItemMarks;
 	}
 
@@ -41,41 +41,37 @@ public class EvExamineeItemMarks {
     @MapsId("examineeBatchId")
     @JoinColumn(name = "examinee_batch_id")
     @JsonIgnore
-    private EvExamineeBatch examineeBatchId;
+    private EvExamineeBatch examineeBatch;
     
     public EvExamineeItemMarks() {
     	
     }
 
-	public EvExamineeItemMarks(float examineeItemMarks, EvQpItem qpItemId, EvExamineeBatch examineeBatchId) {
+	public EvExamineeItemMarks(float examineeItemMarks, EvQpItem qpItem, EvExamineeBatch examineeBatch) {
 		super();
 		this.examineeItemMarks = examineeItemMarks;
-		this.qpItemId = qpItemId;
-		this.examineeBatchId = examineeBatchId;
+		this.qpItem = qpItem;
+		this.examineeBatch = examineeBatch;
 	}
 
-	public double getExamineeItemMarks() {
+	public float getExamineeItemMarks() {
 		return examineeItemMarks;
 	}
 
-	public void setExamineeItemMarks(float examineeItemMarks) {
-		this.examineeItemMarks = examineeItemMarks;
+	public EvQpItem getQpItem() {
+		return qpItem;
 	}
 
-	public EvQpItem getQpItemId() {
-		return qpItemId;
+	public void setQpItem(EvQpItem qpItem) {
+		this.qpItem = qpItem;
 	}
 
-	public void setQpItemId(EvQpItem qpItemId) {
-		this.qpItemId = qpItemId;
+	public EvExamineeBatch getExamineeBatch() {
+		return examineeBatch;
 	}
 
-	public EvExamineeBatch getExamineeBatchId() {
-		return examineeBatchId;
-	}
-
-	public void setExamineeBatchId(EvExamineeBatch examineeBatchId) {
-		this.examineeBatchId = examineeBatchId;
+	public void setExamineeBatch(EvExamineeBatch examineeBatch) {
+		this.examineeBatch = examineeBatch;
 	}
 
     
