@@ -12,19 +12,22 @@ import { baseURL } from "./shared/baseurl";
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { DriveCenterService } from "./services/drive-center.service";
-import {QpItemService} from "./services/qp-item.service";
-import {ResponseService} from "./services/response.service";
+import { QpItemService } from "./services/qp-item.service";
+import { ResponseService } from "./services/response.service";
+import { TriggerService } from "./services/trigger.service";
 
 import { DriveCenterComponent } from './drive-center/drive-center.component';
 import { QpItemComponent } from './qp-item/qp-item.component';
 import { ResponseComponent } from './response/response.component';
+import { ExamineeItemMarksComponent } from './examinee-item-marks/examinee-item-marks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DriveCenterComponent,
     QpItemComponent,
-    ResponseComponent
+    ResponseComponent,
+    ExamineeItemMarksComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { ResponseComponent } from './response/response.component';
     DriveCenterService,
     QpItemService,
     ResponseService,
+    TriggerService,
     {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent]
