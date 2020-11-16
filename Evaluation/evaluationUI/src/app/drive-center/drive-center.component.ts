@@ -13,6 +13,7 @@ import { Observable, of } from "rxjs";
 export class DriveCenterComponent implements OnInit {
 
   driveCenterExaminee : DriveCenterExaminee[]; 
+  examineeItemMarks = {examineeItemMarksId : null, examineeItemMarks : null, qpItem : null, examineeBatch : null};
   searchText: any;
   constructor(private driveCenterService: DriveCenterService, private triggerService : TriggerService) { }
 
@@ -21,11 +22,14 @@ export class DriveCenterComponent implements OnInit {
   }
 
   Trigger(id: number) : void{
-    this.triggerService.startTrigger(id);
+    this.triggerService.startTrigger(id).subscribe((examineeItemMarks) => this.examineeItemMarks = examineeItemMarks);
+    setTimeout(() => {
+      this.Evaluate(id);
+    },500);
   }
 
   Evaluate(id: number) : void{
-    this.triggerService.evaluateMarks(id);
+    this.triggerService.evaluateMarks(id).subscribe((examineeItemMarks) => this.examineeItemMarks = examineeItemMarks);
   }
 
 }
