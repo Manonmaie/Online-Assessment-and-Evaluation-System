@@ -10,4 +10,5 @@ public interface ResponseRepository  extends CrudRepository<AsResponse, Integer>
 	AsResponse findByAsQpItemQpItemIdAndAsAttemptAttemptIdAndResponseText(int qpItemId, int attemptId, String responseText); 
 	AsResponse findTopByOrderByResponseIdDesc();
 	AsResponse findByAsQpItemQpItemIdAndAsAttemptAttemptId(int qpItemId, int attemptId);
+	List<AsResponse> findByAsQpItemAsQuestionPaperAsBatchBatchId(int batchId);
 }

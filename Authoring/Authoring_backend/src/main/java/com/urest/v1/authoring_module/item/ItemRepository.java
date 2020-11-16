@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 public interface ItemRepository extends CrudRepository<Item, Integer> {
 	public List<Item> findByAuthorId(int qpId);
 	
-	@Query(nativeQuery =true,value = "SELECT * FROM item as i WHERE i.cognitive_level IN (:cgLvl) AND i.diff_lvl IN (:difLvl) AND i.item_type IN (:type) AND i.marks BETWEEN (:startMark) AND (:endMark)")   
+	@Query(nativeQuery =true,value = "SELECT * FROM item as i WHERE i.cognitive_level IN (:cgLvl) AND i.difficulty_level IN (:difLvl) AND i.item_type IN (:type) AND i.marks BETWEEN (:startMark) AND (:endMark)")   
     public List<Item> findByItemId(@Param("cgLvl") List<String> cgLvl,List<String> difLvl,List<String> type,int startMark,int endMark);
 	
 	public List<Item> findByItemIdIn(List<Integer> ids);

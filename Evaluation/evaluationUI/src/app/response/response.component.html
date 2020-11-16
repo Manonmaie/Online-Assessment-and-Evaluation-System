@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <h2 style="text-align:center;"> Examinee Batch Response Details </h2>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let response of responses">
@@ -12,5 +12,25 @@
         
         </li>
     </ul>
-</div>
+</div> -->
 
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Question</th>
+                <th scope="col">Maximum Marks</th>
+                <th scope="col">Response</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let response of responses">
+                <td>{{response.responseCode}}</td>
+                <td>{{response.evQpItem.itemText}}</td>
+                <td>{{response.evQpItem.itemMarks}}</td>
+                <td>{{response.responseText}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
