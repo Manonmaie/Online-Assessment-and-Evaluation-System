@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.center.Center;
 import com.iiitb.examAdminBackEnd.examdrive.Examdrive;
-import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchMarks;
 
 @Entity
 @Table (name ="ea_batch")
@@ -37,7 +37,7 @@ public class Batch {
 	
 	@OneToMany(mappedBy = "batch")
 	@JsonIgnore
-	private List<ExamineeBatch> examineeBatchList;
+	private List<ExamineeBatchMarks> examineeBatchList;
 	
 	public Batch() {
 	}
@@ -93,10 +93,10 @@ public class Batch {
 	public void setExamdrive(Examdrive examdrive) {
 		this.examdrive = examdrive;
 	}
-	public List<ExamineeBatch> getExamineeBatchList() {
+	public List<ExamineeBatchMarks> getExamineeBatchList() {
 		return examineeBatchList;
 	}
-	public void setExamineeBatchList(List<ExamineeBatch> examineeBatchList) {
+	public void setExamineeBatchList(List<ExamineeBatchMarks> examineeBatchList) {
 		this.examineeBatchList = examineeBatchList;
 	}
 }
