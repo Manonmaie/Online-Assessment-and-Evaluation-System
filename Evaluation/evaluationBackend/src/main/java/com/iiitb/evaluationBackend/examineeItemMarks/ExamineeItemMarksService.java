@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.iiitb.evaluationBackend.response.EvResponse;
 import com.iiitb.evaluationBackend.response.ResponseRepository;
+import com.iiitb.evaluationBackend.examineeBatch.EvExamineeBatch;
+import com.iiitb.evaluationBackend.examineeBatch.ExamineeBatchRepository;
 import com.iiitb.evaluationBackend.itemMcqOptions.EvItemMcqOptions;
 import com.iiitb.evaluationBackend.itemTrueFalse.EvItemTrueFalse;
 
@@ -19,6 +21,9 @@ public class ExamineeItemMarksService {
 	
 	@Autowired
 	private ResponseRepository responseRepository;
+	
+	@Autowired
+	private ExamineeBatchRepository examineeBatchRepository;
 	
 	
 	public EvExamineeItemMarks addMarks(EvExamineeItemMarks examineeItemMarks) {
@@ -51,11 +56,21 @@ public class ExamineeItemMarksService {
 			itemMarks.setExamineeBatch(response.getEvExamineeBatch());
 			examineeItemMarksRepository.save(itemMarks);
 		}
+		EvExamineeBatch examineeBatch = examineeBatchRepository.findByExamineeBatchId(examineeBatchId);
+		if(ResponseList.size() != 0) {
+			examineeBatch.setStatus_id("PENDING");
+			examineeBatchRepository.save(examineeBatch);
+		}
+		else {
+			examineeBatch.setStatus_id("ABANDONED");
+			examineeBatchRepository.save(examineeBatch);
+		}
 		return 1;
 	}
 	
 	public Integer EvaluateQpItems(int examineeBatchId) {
 		List<EvResponse>ResponseList = responseRepository.findByEvExamineeBatchExamineeBatchId(examineeBatchId);
+		EvExamineeBatch examineeBatch = examineeBatchRepository.findByExamineeBatchId(examineeBatchId);
 		for(EvResponse response : ResponseList) {
 			for(EvItemMcqOptions mcqOptions: response.getEvQpItem().getEvItemMcqOptionsList()) {
 				if(response.getResponseText().compareTo(mcqOptions.getMcqOptionText())==0) {
@@ -78,6 +93,8 @@ public class ExamineeItemMarksService {
 					examineeItemMarksRepository.save(itemMarks);
 				}
 			}
+			examineeBatch.setStatus_id("COMPLETED");
+			examineeBatchRepository.save(examineeBatch);
 		}
 		return 1;
 	}
