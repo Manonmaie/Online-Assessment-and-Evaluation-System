@@ -52,6 +52,10 @@ public class ResponseService {
 		responseRepository.deleteById(responseId);
 	}
 	
+	public List<AsResponse> getAllResponsesForBatchId(int batchId) {
+		return responseRepository.findByAsQpItemAsQuestionPaperAsBatchBatchId(batchId);
+	}
+	
 //	public void addResponse(int qpItemtId, int attemptId, AsResponse response) {
 ////		response.setAsResponseMcq(asResponseMcq);
 ////		AsResponseMcq asResponseMcq = new AsResponseMcq();

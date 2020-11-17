@@ -100,6 +100,9 @@ CREATE TABLE IF NOT EXISTS ev_item_true_false(
 ALTER TABLE ev_item_true_false
   ADD CONSTRAINT `fk_ev_item_true_false_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
+INSERT INTO ev_item_true_false VALUES(0,"TF_item4_qp1",4,0.0,100.0);
+INSERT INTO ev_item_true_false VALUES(0,"TF_item5_qp1",5,100.0,0.0);
+
 -- --------------------------------------------------------
 -- Table structure for table `ev_examinee_batch`
 -- --------------------------------------------------------
@@ -155,11 +158,22 @@ INSERT INTO ev_response VALUES(0,"Mcq1_Item11_qp1","Collection of related data",
 INSERT INTO ev_response VALUES(0,"Mcq1_Item12_qp1","Primary Key",1,2);
 INSERT INTO ev_response VALUES(0,"Mcq4_Item12_qp1","Primary Keyword",1,2);
 INSERT INTO ev_response VALUES(0,"Mcq1_Item13_qp1","Foreign Key",1,3);
-INSERT INTO ev_response VALUES(0,"Mcq3_Item13_qp1","Fashion Key",1,3);
+INSERT INTO ev_response VALUES(0,"Mcq3_Item13_qp1","Foreign Keyword",1,3);
+INSERT INTO ev_response VALUES(0,"TF_Item14_qp1","False",1,4);
+INSERT INTO ev_response VALUES(0,"TF_Item15_qp1","True",1,5);
 INSERT INTO ev_response VALUES(0,"Mcq1_Item21_qp1","Collection of related data",2,1);
 INSERT INTO ev_response VALUES(0,"Mcq1_Item22_qp1","Primary Key",2,2);
 INSERT INTO ev_response VALUES(0,"Mcq3_Item23_qp1","Fashion Key",2,3);
-
+INSERT INTO ev_response VALUES(0,"TF_Item24_qp1","False",2,4);
+INSERT INTO ev_response VALUES(0,"TF_Item25_qp1","False",2,5);
+INSERT INTO ev_response VALUES(0,"Mcq1_Item31_qp1","Collection of data",3,1);
+INSERT INTO ev_response VALUES(0,"Mcq4_Item32_qp1","Primary Keyword",3,2);
+INSERT INTO ev_response VALUES(0,"Mcq3_Item32_qp1","Personal Key",3,2);
+INSERT INTO ev_response VALUES(0,"Mcq2_Item32_qp1","Person Key",3,2);
+INSERT INTO ev_response VALUES(0,"Mcq4_Item33_qp1","Forward Key",3,3);
+INSERT INTO ev_response VALUES(0,"Mcq3_Item33_qp1","Fashion Key",3,3);
+INSERT INTO ev_response VALUES(0,"TF_Item34_qp1","True",3,4);
+INSERT INTO ev_response VALUES(0,"TF_Item35_qp1","False",3,5);
 
  
 -- --------------------------------------------------------

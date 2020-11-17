@@ -24,7 +24,7 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
-	@RequestMapping("/urest/v1/getallitemsTF")
+	@RequestMapping("/urest/v1/getallitems")
 	public List<Item> getAllItems() {
 		return itemService.getAllItems();
 	}
@@ -44,11 +44,11 @@ public class ItemController {
 	}
 	
 	
-	// get item_by item_id
-		@RequestMapping(value = "/urest/v1/getitem_ids", method = RequestMethod.GET)
-		public List<Item> getItemByItemId(@RequestParam  Map<String, String> p){
-			return itemService.getItemByItemId(p);
-		}
+	// get item_by item_ids
+	@RequestMapping(value = "/urest/v1/getitem_ids", method = RequestMethod.GET)
+	public List<Item> getItemByItemId(@RequestParam  Map<String, String> p){
+		return itemService.getItemByItemId(p);
+	}
 	
 	
 	// set question type TF

@@ -19,12 +19,11 @@ import com.urest.v1.authoring_module.item.Item;
 @JsonIgnoreProperties(value = { "item" })
 
 @Entity // This tells Hibernate to make a table out of this class
-@Table(name = "item_true_false")
+@Table(name = "au_item_true_false")
 public class TF {
 	public TF() {}
 	public TF(Integer trueMarks,Integer falseMarks) {
 		super();
-		System.out.println("soumya");
 		// TODO Auto-generated constructor stub
 		this.trueMarks=trueMarks;
 		this.falseMarks=falseMarks;
@@ -39,9 +38,11 @@ public class TF {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(updatable = false, nullable = false)
+	@Column(updatable = false, nullable = false,name="item_true_false_id")
 	private Integer itemTrueFalseId;
+	@Column(name="true_percent")
 	private Integer trueMarks;
+	@Column(name="false_percent")
 	private Integer falseMarks;
 	
 	

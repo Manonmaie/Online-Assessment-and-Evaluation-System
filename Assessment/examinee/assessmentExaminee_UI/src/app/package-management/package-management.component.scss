@@ -3,5 +3,24 @@
     // margin-bottom: 5px;
     // position: absolute;
     // left: 50%;
-    // transform: translate(-50%, 0%);
+    // transform: translate(20%, 20%);
+}
+
+fieldset{
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+}
+p#innerPara{
+    padding: 5px;
+    margin-left: 35%;
+}
+legend{
+    width:200px;
+    padding:10px 20px;
+}
+
+.marginButton{
+    margin-left: 15%;
+    margin-top: 2%;
 }

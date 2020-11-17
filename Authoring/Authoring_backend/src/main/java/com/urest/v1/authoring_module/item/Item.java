@@ -23,13 +23,10 @@ import com.urest.v1.authoring_module.options.Options;
 
 @Entity // This tells Hibernate to make a table out of this class
 
-@Table(name = "item")
-
-
+@Table(name = "au_item")
 public class Item {
 	
 	public Item() {
-//		System.out.println("vani");
 	}
 	public Item(Integer itemId, Integer marks, String itemText, String cgLvl,String reviewStatus,String itemStatus,Integer itemUseCount,String diffLvl,String subject,Integer authorId,String itemType) {
 		super();
@@ -49,19 +46,27 @@ public class Item {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(updatable = false, nullable = false)
+	@Column(updatable = false, nullable = false,name="item_id")
 	private Integer itemId;
 	
 	@Lob
-	@Column(length=8192)
+	@Column(length=8192,name="item_text")
 	private String itemText;
+	@Column(name="cognitive_level")
 	private String cgLvl;
+	@Column(name="difficulty_level")
 	private String diffLvl;
+	@Column(name="author_id")
 	private Integer authorId;
+	@Column(name="marks")
 	private Integer marks;
+	@Column(name="review_status")
 	private String reviewStatus="PENDING";
+	@Column(name="item_use_count")
 	private Integer itemUseCount=0;
+	@Column(name="item_status")
 	private String itemStatus="ACTIVE";
+	@Column(name="item_type")
 	private String itemType;
 	
 	@OneToMany(mappedBy="itemTF", fetch = FetchType.LAZY,

@@ -208,9 +208,11 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-11-10 07:00:00","2020-11-10 23:00:00","RECEIVED",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-11-15 07:00:00","2020-11-15 23:00:00","SENT",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
-INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","RECEIVED",1,3,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","SENT",1,3,NULL);
+-- INSERT INTO as_batch VALUES(0,"Mrng3","2020-01-01 09:00:00","2020-01-01 12:00:00","SENT",1,3,NULL);
+-- INSERT INTO as_batch VALUES(0,"Mrng4","2020-01-01 09:00:00","2020-01-01 12:00:00","SENT",1,3,NULL);
 
 -- --------------------------------------------------------
 -- Data Entry for table `as_question_paper`
@@ -251,8 +253,8 @@ ALTER TABLE as_examinee_batch
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,1);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,2);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",1,3);
-INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,1);
-INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,2);
+INSERT INTO as_examinee_batch VALUES(0,"2020-11-11 07:00:00","2020-11-11 23:00:00","COMPLETED",2,1);
+INSERT INTO as_examinee_batch VALUES(0,"2020-11-11 07:00:00","2020-11-11 23:00:00","COMPLETED",2,2);
 INSERT INTO as_examinee_batch VALUES(0,null,null,"NOT_STARTED",2,4);
 
 -- --------------------------------------------------------
@@ -431,7 +433,7 @@ ALTER TABLE as_attempt
 -- --------------------------------------------------------
 -- Data Entry for table `as_attempt`
 -- --------------------------------------------------------
--- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
+INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
 -- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
 -- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
 -- INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","IN_PROGRESS",1,1);
@@ -461,13 +463,16 @@ ALTER TABLE as_response
 -- --------------------------------------------------------
 -- Data Entry for table `as_response`
 -- --------------------------------------------------------
--- INSERT INTO as_response VALUES(0,"Primary Key",1,1);
--- INSERT INTO as_response VALUES(0,"Primary Key",1,1;
--- INSERT INTO as_response VALUES(0,"Post Key",2,2);
--- INSERT INTO as_response VALUES(0,"Post Key",3,1);
--- INSERT INTO as_response VALUES(0,"Key",2,4);
+-- INSERT INTO as_response VALUES(0,"Answer 1",1,1);
+-- INSERT INTO as_response VALUES(0,"Answer 2",1,1;
+INSERT INTO as_response VALUES(0,"Post Key",2,1);
+INSERT INTO as_response VALUES(0,"Post Key",3,1);
+-- INSERT INTO as_response VALUES(0,"Key",2,1);
 -- INSERT INTO as_response VALUES(0,"PK",3,1);
 -- INSERT INTO as_response VALUES(0,"Primary Key",3,1);
+INSERT INTO as_response VALUES(0,"Answer 1",11,1);
+INSERT INTO as_response VALUES(0,"Answer 2",12,1);
+INSERT INTO as_response VALUES(0,"Post Key",13,1);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response_mcq`

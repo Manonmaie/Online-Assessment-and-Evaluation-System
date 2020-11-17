@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '../shared/Response';
 import {ResponseService} from '../services/response.service';
-import { ActivatedRoute } from '@angular/router';
+import { Params, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-response',

@@ -3,6 +3,7 @@ package com.iiitb.examAdminBackEnd.examinee;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,18 +13,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchMarks;
 
 @Entity
 @Table(name = "ea_examinee")
 public class Examinee {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int examineeId;
-	private String examineeCode,examineeName,examineePassword,examineeBranch,examineeEmail,examineeCollege;
+	@Column(name = "examinee_code")
+	private String examineeCode;
+	private String examineeName,examineePassword,examineeBranch,examineeEmail,examineeCollege;
 	
 	@OneToMany(mappedBy = "examinee", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<ExamineeBatch> examineeBatchList;
+	private List<ExamineeBatchMarks> examineeBatchList;
 	
 	public Examinee() {
 	}
@@ -81,10 +84,10 @@ public class Examinee {
 	public void setExamineeCollege(String examineeCollege) {
 		this.examineeCollege = examineeCollege;
 	}
-	public List<ExamineeBatch> getExamineeBatchList() {
+	public List<ExamineeBatchMarks> getExamineeBatchList() {
 		return examineeBatchList;
 	}
-	public void setExamineeBatchList(List<ExamineeBatch> examineeBatchList) {
+	public void setExamineeBatchList(List<ExamineeBatchMarks> examineeBatchList) {
 		this.examineeBatchList = examineeBatchList;
 	}
 }

@@ -18,18 +18,28 @@ public class ExamineeBatchController {
 	public ExamineeBatchService examineeBatchService;
 	
 	@RequestMapping(method = RequestMethod.PUT, value="examineeBatch/examinee/{examineeId}/batch/{batchId}")
-	public void updateExamineeBatch(@PathVariable int examineeId, @PathVariable int batchId, @RequestBody ExamineeBatch examineeBatch) {
+	public void updateExamineeBatch(@PathVariable int examineeId, @PathVariable int batchId, @RequestBody ExamineeBatchMarks examineeBatchMarks) {
 		ExamineeBatchKey key = new ExamineeBatchKey(examineeId, batchId);
-		examineeBatchService.updateExamineeBatch(key, examineeBatch);
+		examineeBatchService.updateExamineeBatch(key, examineeBatchMarks);
 	}
 	
 	@RequestMapping("examineeBatchByExamdrive/{id}")
-	public List<ExamineeBatch> getExamineeBatchByExamdriveId(@PathVariable int id){
+	public List<ExamineeBatchMarks> getExamineeBatchByExamdriveId(@PathVariable int id){
 		return examineeBatchService.getExamineeBatchByExamdriveId(id);
 	}
 	
 	@RequestMapping("examineeBatchByExaminee/{id}")
-	public List<ExamineeBatch> getExamineeBatchByExamineeId(@PathVariable int id){
+	public List<ExamineeBatchMarks> getExamineeBatchByExamineeId(@PathVariable int id){
 		return examineeBatchService.getExamineeBatchByExamineeId(id);
+	}
+	
+	@RequestMapping("examineeBatches")
+	public List<ExamineeBatch> getAllExamineeBatches(){
+		return examineeBatchService.getAllExamineeBatches();
+	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/examineeBatchBulk")
+	public void addExamineeBatches(@RequestBody List<ExamineeBatch> examineeBatches) {
+		examineeBatchService.addExamineeBatches(examineeBatches);
 	}
 }

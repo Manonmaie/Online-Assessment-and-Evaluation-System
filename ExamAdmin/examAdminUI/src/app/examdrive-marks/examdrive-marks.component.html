@@ -2,15 +2,17 @@
     <legend class="center">{{examdrive.examdriveName}} - {{examdrive.course.courseName}} [{{examdrive.course.courseCode}}]</legend>
 </div>
 <div class="container">
-    <button class="btn btn-success float-right mr-1" title="Export to Excel"> <i class="fa fa-file-excel-o fa-lg"></i> .xlsx</button>
-    <button class="btn btn-success float-right mr-1" title="Export to PDF"> <i class="fa fa-file-pdf-o fa-lg"></i> .pdf</button>
-    <button class="btn btn-success float-right mr-1" title="Export to HTML"> <i class="fa fa-code fa-lg"></i> .html</button>
+    <font color="red">* Note that the only the displayed records will be downloaded while export</font> 
+    <font size="-1"> [Tip - to see all the records make the items per page as blank]</font>
+    <button class="btn btn-success float-right mr-1" title="Export to Excel" (click)="exportAsExcel()"> <i class="fa fa-file-excel-o fa-lg"></i> .xlsx</button>
+    <!-- <button class="btn btn-success float-right mr-1" title="Export to PDF"> <i class="fa fa-file-pdf-o fa-lg"></i> .pdf</button> -->
+    <!-- <button class="btn btn-success float-right mr-1" title="Export to HTML"> <i class="fa fa-code fa-lg"></i> .html</button> -->
 </div>
 <div class="container">
     <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search students here..." [(ngModel)]="searchText"/>
 </div>
 <div class="container">
-    <table class="table">
+    <table class="table" id="drive-marks-list">
         <thead>
             <tr>
                 <th scope="col">Roll Number</th>
