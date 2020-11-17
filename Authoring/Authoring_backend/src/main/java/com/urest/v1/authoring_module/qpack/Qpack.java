@@ -39,10 +39,7 @@ public class Qpack {
 	@Column(name = "qpack_path")
 	private String qpack_path;
 	
-	@Column(name = "center_id")
-	private int center_id;
-	
-	@OneToMany(mappedBy = "qpack")
+	@OneToMany(mappedBy = "qpack_header")
 	@JsonIgnore
 	private List<Qpack1> qpack1List;
 	
@@ -105,21 +102,13 @@ public class Qpack {
 	public void setQpack_path(String qpack_path) {
 		this.qpack_path = qpack_path;
 	}
-
-	public int getCenter_id() {
-		return center_id;
-	}
-
-	public void setCenter_id(int center_id) {
-		this.center_id = center_id;
-	}
 	
 
-	public List<Qpack1> getQpack1List() {
-		return qpack1List;
-	}
-
-	public void setQpack1List(List<Qpack1> qpack1List) {
-		this.qpack1List = qpack1List;
-	}
+//	public List<Qpack1> getQpack1List() {
+//		return qpack1List;
+//	}
+//
+//	public void setQpack1List(List<Qpack1> qpack1List) {
+//		this.qpack1List = qpack1List;
+//	}
 }
