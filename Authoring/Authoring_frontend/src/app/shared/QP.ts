@@ -1,8 +1,9 @@
+import { Item } from "../shared/item";
 
 export class QP{
     course :string;
     totalMarks: Number;
     timeDuration: Number;
-    instructions: string;
-    asitemIds: Number[];
+    items: Item[];
+    batchCode: string
 }

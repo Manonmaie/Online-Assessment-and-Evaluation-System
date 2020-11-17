@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import com.urest.v1.authoring_module.item.Item;
 import com.urest.v1.authoring_module.questionPaperItem.questionPaperItem;
 import com.urest.v1.authoring_module.questionPaperItem.questionPaperItemRepository;
 
@@ -26,15 +27,16 @@ public class questionPaperService {
 	}
 	
 	public questionPaper createQP(questionPaper q) {	
+		System.out.println("create qp");
 		questionPaper qp=new questionPaper(q.getTimeDuration(),q.getTotalMarks(),q.getCourse(),q.getBatchCode());
 		qpRepository.save(qp);
-		ArrayList<questionPaperItem> qpItem=(ArrayList<questionPaperItem>) q.getAsitemIds();
-		for(int i=0;i<qpItem.size();i++)
+		ArrayList<Item> items=(ArrayList<Item>) q.getItems();
+		for(int i=0;i<items.size();i++)
 		{
-			questionPaperItem t =new questionPaperItem();
-			t.setItem(qpItem.get(i).getItem());
-			t.setQPItemId(qp);
-			qp.getAsitemIds().add(qpItemRepository.save(t));
+			questionPaperItem qpItem =new questionPaperItem();
+			qpItem.setItem(items.get(i));
+			qpItem.setQPItemId(qp);
+			qp.getAsitemIds().add(qpItemRepository.save(qpItem));
 		}
 		return qp;	
 	}

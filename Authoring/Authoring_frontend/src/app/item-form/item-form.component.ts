@@ -63,7 +63,6 @@ export class ItemFormComponent implements OnInit  {
 
 
   onChange() {
-    console.log(this.selectedType);
     var selValue = this.selectedType;
     if(selValue=='MCQ' || selValue=='Multi_Correct_MCQ') {
       $("#MCQoptionID").show();
