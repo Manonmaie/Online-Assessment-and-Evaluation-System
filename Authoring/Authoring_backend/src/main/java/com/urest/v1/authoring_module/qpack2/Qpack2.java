@@ -1,5 +1,7 @@
 package com.urest.v1.authoring_module.qpack2;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.urest.v1.authoring_module.qpack1.Qpack1;
+import com.urest.v1.authoring_module.qpack3.Qpack3;
 
 @Entity
 @Table(name = "qpack2")
@@ -21,12 +24,12 @@ public class Qpack2 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int qpack2_id;
 	
-	@JoinColumn(name="qp_id")
-	private int qp_id;
-	
 	@ManyToOne
 	@JoinColumn(name="qpack1_id")
 	private Qpack1 qpack1;
+	
+	@JoinColumn(name="qp_id")
+	private int qp_id;
 	
 	@Column(name = "item_id")
 	private int item_id;
@@ -42,6 +45,10 @@ public class Qpack2 {
 	
 	@Column(name = "cognitive_level")
 	private String cognitive_level;
+	
+	@OneToMany(mappedBy = "qpack2")
+	@JsonIgnore
+	private List<Qpack3> qpack3List;
 
 	public Qpack2() {
 		super();

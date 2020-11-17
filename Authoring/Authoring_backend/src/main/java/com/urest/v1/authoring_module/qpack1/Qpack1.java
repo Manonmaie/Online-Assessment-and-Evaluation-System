@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.urest.v1.authoring_module.qpack.Qpack;
-//import com.urest.v1.authoring_module.qpack2.Qpack2;
+import com.urest.v1.authoring_module.qpack2.Qpack2;
 
 @Entity
 @Table(name = "qpack1")
@@ -55,13 +55,47 @@ public class Qpack1 {
 	@Column(name = "batch_code")
 	private String batch_code;
 	
-//	@OneToMany(mappedBy = "qpack1")
-//	@JsonIgnore
-//	private List<Qpack2> qpack2List;
+	@OneToMany(mappedBy = "qpack1")
+	@JsonIgnore
+	private List<Qpack2> qpack2List;
 
 	public Qpack1() {
 	}
+	
+	public Qpack1(int qp_id, int maximum_marks, int duration,
+			String course_code, String batch_code) {
+		super();
+		this.qp_id = qp_id;
+		this.maximum_marks = maximum_marks;
+		this.duration = duration;
+		this.course_code = course_code;
+		this.batch_code = batch_code;
+	}
+	
+	public Qpack1(int qp_id, int maximum_marks, int instruction_id, String instruction_text, int duration,
+			String course_code, String batch_code) {
+		super();
+		this.qp_id = qp_id;
+		this.maximum_marks = maximum_marks;
+		this.instruction_id = instruction_id;
+		this.instruction_text = instruction_text;
+		this.duration = duration;
+		this.course_code = course_code;
+		this.batch_code = batch_code;
+	}
 
+	public Qpack1(int qp_id, int maximum_marks, int duration,
+			int course_id, String course_code, String course_name, String batch_code) {
+		super();
+		this.qp_id = qp_id;
+		this.maximum_marks = maximum_marks;
+		this.duration = duration;
+		this.course_id = course_id;
+		this.course_code = course_code;
+		this.course_name = course_name;
+		this.batch_code = batch_code;
+	}
+	
 	public Qpack1(int qp_id, int maximum_marks, int instruction_id, String instruction_text, int duration,
 			int course_id, String course_code, String course_name, String batch_code) {
 		super();
@@ -180,13 +214,13 @@ public class Qpack1 {
 	}
 
 
-//	public List<Qpack2> getQpack2List() {
-//		return qpack2List;
-//	}
+	public List<Qpack2> getQpack2List() {
+		return qpack2List;
+	}
 
 
-//	public void setQpack2List(List<Qpack2> qpack2List) {
-//		this.qpack2List = qpack2List;
-//	}
+	public void setQpack2List(List<Qpack2> qpack2List) {
+		this.qpack2List = qpack2List;
+	}
 	
 }

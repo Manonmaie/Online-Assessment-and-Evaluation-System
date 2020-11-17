@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.urest.v1.authoring_module.qpack1.Qpack1;
 import com.urest.v1.authoring_module.qpack1.Qpack1Service;
-//import com.urest.v1.authoring_module.qpack2.Qpack2;
-//import com.urest.v1.authoring_module.qpack2.Qpack2Service;
+import com.urest.v1.authoring_module.qpack2.Qpack2;
+import com.urest.v1.authoring_module.qpack2.Qpack2Service;
+import com.urest.v1.authoring_module.qpack3.Qpack3;
+import com.urest.v1.authoring_module.qpack3.Qpack3Service;
 
 @Service
 public class QpackService {
@@ -25,8 +27,11 @@ public class QpackService {
 	@Autowired
 	private Qpack1Service qpack1Service;
 	
-//	@Autowired
-//	private Qpack2Service qpack2Service;
+	@Autowired
+	private Qpack2Service qpack2Service;
+	
+	@Autowired
+	private Qpack3Service qpack3Service;
 	
 	public List<Qpack> getAllQpacks() {
 		List<Qpack> qpacks = new ArrayList<>();
@@ -39,6 +44,10 @@ public class QpackService {
 	}
 	
 	public void addQpack() {
+		qpack3Service.deleteAll();
+		qpack2Service.deleteAll();
+		qpack1Service.deleteAll();
+		//Generate Qpack
 		Qpack qpack = new Qpack();
 		qpack.setQpack_desc("Nothing");
 		qpack.setCreated_on(LocalDateTime.now());
@@ -46,18 +55,51 @@ public class QpackService {
 		qpack.setQpack_status("CREATED");
 		qpackRepository.save(qpack);
 		
+		//Generate Qpack1
 		List<Object[]> qpack1Objects = qpackJoinRepository.fetchQpack1Data();
 		List<Qpack1> qpack1s = new ArrayList<Qpack1>();
 		for(int i = 0; i < qpack1Objects.size(); i++) {
-			Object[] course = qpackJoinRepository.getCourseByCode(String.valueOf(qpack1Objects.get(i)[5]));
-			qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[2], String.valueOf(qpack1Objects.get(i)[3]), (Integer)qpack1Objects.get(i)[4], (Integer)course[0], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(course[2]), String.valueOf(qpack1Objects.get(i)[6])));
+			List<Object[]> course = qpackJoinRepository.getCourseByCode(String.valueOf(qpack1Objects.get(i)[5]));
+			if(!course.isEmpty()) {
+				if(qpack1Objects.get(i)[2] != null) {
+					qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[2], String.valueOf(qpack1Objects.get(i)[3]), (Integer)qpack1Objects.get(i)[4], (Integer)course.get(0)[0], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(course.get(0)[2]), String.valueOf(qpack1Objects.get(i)[6])));
+				}
+				else {
+					qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[4], (Integer)course.get(0)[0], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(course.get(0)[2]), String.valueOf(qpack1Objects.get(i)[6])));
+				}
+			}
+//			course_id and course_name should always be present(NOT NULL). ensure course_code is correct in question paper.
+//			else {
+//				if(qpack1Objects.get(i)[2] != null) {
+//					qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[2], String.valueOf(qpack1Objects.get(i)[3]), (Integer)qpack1Objects.get(i)[4], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(qpack1Objects.get(i)[6])));
+//				}
+//				else {
+//					qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[4], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(qpack1Objects.get(i)[6])));
+//				}
+//			}
 			
 		}
 		qpack1s.forEach( (qpack1) -> qpack1.setQpack_header(qpack));
 		qpack1Service.addQpack1Bulk(qpack1s);
-//		List<Qpack2> qpack2s = qpackJoinRepository.fetchQpack2Data();
-//		qpack2s.forEach( (qpack2) -> qpack2.setQpack1(qpack1s.get(0)));
-//		qpack2Service.addQpack2Bulk(qpack2s);
+		
+		//Generate Qpack2
+		List<Qpack1> uniqueQpQpack1s = qpack1Service.getUniqueQpQpacks();
+		for(int i = 0; i < uniqueQpQpack1s.size(); i++) {
+			List<Object[]> qpack2Objects = qpackJoinRepository.fetchQpack2Data(uniqueQpQpack1s.get(i).getQp_id());
+			for(int j = 0; j < qpack2Objects.size(); j++) {
+				Qpack2 qpack2 = new Qpack2((Integer)qpack2Objects.get(j)[0], (Integer)qpack2Objects.get(j)[1], String.valueOf(qpack2Objects.get(j)[2]), (Float)qpack2Objects.get(j)[3], String.valueOf(qpack2Objects.get(j)[4]), String.valueOf(qpack2Objects.get(j)[5]));
+				qpack2.setQpack1(uniqueQpQpack1s.get(i));
+				qpack2Service.addQpack2(qpack2);
+			}
+		}
+		
+		//Generate Qpack3
+		List<Object[]> qpack3Objects = qpackJoinRepository.fetchQpack3Data();
+		for(int i = 0; i < qpack3Objects.size(); i++) {
+			Qpack3 qpack3 = new Qpack3((Integer)qpack3Objects.get(i)[0], (Integer)qpack3Objects.get(i)[1], String.valueOf(qpack3Objects.get(i)[2]));
+			qpack3.setQpack2(qpack2Service.getQpack2ByItemId(qpack3.getItem_id()));
+			qpack3Service.addQpack3(qpack3);
+		}
 	}
 	
 	public Optional<Qpack> getQpack(int id){
