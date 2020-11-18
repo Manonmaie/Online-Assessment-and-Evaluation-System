@@ -23,4 +23,8 @@ public class Epack1Service {
 	public void addEpack1Bulk(List<Epack1> epack1s) {
 		epack1Repository.saveAll(epack1s);
 	}
+	
+	public void deleteAll() {
+		epack1Repository.deleteAll();
+	}
 }

@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.epack.Epack;
+import com.iiitb.examAdminBackEnd.epack2.Epack2;
 
 @Entity
 @Table(name = "epack1")
@@ -30,9 +31,6 @@ public class Epack1 {
 	
 	@Column(name = "qp_id")
 	private int qp_id;
-	
-	@Column(name = "qp_code")
-	private String qp_code;
 	
 	@Column(name = "maximum_marks")
 	private float maximum_marks;
@@ -64,11 +62,11 @@ public class Epack1 {
 	@Column(name = "center_id")
 	private int center_id;
 	
-	@Column(name = "centre_code")
-	private String centre_code;
+	@Column(name = "center_code")
+	private String center_code;
 	
-	@Column(name = "centre_name")
-	private String centre_name;
+	@Column(name = "center_name")
+	private String center_name;
 	
 	@Column(name = "examdrive_id")
 	private int examdrive_id;
@@ -87,30 +85,29 @@ public class Epack1 {
 	
 	@Column(name = "course_name")
 	private String course_name;
+	
+	@OneToMany(mappedBy = "epack1")
+	@JsonIgnore
+	private List<Epack2> epack2List;
 
 	public Epack1() {
 	}
-
-	public Epack1(int qp_id, String qp_code, float maximum_marks, int instruction_id, String instruction_code,
-			String instruction_text, int duration, int batch_id, String batch_code, LocalDateTime batch_start_time,
-			LocalDateTime batch_end_time, int center_id, String centre_code, String centre_name, int examdrive_id,
-			String examdrive_code, String examdrive_name, int course_master_id, String course_code,
-			String course_name) {
+	
+	public Epack1(int qp_id, float maximum_marks, int duration, int batch_id, String batch_code,
+			LocalDateTime batch_start_time, LocalDateTime batch_end_time, int center_id, String center_code,
+			String center_name, int examdrive_id, String examdrive_code, String examdrive_name, int course_master_id,
+			String course_code, String course_name) {
 		super();
 		this.qp_id = qp_id;
-		this.qp_code = qp_code;
 		this.maximum_marks = maximum_marks;
-		this.instruction_id = instruction_id;
-		this.instruction_code = instruction_code;
-		this.instruction_text = instruction_text;
 		this.duration = duration;
 		this.batch_id = batch_id;
 		this.batch_code = batch_code;
 		this.batch_start_time = batch_start_time;
 		this.batch_end_time = batch_end_time;
 		this.center_id = center_id;
-		this.centre_code = centre_code;
-		this.centre_name = centre_name;
+		this.center_code = center_code;
+		this.center_name = center_name;
 		this.examdrive_id = examdrive_id;
 		this.examdrive_code = examdrive_code;
 		this.examdrive_name = examdrive_name;
@@ -119,15 +116,15 @@ public class Epack1 {
 		this.course_name = course_name;
 	}
 
-	public Epack1(int epack1_id, int qp_id, String qp_code, float maximum_marks, int instruction_id,
-			String instruction_code, String instruction_text, int duration, int batch_id, String batch_code,
-			LocalDateTime batch_start_time, LocalDateTime batch_end_time, int center_id, String centre_code,
-			String centre_name, int examdrive_id, String examdrive_code, String examdrive_name, int course_master_id,
-			String course_code, String course_name) {
+
+
+	public Epack1(int qp_id, float maximum_marks, int instruction_id, String instruction_code,
+			String instruction_text, int duration, int batch_id, String batch_code, LocalDateTime batch_start_time,
+			LocalDateTime batch_end_time, int center_id, String center_code, String center_name, int examdrive_id,
+			String examdrive_code, String examdrive_name, int course_master_id, String course_code,
+			String course_name) {
 		super();
-		this.epack1_id = epack1_id;
 		this.qp_id = qp_id;
-		this.qp_code = qp_code;
 		this.maximum_marks = maximum_marks;
 		this.instruction_id = instruction_id;
 		this.instruction_code = instruction_code;
@@ -138,8 +135,36 @@ public class Epack1 {
 		this.batch_start_time = batch_start_time;
 		this.batch_end_time = batch_end_time;
 		this.center_id = center_id;
-		this.centre_code = centre_code;
-		this.centre_name = centre_name;
+		this.center_code = center_code;
+		this.center_name = center_name;
+		this.examdrive_id = examdrive_id;
+		this.examdrive_code = examdrive_code;
+		this.examdrive_name = examdrive_name;
+		this.course_master_id = course_master_id;
+		this.course_code = course_code;
+		this.course_name = course_name;
+	}
+
+	public Epack1(int epack1_id, int qp_id, float maximum_marks, int instruction_id,
+			String instruction_code, String instruction_text, int duration, int batch_id, String batch_code,
+			LocalDateTime batch_start_time, LocalDateTime batch_end_time, int center_id, String center_code,
+			String center_name, int examdrive_id, String examdrive_code, String examdrive_name, int course_master_id,
+			String course_code, String course_name) {
+		super();
+		this.epack1_id = epack1_id;
+		this.qp_id = qp_id;
+		this.maximum_marks = maximum_marks;
+		this.instruction_id = instruction_id;
+		this.instruction_code = instruction_code;
+		this.instruction_text = instruction_text;
+		this.duration = duration;
+		this.batch_id = batch_id;
+		this.batch_code = batch_code;
+		this.batch_start_time = batch_start_time;
+		this.batch_end_time = batch_end_time;
+		this.center_id = center_id;
+		this.center_code = center_code;
+		this.center_name = center_name;
 		this.examdrive_id = examdrive_id;
 		this.examdrive_code = examdrive_code;
 		this.examdrive_name = examdrive_name;
@@ -170,14 +195,6 @@ public class Epack1 {
 
 	public void setQp_id(int qp_id) {
 		this.qp_id = qp_id;
-	}
-
-	public String getQp_code() {
-		return qp_code;
-	}
-
-	public void setQp_code(String qp_code) {
-		this.qp_code = qp_code;
 	}
 
 	public float getMaximum_marks() {
@@ -260,20 +277,20 @@ public class Epack1 {
 		this.center_id = center_id;
 	}
 
-	public String getCentre_code() {
-		return centre_code;
+	public String getCenter_code() {
+		return center_code;
 	}
 
-	public void setCentre_code(String centre_code) {
-		this.centre_code = centre_code;
+	public void setCenter_code(String center_code) {
+		this.center_code = center_code;
 	}
 
-	public String getCentre_name() {
-		return centre_name;
+	public String getCenter_name() {
+		return center_name;
 	}
 
-	public void setCentre_name(String centre_name) {
-		this.centre_name = centre_name;
+	public void setCenter_name(String center_name) {
+		this.center_name = center_name;
 	}
 
 	public int getExamdrive_id() {

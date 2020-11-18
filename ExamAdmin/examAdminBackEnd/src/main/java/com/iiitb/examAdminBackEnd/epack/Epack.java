@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+//import com.iiitb.examAdminBackEnd.epack1.Epack1;
 import com.iiitb.examAdminBackEnd.epack1.Epack1;
 
 @Entity
@@ -43,7 +44,7 @@ public class Epack {
 	@Column(name = "center_id")
 	private int center_id;
 	
-	@OneToMany(mappedBy = "epack")
+	@OneToMany(mappedBy = "epack_header")
 	@JsonIgnore
 	private List<Epack1> epack1List;
 
