@@ -348,7 +348,7 @@ CREATE TABLE IF NOT EXISTS out_apack_header(
   apack_desc varchar(255),
   created_on datetime,
   created_by varchar(255),
-  apack_status ENUM('CREATED', 'SENT'),
+  apack_status ENUM('CREATED', 'SENT') DEFAULT 'CREATED',
   apack_sent_on datetime,
   apack_path varchar(255),
   PRIMARY KEY(apack_header_id)
@@ -356,31 +356,34 @@ CREATE TABLE IF NOT EXISTS out_apack_header(
 
 -- --------------------------------------------------------
 -- Table structure for table apack1
+-- SELECT q.qp_id, i.item_id, i.item_text, i.marks, i.item_type FROM au_item i INNER JOIN au_qp_item q ON q.item_id = i.item_id;
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS apack1(
+  apack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   apack_header_id int(10) unsigned NOT NULL,
   qp_id int(10) unsigned NOT NULL,
-  qp_code varchar(255) NOT NULL,
-  item_id int(10) unsigned UNIQUE NOT NULL,
+  item_id int(10) unsigned NOT NULL,
   item_text varchar(255) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
-  PRIMARY KEY(apack_header_id)
+  PRIMARY KEY(apack1_id)
 );
 
 ALTER TABLE apack1
   ADD CONSTRAINT `fk_apack1_apack_header_id` FOREIGN KEY (apack_header_id) REFERENCES out_apack_header(apack_header_id) ON DELETE CASCADE;
 
--- --------------------------------------------------------
+  -- --------------------------------------------------------
 -- Table structure for table apack2
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS apack2(
-  apack_id int(10) unsigned NOT NULL,
+  apack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  apack1_id int(10) unsigned NOT NULL,
   item_id int(10) unsigned NOT NULL,
+  item_option_id int(10) unsigned NOT NULL,
   option_text varchar(255) NOT NULL,
-  option_percentage float(24),
-  PRIMARY KEY(apack_id)
+  option_percentage int(10) NOT NULL,
+  PRIMARY KEY(apack2_id)
 );
 
 ALTER TABLE apack2
-  ADD CONSTRAINT `fk_apack2_item_id` FOREIGN KEY (item_id) REFERENCES apack1(item_id) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_apack2_apack1_id` FOREIGN KEY (apack1_id) REFERENCES apack1(apack1_id) ON DELETE CASCADE;
