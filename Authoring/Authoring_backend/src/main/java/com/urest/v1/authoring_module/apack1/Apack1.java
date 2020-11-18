@@ -1,7 +1,6 @@
-package com.urest.v1.authoring_module.qpack2;
+package com.urest.v1.authoring_module.apack1;
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,20 +12,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.urest.v1.authoring_module.qpack1.Qpack1;
-import com.urest.v1.authoring_module.qpack3.Qpack3;
+import com.urest.v1.authoring_module.apack.Apack;
+import com.urest.v1.authoring_module.apack2.Apack2;
 
 @Entity
-@Table(name = "qpack2")
-public class Qpack2 {
+@Table(name = "apack1")
+public class Apack1 {
 	@Id 
-	@Column(name = "qpack2_id") 
+	@Column(name = "apack1_id") 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int qpack2_id;
+	private int apack1_id;
 	
 	@ManyToOne
-	@JoinColumn(name="qpack1_id")
-	private Qpack1 qpack1;
+	@JoinColumn(name="apack_header_id")
+	private Apack apack_header;
 	
 	@Column(name="qp_id")
 	private int qp_id;
@@ -42,27 +41,38 @@ public class Qpack2 {
 	
 	@Column(name = "item_type")
 	private String item_type;
-	
-	@Column(name = "cognitive_level")
-	private String cognitive_level;
-	
-	@OneToMany(mappedBy = "qpack2")
-	@JsonIgnore
-	private List<Qpack3> qpack3List;
 
-	public Qpack2() {
+	@OneToMany(mappedBy = "apack1")
+	@JsonIgnore
+	private List<Apack2> apack2List;
+	
+	public Apack1() {
 		super();
 	}
 
-	public Qpack2(int qp_id, int item_id, String item_text, float item_marks, String item_type,
-			String cognitive_level) {
+	public Apack1(int qp_id, int item_id, String item_text, float item_marks, String item_type) {
 		super();
 		this.qp_id = qp_id;
 		this.item_id = item_id;
 		this.item_text = item_text;
 		this.item_marks = item_marks;
 		this.item_type = item_type;
-		this.cognitive_level = cognitive_level;
+	}
+
+	public int getApack1_id() {
+		return apack1_id;
+	}
+
+	public void setApack1_id(int apack1_id) {
+		this.apack1_id = apack1_id;
+	}
+
+	public Apack getApack_header() {
+		return apack_header;
+	}
+
+	public void setApack_header(Apack apack_header) {
+		this.apack_header = apack_header;
 	}
 
 	public int getQp_id() {
@@ -71,22 +81,6 @@ public class Qpack2 {
 
 	public void setQp_id(int qp_id) {
 		this.qp_id = qp_id;
-	}
-
-	public int getQpack2_id() {
-		return qpack2_id;
-	}
-
-	public void setQpack2_id(int qpack2_id) {
-		this.qpack2_id = qpack2_id;
-	}
-
-	public Qpack1 getQpack1() {
-		return qpack1;
-	}
-
-	public void setQpack1(Qpack1 qpack1) {
-		this.qpack1 = qpack1;
 	}
 
 	public int getItem_id() {
@@ -120,14 +114,4 @@ public class Qpack2 {
 	public void setItem_type(String item_type) {
 		this.item_type = item_type;
 	}
-
-	public String getCognitive_level() {
-		return cognitive_level;
-	}
-
-	public void setCognitive_level(String cognitive_level) {
-		this.cognitive_level = cognitive_level;
-	}
-	
-	
 }

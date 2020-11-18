@@ -1,5 +1,4 @@
-package com.urest.v1.authoring_module.qpack;
-
+package com.urest.v1.authoring_module.apack;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class QpackController {
-	
+public class ApackController {
 	@Autowired
-	private QpackService qpackService;
+	private ApackService apackService;
 	
-	@RequestMapping("/createQpack")
-	public void createQpack(){
-		qpackService.addQpack();
+	@RequestMapping("/createApack")
+	public void createApack(){
+		apackService.addApack();
 	}
-
 }
