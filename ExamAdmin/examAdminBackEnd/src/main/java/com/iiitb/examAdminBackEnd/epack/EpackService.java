@@ -15,6 +15,10 @@ import com.iiitb.examAdminBackEnd.epack1.Epack1;
 import com.iiitb.examAdminBackEnd.epack1.Epack1Service;
 import com.iiitb.examAdminBackEnd.epack2.Epack2;
 import com.iiitb.examAdminBackEnd.epack2.Epack2Service;
+import com.iiitb.examAdminBackEnd.epack3.Epack3;
+import com.iiitb.examAdminBackEnd.epack3.Epack3Service;
+import com.iiitb.examAdminBackEnd.epack4.Epack4;
+import com.iiitb.examAdminBackEnd.epack4.Epack4Service;
 
 @Service
 public class EpackService {
@@ -31,6 +35,12 @@ public class EpackService {
 	@Autowired
 	private Epack2Service epack2Service;
 	
+	@Autowired
+	private Epack3Service epack3Service;
+	
+	@Autowired
+	private Epack4Service epack4Service;
+	
 	public List<Epack> getAllEpacks() {
 		List<Epack> epacks = new ArrayList<>();
 		epackRepository.findAll().forEach(epacks::add);
@@ -42,6 +52,8 @@ public class EpackService {
 	}
 	
 	public void addEpack(int center_id) {
+		
+		epack3Service.deleteAll();
 		epack2Service.deleteAll();
 		epack1Service.deleteAll();
 		
@@ -56,6 +68,7 @@ public class EpackService {
 		
 		//Generate Epack1
 		Map<Integer, Epack1> qp_id2Epack1 = new HashMap<Integer, Epack1>();
+		Map<Integer, Epack1> batch_id2Epack1 = new HashMap<Integer, Epack1>();
 		
 		List<Object[]> epack1Objects = epackJoinRepository.fetchEpack1Data(center_id);
 		for(int i = 0; i < epack1Objects.size(); i++) {
@@ -90,15 +103,56 @@ public class EpackService {
 			if(!qp_id2Epack1.containsKey(epack1.getQp_id())) {
 				qp_id2Epack1.put(epack1.getQp_id(), epack1);
 			}
+			
+			if(!batch_id2Epack1.containsKey(epack1.getBatch_id())) {
+				batch_id2Epack1.put(epack1.getBatch_id(), epack1);
+			}
 		}
 		
 		//Generate Epack2
+		Map<Integer, Epack2> item_id2Epack2 = new HashMap<Integer, Epack2>();
+		
 		for (Map.Entry mapElement : qp_id2Epack1.entrySet()) {
 			List<Object[]> epack2Objects = epackJoinRepository.fetchEpack2Data((int)mapElement.getKey());
 			for(int i = 0; i < epack2Objects.size(); i++) {
 				Epack2 epack2 = new Epack2((Integer)epack2Objects.get(i)[0], (Integer)epack2Objects.get(i)[1], String.valueOf(epack2Objects.get(i)[2]), (Float)epack2Objects.get(i)[3], String.valueOf(epack2Objects.get(i)[4]), String.valueOf(epack2Objects.get(i)[5]));
 				epack2.setEpack1((Epack1)mapElement.getValue());
 				epack2Service.addEpack2(epack2);
+				
+				if(!item_id2Epack2.containsKey(epack2.getItem_id())) {
+					item_id2Epack2.put(epack2.getItem_id(), epack2);
+				}
+			}
+		}
+		
+		//Generate Epack3
+		for (Map.Entry mapElement : item_id2Epack2.entrySet()) {
+			List<Object[]> epack3McqObjects = epackJoinRepository.fetchEpack3McqData((int)mapElement.getKey());
+			for(int i = 0; i < epack3McqObjects.size(); i++) {
+				Epack3 epack3 = new Epack3((Integer)epack3McqObjects.get(i)[0], (Integer)epack3McqObjects.get(i)[1], String.valueOf(epack3McqObjects.get(i)[2]));
+				epack3.setEpack2((Epack2)mapElement.getValue());
+				epack3Service.addEpack3(epack3);
+			}
+			
+			List<Object[]> epack3TFObjects = epackJoinRepository.fetchEpack3TFData((int)mapElement.getKey());
+			for(int i = 0; i < epack3TFObjects.size(); i++) {
+				Epack3 epack3True = new Epack3((Integer)epack3TFObjects.get(i)[0], (Integer)epack3TFObjects.get(i)[1], "True");
+				epack3True.setEpack2((Epack2)mapElement.getValue());
+				epack3Service.addEpack3(epack3True);
+				
+				Epack3 epack3False = new Epack3((Integer)epack3TFObjects.get(i)[0], (Integer)epack3TFObjects.get(i)[1], "False");
+				epack3False.setEpack2((Epack2)mapElement.getValue());
+				epack3Service.addEpack3(epack3False);
+			}
+		}
+		
+		//Generate Qpack4
+		for (Map.Entry mapElement : batch_id2Epack1.entrySet()) {
+			List<Object[]> epack4Objects = epackJoinRepository.fetchEpack4Data((int)mapElement.getKey());
+			for(int i = 0; i < epack4Objects.size(); i++) {
+				Epack4 epack4 = new Epack4((Integer)epack4Objects.get(i)[0], (Integer)epack4Objects.get(i)[1], (Integer)epack4Objects.get(i)[2], String.valueOf(epack4Objects.get(i)[3]), String.valueOf(epack4Objects.get(i)[4]), String.valueOf(epack4Objects.get(i)[5]), String.valueOf(epack4Objects.get(i)[6]), String.valueOf(epack4Objects.get(i)[7]), String.valueOf(epack4Objects.get(i)[8]));
+				epack4.setEpack1((Epack1)mapElement.getValue());
+				epack4Service.addEpack4(epack4);
 			}
 		}
 		

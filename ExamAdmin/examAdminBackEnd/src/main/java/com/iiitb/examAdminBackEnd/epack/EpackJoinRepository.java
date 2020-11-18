@@ -16,4 +16,14 @@ public interface EpackJoinRepository extends JpaRepository<Epack, Integer>{
 	
 	@Query(nativeQuery = true, value = "SELECT i.qp_id, i.qp_item_id, i.item_text, i.item_marks, i.item_type, i.cognitive_level FROM ea_qp_item i WHERE i.qp_id = :qp_id")
 	List<Object[]> fetchEpack2Data(@Param("qp_id") int qp_id);
+	
+	@Query(nativeQuery = true, value = "SELECT o.qp_item_id, o.item_mcq_id, o.mcq_option_text FROM ea_item_mcq_options o WHERE o.qp_item_id = :item_id")
+	List<Object[]> fetchEpack3McqData(@Param("item_id") int item_id);
+	
+	@Query(nativeQuery = true, value = "SELECT o.qp_item_id, o.item_true_false_id FROM ea_item_true_false o WHERE o.qp_item_id = :item_id")
+	List<Object[]> fetchEpack3TFData(@Param("item_id") int item_id);
+	
+	@Query(nativeQuery = true, value = "SELECT b.batch_id, eb.examinee_batch_id, e.examinee_id, e.examinee_code, e.examinee_name, e.examinee_password, e.examinee_branch, e.examinee_email, e.examinee_college "
+			+ "FROM ea_batch b INNER JOIN ea_examinee_batch eb ON b.batch_id = eb.batch_id INNER JOIN ea_examinee e ON e.examinee_id = eb.examinee_id WHERE b.batch_id = :batch_id")
+	List<Object[]> fetchEpack4Data(@Param("batch_id") int batch_id);
 }

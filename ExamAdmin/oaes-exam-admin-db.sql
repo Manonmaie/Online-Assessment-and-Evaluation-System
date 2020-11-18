@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS ea_itemtype_master (
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_qp_item (
   qp_item_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_code varchar(255) UNIQUE NOT NULL,
+  -- item_code varchar(255) UNIQUE NOT NULL,
   item_text varchar(511) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
@@ -220,12 +220,18 @@ ALTER TABLE ea_qp_item
 -- --------------------------------------------------------
 -- Data Entry for table ea_qp_item
 -- --------------------------------------------------------
-INSERT INTO ea_qp_item VALUES(0,"1.1","1stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
-INSERT INTO ea_qp_item VALUES(0,"1.2","2stQuestion-Mid-DB",10,"MCQ",'APPLY',1);
-INSERT INTO ea_qp_item VALUES(0,"1.3","3stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
-INSERT INTO ea_qp_item VALUES(0,"2.1","1stQuestion-End-DB",5,"MCQ",'REMEMBER',2);
-INSERT INTO ea_qp_item VALUES(0,"2.2","2stQuestion-End-DB",10,"TF",'APPLY',2);
-INSERT INTO ea_qp_item VALUES(0,"3.1","1stQuestion-IMP-DB",30,"MCQ",'EVALUATE',3);
+-- INSERT INTO ea_qp_item VALUES(0,"1.1","1stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+-- INSERT INTO ea_qp_item VALUES(0,"1.2","2stQuestion-Mid-DB",10,"MCQ",'APPLY',1);
+-- INSERT INTO ea_qp_item VALUES(0,"1.3","3stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+-- INSERT INTO ea_qp_item VALUES(0,"2.1","1stQuestion-End-DB",5,"MCQ",'REMEMBER',2);
+-- INSERT INTO ea_qp_item VALUES(0,"2.2","2stQuestion-End-DB",10,"TF",'APPLY',2);
+-- INSERT INTO ea_qp_item VALUES(0,"3.1","1stQuestion-IMP-DB",30,"MCQ",'EVALUATE',3);
+INSERT INTO ea_qp_item VALUES(0,"1stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+INSERT INTO ea_qp_item VALUES(0,"2stQuestion-Mid-DB",10,"MCQ",'APPLY',1);
+INSERT INTO ea_qp_item VALUES(0,"3stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+INSERT INTO ea_qp_item VALUES(0,"1stQuestion-End-DB",5,"MCQ",'REMEMBER',2);
+INSERT INTO ea_qp_item VALUES(0,"2stQuestion-End-DB",10,"TF",'APPLY',2);
+INSERT INTO ea_qp_item VALUES(0,"1stQuestion-IMP-DB",30,"MCQ",'EVALUATE',3);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_examinee_item_marks`
@@ -272,7 +278,7 @@ CREATE view `ea_examinee_batch_marks` as (
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_item_mcq_options(
   item_mcq_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_mcq_options_code varchar(255) UNIQUE NOT NULL,
+  -- item_mcq_options_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
   mcq_option_text varchar(255) NOT NULL,
   PRIMARY KEY(item_mcq_id)
@@ -284,20 +290,27 @@ ALTER TABLE ea_item_mcq_options
 -- --------------------------------------------------------
 -- Data Entry for table ea_item_mcq_options
 -- --------------------------------------------------------
-INSERT INTO ea_item_mcq_options VALUES(0,"1.1.1",1,"1stQuestion-Mid-DB-OP1");
-INSERT INTO ea_item_mcq_options VALUES(0,"1.1.2",1,"1stQuestion-Mid-DB-OP2");
-INSERT INTO ea_item_mcq_options VALUES(0,"1.1.3",1,"1stQuestion-Mid-DB-OP3");
-INSERT INTO ea_item_mcq_options VALUES(0,"1.2.1",2,"2stQuestion-Mid-DB-OP1");
-INSERT INTO ea_item_mcq_options VALUES(0,"1.2.2",2,"2stQuestion-Mid-DB-OP2");
-INSERT INTO ea_item_mcq_options VALUES(0,"2.1.1",4,"1stQuestion-End-DB-OP1");
-INSERT INTO ea_item_mcq_options VALUES(0,"3.1.1",6,"1stQuestion-IMP-DB-OP1");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.1.1",1,"1stQuestion-Mid-DB-OP1");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.1.2",1,"1stQuestion-Mid-DB-OP2");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.1.3",1,"1stQuestion-Mid-DB-OP3");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.2.1",2,"2stQuestion-Mid-DB-OP1");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.2.2",2,"2stQuestion-Mid-DB-OP2");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"2.1.1",4,"1stQuestion-End-DB-OP1");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"3.1.1",6,"1stQuestion-IMP-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,1,"1stQuestion-Mid-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,1,"1stQuestion-Mid-DB-OP2");
+INSERT INTO ea_item_mcq_options VALUES(0,1,"1stQuestion-Mid-DB-OP3");
+INSERT INTO ea_item_mcq_options VALUES(0,2,"2stQuestion-Mid-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,2,"2stQuestion-Mid-DB-OP2");
+INSERT INTO ea_item_mcq_options VALUES(0,4,"1stQuestion-End-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,6,"1stQuestion-IMP-DB-OP1");
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_item_true_false`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_item_true_false(
   item_true_false_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_true_false_code varchar(255) UNIQUE NOT NULL,
+  -- item_true_false_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
   PRIMARY KEY(item_true_false_id)
 );
@@ -308,7 +321,8 @@ ALTER TABLE ea_item_true_false
 -- --------------------------------------------------------
 -- Data Entry for table ea_item_true_false
 -- --------------------------------------------------------
-INSERT INTO ea_item_true_false VALUES(0,"2.2",5);
+-- INSERT INTO ea_item_true_false VALUES(0,"2.2",5);
+INSERT INTO ea_item_true_false VALUES(0, 5);
 
 -- --------------------------------------------------------
 -- Table structure for table in_qpack_header
@@ -427,7 +441,7 @@ ALTER TABLE epack1
 
 -- --------------------------------------------------------
 -- Table structure for table epack2
--- SELECT i.qp_id, i.qp_item_id, i.item_text, i.item_marks, i.item_type, i.cognitive_level FROM ea_qp_item i WHERE q.qp_id = :qp_id")
+-- SELECT i.qp_id, i.qp_item_id, i.item_text, i.item_marks, i.item_type, i.cognitive_level FROM ea_qp_item i WHERE q.qp_id = :qp_id"
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS epack2(
   epack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -444,40 +458,47 @@ CREATE TABLE IF NOT EXISTS epack2(
 ALTER TABLE epack2
   ADD CONSTRAINT `fk_epack2_epack1_id` FOREIGN KEY (epack1_id) REFERENCES epack1(epack1_id) ON DELETE CASCADE;
 
--- -- --------------------------------------------------------
--- -- Table structure for table epack3
--- -- --------------------------------------------------------
--- CREATE TABLE IF NOT EXISTS epack3(
---   epack_id int(10) unsigned NOT NULL,
---   item_id int(10) unsigned NOT NULL,
---   option_text varchar(255) NOT NULL,
---   PRIMARY KEY(epack_id)
--- );
+-- --------------------------------------------------------
+-- Table structure for table epack3
+-- SELECT o.qp_item_id, o.item_mcq_id, o.mcq_option_text FROM ea_item_mcq_options o WHERE o.qp_item_id = :item_id
+-- SELECT o.qp_item_id, o.item_true_false_id FROM ea_item_true_false o WHERE o.qp_item_id = :item_id
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack3(
+  epack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack2_id int(10) unsigned NOT NULL,
+  item_id int(10) unsigned NOT NULL,
+  item_option_id int(10) unsigned NOT NULL,
+  option_text varchar(255) NOT NULL,
+  PRIMARY KEY(epack3_id)
+);
 
--- ALTER TABLE epack3
---   ADD CONSTRAINT `fk_epack3_epack_id` FOREIGN KEY (epack_id) REFERENCES epack2(epack_id) ON DELETE CASCADE,
---   ADD CONSTRAINT `fk_epack3_item_id` FOREIGN KEY (item_id) REFERENCES epack2(item_id) ON DELETE CASCADE;
+ALTER TABLE epack3
+  ADD CONSTRAINT `fk_epack3_epack2_id` FOREIGN KEY (epack2_id) REFERENCES epack2(epack2_id) ON DELETE CASCADE;
+  -- ADD CONSTRAINT `fk_epack3_item_id` FOREIGN KEY (item_id) REFERENCES epack2(item_id) ON DELETE CASCADE;
 
--- -- --------------------------------------------------------
--- -- Table structure for table epack4
--- -- --------------------------------------------------------
--- CREATE TABLE IF NOT EXISTS epack4(
---   epack_id int(10) unsigned NOT NULL AUTO_INCREMENT,
---   qp_id int(10) unsigned NOT NULL,
---   batch_id int(10) unsigned NOT NULL,
---   examinee_batch_id int(10) unsigned NOT NULL,
---   examinee_id int(10) unsigned NOT NULL,
---   examinee_code varchar(255) NOT NULL,
---   examinee_name varchar(255) NOT NULL,
---   examinee_password varchar(255) NOT NULL,
---   examinee_branch varchar(255),
---   examinee_email varchar(255),
---   examinee_college varchar(255),
---   PRIMARY KEY(epack_id)
--- );
+-- --------------------------------------------------------
+-- Table structure for table epack4
+-- SELECT b.batch_id, eb.examinee_batch_id, e.examinee_id, e.examinee_code, e.examinee_name, e.examinee_password, e.examinee_branch, e.examinee_email, e.examinee_college 
+-- FROM ea_batch b INNER JOIN ea_examinee_batch eb ON b.batch_id = eb.batch_id INNER JOIN ea_examinee e ON e.examinee_id = eb.examinee_id WHERE b.batch_id = :batch_id
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS epack4(
+  epack4_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack1_id int(10) unsigned NOT NULL,
+  batch_id int(10) unsigned NOT NULL,
+  -- qp_id int(10) unsigned NOT NULL,
+  examinee_batch_id int(10) unsigned NOT NULL,
+  examinee_id int(10) unsigned NOT NULL,
+  examinee_code varchar(255) NOT NULL,
+  examinee_name varchar(255) NOT NULL,
+  examinee_password varchar(255) NOT NULL,
+  examinee_branch varchar(255),
+  examinee_email varchar(255),
+  examinee_college varchar(255),
+  PRIMARY KEY(epack4_id)
+);
 
--- ALTER TABLE epack4
---   ADD CONSTRAINT `fk_epack4_qp_id` FOREIGN KEY (qp_id) REFERENCES epack1(qp_id) ON DELETE CASCADE,
+ALTER TABLE epack4
+  ADD CONSTRAINT `fk_epack4_epack1_id` FOREIGN KEY (epack1_id) REFERENCES epack1(epack1_id) ON DELETE CASCADE;
 --   ADD CONSTRAINT `fk_epack4_batch_id` FOREIGN KEY (batch_id) REFERENCES epack1(batch_id) ON DELETE CASCADE;
 
 

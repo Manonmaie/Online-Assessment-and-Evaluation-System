@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.epack.Epack;
 import com.iiitb.examAdminBackEnd.epack2.Epack2;
+import com.iiitb.examAdminBackEnd.epack4.Epack4;
 
 @Entity
 @Table(name = "epack1")
@@ -89,6 +90,10 @@ public class Epack1 {
 	@OneToMany(mappedBy = "epack1")
 	@JsonIgnore
 	private List<Epack2> epack2List;
+	
+	@OneToMany(mappedBy = "epack1")
+	@JsonIgnore
+	private List<Epack4> epack4List;
 
 	public Epack1() {
 	}

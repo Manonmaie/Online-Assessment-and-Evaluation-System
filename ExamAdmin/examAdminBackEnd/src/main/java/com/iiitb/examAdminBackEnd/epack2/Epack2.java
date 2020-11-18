@@ -1,6 +1,5 @@
 package com.iiitb.examAdminBackEnd.epack2;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.epack1.Epack1;
+import com.iiitb.examAdminBackEnd.epack3.Epack3;
 
 @Entity
 @Table(name = "epack2")
@@ -22,7 +22,7 @@ public class Epack2 {
 	@Id 
 	@Column(name = "epack2_id") 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int epack1_id;
+	private int epack2_id;
 	
 	@ManyToOne
 	@JoinColumn(name="epack1_id")
@@ -46,9 +46,9 @@ public class Epack2 {
 	@Column(name = "cognitive_level")
 	private String cognitive_level;
 	
-//	@OneToMany(mappedBy = "epack2")
-//	@JsonIgnore
-//	private List<epack3> epack3List;
+	@OneToMany(mappedBy = "epack2")
+	@JsonIgnore
+	private List<Epack3> epack3List;
 	
 	public Epack2() {
 		super();
@@ -64,12 +64,12 @@ public class Epack2 {
 		this.cognitive_level = cognitive_level;
 	}
 
-	public int getEpack1_id() {
-		return epack1_id;
+	public int getEpack2_id() {
+		return epack2_id;
 	}
 
-	public void setEpack1_id(int epack1_id) {
-		this.epack1_id = epack1_id;
+	public void setEpack2_id(int epack2_id) {
+		this.epack2_id = epack2_id;
 	}
 
 	public Epack1 getEpack1() {
@@ -86,6 +86,14 @@ public class Epack2 {
 
 	public void setQp_id(int qp_id) {
 		this.qp_id = qp_id;
+	}
+
+	public int getItem_id() {
+		return item_id;
+	}
+
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
 	}
 
 	public String getItem_text() {
