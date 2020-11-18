@@ -27,9 +27,9 @@ import com.urest.v1.authoring_module.options.Options;
 public class Item {
 	
 	public Item() {
+		super();
 	}
 	public Item(Integer itemId, Integer marks, String itemText, String cgLvl,String reviewStatus,String itemStatus,Integer itemUseCount,String diffLvl,String subject,Integer authorId,String itemType) {
-		super();
 		
 		// TODO Auto-generated constructor stub
 		this.itemId = itemId;

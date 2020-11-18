@@ -1,4 +1,10 @@
-<div class="container">
+<!-- 
+----------------------------------------------- question selection module ----------------------------------------------------
+ -->
+
+<div id="QuestionSeletionModule">
+
+<div class="container" >
   <br/>
 
 
@@ -21,15 +27,6 @@
   </div>
 
 
-
-   <!-- Instructions -->
-   <div class="form-group">
-    <label class=" control-label">Instructions</label>
-    <div class="">
-        <input type="text" class="form-control" name="number" [(ngModel)]="instructions" />
-    </div>
-  </div>
-
   <!-- Test Duration -->
   <div class="form-group">
     <label class=" control-label">Test Duration(in mins)</label>
@@ -38,11 +35,35 @@
     </div>
   </div>
 
+   <!-- Batch Code -->
+   <div class="form-group">
+    <label class=" control-label">Batch Code of Question Paper</label>
+    <div class="">
+        <input type="text" class="form-control" name="number" [(ngModel)]="batchCode" />
+    </div>
+  </div>
+
+
+  <!-- Instructions -->
+  <form [formGroup]="productForm"  id="MCQoptionID">
+      
+    <table class="table table-bordered" formArrayName="quantities" >
+      <tr>
+        <th colspan="2" scope="col">Add Instruction:</th>
+        <th width="150px" scope="colgroup" ><button type="button" (click)="addQuantity()" class="btn btn-primary">Add More</button></th>
+      </tr>
+      <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+        <td colspan="2">
+            <input type="text" size="100" formControlName="opt" class="form-control">
+        </td>
+        <td>
+          <button  (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+      </td>
+      </tr>
+    </table>
+     
+  </form>
   <br/>
-
-  <!-- Preview of Question Paper -->
-  <button type="button" class="btn btn-primary" (click)="routeToQpPreview()">Question Paper Preview</button>
-
 
 
 
@@ -111,7 +132,7 @@
               </td>
               <td>
                 <div class="custom-control custom-checkbox" style="text-align:center;">
-                <input type="checkbox"  class="custom-control-input" (click)="editQPList(item.itemId)" id={{item.itemId}}>
+                <input type="checkbox" class="custom-control-input" (click)="editQPList(item)" id={{item.itemId}} [checked]="checked(item)">
                 <label class="custom-control-label" for={{item.itemId}} [ngValue]="item.itemId" ></label>
 
                 </div>
@@ -144,8 +165,8 @@
           </div>
         </div>
       </div><div class="col-md-4 order-md-1 col-lg-3 sidebar-filter">
-        <h3 class="mt-0 mb-5">Showing <span class="text-primary">12</span> Questions</h3>
-
+        <h4 class="mt-0 mb-3">Selected Questions: <span class="text-primary" >{{this.stats.TotalQuestionsSelected}}</span> </h4>
+        <h4 class="mt-0 mb-3">Marks So Far : <span class="text-primary" >{{stats.TotalMarksSoFar}}</span> </h4>
 
         <!-- difficulty level -->
         <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
@@ -153,7 +174,7 @@
         <div class=" pl-2" *ngFor="let sub of difLvl">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id={{sub.value}} [(ngModel)]="sub.checked" (ngModelChange)="onFilterChange()" />
-            <label class="custom-control-label" for={{sub.value}} [ngValue]="sub.value">{{ sub.label }}</label>
+            <label class="custom-control-label" for={{sub.value}} [ngValue]="sub.value">{{ sub.label }} {{displayStat(sub.value)}} </label>
           </div>
         </div>
 
@@ -164,7 +185,7 @@
         <div class=" pl-2" *ngFor="let sub of types">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id={{sub.value}} [(ngModel)]="sub.checked" (ngModelChange)="onFilterChange()" />
-            <label class="custom-control-label" for={{sub.value}} [ngValue]="sub.value">{{ sub.label }}</label>
+            <label class="custom-control-label" for={{sub.value}} [ngValue]="sub.value">{{ sub.label }} {{displayStat(sub.value)}}</label>
           </div>
         </div>
 
@@ -176,7 +197,7 @@
         <div class=" pl-2" *ngFor="let sub of cgLvl">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" id={{sub.value}} [(ngModel)]="sub.checked" (ngModelChange)="onFilterChange()" />
-            <label class="custom-control-label" for={{sub.value}} [ngValue]="sub.value">{{ sub.label }}</label>
+            <label class="custom-control-label" for={{sub.value}} [ngValue]="sub.value">{{ sub.label }} {{displayStat(sub.value)}}</label>
           </div>
         </div>
 
@@ -185,8 +206,8 @@
         <div class="divider mt-5 mb-5 border-bottom border-secondary"></div>
         <h6 class="text-uppercase mt-5 mb-3 font-weight-bold">Marks Range</h6>
         <div class="price-filter-control">
-          <input type="number" class="form-control w-50 pull-left mb-2" value="50" id="price-min-control" (ngModelChange)="onFilterChange()" [(ngModel)]="startMark">&nbsp;to&nbsp;  
-          <input type="number" class="form-control w-50 pull-right" value="150" id="price-max-control" (ngModelChange)="onFilterChange()" [(ngModel)]="endMark">
+          <input type="number" class="form-control w-50 pull-left mb-2" value="50" id="price-min-control" (change)="onFilterChange()" [(ngModel)]="startMark">&nbsp;to&nbsp;  
+          <input type="number" class="form-control w-50 pull-right" value="150" id="price-max-control" (change)="onFilterChange()" [(ngModel)]="endMark">
         </div>
         <input id="ex2" type="text" class="slider " value="50,150" data-slider-min="10" data-slider-max="200" data-slider-step="5" data-slider-value="[50,150]" data-value="50,150" style="display: none;">
       </div>
@@ -195,15 +216,162 @@
 
     <br/>
     <br/>
-
-    <!-- Create of Question Paper -->
-    <button type="button" class="btn btn-primary" (click)="setQP()">Create Question Paper </button>
+    <div style="display:flex; justify-content: flex-end; width: 100%;">
+      <!-- Preview of Question Paper -->
+      <button type="button" class="btn btn-secondary mr-2" (click)="routeToQpPreview()">Next</button>
+    </div>
     <br/>
     <br/>
 
   </div>
 
 
+
+  </div>
+
+
+
+
+
+
+
+
+
+
   
 
   
+
+  <!-- 
+----------------------------------------------- question paper preview ----------------------------------------------------
+ -->
+
+
+
+
+<div id="QuestionPreviewModule">
+  <div class="container-dummy">
+      <h2 style="text-align:center;"> Question Paper Preview </h2>
+      <div class="row customMain">
+          <div class="col-md-7 col-md-offset-1">
+              <ol class="list-group">
+                  <li class="list-group-item" *ngFor="let qpItem of myQPSet;">
+                      <div id="{{indexOfelement}}" class="ck-content" [innerHtml]='qpItem.itemText' style="display: inline"></div>
+                  <button class="badge badge-primary badge-pill" (click)="editQPList(qpItem)" style="background-color: #f44336; margin-left: 5px; margin-top: -3px;">
+                    Delete
+                  </button>
+                  <span class="badge badge-primary badge-pill">
+                    {{qpItem.marks}} Marks
+                  </span>
+                  
+                  <ol class="list-group" type="a">
+                      <li class="list-group-item"  *ngFor="let itemMcq of qpItem.asItemMCQ">
+                          <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="checkbox">
+                                  <input type="checkbox" name="{{itemMcq.itemCode}}"  [value]="itemMcqOption"> {{itemMcq.mcqOptionText}}
+                          </div>
+                          <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="radio">
+                              <input type="radio" name="{{qpItem.itemCode}}"  [value]="itemMcqOption"> {{itemMcq.mcqOptionText}}
+                          </div>
+                      </li>
+                  </ol>
+                  
+                  <div *ngIf='qpItem.itemType === "True/False"' class="radio">
+                      <div>
+                          <input type="radio" disabled /> &nbsp;
+                          <label class="block">True<span class="required"></span></label>
+                        </div>
+                        <div>
+                          <input type="radio" disabled /> &nbsp;
+                          <label class="block">False<span class="required"></span></label>
+                        </div>
+                  </div>
+                  <pre></pre>
+                  
+                  </li>
+              </ol>
+          </div>
+      </div>
+      <div style="display:flex; justify-content: flex-end; width: 80%; padding: 20px;">
+        <!-- Preview of Question Paper -->
+        <button type="button" class="btn btn-secondary mr-2" (click)="routeToQuestionsDisplay()">Previous</button>
+        <!-- Create of Question Paper -->
+        <button type="button" class="btn btn-primary" (click)="routeToQPSet()">Next</button>
+      </div>
+  </div>
+  </div>
+
+
+
+
+
+  <!-- 
+----------------------------------------------- question paper stats and submit ----------------------------------------------------
+ -->
+
+<div id="QPSetModule" style="display: flex; align-items: center; flex-direction: column;">
+  <br/>
+  <h2 >Question Paper Statistics </h2>
+  <br/>
+  <div style="display: flex; justify-content: space-evenly; flex-direction: row;">
+  <div style="width: 500px ;height: 400px">
+    <h3 style="text-align: center;">Difficulty Level</h3>
+    <canvas 
+        baseChart
+        height="300" width="500"
+        [chartType]="chartType"
+        [datasets]="chartDatasetsDifLvl"
+        [labels]="chartLabelsDifLvl"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]=true
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+  <div style="width: 500px ;height: 400px">
+      <h3 style="text-align: center;">Cognitive Level</h3>
+    <canvas 
+        baseChart
+        height="300" width="500"
+        [chartType]="chartType"
+        [datasets]="chartDatasetsCgLvl"
+        [labels]="chartLabelsCgLvl"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]=true
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+  <div style="width: 500px ;height: 400px">
+      <h3 style="text-align: center;">Types</h3>
+    <canvas 
+        baseChart
+        height="300" width="500"
+        [chartType]="chartType"
+        [datasets]="chartDatasetsType"
+        [labels]="chartLabelsType"
+        [colors]="chartColors"
+        [options]="chartOptions"
+        [legend]=true
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)">
+    </canvas>
+  </div>
+</div>
+<br/>
+
+<h3 style="text-align: center;">Total Number of Questions: {{this.stats.TotalQuestionsSelected}}</h3>
+<h3 style="text-align: center;">Total Marks: {{stats.TotalMarksSoFar}}</h3>
+
+
+  <div style="display:flex; justify-content: flex-end; width: 100%; padding: 20px;">
+      <!-- Preview of Question Paper -->
+      <button type="button" class="btn btn-secondary mr-2" (click)="routeToQpPreview()">Previous</button>
+      <!-- Create of Question Paper -->
+      <button type="button" class="btn btn-primary" (click)="setQP()">Create</button>
+  </div>
+
+
+  
+</div>
