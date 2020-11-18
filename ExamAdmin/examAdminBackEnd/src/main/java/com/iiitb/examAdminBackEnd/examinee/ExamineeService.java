@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
-import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchRepository;
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchMarks;
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchMarksRepository;
 
 @Service
 public class ExamineeService {
@@ -16,7 +16,7 @@ public class ExamineeService {
 	private ExamineeRepository examineeRepository;
 	
 	@Autowired
-	private ExamineeBatchRepository examineeBatchRepository;
+	private ExamineeBatchMarksRepository examineeBatchMarksRepository;
 	
 	public List<Examinee> getAllExaminees() {
 		List<Examinee> examinees = new ArrayList<>();

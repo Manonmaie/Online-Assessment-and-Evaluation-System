@@ -9,7 +9,7 @@ import { QuestionPaperComponent } from './question-paper/question-paper.componen
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionManagementComponent } from './question-management/question-management.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { QpPreviewComponent } from './qp-preview/qp-preview.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -19,7 +19,6 @@ import { QpPreviewComponent } from './qp-preview/qp-preview.component';
     ItemFormComponent,
     QuestionManagementComponent,
     QuestionPaperComponent,
-    QpPreviewComponent
    ],
   imports: [
     BrowserModule,
@@ -28,7 +27,8 @@ import { QpPreviewComponent } from './qp-preview/qp-preview.component';
     CKEditorModule,
     HttpClientModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
     ],
   providers: [],
   bootstrap: [AppComponent],

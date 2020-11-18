@@ -29,13 +29,13 @@ public class questionPaperItem {
 		super();
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne( cascade=CascadeType.MERGE)
 	@JoinColumn(name="item_id")
-	@JsonIgnore
+//	@JsonIgnore
 	private Item item;
 	
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne( cascade=CascadeType.MERGE)
 	@JoinColumn(name="qp_id")
 	@JsonIgnore
 	private questionPaper QPItemId;

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchMarks;
 
 @Entity
 @Table(name = "ea_examinee")
@@ -26,7 +26,7 @@ public class Examinee {
 	
 	@OneToMany(mappedBy = "examinee", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JsonIgnore
-	private List<ExamineeBatch> examineeBatchList;
+	private List<ExamineeBatchMarks> examineeBatchList;
 	
 	public Examinee() {
 	}
@@ -84,10 +84,10 @@ public class Examinee {
 	public void setExamineeCollege(String examineeCollege) {
 		this.examineeCollege = examineeCollege;
 	}
-	public List<ExamineeBatch> getExamineeBatchList() {
+	public List<ExamineeBatchMarks> getExamineeBatchList() {
 		return examineeBatchList;
 	}
-	public void setExamineeBatchList(List<ExamineeBatch> examineeBatchList) {
+	public void setExamineeBatchList(List<ExamineeBatchMarks> examineeBatchList) {
 		this.examineeBatchList = examineeBatchList;
 	}
 }

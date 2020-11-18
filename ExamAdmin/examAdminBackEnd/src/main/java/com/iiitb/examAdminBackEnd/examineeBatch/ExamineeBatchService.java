@@ -1,5 +1,6 @@
 package com.iiitb.examAdminBackEnd.examineeBatch;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +10,30 @@ import org.springframework.stereotype.Service;
 public class ExamineeBatchService {
 
 	@Autowired
+	ExamineeBatchMarksRepository examineeBatchMarksRepository;
+	
+	@Autowired
 	ExamineeBatchRepository examineeBatchRepository;
 	
-	public void updateExamineeBatch(ExamineeBatchKey examineeBatchKey, ExamineeBatch examineeBatch) {
-		examineeBatchRepository.save(examineeBatch);
+	public List<ExamineeBatch> getAllExamineeBatches(){
+		List<ExamineeBatch> examineeBatches = new ArrayList<>();
+		examineeBatchRepository.findAll().forEach(examineeBatches::add);
+		return examineeBatches;
 	}
 	
-	public List<ExamineeBatch> getExamineeBatchByExamdriveId(int id){
-		return examineeBatchRepository.findByBatchExamdriveExamdriveId(id);
+	public void addExamineeBatches(List<ExamineeBatch> examineeBatches) {
+		examineeBatchRepository.saveAll(examineeBatches);
 	}
 	
-	public List<ExamineeBatch> getExamineeBatchByExamineeId(int id){
-		return examineeBatchRepository.findByExamineeExamineeId(id);
+	public void updateExamineeBatch(ExamineeBatchKey examineeBatchKey, ExamineeBatchMarks examineeBatchMarks) {
+		examineeBatchMarksRepository.save(examineeBatchMarks);
+	}
+	
+	public List<ExamineeBatchMarks> getExamineeBatchByExamdriveId(int id){
+		return examineeBatchMarksRepository.findByBatchExamdriveExamdriveId(id);
+	}
+	
+	public List<ExamineeBatchMarks> getExamineeBatchByExamineeId(int id){
+		return examineeBatchMarksRepository.findByExamineeExamineeId(id);
 	}
 }
