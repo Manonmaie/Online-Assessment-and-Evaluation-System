@@ -24,4 +24,8 @@ export class ExamineeBatchService {
   getExamineeBatchByExamineeId(examineeId: number): Observable<ExamineeBatch[]>{
     return this.http.get<ExamineeBatch[]>(baseURL + "examineeBatchByExaminee/" + examineeId);
   }
+
+  addExamineeBatches(examineeBatches: ExamineeBatch[]): Observable<ExamineeBatch[]>{
+    return this.http.post<ExamineeBatch[]>(baseURL + 'examineeBatchBulk', examineeBatches);
+  } 
 }
