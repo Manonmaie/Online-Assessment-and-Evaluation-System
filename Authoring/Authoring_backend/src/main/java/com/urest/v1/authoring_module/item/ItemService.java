@@ -50,6 +50,7 @@ public class ItemService {
 		if(m.get("endMark")!=null)
 			endMarkInteger=Integer.parseInt(m.get("endMark").trim());
 		List<Item> itemList= itemRepository.findByItemId(cgLvlList,difLvlList,typesList,startMarkInteger,endMarkInteger);
+		System.out.println(itemList.size());
 		return itemList;
 	}
 	
@@ -62,7 +63,6 @@ public class ItemService {
 	         t2.add(Integer.parseInt(t1.get(i)));
 	      }
 		List<Item> t= itemRepository.findByItemIdIn(t2);
-		System.out.println("meee");
 		return t;
 	}
 	

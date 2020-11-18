@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,9 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.urest.v1.authoring_module.TF.TF;
+import com.urest.v1.authoring_module.item.Item;
 import com.urest.v1.authoring_module.questionPaperItem.questionPaperItem;
 
 
@@ -32,11 +33,16 @@ public class questionPaper {
 		this.course=course;
 		this.batchCode=batchCode;
 	}
+	
+	
+	// --------------------------------------------------------------------------------
+//	@ElementCollection(targetClass=Item.class)
+	@Transient private List<Item> items;
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="qp_id", updatable = false, nullable = false)
 	private Integer questionPaperId;
-	
 	@Column(name="duration")
 	private int timeDuration;
 	@Column(name="maximum_marks")
@@ -47,11 +53,21 @@ public class questionPaper {
 	private String batchCode;
 	
 		
-	@OneToMany(mappedBy="QPItemId", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(mappedBy="QPItemId",
+            cascade = CascadeType.MERGE,orphanRemoval = true)
 	private List<questionPaperItem> asitemIds=new ArrayList<questionPaperItem>();
 	
 	
+	
+	
+	// --------------------------------------------------------------------------------
+	@Transient
+	public List<Item> getItems() {
+		return items;
+	}
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
 	public Integer getQuestionPaperId() {
 		return questionPaperId;
 	}
