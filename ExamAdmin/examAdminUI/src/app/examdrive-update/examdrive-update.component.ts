@@ -7,6 +7,8 @@ import {ExamdriveService} from '../services/examdrive.service';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { BatchService } from '../services/batch.service';
+import { ExamineeService } from '../services/examinee.service';
+import { ExamineeBatchService } from '../services/examinee-batch.service';
 import {resetError, setError} from '../shared/error';
 import { newArray } from '@angular/compiler/src/util';
 
@@ -29,9 +31,10 @@ export class ExamdriveUpdateComponent implements OnInit {
   examdriveId = this.route.snapshot.params['id'];
   validStatus: any[] = ['NOT_STARTED','IN_PROGRESS','COMPLETED'];
   isAddBatch: boolean = false;
+  isUpload: boolean[];
   newBatch: Batch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
 
-  constructor(private examdriveService:ExamdriveService, private courseService: CourseService, private batchService:BatchService, private route: ActivatedRoute, public router: Router) { }
+  constructor(private examdriveService:ExamdriveService, private courseService: CourseService, private batchService:BatchService, private examineeService: ExamineeService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
     this.getCourses();
@@ -44,6 +47,7 @@ export class ExamdriveUpdateComponent implements OnInit {
     this.isShow = new Array();
     this.isUpdate = new Array();
     this.batches = new Array();
+    this.isUpload = new Array();
   }
 
   getExamdrive(id: number): void{
@@ -186,5 +190,21 @@ export class ExamdriveUpdateComponent implements OnInit {
     setTimeout(() => {
       this.newBatch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
     },200);
+  }
+
+  uploadStudents(batch: Batch): void{
+    this.isUpload[batch.batchId] = true;
+  }
+
+  assignStudentsToBatch(batch: Batch): void{
+    // TODO - from the gotten list of examinees make a examineeBatch json object and upload it to backend
+    // this.examineeBatchService.addExamineeBatches(examineeBatches);
+    this.isUpload[batch.batchId] = false;
+  }
+
+  onFileChange(ev){
+    // Make the list of batch students as null or create a 2d array of students 1st ind is batch id
+    // TODO - Get list of student codes and call a backend function to get examinee objects of the list
+    // this.examineeService.getExamineesByCode(List of examinee Codes)
   }
 }
