@@ -312,6 +312,7 @@ CREATE TABLE IF NOT EXISTS qpack2(
   qpack1_id int(10) unsigned NOT NULL,
   qp_id int(10) unsigned NOT NULL,
   item_id int(10) unsigned NOT NULL,
+  qp_item_id int(10) unsigned NOT NULL,
   item_text varchar(255) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
@@ -331,6 +332,7 @@ CREATE TABLE IF NOT EXISTS qpack3(
   qpack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   qpack2_id int(10) unsigned NOT NULL,
   item_id int(10) unsigned NOT NULL,
+  qp_item_id int(10) unsigned NOT NULL,
   item_mcq_id int(10) unsigned NOT NULL,
   mcq_option_text varchar(255) NOT NULL,
   PRIMARY KEY(qpack3_id)

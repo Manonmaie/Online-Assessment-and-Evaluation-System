@@ -34,6 +34,9 @@ public class Qpack2 {
 	@Column(name = "item_id")
 	private int item_id;
 	
+	@Column(name = "qp_item_id")
+	private int qp_item_id;
+	
 	@Column(name = "item_text")
 	private String item_text;
 	
@@ -54,11 +57,12 @@ public class Qpack2 {
 		super();
 	}
 
-	public Qpack2(int qp_id, int item_id, String item_text, float item_marks, String item_type,
+	public Qpack2(int qp_id, int item_id, int qp_item_id, String item_text, float item_marks, String item_type,
 			String cognitive_level) {
 		super();
 		this.qp_id = qp_id;
 		this.item_id = item_id;
+		this.qp_item_id = qp_item_id;
 		this.item_text = item_text;
 		this.item_marks = item_marks;
 		this.item_type = item_type;
@@ -71,6 +75,22 @@ public class Qpack2 {
 
 	public void setQp_id(int qp_id) {
 		this.qp_id = qp_id;
+	}
+
+	public int getQp_item_id() {
+		return qp_item_id;
+	}
+
+	public void setQp_item_id(int qp_item_id) {
+		this.qp_item_id = qp_item_id;
+	}
+
+	public List<Qpack3> getQpack3List() {
+		return qpack3List;
+	}
+
+	public void setQpack3List(List<Qpack3> qpack3List) {
+		this.qpack3List = qpack3List;
 	}
 
 	public int getQpack2_id() {

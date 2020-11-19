@@ -31,8 +31,8 @@ public class Apack1Service {
 		return apack1Repository.findById(id);
 	}
 
-	public Apack1 getApack1ByItemId(int item_id) {
-		return apack1Repository.getApack1ByItemId(item_id);
+	public Apack1 getApack1ByQpItemId(int qp_item_id) {
+		return apack1Repository.getApack1ByQpItemId(qp_item_id);
 	}
 	
 	public void deleteAll() {

@@ -24,8 +24,8 @@ public class Qpack2Service {
 		qpack2Repository.saveAll(qpack2s);
 	}
 	
-	public Qpack2 getQpack2ByItemId(int item_id) {
-		return qpack2Repository.getQpack2ByItemId(item_id);
+	public Qpack2 getQpack2ByQpItemId(int qp_item_id) {
+		return qpack2Repository.getQpack2ByQpItemId(qp_item_id);
 	}
 	
 	public void deleteAll() {

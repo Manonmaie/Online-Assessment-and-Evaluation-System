@@ -28,6 +28,9 @@ public class Qpack3 {
 	@Column(name = "item_id")
 	private int item_id;
 	
+	@Column(name = "qp_item_id")
+	private int qp_item_id;
+	
 	@Column(name = "item_option_id")
 	private int item_option_id;
 	
@@ -38,9 +41,10 @@ public class Qpack3 {
 		super();
 	}
 
-	public Qpack3(int item_id, int item_option_id, String option_text) {
+	public Qpack3(int item_id, int qp_item_id, int item_option_id, String option_text) {
 		super();
 		this.item_id = item_id;
+		this.qp_item_id = qp_item_id;
 		this.item_option_id = item_option_id;
 		this.option_text = option_text;
 	}
@@ -67,6 +71,14 @@ public class Qpack3 {
 
 	public void setItem_id(int item_id) {
 		this.item_id = item_id;
+	}
+
+	public int getQp_item_id() {
+		return qp_item_id;
+	}
+
+	public void setQp_item_id(int qp_item_id) {
+		this.qp_item_id = qp_item_id;
 	}
 
 	public int getItem_option_id() {

@@ -88,7 +88,7 @@ public class QpackService {
 		for(int i = 0; i < uniqueQpQpack1s.size(); i++) {
 			List<Object[]> qpack2Objects = qpackJoinRepository.fetchQpack2Data(uniqueQpQpack1s.get(i).getQp_id());
 			for(int j = 0; j < qpack2Objects.size(); j++) {
-				Qpack2 qpack2 = new Qpack2((Integer)qpack2Objects.get(j)[0], (Integer)qpack2Objects.get(j)[1], String.valueOf(qpack2Objects.get(j)[2]), (Float)qpack2Objects.get(j)[3], String.valueOf(qpack2Objects.get(j)[4]), String.valueOf(qpack2Objects.get(j)[5]));
+				Qpack2 qpack2 = new Qpack2((Integer)qpack2Objects.get(j)[0], (Integer)qpack2Objects.get(j)[1], (Integer)qpack2Objects.get(j)[2], String.valueOf(qpack2Objects.get(j)[3]), (Float)qpack2Objects.get(j)[4], String.valueOf(qpack2Objects.get(j)[5]), String.valueOf(qpack2Objects.get(j)[6]));
 				qpack2.setQpack1(uniqueQpQpack1s.get(i));
 				qpack2Service.addQpack2(qpack2);
 			}
@@ -97,18 +97,18 @@ public class QpackService {
 		//Generate Qpack3
 		List<Object[]> qpack3McqObjects = qpackJoinRepository.fetchQpack3McqData();
 		for(int i = 0; i < qpack3McqObjects.size(); i++) {
-			Qpack3 qpack3 = new Qpack3((Integer)qpack3McqObjects.get(i)[0], (Integer)qpack3McqObjects.get(i)[1], String.valueOf(qpack3McqObjects.get(i)[2]));
-			qpack3.setQpack2(qpack2Service.getQpack2ByItemId(qpack3.getItem_id()));
+			Qpack3 qpack3 = new Qpack3((Integer)qpack3McqObjects.get(i)[0], (Integer)qpack3McqObjects.get(i)[1], (Integer)qpack3McqObjects.get(i)[2], String.valueOf(qpack3McqObjects.get(i)[3]));
+			qpack3.setQpack2(qpack2Service.getQpack2ByQpItemId(qpack3.getQp_item_id()));
 			qpack3Service.addQpack3(qpack3);
 		}
 		List<Object[]> qpack3TFObjects = qpackJoinRepository.fetchQpack3TFData();
 		for(int i = 0; i < qpack3TFObjects.size(); i++) {
-			Qpack3 qpack3True = new Qpack3((Integer)qpack3TFObjects.get(i)[0], (Integer)qpack3TFObjects.get(i)[1], "True");
-			qpack3True.setQpack2(qpack2Service.getQpack2ByItemId(qpack3True.getItem_id()));
+			Qpack3 qpack3True = new Qpack3((Integer)qpack3TFObjects.get(i)[0], (Integer)qpack3TFObjects.get(i)[1], (Integer)qpack3McqObjects.get(i)[2], "True");
+			qpack3True.setQpack2(qpack2Service.getQpack2ByQpItemId(qpack3True.getQp_item_id()));
 			qpack3Service.addQpack3(qpack3True);
 			
-			Qpack3 qpack3False = new Qpack3((Integer)qpack3TFObjects.get(i)[0], (Integer)qpack3TFObjects.get(i)[1], "False");
-			qpack3False.setQpack2(qpack2Service.getQpack2ByItemId(qpack3False.getItem_id()));
+			Qpack3 qpack3False = new Qpack3((Integer)qpack3TFObjects.get(i)[0], (Integer)qpack3TFObjects.get(i)[1], (Integer)qpack3McqObjects.get(i)[2], "False");
+			qpack3False.setQpack2(qpack2Service.getQpack2ByQpItemId(qpack3False.getQp_item_id()));
 			qpack3Service.addQpack3(qpack3False);
 		}
 		

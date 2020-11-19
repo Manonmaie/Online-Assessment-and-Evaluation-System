@@ -33,6 +33,9 @@ public class Apack1 {
 	@Column(name = "item_id")
 	private int item_id;
 	
+	@Column(name = "qp_item_id")
+	private int qp_item_id;
+	
 	@Column(name = "item_text")
 	private String item_text;
 	
@@ -50,13 +53,30 @@ public class Apack1 {
 		super();
 	}
 
-	public Apack1(int qp_id, int item_id, String item_text, float item_marks, String item_type) {
+	public Apack1(int qp_id, int item_id, int qp_item_id, String item_text, float item_marks, String item_type) {
 		super();
 		this.qp_id = qp_id;
 		this.item_id = item_id;
+		this.qp_item_id = qp_item_id;
 		this.item_text = item_text;
 		this.item_marks = item_marks;
 		this.item_type = item_type;
+	}
+
+	public int getQp_item_id() {
+		return qp_item_id;
+	}
+
+	public void setQp_item_id(int qp_item_id) {
+		this.qp_item_id = qp_item_id;
+	}
+
+	public List<Apack2> getApack2List() {
+		return apack2List;
+	}
+
+	public void setApack2List(List<Apack2> apack2List) {
+		this.apack2List = apack2List;
 	}
 
 	public int getApack1_id() {
