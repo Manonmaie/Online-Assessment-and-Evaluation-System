@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.evaluationBackend.mpack.Mpack;
+import com.iiitb.evaluationBackend.mpack2.Mpack2;
 
 @Entity
 @Table(name = "mpack1")
@@ -35,6 +36,10 @@ public class Mpack1 {
 	
 	@Column(name = "duration")
 	private int duration;
+	
+	@OneToMany(mappedBy = "mpack1")
+	@JsonIgnore
+	private List<Mpack2> mpack2List;
 
 	public Mpack1() {
 		super();
