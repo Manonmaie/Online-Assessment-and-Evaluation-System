@@ -447,7 +447,7 @@ CREATE TABLE IF NOT EXISTS epack2(
   epack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   epack1_id int(10) unsigned NOT NULL,
   qp_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned UNIQUE NOT NULL,
+  qp_item_id int(10) unsigned UNIQUE NOT NULL,
   item_text varchar(255) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
@@ -466,7 +466,7 @@ ALTER TABLE epack2
 CREATE TABLE IF NOT EXISTS epack3(
   epack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   epack2_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
+  qp_item_id int(10) unsigned NOT NULL,
   item_option_id int(10) unsigned NOT NULL,
   option_text varchar(255) NOT NULL,
   PRIMARY KEY(epack3_id)

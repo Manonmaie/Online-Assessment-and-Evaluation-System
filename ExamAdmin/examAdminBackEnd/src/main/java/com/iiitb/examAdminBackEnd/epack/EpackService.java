@@ -110,7 +110,7 @@ public class EpackService {
 		}
 		
 		//Generate Epack2
-		Map<Integer, Epack2> item_id2Epack2 = new HashMap<Integer, Epack2>();
+		Map<Integer, Epack2> qp_item_id2Epack2 = new HashMap<Integer, Epack2>();
 		
 		for (Map.Entry mapElement : qp_id2Epack1.entrySet()) {
 			List<Object[]> epack2Objects = epackJoinRepository.fetchEpack2Data((int)mapElement.getKey());
@@ -119,14 +119,14 @@ public class EpackService {
 				epack2.setEpack1((Epack1)mapElement.getValue());
 				epack2Service.addEpack2(epack2);
 				
-				if(!item_id2Epack2.containsKey(epack2.getItem_id())) {
-					item_id2Epack2.put(epack2.getItem_id(), epack2);
+				if(!qp_item_id2Epack2.containsKey(epack2.getQp_item_id())) {
+					qp_item_id2Epack2.put(epack2.getQp_item_id(), epack2);
 				}
 			}
 		}
 		
 		//Generate Epack3
-		for (Map.Entry mapElement : item_id2Epack2.entrySet()) {
+		for (Map.Entry mapElement : qp_item_id2Epack2.entrySet()) {
 			List<Object[]> epack3McqObjects = epackJoinRepository.fetchEpack3McqData((int)mapElement.getKey());
 			for(int i = 0; i < epack3McqObjects.size(); i++) {
 				Epack3 epack3 = new Epack3((Integer)epack3McqObjects.get(i)[0], (Integer)epack3McqObjects.get(i)[1], String.valueOf(epack3McqObjects.get(i)[2]));

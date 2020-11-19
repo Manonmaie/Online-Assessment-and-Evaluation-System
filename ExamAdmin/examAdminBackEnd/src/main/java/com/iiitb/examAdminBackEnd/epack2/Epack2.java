@@ -31,8 +31,8 @@ public class Epack2 {
 	@Column(name = "qp_id")
 	private int qp_id;
 	
-	@Column(name = "item_id")
-	private int item_id;
+	@Column(name = "qp_item_id")
+	private int qp_item_id;
 	
 	@Column(name = "item_text")
 	private String item_text;
@@ -54,10 +54,10 @@ public class Epack2 {
 		super();
 	}
 
-	public Epack2(int qp_id, int item_id, String item_text, float item_marks, String item_type, String cognitive_level) {
+	public Epack2(int qp_id, int qp_item_id, String item_text, float item_marks, String item_type, String cognitive_level) {
 		super();
 		this.qp_id = qp_id;
-		this.item_id = item_id;
+		this.qp_item_id = qp_item_id;
 		this.item_text = item_text;
 		this.item_marks = item_marks;
 		this.item_type = item_type;
@@ -88,12 +88,20 @@ public class Epack2 {
 		this.qp_id = qp_id;
 	}
 
-	public int getItem_id() {
-		return item_id;
+	public int getQp_item_id() {
+		return qp_item_id;
 	}
 
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setQp_item_id(int qp_item_id) {
+		this.qp_item_id = qp_item_id;
+	}
+
+	public List<Epack3> getEpack3List() {
+		return epack3List;
+	}
+
+	public void setEpack3List(List<Epack3> epack3List) {
+		this.epack3List = epack3List;
 	}
 
 	public String getItem_text() {
