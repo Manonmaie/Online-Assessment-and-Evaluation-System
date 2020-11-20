@@ -433,16 +433,16 @@ ALTER TABLE as_attempt
 -- --------------------------------------------------------
 -- Data Entry for table `as_attempt`
 -- --------------------------------------------------------
--- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
--- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
--- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
--- INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","IN_PROGRESS",1,1);
--- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,2);
--- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
--- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
--- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
--- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
--- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
+INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
+INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
+INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","IN_PROGRESS",1,1);
+INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,2);
+INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response`
@@ -463,16 +463,16 @@ ALTER TABLE as_response
 -- --------------------------------------------------------
 -- Data Entry for table `as_response`
 -- --------------------------------------------------------
--- -- INSERT INTO as_response VALUES(0,"Answer 1",1,1);
--- -- INSERT INTO as_response VALUES(0,"Answer 2",1,1;
--- INSERT INTO as_response VALUES(0,"Post Key",2,1);
--- INSERT INTO as_response VALUES(0,"Post Key",3,1);
--- -- INSERT INTO as_response VALUES(0,"Key",2,1);
--- -- INSERT INTO as_response VALUES(0,"PK",3,1);
--- -- INSERT INTO as_response VALUES(0,"Primary Key",3,1);
--- INSERT INTO as_response VALUES(0,"Answer 1",11,1);
--- INSERT INTO as_response VALUES(0,"Answer 2",12,1);
--- INSERT INTO as_response VALUES(0,"Post Key",13,1);
+-- INSERT INTO as_response VALUES(0,"Answer 1",1,1);
+-- INSERT INTO as_response VALUES(0,"Answer 2",1,1;
+INSERT INTO as_response VALUES(0,"Post Key",2,1);
+INSERT INTO as_response VALUES(0,"Post Key",3,1);
+-- INSERT INTO as_response VALUES(0,"Key",2,1);
+-- INSERT INTO as_response VALUES(0,"PK",3,1);
+-- INSERT INTO as_response VALUES(0,"Primary Key",3,1);
+INSERT INTO as_response VALUES(0,"Answer 1",11,1);
+INSERT INTO as_response VALUES(0,"Answer 2",12,1);
+INSERT INTO as_response VALUES(0,"Post Key",13,1);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response_mcq`
@@ -684,22 +684,26 @@ ALTER TABLE rpack3
   ADD CONSTRAINT `fk_rpack3_rpack2_id` FOREIGN KEY (rpack2_id) REFERENCES rpack2(rpack2_id) ON DELETE CASCADE;
   -- ADD CONSTRAINT `fk_rpack3_item_id` FOREIGN KEY (item_id) REFERENCES rpack2(item_id) ON DELETE CASCADE;
 
--- -- --------------------------------------------------------
--- -- Table structure for table rpack4
--- -- --------------------------------------------------------
--- CREATE TABLE IF NOT EXISTS rpack4(
---   rpack_id int(10) unsigned NOT NULL,
---   qp_id int(10) unsigned NOT NULL,
---   batch_id int(10) unsigned NOT NULL,
---   examinee_batch_id int(10) unsigned NOT NULL,
---   examinee_id int(10) unsigned NOT NULL,
---   item_id int(10) unsigned NOT NULL,
---   response_id int(10) unsigned NOT NULL,
---   response_text varchar(511) NOT NULL,
---   PRIMARY KEY(rpack_id)
--- );
+-- --------------------------------------------------------
+-- Table structure for table rpack4
+-- SELECT q.qp_id, q.batch_id, eb.examinee_batch_id, eb.examinee_id, i.qp_item_id, r.response_id, r.response_text FROM as_qp_item i INNER JOIN as_question_paper q ON 
+-- i.qp_id = q.qp_id INNER JOIN as_batch b ON q.batch_id = b.batch_id INNER JOIN as_examinee_batch eb ON b.batch_id = eb.batch_id INNER JOIN as_response r ON i.qp_item_id 
+-- = r.qp_item_id WHERE i.qp_item_id = :qp_item_id
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS rpack4(
+  rpack4_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  rpack2_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  batch_id int(10) unsigned NOT NULL,
+  examinee_batch_id int(10) unsigned NOT NULL,
+  examinee_id int(10) unsigned NOT NULL,
+  qp_item_id int(10) unsigned NOT NULL,
+  response_id int(10) unsigned NOT NULL,
+  response_text varchar(511) NOT NULL,
+  PRIMARY KEY(rpack4_id)
+);
 
--- ALTER TABLE rpack4
---   ADD CONSTRAINT `fk_rpack4_qp_id` FOREIGN KEY (qp_id) REFERENCES rpack1(qp_id) ON DELETE CASCADE,
+ALTER TABLE rpack4
+  ADD CONSTRAINT `fk_rpack4_rpack2_id` FOREIGN KEY (rpack2_id) REFERENCES rpack2(rpack2_id) ON DELETE CASCADE;
 --   ADD CONSTRAINT `fk_rpack4_batch_id` FOREIGN KEY (batch_id) REFERENCES rpack1(batch_id) ON DELETE CASCADE,
 --   ADD CONSTRAINT `fk_rpack4_item_id` FOREIGN KEY (item_id) REFERENCES rpack2(item_id) ON DELETE CASCADE;

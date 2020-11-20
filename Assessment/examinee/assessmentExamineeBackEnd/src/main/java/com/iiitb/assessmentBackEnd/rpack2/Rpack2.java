@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.assessmentBackEnd.rpack1.Rpack1;
 import com.iiitb.assessmentBackEnd.rpack3.Rpack3;
+import com.iiitb.assessmentBackEnd.rpack4.Rpack4;
 
 @Entity
 @Table(name = "rpack2")
@@ -49,6 +50,10 @@ public class Rpack2 {
 	@OneToMany(mappedBy = "rpack2")
 	@JsonIgnore
 	private List<Rpack3> rpack3List;
+	
+	@OneToMany(mappedBy = "rpack2")
+	@JsonIgnore
+	private List<Rpack4> rpack4List;
 	
 	public Rpack2() {
 		super();

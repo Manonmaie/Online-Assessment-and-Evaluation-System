@@ -25,4 +25,9 @@ public class RpackHeaderController {
 	public void updateRpackHeader(@PathVariable int rpackHeaderId, @RequestBody OutRpackHeader outRpackHeader) {
 		rpackHeaderService.updateRpackHeader(outRpackHeader);
 	}
+	
+	@RequestMapping("/createRpack")
+	public void createRpack(){
+		rpackHeaderService.addRpack();
+	}
 }

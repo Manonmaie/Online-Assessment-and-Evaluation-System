@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.iiitb.assessmentBackEnd.rpack.Rpack;
+import com.iiitb.assessmentBackEnd.outRpackHeader.OutRpackHeader;
 import com.iiitb.assessmentBackEnd.rpack2.Rpack2;
 
 @Entity
@@ -26,7 +26,7 @@ public class Rpack1 {
 	
 	@ManyToOne
 	@JoinColumn(name="rpack_header_id")
-	private Rpack rpack_header;
+	private OutRpackHeader rpack_header;
 	
 	@Column(name = "qp_id")
 	private int qp_id;
@@ -64,11 +64,11 @@ public class Rpack1 {
 		this.rpack1_id = rpack1_id;
 	}
 
-	public Rpack getRpack_header() {
+	public OutRpackHeader getRpack_header() {
 		return rpack_header;
 	}
 
-	public void setRpack_header(Rpack rpack_header) {
+	public void setRpack_header(OutRpackHeader rpack_header) {
 		this.rpack_header = rpack_header;
 	}
 
