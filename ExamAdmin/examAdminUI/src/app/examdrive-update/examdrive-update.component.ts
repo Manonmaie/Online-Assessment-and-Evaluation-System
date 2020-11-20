@@ -4,6 +4,7 @@ import {Course} from '../shared/course';
 import { Center } from '../shared/center';
 import { Batch } from '../shared/batch';
 import { Examinee } from '../shared/examinee';
+import { ExamineeBatch } from '../shared/examinee-batch';
 import {ExamdriveService} from '../services/examdrive.service';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
@@ -37,6 +38,7 @@ export class ExamdriveUpdateComponent implements OnInit {
   newBatch: Batch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
   uploadExamineeCodes: string[];
   uploadExaminees: Examinee[][];  
+  uploadExamineeBatches: ExamineeBatch[][];  
 
   constructor(private examdriveService:ExamdriveService, private courseService: CourseService, private batchService:BatchService, private examineeService: ExamineeService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute, public router: Router) { }
 
@@ -54,6 +56,7 @@ export class ExamdriveUpdateComponent implements OnInit {
     this.isUpload = new Array();
     this.uploadExamineeCodes = new Array();
     this.uploadExaminees = new Array();
+    this.uploadExamineeBatches = new Array();
   }
 
   getExamdrive(id: number): void{
@@ -203,8 +206,19 @@ export class ExamdriveUpdateComponent implements OnInit {
   }
 
   assignStudentsToBatch(batch: Batch): void{
-    // TODO - from the gotten list of examinees make a examineeBatch json object and upload it to backend
-    // this.examineeBatchService.addExamineeBatches(examineeBatches);
+    let newExamineeBatch = new ExamineeBatch();
+    this.uploadExamineeBatches[batch.batchId] = new Array();
+    for(let examinee of this.uploadExaminees[batch.batchId]){
+      newExamineeBatch = {
+        "examineeBatchId":{"examineeId":examinee.examineeId,"batchId":batch.batchId},
+        "examinee":examinee,
+        "batch":batch
+      }
+      this.uploadExamineeBatches[batch.batchId].push(newExamineeBatch);
+    }
+    setTimeout(()=> {
+      this.examineeBatchService.addExamineeBatches(this.uploadExamineeBatches[batch.batchId]).subscribe(examineeBatchList => this.uploadExamineeBatches[batch.batchId]=examineeBatchList);
+    },5000);
     this.isUpload[batch.batchId] = false;
   }
 
@@ -230,6 +244,6 @@ export class ExamdriveUpdateComponent implements OnInit {
     reader.readAsBinaryString(file);
     setTimeout(() => {
       this.examineeService.getExamineesByCode(this.uploadExamineeCodes[batch.batchId]).subscribe(examineeList => this.uploadExaminees[batch.batchId] = examineeList);    
-    },1000);
+    },3000);
   }
 }
