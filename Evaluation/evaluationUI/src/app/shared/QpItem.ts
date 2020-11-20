@@ -1,6 +1,6 @@
 export class QpItem{
     qpItemId : number;
-    itemCode : string;
+    // itemCode : string;
     itemText : string;
     itemMarks : number;
     itemType : string;

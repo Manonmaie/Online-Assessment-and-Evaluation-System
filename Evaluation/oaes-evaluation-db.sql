@@ -10,7 +10,7 @@ USE oaes_evaluation_db;
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_question_paper(
   qp_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qp_code varchar(255) UNIQUE NOT NULL,
+  qp_code varchar(255) UNIQUE,
   maximum_marks float(24) NOT NULL DEFAULT 100,
   duration int(10) NOT NULL DEFAULT 180,
   PRIMARY KEY(qp_id)
@@ -24,7 +24,7 @@ INSERT INTO ev_question_paper VALUES(0,"CHEM_1",25,60);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_itemtype_master (
   itemtype_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  itemtype_code varchar(255) UNIQUE NOT NULL,
+  itemtype_code varchar(255) UNIQUE,
   itemtype_name varchar(255) NOT NULL,
   itemtype_category ENUM('AUTO','MANUAL') DEFAULT 'MANUAL',
   PRIMARY KEY (itemtype_id)
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS ev_itemtype_master (
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_qp_item (
   qp_item_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_code varchar(255) UNIQUE NOT NULL,
+  item_code varchar(255) UNIQUE,
   item_text varchar(511) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
@@ -62,7 +62,7 @@ INSERT INTO ev_qp_item VALUES(0,"Item5_qp2","Uk with no null values is Pk.",2,"T
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_item_mcq_options(
   item_mcq_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_mcq_options_code varchar(255) UNIQUE NOT NULL,
+  item_mcq_options_code varchar(255) UNIQUE,
   qp_item_id int(10) unsigned,
   mcq_option_text varchar(255) NOT NULL,
   mcq_option_percentage float(24) DEFAULT 0.0,
@@ -90,7 +90,7 @@ INSERT INTO ev_item_mcq_options VALUES(0,"Mcq4_item3_qp1",3,"Forward Key",0.0);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_item_true_false(
   item_true_false_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_true_false_code varchar(255) UNIQUE NOT NULL,
+  item_true_false_code varchar(255) UNIQUE,
   qp_item_id int(10) unsigned,
   true_percentage float(24) DEFAULT 0.0,
   false_percentage  float(24) DEFAULT 0.0,
@@ -143,7 +143,7 @@ INSERT INTO ev_examinee_item_marks VALUES(0,10.0,1,1);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_response (
   response_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  response_code varchar(255) UNIQUE NOT NULL,
+  response_code varchar(255) UNIQUE,
   response_text varchar(511) NOT NULL,
   examinee_batch_id int(10) unsigned,
   qp_item_id int(10) unsigned,
@@ -181,7 +181,7 @@ INSERT INTO ev_response VALUES(0,"TF_Item35_qp1","False",3,5);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_response_mcq (
   response_mcq_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  response_mcq_code varchar(255) UNIQUE NOT NULL,
+  response_mcq_code varchar(255) UNIQUE,
   response_text varchar(511) NOT NULL,
   response_id int(10) unsigned,
   PRIMARY KEY (response_mcq_id)
@@ -203,7 +203,7 @@ INSERT INTO ev_response_mcq VALUES(0,"Mcq3_item3_qp1","Fashion Key",3);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ev_response_true_false (
   response_true_false_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  response_true_false_code varchar(255) UNIQUE NOT NULL,
+  response_true_false_code varchar(255) UNIQUE,
   response_id int(10) unsigned,
   PRIMARY KEY (response_true_false_id)
 );
