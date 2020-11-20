@@ -166,7 +166,6 @@ ALTER TABLE ea_batch
 INSERT INTO ea_question_paper VALUES(0,1,100,180);
 INSERT INTO ea_question_paper VALUES(0,2,100,180);
 INSERT INTO ea_question_paper VALUES(0,3,100,180);
-INSERT INTO ea_question_paper VALUES(0,5,100,180);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_instruction`
@@ -322,7 +321,7 @@ ALTER TABLE ea_item_true_false
 -- Data Entry for table ea_item_true_false
 -- --------------------------------------------------------
 -- INSERT INTO ea_item_true_false VALUES(0,"2.2",5);
-INSERT INTO ea_item_true_false VALUES(0, 5);
+INSERT INTO ea_item_true_false VALUES(0,5);
 
 -- --------------------------------------------------------
 -- Table structure for table in_qpack_header
