@@ -144,7 +144,7 @@ INSERT INTO ea_examinee_batch VALUES(0,3,2);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_question_paper(
   qp_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qp_code varchar(255) UNIQUE NOT NULL,
+  -- qp_code varchar(255) UNIQUE NOT NULL,
   batch_id int(10) unsigned,
   maximum_marks float(24) NOT NULL DEFAULT 100,
   duration int(10) NOT NULL DEFAULT 180,
@@ -160,9 +160,12 @@ ALTER TABLE ea_batch
 -- --------------------------------------------------------
 -- Data Entry for table ea_question_paper
 -- --------------------------------------------------------
-INSERT INTO ea_question_paper VALUES(0,"dbMid",1,100,180);
-INSERT INTO ea_question_paper VALUES(0,"dbEnd",2,100,180);
-INSERT INTO ea_question_paper VALUES(0,"dbImp",3,100,180);
+-- INSERT INTO ea_question_paper VALUES(0,"dbMid",1,100,180);
+-- INSERT INTO ea_question_paper VALUES(0,"dbEnd",2,100,180);
+-- INSERT INTO ea_question_paper VALUES(0,"dbImp",3,100,180);
+INSERT INTO ea_question_paper VALUES(0,1,100,180);
+INSERT INTO ea_question_paper VALUES(0,2,100,180);
+INSERT INTO ea_question_paper VALUES(0,3,100,180);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_instruction`
@@ -201,7 +204,7 @@ CREATE TABLE IF NOT EXISTS ea_itemtype_master (
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_qp_item (
   qp_item_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_code varchar(255) UNIQUE NOT NULL,
+  -- item_code varchar(255) UNIQUE NOT NULL,
   item_text varchar(511) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
@@ -216,12 +219,18 @@ ALTER TABLE ea_qp_item
 -- --------------------------------------------------------
 -- Data Entry for table ea_qp_item
 -- --------------------------------------------------------
-INSERT INTO ea_qp_item VALUES(0,"1.1","1stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
-INSERT INTO ea_qp_item VALUES(0,"1.2","2stQuestion-Mid-DB",10,"MCQ",'APPLY',1);
-INSERT INTO ea_qp_item VALUES(0,"1.3","3stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
-INSERT INTO ea_qp_item VALUES(0,"2.1","1stQuestion-End-DB",5,"MCQ",'REMEMBER',2);
-INSERT INTO ea_qp_item VALUES(0,"2.2","2stQuestion-End-DB",10,"TF",'APPLY',2);
-INSERT INTO ea_qp_item VALUES(0,"3.1","1stQuestion-IMP-DB",30,"MCQ",'EVALUATE',3);
+-- INSERT INTO ea_qp_item VALUES(0,"1.1","1stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+-- INSERT INTO ea_qp_item VALUES(0,"1.2","2stQuestion-Mid-DB",10,"MCQ",'APPLY',1);
+-- INSERT INTO ea_qp_item VALUES(0,"1.3","3stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+-- INSERT INTO ea_qp_item VALUES(0,"2.1","1stQuestion-End-DB",5,"MCQ",'REMEMBER',2);
+-- INSERT INTO ea_qp_item VALUES(0,"2.2","2stQuestion-End-DB",10,"TF",'APPLY',2);
+-- INSERT INTO ea_qp_item VALUES(0,"3.1","1stQuestion-IMP-DB",30,"MCQ",'EVALUATE',3);
+INSERT INTO ea_qp_item VALUES(0,"1stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+INSERT INTO ea_qp_item VALUES(0,"2stQuestion-Mid-DB",10,"MCQ",'APPLY',1);
+INSERT INTO ea_qp_item VALUES(0,"3stQuestion-Mid-DB",5,"MCQ",'REMEMBER',1);
+INSERT INTO ea_qp_item VALUES(0,"1stQuestion-End-DB",5,"MCQ",'REMEMBER',2);
+INSERT INTO ea_qp_item VALUES(0,"2stQuestion-End-DB",10,"TF",'APPLY',2);
+INSERT INTO ea_qp_item VALUES(0,"1stQuestion-IMP-DB",30,"MCQ",'EVALUATE',3);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_examinee_item_marks`
@@ -268,7 +277,7 @@ CREATE view `ea_examinee_batch_marks` as (
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_item_mcq_options(
   item_mcq_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_mcq_options_code varchar(255) UNIQUE NOT NULL,
+  -- item_mcq_options_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
   mcq_option_text varchar(255) NOT NULL,
   PRIMARY KEY(item_mcq_id)
@@ -280,20 +289,27 @@ ALTER TABLE ea_item_mcq_options
 -- --------------------------------------------------------
 -- Data Entry for table ea_item_mcq_options
 -- --------------------------------------------------------
-INSERT INTO ea_item_mcq_options VALUES(0,"1.1.1",1,"1stQuestion-Mid-DB-OP1");
-INSERT INTO ea_item_mcq_options VALUES(0,"1.1.2",1,"1stQuestion-Mid-DB-OP2");
-INSERT INTO ea_item_mcq_options VALUES(0,"1.1.3",1,"1stQuestion-Mid-DB-OP3");
-INSERT INTO ea_item_mcq_options VALUES(0,"1.2.1",2,"2stQuestion-Mid-DB-OP1");
-INSERT INTO ea_item_mcq_options VALUES(0,"1.2.2",2,"2stQuestion-Mid-DB-OP2");
-INSERT INTO ea_item_mcq_options VALUES(0,"2.1.1",4,"1stQuestion-End-DB-OP1");
-INSERT INTO ea_item_mcq_options VALUES(0,"3.1.1",6,"1stQuestion-IMP-DB-OP1");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.1.1",1,"1stQuestion-Mid-DB-OP1");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.1.2",1,"1stQuestion-Mid-DB-OP2");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.1.3",1,"1stQuestion-Mid-DB-OP3");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.2.1",2,"2stQuestion-Mid-DB-OP1");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"1.2.2",2,"2stQuestion-Mid-DB-OP2");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"2.1.1",4,"1stQuestion-End-DB-OP1");
+-- INSERT INTO ea_item_mcq_options VALUES(0,"3.1.1",6,"1stQuestion-IMP-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,1,"1stQuestion-Mid-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,1,"1stQuestion-Mid-DB-OP2");
+INSERT INTO ea_item_mcq_options VALUES(0,1,"1stQuestion-Mid-DB-OP3");
+INSERT INTO ea_item_mcq_options VALUES(0,2,"2stQuestion-Mid-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,2,"2stQuestion-Mid-DB-OP2");
+INSERT INTO ea_item_mcq_options VALUES(0,4,"1stQuestion-End-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,6,"1stQuestion-IMP-DB-OP1");
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_item_true_false`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_item_true_false(
   item_true_false_id  int(10) unsigned NOT NULL AUTO_INCREMENT,
-  item_true_false_code varchar(255) UNIQUE NOT NULL,
+  -- item_true_false_code varchar(255) UNIQUE NOT NULL,
   qp_item_id int(10) unsigned,
   PRIMARY KEY(item_true_false_id)
 );
@@ -304,7 +320,8 @@ ALTER TABLE ea_item_true_false
 -- --------------------------------------------------------
 -- Data Entry for table ea_item_true_false
 -- --------------------------------------------------------
-INSERT INTO ea_item_true_false VALUES(0,"2.2",5);
+-- INSERT INTO ea_item_true_false VALUES(0,"2.2",5);
+INSERT INTO ea_item_true_false VALUES(0,5);
 
 -- --------------------------------------------------------
 -- Table structure for table in_qpack_header
