@@ -1,7 +1,6 @@
 package com.iiitb.assessmentBackEnd.batch;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +32,7 @@ public class BatchController {
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/batch/{batchId}")
-	public void updateExamineeBatch(@PathVariable int batchId,@RequestBody AsBatch batch) {
+	public void updateBatch(@PathVariable int batchId,@RequestBody AsBatch batch) {
 		batchService.updateBatch(batch);
 	}
 }
