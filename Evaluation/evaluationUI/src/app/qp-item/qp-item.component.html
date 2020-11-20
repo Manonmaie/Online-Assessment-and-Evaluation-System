@@ -2,12 +2,12 @@
     <h2 style="text-align:center;"> Qp-Item Details </h2>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let QpItem of qpitems">
-        {{QpItem.itemCode}}
+        <!-- {{QpItem.itemCode}} -->
         <a class="col-md-6">type: {{QpItem.itemType}}</a>
         <span style="text-align: right;">{{QpItem.itemText}}</span>
         <ul class="list-group" ng-show="showme">
             <li class="list-group-item" *ngFor="let option of QpItem.evItemMcqOptionsList">
-                {{option.itemMcqOptionsCode}}
+                <!-- {{option.itemMcqOptionsCode}} -->
                 <span style="text-align: right;">{{option.mcqOptionText}}</span>
             </li>
         </ul>

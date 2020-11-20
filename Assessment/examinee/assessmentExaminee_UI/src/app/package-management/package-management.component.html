@@ -15,31 +15,20 @@
         <br>
         <h4 style="text-align:center;">Sent Question Papers</h4>
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let batch of sentBatches;let indexOfelement=index;">
-                {{batch.asExamdrive.courseMaster.courseName}} Exam <span style="color:rgb(153, 146, 146);font-size:15px;"> - Completed at {{batch.batchEndTime | date : "MMM d, y HH:mm:ss"}}</span>
+            <li class="list-group-item" *ngFor="let rpack of sentRpacks;let indexOfelement=index;">
+                {{sentBatches && sentBatches[indexOfelement]?.asExamdrive.courseMaster.courseName}} Exam <span style="color:rgb(153, 146, 146);font-size:15px;"> - Sent on {{rpack.rpackSentOn | date : "MMM d, y HH:mm:ss"}}</span>
                 <button type="button" class="btn btn-secondary float-right mr-1" (click) = "manageViewHistoryOfSentBatch(batch, indexOfelement)"><i class="fa fa-eye"></i> View History </button>
-                <!-- <div *ngIf="showHistoryBoolean[indexOfelement]" class="text-center">
-                    <br>
-                    <h6><strong> Exam Details </strong></h6>
-                    <p>
-                        <strong>Examdrive Name:</strong> {{batch.asExamdrive.examdriveName}} <br>
-                        <strong>Course Name:</strong> {{batch.asExamdrive.courseMaster.courseName}} <br>
-                        <strong>Exam Start Time:</strong> {{batch.batchStartTime | date : "MMM d, y HH:mm:ss"}} <br>
-                        <strong>Exam End Time:</strong> {{batch.batchEndTime | date : "MMM d, y HH:mm:ss"}} <br>
-                        <strong>R-Pack Status:</strong> {{batch.qpStatus}} <br>
-                        <strong>Number of Responses sent:</strong> 0 <br>
-                    </p>
-                    <button type="button" class="btn btn-danger mr-1" (click)="manageViewHistoryOfSentBatch(batch, indexOfelement)"><i class="fa fa-times"></i> Close </button>
-                </div> -->
                 <div *ngIf="showHistoryBoolean[indexOfelement]">
                     <fieldset class="border">
-                        <legend class ='text-center'>Exam Details</legend>
+                        <legend class ='text-center'>R-Pack Details</legend>
                         <p id="innerPara">
-                            <strong>Examdrive Name:</strong> {{batch.asExamdrive.examdriveName}} <br>
-                            <strong>Course Name:</strong> {{batch.asExamdrive.courseMaster.courseName}} <br>
-                            <strong>Exam Start Time:</strong> {{batch.batchStartTime | date : "MMM d, y HH:mm:ss"}} <br>
-                            <strong>Exam End Time:</strong> {{batch.batchEndTime | date : "MMM d, y HH:mm:ss"}} <br>
-                            <strong>R-Pack Status:</strong> {{batch.qpStatus}} <br>
+                            <strong>Examdrive Name:</strong> {{sentBatches[indexOfelement].asExamdrive.examdriveName}} <br>
+                            <strong>Course Name:</strong> {{sentBatches[indexOfelement].asExamdrive.courseMaster.courseName}} <br>
+                            <strong>R-Pack Created On:</strong> {{rpack.createdOn | date : "MMM d, y HH:mm:ss"}} <br>
+                            <strong>R-Pack Created By:</strong> {{rpack.createdBy}} <br>
+                            <strong>R-Pack Sent On:</strong> {{rpack.rpackSentOn | date : "MMM d, y HH:mm:ss"}} <br>
+                            <strong>R-Pack Status:</strong> {{rpack.rpackStatus}} <br>
+                            <strong>R-Pack Description:</strong> {{rpack.rpackDesc}} <br>
                             <!-- <strong>Number of Responses sent:</strong> {{responsesForSelectedBatch.length}} <br> -->
                             <button type="button" class="btn btn-danger mr-1 marginButton" (click)="manageViewHistoryOfSentBatch(batch, indexOfelement)"><i class="fa fa-times"></i> Close </button>
                        </p>
