@@ -15,11 +15,13 @@ import com.iiitb.examAdminBackEnd.examinee.Examinee;
 
 @Entity
 @Immutable
-@Table (name = "ea_examinee_batch")
-public class ExamineeBatch {
+@Table (name = "ea_examinee_batch_marks")
+public class ExamineeBatchMarks {
 
 	@EmbeddedId
 	private ExamineeBatchKey examineeBatchId;
+	
+	private Float marksObtained;
 	
 	@ManyToOne
 	@MapsId("examineeId")
@@ -32,11 +34,12 @@ public class ExamineeBatch {
 	@JoinColumn(name = "batch_id")
 	private Batch batch;
 
-	public ExamineeBatch() {
+	public ExamineeBatchMarks() {
 	}
-	public ExamineeBatch(ExamineeBatchKey examineeBatchId, Examinee examinee, Batch batch) {
+	public ExamineeBatchMarks(ExamineeBatchKey examineeBatchId, Float marksObtained, Examinee examinee, Batch batch) {
 		super();
 		this.examineeBatchId = examineeBatchId;
+		this.marksObtained = marksObtained;
 		this.examinee = examinee;
 		this.batch = batch;
 	}
@@ -47,6 +50,14 @@ public class ExamineeBatch {
 
 	public void setExamineeBatchId(ExamineeBatchKey examineeBatchId) {
 		this.examineeBatchId = examineeBatchId;
+	}
+
+	public Float getMarksObtained() {
+		return marksObtained;
+	}
+
+	public void setMarksObtained(Float marksObtained) {
+		this.marksObtained = marksObtained;
 	}
 
 	public Examinee getExaminee() {

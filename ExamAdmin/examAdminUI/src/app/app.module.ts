@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { HttpModule } from '@angular/http';
 import {baseURL} from './shared/baseurl';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+// import {ModalModule} from 'ngx-bootstrap/modal';
 
 import { BatchService } from './services/batch.service';
 import { CenterService } from './services/center.service';

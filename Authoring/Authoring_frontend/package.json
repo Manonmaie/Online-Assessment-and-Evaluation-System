@@ -24,7 +24,10 @@
     "@ckeditor/ckeditor5-build-classic": "^22.0.0",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "bootstrap": "^4.5.2",
+    "canvas": "^2.6.1",
+    "chart.js": "^2.9.4",
     "jquery": "^3.5.1",
+    "ng2-charts": "^2.4.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

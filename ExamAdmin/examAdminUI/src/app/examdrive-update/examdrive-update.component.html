@@ -108,24 +108,32 @@
                                         <button type="button" class="btn btn-success float-right mr-1" (click)="addBatch(center)">Add Batch</button>
                                     </td>
                                 </ng-container>
-                                <tr *ngFor = "let batch of batches[center.centerId]; let ind=index;">
+                                <ng-container *ngFor = "let batch of batches[center.centerId]; let ind=index;">
                                     <ng-container *ngIf="batch">
-                                        <td>
-                                            <input type="text" id="centerBatch" name="batchCode" placeholder="BatchCode(Examdrive Code-Time-Center)" [(ngModel)]="batch.batchCode">
+                                        <tr>
+                                            <td>
+                                                <input type="text" id="centerBatch" name="batchCode" placeholder="BatchCode(Examdrive Code-Time-Center)" [(ngModel)]="batch.batchCode">
+                                            </td>
+                                            <td>
+                                                <input type="datetime-local" ng-model="string" id="batchStartTime" name="batchStartTime" placeholder="Examination Start Time" [(ngModel)]="batch.batchStartTime">
+                                            </td>
+                                            <td>
+                                                <input type="datetime-local" ng-model="string" id="batchEndTime" name="batchEndTime" placeholder="Examination End Time" [(ngModel)]="batch.batchEndTime">
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger float-right" (click)="deleteBatch(batch)"><i class="fa fa-trash-o"></i></button>
+                                                <button type="button" class="btn btn-primary float-right mr-1" (click)="uploadStudents(batch)"><i class="fa fa-upload"></i></button>
+                                                <button type="button" class="btn btn-success float-right mr-1" (click)="updateBatch(batch.batchId,batch,ind)">Update</button>
+                                            </td>
+                                        </tr>
+                                        <td colspan="4" [hidden]="!isUpload[batch.batchId]">
+                                            Upload an Excel file with student codes with the column name as "StudentCode"
+                                            <br>
+                                            <input type="file" id="file" accept = ".xls, .xlsx, .odt, .csv" (change)="onFileChange($event)"/>
+                                            <button type="button" class="btn btn-success float-right" (click)="assignStudentsToBatch(batch)"> Assign Students to Batch</button>
                                         </td>
-                                        <td>
-                                            <input type="datetime-local" ng-model="string" id="batchStartTime" name="batchStartTime" placeholder="Examination Start Time" [(ngModel)]="batch.batchStartTime">
-                                        </td>
-                                        <td>
-                                            <input type="datetime-local" ng-model="string" id="batchEndTime" name="batchEndTime" placeholder="Examination End Time" [(ngModel)]="batch.batchEndTime">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger float-right" (click)="deleteBatch(batch)"><i class="fa fa-trash-o"></i></button>
-                                            <button type="button" class="btn btn-primary float-right mr-1"><i class="fa fa-upload"></i></button>
-                                            <button type="button" class="btn btn-success float-right mr-1" (click)="updateBatch(batch.batchId,batch,ind)">Update</button>
-                                        </td>
-                                    </ng-container>
-                                </tr>
+                                    </ng-container>       
+                                </ng-container>        
                             </tbody>
                         </table>
                     </td>

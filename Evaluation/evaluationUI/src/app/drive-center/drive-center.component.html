@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <h2 style="text-align:center;"> Evaluations </h2>
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let examDrive of driveCenterExaminee">
@@ -8,4 +8,33 @@
         <button type="button" class="btn btn-primary float-right mr-1"><i class="fa fa-cogs"></i> Trigger</button>
         </li>
     </ul>
+</div> -->
+
+
+    
+<!-- <div class="container">
+    <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search here..." [(ngModel)]="searchText"/>
+</div> -->
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Examinee Batch</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let examdrive of driveCenterExaminee">
+                <td>{{examdrive.examinee_batch_id}}</td>
+                <td>{{examdrive.status_id}}</td>
+                <td>
+                    <button type="button" class="btn btn-success float-right" routerLink="/examdrive/{{examdrive.examinee_batch_id}}/responses"><i class="fa fa-info-circle"></i> Info</button>
+                    
+                    <button type="button" class="btn btn-primary float-right mr-1" (click)="Trigger(examdrive.examinee_batch_id)" ><i class="fa fa-cogs"></i> Evaluate</button>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

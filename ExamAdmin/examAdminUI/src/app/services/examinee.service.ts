@@ -35,4 +35,8 @@ export class ExamineeService {
   addExamineeBulk(examinees: Examinee[]): Observable<Examinee[]>{
     return this.http.post<Examinee[]>(baseURL + 'examineesBulk', examinees);
   }
+
+  getExamineesByCode(codes: String[]):Observable<any>{
+    return this.http.request('get', baseURL+ 'examineesByCode/', {body: codes});
+  }
 }

@@ -1,4 +1,6 @@
 import { option } from "../shared/option";
+import { Tf } from "../shared/tf";
+
 
 export class Item{
     itemText :string;
@@ -6,8 +8,17 @@ export class Item{
     diffLvl: string;
     marks: number;
     itemId: number;
+    authorId: number;
     itemType:string;
     itemStatus:string;
-    asitemIds: Number[];
     asItemMCQ: option[];
+    reviewStatus: string;
+    itemUseCount: string;
+    asItemTF:Tf[];
+
 }
+
+
+
+
+

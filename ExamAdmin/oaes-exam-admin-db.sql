@@ -179,6 +179,13 @@ ALTER TABLE ea_instruction
   ADD CONSTRAINT `fk_ea_instruction_qp_id` FOREIGN KEY (qp_id) REFERENCES ea_question_paper(qp_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table ea_instruction
+-- --------------------------------------------------------
+INSERT INTO ea_instruction VALUES(0,"IC1",1,"Instruction 1");
+INSERT INTO ea_instruction VALUES(0,"IC2",1,"Instruction 2");
+INSERT INTO ea_instruction VALUES(0,"IC3",2,"Instruction 3");
+
+-- --------------------------------------------------------
 -- Table structure for table `ea_itemtype_master`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_itemtype_master (
@@ -223,7 +230,7 @@ CREATE TABLE IF NOT EXISTS ea_examinee_item_marks (
   examinee_item_marks_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   qp_item_id int(10) unsigned,
   examinee_batch_id int(10) unsigned,
-  marks_obtained float(24) unsigned NOT NULL,
+  marks_obtained float(24) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (examinee_item_marks_id),
   CONSTRAINT `uk_ea_examinee_item_marks` UNIQUE (qp_item_id,examinee_batch_id)
 );
@@ -271,6 +278,17 @@ ALTER TABLE ea_item_mcq_options
   ADD constraint `ea_item_mcq_options_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ea_qp_item(qp_item_id) ON DELETE SET NULL;
 
 -- --------------------------------------------------------
+-- Data Entry for table ea_item_mcq_options
+-- --------------------------------------------------------
+INSERT INTO ea_item_mcq_options VALUES(0,"1.1.1",1,"1stQuestion-Mid-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,"1.1.2",1,"1stQuestion-Mid-DB-OP2");
+INSERT INTO ea_item_mcq_options VALUES(0,"1.1.3",1,"1stQuestion-Mid-DB-OP3");
+INSERT INTO ea_item_mcq_options VALUES(0,"1.2.1",2,"2stQuestion-Mid-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,"1.2.2",2,"2stQuestion-Mid-DB-OP2");
+INSERT INTO ea_item_mcq_options VALUES(0,"2.1.1",4,"1stQuestion-End-DB-OP1");
+INSERT INTO ea_item_mcq_options VALUES(0,"3.1.1",6,"1stQuestion-IMP-DB-OP1");
+
+-- --------------------------------------------------------
 -- Table structure for table `ea_item_true_false`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_item_true_false(
@@ -282,6 +300,11 @@ CREATE TABLE IF NOT EXISTS ea_item_true_false(
 
 ALTER TABLE ea_item_true_false
   ADD constraint `ea_item_true_false_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ea_qp_item(qp_item_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table ea_item_true_false
+-- --------------------------------------------------------
+INSERT INTO ea_item_true_false VALUES(0,"2.2",5);
 
 -- --------------------------------------------------------
 -- Table structure for table in_qpack_header
