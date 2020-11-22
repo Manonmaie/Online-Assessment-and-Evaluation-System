@@ -46,15 +46,15 @@ export class ExamineeUpdateComponent implements OnInit {
       }
       else{
         resetError("examineeCode");
-        if(this.examinee.examineePassword==null||this.examinee.examineePassword==""){
-          setError("examineePassword","Student Password is Required");
-        }
-        else{
+        // if(this.examinee.examineePassword==null||this.examinee.examineePassword==""){
+        //   setError("examineePassword","Student Password is Required");
+        // }
+        // else{
           this.updateExaminee(this.examineeId, this.examinee);
           setTimeout(() => {
             this.router.navigate(['/examinees']);
           },500);
-        }
+        // }
       }
     }
   }
