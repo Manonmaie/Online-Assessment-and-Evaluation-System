@@ -70,4 +70,11 @@ public class ExamineeController {
 	public List<Examinee> getExamineesByCode(@RequestParam List<String> code){
 		return examineeService.getExamineesByCode(code);
 	}
+	
+	@RequestMapping("/examineesUpdatePassword")
+	public void updatePasswords() {
+		List<Examinee> examinees = getAllExaminees();
+		examinees.forEach(examinee->randomPassword(examinee));
+		addExaxmineeBulk(examinees);
+	}
 }
