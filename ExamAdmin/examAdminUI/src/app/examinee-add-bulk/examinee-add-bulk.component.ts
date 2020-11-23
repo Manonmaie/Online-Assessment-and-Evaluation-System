@@ -12,11 +12,11 @@ import { ExcelServicesService } from '../services/excel-services.service';
 })
 export class ExamineeAddBulkComponent implements OnInit {
   examineeList:Examinee[] = [];
-  examineeTemplateList:Examinee[] = [
+  examineeTemplateList:any = [
     {
       'examineeName': null, 
       'examineeCode':null,
-      'examineePassword': null,
+      // 'examineePassword': null,
       'examineeBranch':null,
       'examineeEmail':null,
       'examineeCollege':null

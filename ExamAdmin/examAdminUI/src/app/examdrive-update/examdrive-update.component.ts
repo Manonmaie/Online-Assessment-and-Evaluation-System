@@ -3,6 +3,8 @@ import {Examdrive} from '../shared/examdrive';
 import {Course} from '../shared/course';
 import { Center } from '../shared/center';
 import { Batch } from '../shared/batch';
+import { Examinee } from '../shared/examinee';
+import { ExamineeBatch } from '../shared/examinee-batch';
 import {ExamdriveService} from '../services/examdrive.service';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +13,7 @@ import { ExamineeService } from '../services/examinee.service';
 import { ExamineeBatchService } from '../services/examinee-batch.service';
 import {resetError, setError} from '../shared/error';
 import { newArray } from '@angular/compiler/src/util';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-examdrive-update',
@@ -33,6 +36,9 @@ export class ExamdriveUpdateComponent implements OnInit {
   isAddBatch: boolean = false;
   isUpload: boolean[];
   newBatch: Batch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
+  uploadExamineeCodes: string[];
+  uploadExaminees: Examinee[][];  
+  uploadExamineeBatches: ExamineeBatch[][];  
 
   constructor(private examdriveService:ExamdriveService, private courseService: CourseService, private batchService:BatchService, private examineeService: ExamineeService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute, public router: Router) { }
 
@@ -48,6 +54,9 @@ export class ExamdriveUpdateComponent implements OnInit {
     this.isUpdate = new Array();
     this.batches = new Array();
     this.isUpload = new Array();
+    this.uploadExamineeCodes = new Array();
+    this.uploadExaminees = new Array();
+    this.uploadExamineeBatches = new Array();
   }
 
   getExamdrive(id: number): void{
@@ -197,14 +206,44 @@ export class ExamdriveUpdateComponent implements OnInit {
   }
 
   assignStudentsToBatch(batch: Batch): void{
-    // TODO - from the gotten list of examinees make a examineeBatch json object and upload it to backend
-    // this.examineeBatchService.addExamineeBatches(examineeBatches);
+    let newExamineeBatch = new ExamineeBatch();
+    this.uploadExamineeBatches[batch.batchId] = new Array();
+    for(let examinee of this.uploadExaminees[batch.batchId]){
+      newExamineeBatch = {
+        "examineeBatchId":{"examineeId":examinee.examineeId,"batchId":batch.batchId},
+        "examinee":examinee,
+        "batch":batch
+      }
+      this.uploadExamineeBatches[batch.batchId].push(newExamineeBatch);
+    }
+    setTimeout(()=> {
+      this.examineeBatchService.addExamineeBatches(this.uploadExamineeBatches[batch.batchId]).subscribe(examineeBatchList => this.uploadExamineeBatches[batch.batchId]=examineeBatchList);
+    },5000);
     this.isUpload[batch.batchId] = false;
   }
 
-  onFileChange(ev){
-    // Make the list of batch students as null or create a 2d array of students 1st ind is batch id
-    // TODO - Get list of student codes and call a backend function to get examinee objects of the list
-    // this.examineeService.getExamineesByCode(List of examinee Codes)
+  onFileChange(ev, batch: Batch){
+    let workBook = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    const file = ev.target.files[0];
+    reader.onload = (event) => {
+      const data = reader.result;
+      workBook = XLSX.read(data, { type: 'binary' });
+      jsonData = workBook.SheetNames.reduce((initial, name) => {
+        const sheet = workBook.Sheets[name];
+        initial["1"] = XLSX.utils.sheet_to_json(sheet);
+        return initial["1"];
+      }, {});
+      this.uploadExamineeCodes[batch.batchId] = jsonData[0]["StudentCode"];
+      for( let i=1;i<jsonData.length;i++){
+        this.uploadExamineeCodes[batch.batchId] = this.uploadExamineeCodes[batch.batchId].concat(",");
+        this.uploadExamineeCodes[batch.batchId] = this.uploadExamineeCodes[batch.batchId].concat(jsonData[i]["StudentCode"]);
+      }
+    }
+    reader.readAsBinaryString(file);
+    setTimeout(() => {
+      this.examineeService.getExamineesByCode(this.uploadExamineeCodes[batch.batchId]).subscribe(examineeList => this.uploadExaminees[batch.batchId] = examineeList);    
+    },3000);
   }
 }

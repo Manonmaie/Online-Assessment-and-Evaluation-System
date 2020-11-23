@@ -31,4 +31,11 @@ export class ExamineeComponent implements OnInit {
       });
     }
   }
+
+  updatePasswords(): void{
+    if(confirm("Are you sure to update passwords of all Students")){
+      this.examineeService.updatePasswords().subscribe( (examinees) => this.examinees=examinees);
+      window.location.reload();
+    }
+  }
 }

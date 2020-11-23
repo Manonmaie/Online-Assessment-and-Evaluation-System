@@ -4,7 +4,7 @@ import { Examinee } from './examinee';
 
 export class ExamineeBatch{
     examineeBatchId: ExamineeBatchKey;
-    marksObtained: number;
+    marksObtained ? : number;
     examinee: Examinee;
     batch: Batch;
 }

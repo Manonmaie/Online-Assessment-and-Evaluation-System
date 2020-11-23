@@ -129,7 +129,7 @@
                                         <td colspan="4" [hidden]="!isUpload[batch.batchId]">
                                             Upload an Excel file with student codes with the column name as "StudentCode"
                                             <br>
-                                            <input type="file" id="file" accept = ".xls, .xlsx, .odt, .csv" (change)="onFileChange($event)"/>
+                                            <input type="file" id="file" accept = ".xls, .xlsx, .odt, .csv" (change)="onFileChange($event,batch)"/>
                                             <button type="button" class="btn btn-success float-right" (click)="assignStudentsToBatch(batch)"> Assign Students to Batch</button>
                                         </td>
                                     </ng-container>       
