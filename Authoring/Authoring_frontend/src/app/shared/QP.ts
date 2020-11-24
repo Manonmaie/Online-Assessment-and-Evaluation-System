@@ -5,5 +5,6 @@ export class QP{
     totalMarks: Number;
     timeDuration: Number;
     items: Item[];
-    batchCode: string
+    batchCode: string;
+    inst: string[]; // instructions
 }
