@@ -1,6 +1,7 @@
 package com.iiitb.examAdminBackEnd.batch;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -45,5 +46,10 @@ public class BatchController {
 	@RequestMapping(method = RequestMethod.POST, value="/batchesBulk")
 	public void addBatches(@RequestBody List<Batch> batches) {
 		batchService.addBatches(batches);
+	}
+	
+	@RequestMapping("/batches/{id}")
+	public Optional<Batch> getBatch(@PathVariable int id) {
+		return batchService.getBatch(id);
 	}
 }

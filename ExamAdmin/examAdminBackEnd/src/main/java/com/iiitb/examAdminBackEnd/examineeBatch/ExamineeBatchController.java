@@ -38,6 +38,11 @@ public class ExamineeBatchController {
 		return examineeBatchService.getAllExamineeBatches();
 	}
 	
+	@RequestMapping("examineeBatches/{id}")
+	public List<ExamineeBatch> getExamineesOfBatch(@PathVariable int id){
+		return examineeBatchService.getExamineesOfBatch(id);
+	}
+	
 	@RequestMapping(method=RequestMethod.POST, value="/examineeBatchBulk")
 	public void addExamineeBatches(@RequestBody List<ExamineeBatch> examineeBatches) {
 		examineeBatchService.addExamineeBatches(examineeBatches);
