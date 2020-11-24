@@ -27,6 +27,10 @@ export class ExaminationService {
     return this.http.get<ResponseTable>(baseURL + 'response/qpItem/' + qpItemId + '/examinee/' + examineeId + '/batch/' + batchId);
   }
 
+  getAllResponsesForBatchAndExamineeIds(examineeId: number, batchId: number): Observable<ResponseTable[]>{
+    return this.http.get<ResponseTable[]>(baseURL + 'examinee/' + examineeId + '/batch/' + batchId + '/allResponses');
+  }
+
   updateResponse(responseId: number, response: ResponseTable): Observable<ResponseTable>{
     return this.http.put<ResponseTable>(baseURL + 'response/' + responseId, response);
   }

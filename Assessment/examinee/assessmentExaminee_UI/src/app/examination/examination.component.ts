@@ -10,6 +10,7 @@ import { QuestionPaperService } from "../services/question-paper.service";
 import { ExamineeBatch } from '../shared/examineeBatch';
 import { ExamineeBatchId } from '../shared/examineeBatch';
 import { DatePipe } from '@angular/common';
+import { ResponseListForOpItem } from "../shared/responseListForQpItem";
 
 declare var $:any;
 
@@ -25,6 +26,8 @@ export class ExaminationComponent implements OnInit {
   qpId: number;
   batchId: number;
   examineeId: number;
+  responseListForQpItems: ResponseListForOpItem[];
+  maxQpItemId: number;
 
   response: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
   attempt: Attempt;
@@ -49,6 +52,8 @@ export class ExaminationComponent implements OnInit {
     this.examineeId = this.activeRoute.snapshot.params['examineeId'];
     this.examinationService.getQpItemsOfQuestionPaper(this.qpId).subscribe((qpItems) => {
       this.qpItems = qpItems;
+      this.maxQpItemId = Math.max.apply(Math, qpItems.map(function(qpItem) { return qpItem.qpItemId; }));
+
       for (let i = 0; i < qpItems.length; i++) {
         this.shuffle(qpItems[i].asItemMcqOptionsList);
       }
@@ -69,11 +74,56 @@ export class ExaminationComponent implements OnInit {
         this.noOfOptionsCheckedForItem.push(0);
       }
 
+      this.responseListForQpItems = [];
+      for(let i=0; i <= this.maxQpItemId; i++){
+        let qpItemResponse: ResponseListForOpItem = new ResponseListForOpItem();
+        qpItemResponse.qpItemId = -1;
+        qpItemResponse.responseList = [];
+        this.responseListForQpItems[i] = qpItemResponse;
+      }
+      this.examinationService.getAllResponsesForBatchAndExamineeIds(this.examineeId, this.batchId).subscribe((allResponses) => {
+        for(let i=0; i < allResponses.length; i++){
+          let qpItemId: number = allResponses[i].asQpItem.qpItemId;
+          this.responseListForQpItems[qpItemId].qpItemId = qpItemId;
+          this.responseListForQpItems[qpItemId].responseList.push(allResponses[i].responseText);
+        }
+        console.log("All responses = ");
+        console.log(allResponses);
+        console.log("Responses List = ");
+        console.log(this.responseListForQpItems);
+        // if(allResponses.length > 0){
+        //   for (let i = 0; i < qpItems.length; i++) {
+        //     let qpItemId: number = qpItems[i].qpItemId;
+        //     if(this.responseListForQpItems[qpItemId].responseList.length > 0){
+        //       if(qpItems[i].itemType == 'McqSingleCorrect'){
+        //         // $('input[name="' + qpItems[i].qpItemId + '"]').prop('checked', true);
+        //       }
+        //       else if(qpItems[i].itemType == 'True/False'){
+        //         console.log("True/false = ");
+        //         console.log($('input[name="' + qpItems[i].qpItemId + '"]'));
+        //         if(this.responseListForQpItems[qpItemId].responseList[0] == "True"){
+        //           $('input[name="' + qpItems[i].qpItemId + '"]').prop('checked', true);
+        //         }
+        //         else{
+        //           $('input[name="' + qpItems[i].qpItemId + '"]').prop('checked', true);
+        //         }
+        //       }
+        //       else if(qpItems[i].itemType == 'McqMultiCorrect'){
+        //         for(let j=0; j < this.responseListForQpItems[qpItemId].responseList.length; j++){
+        //           // $('input[name="' + qpItems[i].qpItemId + '"]').prop('checked', true);
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+      });
+
       // this.flagName = [];
       // for (let i = 0; i < qpItems.length; i++) {
       //   this.flagName.push("Flag");
       // }
     });
+
     // this.examinationService.getLastPostedAttemptForBathAndExamineeIds(this.examineeId, this.batchId).subscribe((attempt) => this.attempt = attempt);
     // this.attempt = this.qpService.getLastAttemptVariable();
     // console.log("In examination component");
@@ -116,6 +166,7 @@ export class ExaminationComponent implements OnInit {
     var currentIndex = array.length, temporaryValue, randomIndex;
     while (0 !== currentIndex) {
       randomIndex = Math.floor(Math.random() * currentIndex);
+      // randomIndex = Math.floor(Math.floor(Math.random() * currentIndex)/this.examineeId);
       currentIndex -= 1;
       temporaryValue = array[currentIndex];
       array[currentIndex] = array[randomIndex];
@@ -143,7 +194,6 @@ export class ExaminationComponent implements OnInit {
 }
 
   updateResponseTableWhenOptionSelected(event: boolean, itemOptionText: string, qpItem: Examination, qpItemType: string, index: number){
-    
     if(qpItemType == 'Reset'){
       this.noOfOptionsCheckedForItem[index] = 0;
       this.attemptedItems[index] = false;

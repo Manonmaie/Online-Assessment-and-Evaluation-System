@@ -470,8 +470,8 @@ ALTER TABLE as_response
 -- -- INSERT INTO as_response VALUES(0,"Key",2,1);
 -- -- INSERT INTO as_response VALUES(0,"PK",3,1);
 -- -- INSERT INTO as_response VALUES(0,"Primary Key",3,1);
--- INSERT INTO as_response VALUES(0,"Answer 1",11,1);
--- INSERT INTO as_response VALUES(0,"Answer 2",12,1);
+-- INSERT INTO as_response VALUES(0,"Answer 1",11,2);
+-- INSERT INTO as_response VALUES(0,"Answer 2",12,2);
 -- INSERT INTO as_response VALUES(0,"Post Key",13,1);
 
 -- --------------------------------------------------------

@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.iiitb.assessmentBackEnd.attempt.AsAttempt;
 import com.iiitb.assessmentBackEnd.attempt.AttemptRepository;
+import com.iiitb.assessmentBackEnd.examineeBatch.ExamineeBatchKey;
 import com.iiitb.assessmentBackEnd.responseMcq.AsResponseMcq;
 import com.iiitb.assessmentBackEnd.responseMcq.ResponseMcqRepository;
 import com.iiitb.assessmentBackEnd.responseMcq.ResponseMcqService;
@@ -53,7 +55,13 @@ public class ResponseService {
 	}
 	
 	public List<AsResponse> getAllResponsesForBatchId(int batchId) {
-		return responseRepository.findByAsQpItemAsQuestionPaperAsBatchBatchId(batchId);
+//		return responseRepository.findByAsQpItemAsQuestionPaperAsBatchBatchId(batchId);
+		return responseRepository.findByAsAttemptAsExamineeBatchBatchBatchIdAndAsAttemptAttemptStatus(batchId, "COMPLETED");
+	}
+	
+	public List<AsResponse> getAllResponsesForExamineeAndBatchIds(int examineeId, int batchId) {
+		int attemptId = attemptRepository.findTopByAsExamineeBatchExamineeBatchIdExamineeIdAndAsExamineeBatchExamineeBatchIdBatchIdOrderByAttemptNumberDesc(examineeId, batchId).getAttemptId();
+		return responseRepository.findByAsAttemptAttemptId(attemptId);
 	}
 	
 //	public void addResponse(int qpItemtId, int attemptId, AsResponse response) {
