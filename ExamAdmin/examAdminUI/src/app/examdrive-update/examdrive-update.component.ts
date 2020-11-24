@@ -84,6 +84,10 @@ export class ExamdriveUpdateComponent implements OnInit {
     for( var batch of this.examdrive.batchList){
       this.centers.push(batch.center);
     }
+    function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+      return value !== null && value !== undefined;
+    }
+    this.centers = this.centers.filter(notEmpty);
     this.centers = this.centers.filter(
       (thing, i, arr) => arr.findIndex(t => t.centerId === thing.centerId) === i
     );
