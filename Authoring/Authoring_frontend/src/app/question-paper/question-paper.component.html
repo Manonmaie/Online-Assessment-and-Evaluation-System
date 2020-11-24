@@ -255,7 +255,7 @@
       <div class="row customMain">
           <div class="col-md-7 col-md-offset-1">
               <ol class="list-group">
-                  <li class="list-group-item" *ngFor="let qpItem of myQPSet;">
+                  <li class="list-group-item" *ngFor="let qpItem of myQPSet.values();">
                       <div id="{{indexOfelement}}" class="ck-content" [innerHtml]='qpItem.itemText' style="display: inline"></div>
                   <button class="badge badge-primary badge-pill" (click)="editQPList(qpItem)" style="background-color: #f44336; margin-left: 5px; margin-top: -3px;">
                     Delete
@@ -369,9 +369,11 @@
       <!-- Preview of Question Paper -->
       <button type="button" class="btn btn-secondary mr-2" (click)="routeToQpPreview()">Previous</button>
       <!-- Create of Question Paper -->
-      <button type="button" class="btn btn-primary" (click)="setQP()">Create</button>
+      <div type="button" class="popup" (click)="myFunction()">Create
+        <span class="popuptext" id="myPopup">{{setQP()}}</span>
+      </div>
   </div>
-
+  
 
   
 </div>

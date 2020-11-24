@@ -50,7 +50,7 @@ public class ItemService {
 		if(m.get("endMark")!=null)
 			endMarkInteger=Integer.parseInt(m.get("endMark").trim());
 		List<Item> itemList= itemRepository.findByItemId(cgLvlList,difLvlList,typesList,startMarkInteger,endMarkInteger);
-		System.out.println(itemList.size());
+//		System.out.println(itemList.size());
 		return itemList;
 	}
 	
@@ -110,7 +110,6 @@ public class ItemService {
 			opt.setItemMCQ(item);
 			item.getAsItemMCQ().add(optRepository.save(opt));
 		}
-		
 		return question;
 	}
 }

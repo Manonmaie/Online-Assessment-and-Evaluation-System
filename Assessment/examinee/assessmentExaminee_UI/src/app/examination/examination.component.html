@@ -38,11 +38,11 @@
                 <ol class="list-group" type="a">
                     <li class="list-group-item"  *ngFor="let itemMcqOption of qpItem.asItemMcqOptionsList">
                         <div *ngIf='qpItem.itemType === "McqMultiCorrect"' class="checkbox">
-                                <input type="checkbox" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType, indexOfelement)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                                <input type="checkbox" name="{{qpItem.qpItemId}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType, indexOfelement)" [value]="itemMcqOption" [checked]="responseListForQpItems[qpItem.qpItemId].responseList.includes(itemMcqOption.mcqOptionText) ? true : false"> {{itemMcqOption.mcqOptionText}}
                             <!-- <label><input [ngModel]="itemMcqOption" type="checkbox" name="optCheckbox" (ngChange)="updateResponse(itemMcqOption)">  {{itemMcqOption.mcqOptionText}}</label> -->
                         </div>
                         <div *ngIf='qpItem.itemType === "McqSingleCorrect"' class="radio">
-                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType, indexOfelement)" [value]="itemMcqOption"> {{itemMcqOption.mcqOptionText}}
+                            <input type="radio" name="{{qpItem.qpItemId}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, itemMcqOption.mcqOptionText, qpItem, qpItem.itemType, indexOfelement)" [value]="itemMcqOption" [checked]="responseListForQpItems[qpItem.qpItemId].responseList[0] == itemMcqOption.mcqOptionText ? true : false"> {{itemMcqOption.mcqOptionText}}
                         </div>
                     </li>
                 </ol>
@@ -50,10 +50,10 @@
                 <div *ngIf='qpItem.itemType === "True/False"' class="radio">
                     <ol class="list-group" type="a" *ngFor="let itemTrueFalse of qpItem.asItemTrueFalseList">
                         <li class="list-group-item">
-                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType, indexOfelement)" [value]="itemTrueFalse"> True
+                            <input type="radio" name="{{qpItem.qpItemId}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'True', qpItem, qpItem.itemType, indexOfelement)" [value]="itemTrueFalse" [checked]="responseListForQpItems[qpItem.qpItemId].responseList[0] == 'True' ? true : false"> True
                         </li>
                         <li class="list-group-item">
-                            <input type="radio" name="{{qpItem.itemCode}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType, indexOfelement)" [value]="itemTrueFalse"> False
+                            <input type="radio" name="{{qpItem.qpItemId}}" (change)="updateResponseTableWhenOptionSelected($event.target.checked, 'False', qpItem, qpItem.itemType, indexOfelement)" [value]="itemTrueFalse" [checked]="responseListForQpItems[qpItem.qpItemId].responseList[0] == 'False' ? true : false"> False
                         </li>
                     </ol>
                 </div>

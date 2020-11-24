@@ -3,7 +3,7 @@ import { ItemTrueFalse } from "./itemTrueFalse";
 
 export class Examination{
     qpItemId: number;
-    itemCode: string;
+    // itemCode: string;
     itemText: string;
     itemMarks: number;
     itemType: string;

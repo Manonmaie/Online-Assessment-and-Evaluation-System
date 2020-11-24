@@ -45,6 +45,11 @@ public class ResponseController {
 		return responseService.getAllResponsesForBatchId(batchId);
 	}
 	
+	@RequestMapping("examinee/{examineeId}/batch/{batchId}/allResponses")
+	public List<AsResponse> getAllResponsesForExamineeAndBatchIds(@PathVariable int examineeId, @PathVariable int batchId){
+		return responseService.getAllResponsesForExamineeAndBatchIds(examineeId, batchId);
+	}
+	
 	@RequestMapping(value = "/response/setResponse", headers="Content-Type=application/json", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<AsResponse> addResponse(@RequestBody AsResponse response) {

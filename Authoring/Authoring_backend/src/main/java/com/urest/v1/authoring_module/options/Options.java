@@ -38,15 +38,6 @@ public class Options {
 		this.mcqOptionMarks = mcqOptionMarks;
 		this.mcqOptionText = mcqOptionText;
 	}
-	
-	
-	public Item getItemMCQ() {
-		return itemMCQ;
-	}
-
-	public void setItemMCQ(Item itemMCQ) {
-		this.itemMCQ = itemMCQ;
-	}
 
 
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -63,6 +54,7 @@ public class Options {
 	private Integer mcqOptionMarks;
 	@Column(name = "mcq_option_text")
 	private String mcqOptionText;
+	
 	public Integer getItem_mcq_options_id() {
 		return item_mcq_options_id;
 	}
@@ -70,7 +62,14 @@ public class Options {
 	public void setItem_mcq_options_id(Integer item_mcq_options_id) {
 		this.item_mcq_options_id = item_mcq_options_id;
 	}
+	
+	public Item getItemMCQ() {
+		return itemMCQ;
+	}
 
+	public void setItemMCQ(Item itemMCQ) {
+		this.itemMCQ = itemMCQ;
+	}
 
 	public Integer getMcqOptionMarks() {
 		return mcqOptionMarks;
@@ -87,9 +86,6 @@ public class Options {
 	public void setMcqOptionText(String mcqOptionText) {
 		this.mcqOptionText = mcqOptionText;
 	}
-	
-
-	
 	
 }
 

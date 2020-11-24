@@ -14,7 +14,7 @@ public class AsItemMcqOptions {
 	@Id
 	private int itemMcqId;
 	
-	private String itemMcqOptionsCode;
+//	private String itemMcqOptionsCode;
 	private String mcqOptionText;
 	
 	@ManyToOne
@@ -26,10 +26,10 @@ public class AsItemMcqOptions {
 		
 	}
 	
-	public AsItemMcqOptions(int itemMcqId, String itemMcqOptionsCode, String mcqOptionText, int qpItemId) {
+	public AsItemMcqOptions(int itemMcqId, String mcqOptionText, int qpItemId) {
 		super();
 		this.itemMcqId = itemMcqId;
-		this.itemMcqOptionsCode = itemMcqOptionsCode;
+//		this.itemMcqOptionsCode = itemMcqOptionsCode;
 		this.mcqOptionText = mcqOptionText;
 		this.asQpItem = new AsQpItem();
 		this.asQpItem.setQpItemId(qpItemId);
@@ -43,13 +43,13 @@ public class AsItemMcqOptions {
 		this.itemMcqId = itemMcqId;
 	}
 
-	public String getItemMcqOptionsCode() {
-		return itemMcqOptionsCode;
-	}
-
-	public void setItemMcqOptionsCode(String itemMcqOptionsCode) {
-		this.itemMcqOptionsCode = itemMcqOptionsCode;
-	}
+//	public String getItemMcqOptionsCode() {
+//		return itemMcqOptionsCode;
+//	}
+//
+//	public void setItemMcqOptionsCode(String itemMcqOptionsCode) {
+//		this.itemMcqOptionsCode = itemMcqOptionsCode;
+//	}
 
 	public String getMcqOptionText() {
 		return mcqOptionText;

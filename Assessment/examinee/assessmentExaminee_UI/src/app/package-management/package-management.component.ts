@@ -12,9 +12,10 @@ import { OutRpackHeader } from "../shared/outRpackHeader";
 export class PackageManagementComponent implements OnInit {
 
   completedBatches: Batch[];
-  sentBatches: Batch[];
+  // sentBatches: Batch[];
   sentRpacks: OutRpackHeader[];
-  showHistoryBoolean: boolean[];
+  batchDetailsForRpack: Batch[];
+  // showHistoryBoolean: boolean[];
   responsesForSelectedBatch: Response[];
   batchToBeUpdated: Batch;
   rpackToBeUpdated: OutRpackHeader;
@@ -25,13 +26,14 @@ export class PackageManagementComponent implements OnInit {
     this.packageManagementService.getAllCompletedBatchesToExport().subscribe((completedBatches) => this.completedBatches = completedBatches);
     this.packageManagementService.getAllSentRpacksForPackHistory().subscribe((sentRpacks) => {
       this.sentRpacks = sentRpacks;
-      
-      this.showHistoryBoolean = [];
-      for (let i = 0; i < sentRpacks.length; i++) {
-        this.showHistoryBoolean.push(false);
-      }
+      // todo - get batch details for r-pack
+
+      // this.showHistoryBoolean = [];
+      // for (let i = 0; i < sentRpacks.length; i++) {
+      //   this.showHistoryBoolean.push(false);
+      // }
     });
-    this.packageManagementService.getAllSentBatchesForBatchHistory().subscribe((sentBatches) => this.sentBatches = sentBatches);
+    // this.packageManagementService.getAllSentBatchesForBatchHistory().subscribe((sentBatches) => this.sentBatches = sentBatches);
     // this.packageManagementService.getAllSentBatchesForBatchHistory().subscribe((sentBatches) => {
     //   this.sentBatches = sentBatches;
     //   this.showHistoryBoolean = [];
@@ -44,30 +46,29 @@ export class PackageManagementComponent implements OnInit {
   exportRPack(batch: Batch){
     alert("R-Pack for the selected qp is exported");
     this.packageManagementService.getAllResponsesForBatchId(batch.batchId).subscribe((responsesForBatch) => {
+      // todo - fill R-Pack tables;
       // todo - send R-Pack;
     });
     batch.qpStatus = "SENT";
-    console.log(batch);
     this.updateBatch(batch.batchId, batch);
-    // update R-Pack Header Status;
     window.location.reload();
   }
 
   updateBatch(batchId: number, batch: Batch): void{
     this.packageManagementService.updateBatchQpStatus(batchId, batch).subscribe((batch) => this.batchToBeUpdated = batch);
   }
-  updateRpackHeader(rpackHeaderId: number, outRpackHeader: OutRpackHeader): void{
-    this.packageManagementService.updateRpackStatus(rpackHeaderId, outRpackHeader).subscribe((rpackHeader) => this.rpackToBeUpdated = rpackHeader);
-  }
+  // updateRpackHeader(rpackHeaderId: number, outRpackHeader: OutRpackHeader): void{
+  //   this.packageManagementService.updateRpackStatus(rpackHeaderId, outRpackHeader).subscribe((rpackHeader) => this.rpackToBeUpdated = rpackHeader);
+  // }
 
   importQPack(){
     alert("Q-Pack imported");
-    // todo - fill Pack tables and Actual tables
+    // todo - fill E-Pack tables and Actual tables
   }
 
-  manageViewHistoryOfSentBatch(batch: Batch, index: number): void{
-    // this.packageManagementService.getAllResponsesForBatchId(batch.batchId).subscribe((responsesForBatch) => this.responsesForSelectedBatch = responsesForBatch);
-    this.showHistoryBoolean[index] = !this.showHistoryBoolean[index];
-  }
+  // manageViewHistoryOfSentBatch(batch: Batch, index: number): void{
+  //   // this.packageManagementService.getAllResponsesForBatchId(batch.batchId).subscribe((responsesForBatch) => this.responsesForSelectedBatch = responsesForBatch);
+  //   this.showHistoryBoolean[index] = !this.showHistoryBoolean[index];
+  // }
 
 }

@@ -12,13 +12,14 @@ import { Item } from '../shared/item';
 
 export class QPServiceService {
   constructor(private http: HttpClient) { }
-  setQP(subject :string,TotalMarks: Number,TestDuration: Number,items: Item[],batchCode:string) : Observable<any>{
+  setQP(subject :string,TotalMarks: Number,TestDuration: Number,items: Item[],batchCode:string,myInstrucions:string[]) : Observable<any>{
     var qp = new QP();
     qp.course=subject;
     qp.timeDuration=TestDuration;
     qp.totalMarks=TotalMarks;
     qp.items=items;
     qp.batchCode=batchCode;
+    qp.inst=myInstrucions;
     console.log("sending qp");
     return this.http.post(baseURL + '/urest/v1/setQP', qp);
   }
