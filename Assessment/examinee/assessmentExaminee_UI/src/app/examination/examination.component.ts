@@ -157,13 +157,12 @@ export class ExaminationComponent implements OnInit {
           this.deleteResponseById(response.responseId);
         }
       });
-      let qpItemCode: string = qpItem.itemCode;
-      console.log(qpItemCode);
-      $('input[name="' + qpItemCode + '"]').prop('checked', false);
+      let qpItemId: number = qpItem.qpItemId;
+      $('input[name="' + qpItemId + '"]').prop('checked', false);
     }
     else{
       if(qpItemType == 'McqMultiCorrect' && event == false){
-        // var element = <HTMLInputElement> document.getElementById(qpItem.itemCode);
+        // var element = <HTMLInputElement> document.getElementById(qpItem.qpItemId);
         // var isChecked = element.checked;
         // if(isChecked == false){
         //   this.attemptedItems[index] = false;

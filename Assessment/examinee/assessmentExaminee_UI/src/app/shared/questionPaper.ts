@@ -2,7 +2,7 @@ import { Batch } from './batch';
 
 export class QuestionPaper{
     qpId: number;
-    qpCode: String;
+    // qpCode: String;
     maximumMarks: number;
     duration: number;
     asBatch: Batch;

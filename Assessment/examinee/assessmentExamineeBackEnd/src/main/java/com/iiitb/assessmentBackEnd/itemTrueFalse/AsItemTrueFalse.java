@@ -14,7 +14,7 @@ public class AsItemTrueFalse {
 	@Id
 	private int itemTrueFalseId;
 	
-	private String itemTrueFalseCode;
+//	private String itemTrueFalseCode;
 	
 	@ManyToOne
 	@JoinColumn(name="qp_item_id")
@@ -25,10 +25,10 @@ public class AsItemTrueFalse {
 		
 	}
 	
-	public AsItemTrueFalse(int itemTrueFalseId, String itemTrueFalseCode, int qpItemId) {
+	public AsItemTrueFalse(int itemTrueFalseId, int qpItemId) {
 		super();
 		this.itemTrueFalseId = itemTrueFalseId;
-		this.itemTrueFalseCode = itemTrueFalseCode;
+//		this.itemTrueFalseCode = itemTrueFalseCode;
 		this.asQpItem = new AsQpItem();
 		this.asQpItem.setQpItemId(qpItemId);
 	}
@@ -41,13 +41,13 @@ public class AsItemTrueFalse {
 		this.itemTrueFalseId = itemTrueFalseId;
 	}
 
-	public String getItemTrueFalseCode() {
-		return itemTrueFalseCode;
-	}
-
-	public void setItemTrueFalseCode(String itemFrueFalseCode) {
-		this.itemTrueFalseCode = itemFrueFalseCode;
-	}
+//	public String getItemTrueFalseCode() {
+//		return itemTrueFalseCode;
+//	}
+//
+//	public void setItemTrueFalseCode(String itemFrueFalseCode) {
+//		this.itemTrueFalseCode = itemFrueFalseCode;
+//	}
 
 	public AsQpItem getAsQpItem() {
 		return asQpItem;

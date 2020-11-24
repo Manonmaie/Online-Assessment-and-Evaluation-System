@@ -20,7 +20,7 @@ public class AsQpItem {
 	@Id
 	private int qpItemId;
 	
-	private String itemCode;
+//	private String itemCode;
 	
 	@Lob
 	private String itemText;
@@ -44,11 +44,11 @@ public class AsQpItem {
 		
 	}
 	
-	public AsQpItem(int qpItemId, String itemCode, String itemText, float itemMarks, String itemType,
+	public AsQpItem(int qpItemId, String itemText, float itemMarks, String itemType,
 			String cognitiveLevel, int qpId) {
 		super();
 		this.qpItemId = qpItemId;
-		this.itemCode = itemCode;
+//		this.itemCode = itemCode;
 		this.itemText = itemText;
 		this.itemMarks = itemMarks;
 		this.itemType = itemType;
@@ -65,13 +65,13 @@ public class AsQpItem {
 		this.qpItemId = qpItemId;
 	}
 
-	public String getItemCode() {
-		return itemCode;
-	}
-
-	public void setItemCode(String itemCode) {
-		this.itemCode = itemCode;
-	}
+//	public String getItemCode() {
+//		return itemCode;
+//	}
+//
+//	public void setItemCode(String itemCode) {
+//		this.itemCode = itemCode;
+//	}
 
 	public String getItemText() {
 		return itemText;
