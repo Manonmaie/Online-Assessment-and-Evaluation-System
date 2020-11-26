@@ -69,7 +69,20 @@ export class ExamdriveUpdateComponent implements OnInit {
   }
 
   getCourses(): void{
-    this.courseService.getCourses().subscribe((courses) => this.courses = courses);
+    this.courseService.getCourses().subscribe((courses) => {
+      courses = courses.sort((obj1, obj2) => {
+        if (obj1.courseCode > obj2.courseCode) {
+            return 1;
+        }
+        if (obj1.courseCode < obj2.courseCode) {
+            return -1;
+        }
+        return 0;
+      });
+      setTimeout(()=>{
+        this.courses = courses;
+      },500);
+    });
   }
 
   getCourse(id: number): void{
@@ -91,6 +104,15 @@ export class ExamdriveUpdateComponent implements OnInit {
     this.centers = this.centers.filter(
       (thing, i, arr) => arr.findIndex(t => t.centerId === thing.centerId) === i
     );
+    this.centers = this.centers.sort((obj1, obj2) => {
+      if (obj1.centerCode > obj2.centerCode) {
+          return 1;
+      }
+      if (obj1.centerCode < obj2.centerCode) {
+          return -1;
+      }
+      return 0;
+    });
   }
 
   setBatches(id: number): void{
@@ -121,6 +143,15 @@ export class ExamdriveUpdateComponent implements OnInit {
 
   getBatches(center: Center): void{
     this.batches[center.centerId] = this.examdrive.batchList.filter(b => b.center!=null && b.center.centerId==center.centerId);
+    this.batches[center.centerId] = this.batches[center.centerId].sort((obj1, obj2) => {
+      if (obj1.batchStartTime > obj2.batchStartTime) {
+          return 1;
+      }
+      if (obj1.batchStartTime < obj2.batchStartTime) {
+          return -1;
+      }
+      return 0;
+    });
   }
 
   updateDrive(){

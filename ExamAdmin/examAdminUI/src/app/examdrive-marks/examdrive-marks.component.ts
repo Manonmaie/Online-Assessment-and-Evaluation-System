@@ -31,7 +31,20 @@ export class ExamdriveMarksComponent implements OnInit {
   }
 
   getExamineeBatchByExamdriveId(id: number): void{
-    this.examineeBatchService.getExamineeBatchByExamdriveId(id).subscribe((examineeBatchList) => this.examineeBatchList=examineeBatchList);
+    this.examineeBatchService.getExamineeBatchByExamdriveId(id).subscribe((examineeBatchList) => {
+      examineeBatchList = examineeBatchList.sort((obj1, obj2) => {
+        if (obj1.examinee.examineeCode > obj2.examinee.examineeCode) {
+            return 1;
+        }
+        if (obj1.examinee.examineeCode < obj2.examinee.examineeCode) {
+            return -1;
+        }
+        return 0;
+      });
+      setTimeout(()=>{
+        this.examineeBatchList = examineeBatchList;
+      },500);
+    });
   }
 
   fileName: string;

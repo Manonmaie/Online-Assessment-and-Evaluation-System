@@ -16,7 +16,7 @@
             <br>
             <select id="examdriveCourse" name="examdriveCourse" [(ngModel)]="selectedCourse">
                 <option *ngFor = "let course of courses" [value]="course.courseMasterId">
-                    {{course.courseName}}
+                    {{course.courseCode}} - {{course.courseName}}
                 </option>
             </select>
             <!-- <button type="button" class="btn btn-success float-right" (click)="addCourse()">

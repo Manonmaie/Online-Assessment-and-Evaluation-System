@@ -27,7 +27,20 @@ export class ExamdriveAddComponent implements OnInit {
   }
 
   getCourses(): void{
-    this.courseService.getCourses().subscribe((courses) => this.courses = courses);
+    this.courseService.getCourses().subscribe((courses) => {
+      courses = courses.sort((obj1, obj2) => {
+        if (obj1.courseCode > obj2.courseCode) {
+            return 1;
+        }
+        if (obj1.courseCode < obj2.courseCode) {
+            return -1;
+        }
+        return 0;
+      });
+      setTimeout(()=>{
+        this.courses = courses;
+      },500);
+    });
   }
 
   getCourse(id: number): void{

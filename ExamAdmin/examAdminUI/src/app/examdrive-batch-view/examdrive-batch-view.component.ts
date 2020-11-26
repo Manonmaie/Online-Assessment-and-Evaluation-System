@@ -25,7 +25,20 @@ export class ExamdriveBatchViewComponent implements OnInit {
   }
 
   getExamineesOfBatch(batchId: number): void{
-    this.examineeBatchService.getExamineesOfBatch(batchId).subscribe(examineeBatches => this.examineeBatches = examineeBatches);
+    this.examineeBatchService.getExamineesOfBatch(batchId).subscribe(examineeBatches => {
+      examineeBatches = examineeBatches.sort((obj1, obj2) => {
+        if (obj1.examinee.examineeCode > obj2.examinee.examineeCode) {
+            return 1;
+        }
+        if (obj1.examinee.examineeCode < obj2.examinee.examineeCode) {
+            return -1;
+        }
+        return 0;
+      });
+      setTimeout(()=>{
+        this.examineeBatches = examineeBatches;
+      },500);
+    });
   }
 
   getBatch(batchId: number): void{
