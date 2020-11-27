@@ -20,7 +20,7 @@
             <br>
             <select id="examdriveCourse" name="examdriveCourse" [(ngModel)]="selectedCourse">
                 <option *ngFor = "let course of courses" [value]="course.courseMasterId">
-                    {{course.courseName}} - {{course.courseCode}}
+                    {{course.courseCode}} - {{course.courseName}}
                 </option>
             </select>
             <br>
@@ -67,6 +67,7 @@
                                     <th scope="col">Exam Start Time</th>
                                     <th scope="col">Exam End Time</th>
                                     <th scope="col">Paper Status</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,6 +77,9 @@
                                         <td>{{batch.batchStartTime.substr(0,10)}} <font color="grey">{{batch.batchStartTime.substr(11)}}</font></td>
                                         <td>{{batch.batchEndTime.substr(0,10)}} <font color="grey">{{batch.batchEndTime.substr(11)}}</font></td>
                                         <td><font size="-2">{{batch.qpStatus}}</font></td>
+                                        <td>
+                                            <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/batchview', batch.batchId]"><i class="fa fa-eye"></i></button>
+                                        </td>
                                     </ng-container>
                                 </tr>
                             </tbody>

@@ -20,7 +20,20 @@ export class CenterComponent implements OnInit {
   }
 
   getCenters(): void{
-    this.centerService.getCenters().subscribe((centers) => this.centers = centers);
+    this.centerService.getCenters().subscribe((centers) => {
+      centers = centers.sort((obj1, obj2) => {
+        if (obj1.centerCode > obj2.centerCode) {
+            return 1;
+        }
+        if (obj1.centerCode < obj2.centerCode) {
+            return -1;
+        }
+        return 0;
+      });
+      setTimeout(()=>{
+        this.centers = centers;
+      },500);
+    });
   }
 
   deleteCenter(center: Center): void{

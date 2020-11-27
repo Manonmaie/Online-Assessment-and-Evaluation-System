@@ -30,6 +30,9 @@ export class ExamineeViewComponent implements OnInit {
   }
 
   setExamineeBatchList(id: number): void{
-    this.examineeBatchService.getExamineeBatchByExamineeId(id).subscribe((examineeBatchList)=> this.examineeBatchList=examineeBatchList);
+    this.examineeBatchService.getExamineeBatchByExamineeId(id).subscribe((examineeBatchList)=> {
+      examineeBatchList = examineeBatchList.reverse();
+      this.examineeBatchList=examineeBatchList
+    });
   }
 }

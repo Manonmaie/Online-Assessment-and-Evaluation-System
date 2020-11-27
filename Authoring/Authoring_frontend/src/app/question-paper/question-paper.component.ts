@@ -47,11 +47,6 @@ export class QuestionPaperComponent implements OnInit {
 
 // ng variables ------------------------------------------------
 
-
-
-//'EASY', 'EASY-MEDIUM', 'MEDIUM', 'HARD-MEDIUM', 'HARD'
-//'REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'
-// McqSingleCorrect , McqMultiCorrect ,True/False
   selectedType: any = "";
   totalMarks: Number;
   instructions: string;
@@ -65,7 +60,6 @@ export class QuestionPaperComponent implements OnInit {
   subject = [
     { value: '', label: 'Choose question subject' },
     { value: 'DBMS', label: 'DBMS' },
-    // { value: 'DBMS', label: 'DBMS' },
     { value: 'Data-Modelling', label: 'Data-Modelling' },
   ];
   types = [
@@ -113,7 +107,7 @@ export class QuestionPaperComponent implements OnInit {
     "TotalQuestionsSelected":0,
     "TotalMarksSoFar":0
   };
-  myQPSet: Set<Item> = new Set<Item>();// selected items in a set
+  myQPSet = new Map(); // selected items in a hashmap --> <primaryKey,item>
 
 
   //-----------------------------------------------------
@@ -164,31 +158,29 @@ export class QuestionPaperComponent implements OnInit {
 //  add item/remove  in  myQPSet
 
   editQPList(item: Item){
-      if(this.myQPSet.has(item))
+      if(this.myQPSet.has(item.itemId))
       {
-        this.myQPSet.delete(item); 
+        this.myQPSet.delete(item.itemId); 
         this.stats[item.diffLvl]--; 
         this.stats[item.cgLvl]--;
         this.stats[item.itemType]--; 
         this.stats.TotalQuestionsSelected--;  
         this.stats.TotalMarksSoFar-=item.marks;
-        return false;
       }
       else
       {
-        this.myQPSet.add(item);
+        this.myQPSet.set(item.itemId,item);
         this.stats[item.diffLvl]++; 
         this.stats[item.cgLvl]++;
         this.stats[item.itemType]++; 
         this.stats.TotalQuestionsSelected++;  
         this.stats.TotalMarksSoFar+=item.marks;
-        return true;
       }
   }
 
   checked(item:Item)
   {
-    if(this.myQPSet.has(item))
+    if(this.myQPSet.has(item.itemId))
       return true;
     else
       return false;
@@ -261,18 +253,18 @@ export class QuestionPaperComponent implements OnInit {
     else
     params = params.set('endMark',JSON.stringify(100));
 
-    console.log(params);
+    // console.log(params);
     this.getItemFilter(params);
   }
 
   ngOnChanges() {
-    console.log(this.items);
+    // console.log(this.items);
   }
 
   stringToHTML(id, str) {
     var parser = new DOMParser();
     var doc = parser.parseFromString(str, 'text/html');
-    console.log(str);
+    // console.log(str);
     document.getElementById(id).innerHTML = str;
   };
 
@@ -327,9 +319,8 @@ routeToQPSet(){
 
 
 deleteItem(item:Item){
-  console.log(item);
-  if(this.myQPSet.has(item))
-    this.myQPSet.delete(item); 
+  if(this.myQPSet.has(item.itemId))
+    this.myQPSet.delete(item.itemId); 
   
 }
 
@@ -378,14 +369,40 @@ public chartType: string = 'pie';
   
   
   // create question paper
-  setQP(): void{
-    let myitems: Item[] = [];
-    for (var item of Array.from(this.myQPSet.values())) {
-      console.log(myitems);
-      myitems.push(item);
+  setQP(): string{
+    if(!this.selectedSub || !this.totalMarks || !this.testDuration || !this.batchCode)
+    {
+      if(!this.selectedSub )
+        return "Subject field not selected";
+      else if(!this.totalMarks)
+        return "Total Marks field is Empty";
+      else if(!this.testDuration)
+        return "Test Duration field is Empty";
+      else if(!this.batchCode)
+        return "Batch Code field is Empty";
+      
     }
-    console.log("set question Paper")
-    console.log(typeof myitems)
-    this.QPService.setQP(this.selectedSub,this.totalMarks,this.testDuration,myitems,this.batchCode).subscribe((items)=> console.log(items));
+
+
+    let myitems: Item[] = [];
+    for (let value of this.myQPSet.values()) {
+      myitems.push(value);    
+  }
+    let myInstructions: string[] = [];
+    for (let key in this.productForm.value.quantities) { 
+      if (this.productForm.value.quantities.hasOwnProperty(key)) { 
+          let value = this.productForm.value.quantities[key]; 
+          myInstructions.push(value.opt);
+      } 
+  } 
+    console.log("set question Paper");
+    this.QPService.setQP(this.selectedSub,this.totalMarks,this.testDuration,myitems,this.batchCode,myInstructions).subscribe((items)=> console.log(items));
+    return "Question Paper set Sucessfully"
+  }
+
+   myFunction() {
+     console.log("popup");
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
   }
 }

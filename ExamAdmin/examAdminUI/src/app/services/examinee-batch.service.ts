@@ -28,4 +28,8 @@ export class ExamineeBatchService {
   addExamineeBatches(examineeBatches: ExamineeBatch[]): Observable<ExamineeBatch[]>{
     return this.http.post<ExamineeBatch[]>(baseURL + 'examineeBatchBulk', examineeBatches);
   } 
+
+  getExamineesOfBatch(batchId: number): Observable<ExamineeBatch[]>{
+    return this.http.get<ExamineeBatch[]>(baseURL + "examineeBatches/" + batchId);
+  }
 }

@@ -1,0 +1,66 @@
+<div class="container">
+    <legend>Batch Details</legend>
+    <ul class="list-group">
+        <li class="list-group-item">
+          <h4>Batch Code: <span style="color:rgb(95, 93, 93)">{{batch.batchCode}}</span> </h4>
+        </li>
+        <li class="list-group-item">
+          Batch Start Time: <span style="color:rgb(95, 93, 93)">{{batch.batchStartTime.substr(0,10)}} <font color="grey">{{batch.batchStartTime.substr(11)}}</font></span> 
+        </li>
+        <li class="list-group-item">
+            Batch End Time: <span style="color:rgb(95, 93, 93)">{{batch.batchEndTime.substr(0,10)}} <font color="grey">{{batch.batchEndTime.substr(11)}}</font></span> 
+        </li>
+        <li class="list-group-item">
+            Examdrive: <span style="color:rgb(95, 93, 93)">{{batch.examdrive.examdriveName}}<font size="-2">[{{batch.examdrive.examdriveCode}}]</font></span> 
+        </li> 
+        <li class="list-group-item">
+            Center: <span style="color:rgb(95, 93, 93)">
+                <ng-container *ngIf="batch.center">
+                    {{batch.center.centerName}}<font size="-2">[{{batch.center.centerCode}}]</font>
+                </ng-container>
+                <ng-container *ngIf="!batch.center">
+                    -
+                </ng-container>
+            </span> 
+        </li> 
+        <li class="list-group-item">
+            Question Paper Status: <span style="color:rgb(95, 93, 93)">{{batch.qpStatus}}</span> 
+        </li>
+    </ul>
+</div>
+
+<div class="container">
+    <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search here..." [(ngModel)]="searchText"/>
+</div>
+<div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Student Name</th>
+          <th scope="col">Roll Number</th>
+          <th scope="col">E-Mail Id</th>
+          <th scope="col">Stream</th>
+          <th scope="col">College</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let examineeBatch of examineeBatches | filter:searchText | paginate: {itemsPerPage: itemsPage, currentPage: pageNo}">
+            <ng-container *ngIf="examineeBatch">
+                <td>{{ examineeBatch.examinee.examineeName }}</td>
+                <td>{{ examineeBatch.examinee.examineeCode }}</td>
+                <td>{{ examineeBatch.examinee.examineeEmail }}</td>
+                <td>{{ examineeBatch.examinee.examineeBranch }}</td>
+                <td>{{ examineeBatch.examinee.examineeCollege }}</td>
+            </ng-container>   
+        </tr>
+      </tbody>
+    </table>
+</div>
+<div class="container">
+    <div class="center">
+      <pagination-controls (pageChange)="pageNo = $event"></pagination-controls>
+    </div>
+    <div class="float-right">
+      Items Per Page : <input type="text" name="items"  [(ngModel)]="itemsPage"/>
+    </div>
+</div>

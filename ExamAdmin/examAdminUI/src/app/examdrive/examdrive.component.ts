@@ -20,7 +20,10 @@ export class ExamdriveComponent implements OnInit {
   }
 
   getExamdrives(): void{
-    this.examdriveService.getExamdrives().subscribe((examdrives) => this.examdrives = examdrives);
+    this.examdriveService.getExamdrives().subscribe((examdrives) => {
+      examdrives = examdrives.reverse()
+      this.examdrives = examdrives
+    });
   }
 
   deleteExamdrive(examdrive: Examdrive): void{
