@@ -39,4 +39,8 @@ export class BatchService {
   getBatch(id: number): Observable<Batch>{
     return this.http.get<Batch>(baseURL + "batches/" + id);
   }
+
+  getCodes(): Observable<string[]>{
+    return this.http.get<string[]>(baseURL + 'batchCodes/');
+  }
 }

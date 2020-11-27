@@ -11,12 +11,18 @@ import {resetError, setError} from '../shared/error';
 })
 export class ExamineeAddComponent implements OnInit {
   examinee = {examineeCode: null, examineeName: null, examineePassword: null, examineeBranch: null, examineeEmail: null, examineeCollege: null}
+  codes: string[];
   constructor(private examineeService: ExamineeService, public router: Router) { }
   ngOnInit(): void {
+    this.getCodes();
   }
 
   addExaminee(examinee: Examinee): void{
     this.examineeService.addExaminee(examinee).subscribe((examinee) => this.examinee = examinee);
+  }
+
+  getCodes(): void{
+    this.examineeService.getCodes().subscribe((codes) => this.codes=codes);
   }
 
   onSubmit(){
@@ -30,15 +36,21 @@ export class ExamineeAddComponent implements OnInit {
       }
       else{
         resetError("examineeCode");
-        // if(this.examinee.examineePassword==null || this.examinee.examineePassword==""){
-        //   setError("examineePassword","Student Password is Required");
-        // }
-        // else{
-          this.addExaminee(this.examinee);
-          setTimeout(() => {
-            this.router.navigate(['/examinees']);
-          },500);
-        // }
+        if(this.codes.includes(this.examinee.examineeCode)){
+          setError("examineeCode","This Student Code is already taken");
+        }
+        else{
+          resetError("examineeCode");
+          // if(this.examinee.examineePassword==null || this.examinee.examineePassword==""){
+          //   setError("examineePassword","Student Password is Required");
+          // }
+          // else{
+            this.addExaminee(this.examinee);
+            setTimeout(() => {
+              this.router.navigate(['/examinees']);
+            },500);
+          // }
+          }
       }
     }
   }

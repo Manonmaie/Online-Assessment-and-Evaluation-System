@@ -13,4 +13,7 @@ public interface ExamineeRepository extends CrudRepository<Examinee, Integer> {
 	List<Examinee> findByExamineeCode(String examineeCode);
 	
 	List<Examinee> findByExamineeCodeIn(List<String> examineeCodes);
+	
+	@Query(value="SELECT examinee_code FROM ea_examinee", nativeQuery=true)
+	public List<String> findExamineeCodes();
 }

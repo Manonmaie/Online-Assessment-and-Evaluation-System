@@ -40,4 +40,8 @@ public class ExamdriveService {
 	public void updateExamdrive(int id,Examdrive examdrive) {
 		examdriveRepository.save(examdrive);
 	}
+	
+	public List<String> getCodes(){
+		return examdriveRepository.findExamdriveCodes();
+	}
 }

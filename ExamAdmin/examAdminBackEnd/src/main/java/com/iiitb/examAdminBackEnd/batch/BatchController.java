@@ -52,4 +52,9 @@ public class BatchController {
 	public Optional<Batch> getBatch(@PathVariable int id) {
 		return batchService.getBatch(id);
 	}
+	
+	@RequestMapping("/batchCodes")
+	public List<String> getCodes(){
+		return batchService.getCodes();
+	}
 }

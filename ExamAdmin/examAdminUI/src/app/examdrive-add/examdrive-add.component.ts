@@ -15,11 +15,13 @@ export class ExamdriveAddComponent implements OnInit {
   examdrive = {examdriveCode: null, examdriveName: null, status: 'NOT_STARTED', course: null};
   courses: Course[];
   selectedCourse: number;
+  codes: string[];
 
   constructor(private examdriveService: ExamdriveService, private courseService: CourseService, public router: Router) { }
 
   ngOnInit(): void {
     this.getCourses();
+    this.getCodes();
   }
 
   addExamdrive(examdrive: Examdrive): void{
@@ -51,6 +53,10 @@ export class ExamdriveAddComponent implements OnInit {
     this.getCourse(this.selectedCourse);
   }
 
+  getCodes(): void{
+    this.examdriveService.getCodes().subscribe((codes) => this.codes=codes);
+  }
+
   addDrive(){
     if(this.examdrive.examdriveName==null || this.examdrive.examdriveName==""){
       setError("examdriveName","Exam Drive name is Required");
@@ -62,14 +68,20 @@ export class ExamdriveAddComponent implements OnInit {
       }
       else{
         resetError("examdriveCode");
-        if(this.examdrive.course==null){
-          setError("examdriveCourse","Course is Required");
+        if(this.codes.includes(this.examdrive.examdriveCode)){
+          setError("examdriveCode","This Examdrive Code is already taken");
         }
         else{
-          this.addExamdrive(this.examdrive);
-          setTimeout(() => {
-            this.router.navigate(['/examdrives']);
-          },500);
+          resetError("examdriveCode")
+          if(this.examdrive.course==null){
+            setError("examdriveCourse","Course is Required");
+          }
+          else{
+            this.addExamdrive(this.examdrive);
+            setTimeout(() => {
+              this.router.navigate(['/examdrives']);
+            },1000);
+          }
         }
       }
     }

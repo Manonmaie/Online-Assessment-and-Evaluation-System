@@ -39,12 +39,14 @@ export class ExamdriveUpdateComponent implements OnInit {
   uploadExamineeCodes: string[];
   uploadExaminees: Examinee[][];  
   uploadExamineeBatches: ExamineeBatch[][];  
+  codes: string[];
 
   constructor(private examdriveService:ExamdriveService, private courseService: CourseService, private batchService:BatchService, private examineeService: ExamineeService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
     this.getCourses();
     this.getExamdrive(this.examdriveId);
+    this.getCodes();
     setTimeout(() => {
       this.getCenters();
       this.selectedCourse = this.examdrive.course.courseMasterId;
@@ -62,6 +64,13 @@ export class ExamdriveUpdateComponent implements OnInit {
   getExamdrive(id: number): void{
     this.examdriveService.getExamdrive(id).subscribe((examdrive) => this.examdrive=examdrive);
     this.setBatches(id);
+  }
+
+  getCodes(): void{
+    this.examdriveService.getCodes().subscribe((codes) => this.codes=codes);
+    setTimeout(() => {
+      this.codes = this.codes.filter(obj => obj !== this.examdrive.examdriveCode);
+    },1000);
   }
 
   updateExamdrive(id:number, examdrive: Examdrive): void{
@@ -165,14 +174,20 @@ export class ExamdriveUpdateComponent implements OnInit {
       }
       else{
         resetError("examdriveCode");
-        if(this.examdrive.course==null){
-          setError("examdriveCourse","Course is Required");
+        if(this.codes.includes(this.examdrive.examdriveCode)){
+          setError("examdriveCode","This Examdrive Code is already Taken");
         }
         else{
-          this.updateExamdrive(this.examdriveId,this.examdrive);
-          setTimeout(() => {
-            this.router.navigate(['/examdrives']);
-          },1000);
+          resetError("examdriveCode");
+          if(this.examdrive.course==null){
+            setError("examdriveCourse","Course is Required");
+          }
+          else{
+            this.updateExamdrive(this.examdriveId,this.examdrive);
+            setTimeout(() => {
+              this.router.navigate(['/examdrives']);
+            },1000);
+          }
         }
       }
     }

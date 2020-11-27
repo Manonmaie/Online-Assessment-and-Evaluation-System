@@ -42,4 +42,9 @@ public class ExamdriveController {
 	public void updateExamdrive(@PathVariable int id, @RequestBody Examdrive examdrive) {
 		examdriveService.updateExamdrive(id, examdrive);
 	}
+	
+	@RequestMapping("/examdriveCodes")
+	public List<String> getCodes(){
+		return examdriveService.getCodes();
+	}
 }
