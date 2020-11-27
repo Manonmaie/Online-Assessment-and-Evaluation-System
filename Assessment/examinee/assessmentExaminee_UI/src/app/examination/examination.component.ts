@@ -28,6 +28,7 @@ export class ExaminationComponent implements OnInit {
   examineeId: number;
   responseListForQpItems: ResponseListForOpItem[];
   maxQpItemId: number;
+  // checkedOrNot: boolean;
 
   response: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
   attempt: Attempt;
@@ -91,6 +92,92 @@ export class ExaminationComponent implements OnInit {
         console.log(allResponses);
         console.log("Responses List = ");
         console.log(this.responseListForQpItems);
+        
+        // console.log("Checked or not:");
+        // const input1 = $('input[name=1]')[0] as HTMLInputElement;
+        // console.log(input1);
+        // console.log(input1.checked);
+        // const input2 = $('input[name=1]')[1] as HTMLInputElement;
+        // console.log(input2);
+        // console.log(input2.checked);
+        // const input3 = $('input[name=1]')[2] as HTMLInputElement;
+        // console.log(input3);
+        // console.log(input3.checked);
+        // const input4 = $('input[name=1]')[3] as HTMLInputElement;
+        // console.log(input4);
+        // console.log(input4.checked);
+        // console.log($('input[name=1]'));
+        // console.log(this.checkedOrNot);
+        // console.log($('input[id=1_1]').checked);
+        // console.log($('input[id=1_1]:checked'));
+        // console.log($('input[id=1_2]:checked'));
+        // console.log($('input[id=1_1]').checked);
+        // console.log($('input[name=1]:checked'));
+        // for (let j = 0; j < qpItems.length; j++) {
+          // var checked_gender = document.querySelector('input[name = 1]:checked');
+          // let qpItemId = 1;
+          // console.log($('input[name="' + qpItemId + '"]').get("checked"));
+          // console.log($$('input[name=1]:checked').length == 1);
+          // console.log(checked_gender);
+          // if(checked_gender != null){  //Test if something was checked
+          //   alert(checked_gender); //Alert the value of the checked.
+          // } 
+          // var checked = false, radios = document.getElementsByName(qpItems[j].qpItemId.toString());
+          // console.log(qpItems[j].itemText)
+          // for (var i = 0, radio; radio = radios[i]; i++) {
+          //     if (radio.checked) {
+          //         checked = true;
+          //         break;
+          //     }
+          // }
+          // console.log(radios);
+          // console.log(checked);
+        // }
+        // console.log($('input[name=1]').length);
+
+        // console.log($('input[name=1]:checked').val());
+        // console.log($('input[name=1]')[0]);
+        // console.log($('input[name=1]')[1]);
+        // console.log($('input[name=1]')[2]);
+        // console.log($('input[name=1]')[3]);
+        // console.log($('input[name=1]')[0].checked);
+        // console.log($('input[name=1]')[1].checked);
+        // console.log($('input[name=1]')[2].checked);
+        // console.log($('input[name=1]')[3].checked);
+
+        // console.log($('input[name=1]').is(':checked'));
+        // console.log("Checked or not:");
+        // let i: string = "1_1", j: string = "1_2", ni = "1", nj = "2";
+        // const ele1 = document.getElementById(i) as HTMLInputElement;
+        // const ele2 = document.getElementById(j) as HTMLInputElement;
+        // console.log(ele1);
+        // console.log(ele1.checked);
+        // console.log(ele2);
+        // console.log(ele2.checked);
+        // console.log($('input[name="' + ni + '"]:checked'));
+        // console.log($('input[name="' + nj + '"]:checked'));
+        // // var eles: HTMLInputElement = <HTMLInputElement[]> document.getElementsByName(ni);
+        // var script = <HTMLScriptElement>document.getElementsByName(ni)[0];
+        // console.log(script[0].checked);
+        // console.log(script[1].checked);
+        // var script1 = <HTMLScriptElement>document.getElementsByName(nj)[0];
+        // console.log(script1[0].checked);
+        // console.log(script1[1].checked);
+        // var script = <HTMLScriptElement>document.getElementsByName(ni)[0];
+        // console.log(script[0].checked)
+        // for (let i = 0; i < qpItems.length; i++) {
+        //   for(let j = 0; j < qpItems[i].asItemMcqOptionsList.length; j++){
+        //     console.log("Checked or not: " + qpItems[i].qpItemId + qpItems[i].asItemMcqOptionsList[j].itemMcqId);
+        //     const ele = document.getElementById(qpItems[i].asItemMcqOptionsList[j].itemMcqId.toString()) as HTMLInputElement;
+        //     // const number = document.getElementsByName(qpItems[i].qpItemId.toString()) as HTMLInputElement;
+        //     console.log(ele);
+        //     console.log(ele.size);
+        //     console.log(ele.checked);
+        //   }
+        //   console.log($('input[name="' + qpItems[i].qpItemId + '"]'));
+        //   console.log($('input[name="' + qpItems[i].qpItemId + '"]:checked').length);
+        // }
+        // $('input[name="' + qpItemId + '"]').prop('checked', false);
         // if(allResponses.length > 0){
         //   for (let i = 0; i < qpItems.length; i++) {
         //     let qpItemId: number = qpItems[i].qpItemId;
@@ -162,18 +249,30 @@ export class ExaminationComponent implements OnInit {
     return false;
   }
 
-  shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      // randomIndex = Math.floor(Math.floor(Math.random() * currentIndex)/this.examineeId);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+  shuffle(array) { // shuffle according to examineeId
+    var length = array.length, index=0, randomIndex, temp;
+    while(index < length){
+      randomIndex = (index * this.examineeId) % length;
+      temp = array[index];
+      array[index] = array[randomIndex];
+      array[randomIndex] = temp;
+      index += 1;
     }
     return array;
   }
+
+  // shuffle(array) { // random shuffle
+  //   var currentIndex = array.length, temporaryValue, randomIndex;
+  //   while (0 !== currentIndex) {
+  //     randomIndex = Math.floor(Math.random() * currentIndex);
+  //     // randomIndex = Math.floor(Math.floor(Math.random() * currentIndex)/this.examineeId);
+  //     currentIndex -= 1;
+  //     temporaryValue = array[currentIndex];
+  //     array[currentIndex] = array[randomIndex];
+  //     array[randomIndex] = temporaryValue;
+  //   }
+  //   return array;
+  // }
 
   flagRespectiveItem(event: boolean, index: number){
     this.flaggedItems[index] = !this.flaggedItems[index];
