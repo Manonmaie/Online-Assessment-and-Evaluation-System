@@ -1,10 +1,13 @@
 package com.iiitb.examAdminBackEnd.examineeBatch;
 
+import java.util.List;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
@@ -12,6 +15,7 @@ import org.hibernate.annotations.Immutable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.batch.Batch;
 import com.iiitb.examAdminBackEnd.examinee.Examinee;
+import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarks;
 
 @Entity
 @Immutable
@@ -31,6 +35,10 @@ public class ExamineeBatch {
 	@MapsId("batchId")
 	@JoinColumn(name = "batch_id")
 	private Batch batch;
+	
+	@OneToMany(mappedBy = "examineeBatch")
+	@JsonIgnore
+	private List<ExamineeItemMarks> examineeItemMarksList;
 
 	public ExamineeBatch() {
 	}

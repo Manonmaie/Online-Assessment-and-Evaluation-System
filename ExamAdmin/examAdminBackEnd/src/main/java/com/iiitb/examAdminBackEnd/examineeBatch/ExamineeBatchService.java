@@ -40,4 +40,8 @@ public class ExamineeBatchService {
 	public List<ExamineeBatch> getExamineesOfBatch(int id){
 		return examineeBatchRepository.findByBatchBatchId(id);
 	}
+	
+	public ExamineeBatch getExamineeBatchByExamineeBatchId(int id) {
+		return examineeBatchRepository.findByExamineeBatchId(id);
+	}
 }

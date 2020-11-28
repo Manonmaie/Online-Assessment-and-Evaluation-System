@@ -554,19 +554,59 @@ ALTER TABLE epack4
 --   ADD CONSTRAINT `fk_epack4_batch_id` FOREIGN KEY (batch_id) REFERENCES epack1(batch_id) ON DELETE CASCADE;
 
 
--- -- --------------------------------------------------------
--- -- Table structure for table in_mpack_header
--- -- --------------------------------------------------------
--- CREATE TABLE IF NOT EXISTS in_mpack_header(
---   mpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
---   mpack_desc varchar(255),
---   created_on datetime,
---   created_by varchar(255),
---   mpack_status ENUM('CREATED', 'SENT'),
---   mpack_sent_on datetime,
---   mpack_path varchar(255),
---   PRIMARY KEY(mpack_header_id)
--- );
+-- --------------------------------------------------------
+-- Table structure for table in_mpack_header
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS out_mpack_header(
+  mpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  mpack_desc varchar(255),
+  created_on datetime,
+  created_by varchar(255),
+  mpack_status ENUM('CREATED', 'SENT'),
+  mpack_sent_on datetime,
+  mpack_path varchar(255),
+  PRIMARY KEY(mpack_header_id)
+);
+
+CREATE TABLE IF NOT EXISTS mpack1(
+  mpack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  mpack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  maximum_marks float(24) NOT NULL,
+  -- marks_obtained float(24) NOT NULL,
+  duration int(10) NOT NULL,
+  PRIMARY KEY(mpack1_id)
+);
+
+ALTER TABLE mpack1
+  ADD CONSTRAINT `fk_mpack1_mpack_header_id` FOREIGN KEY (mpack_header_id) REFERENCES out_mpack_header(mpack_header_id) ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS mpack2(
+  mpack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  mpack1_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  qp_item_id int(10) unsigned NOT NULL,
+  item_text varchar(255) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  PRIMARY KEY(mpack2_id)
+);
+
+ALTER TABLE mpack2
+  ADD CONSTRAINT `fk_mpack2_mpack1_id` FOREIGN KEY (mpack1_id) REFERENCES mpack1(mpack1_id) ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS mpack3(
+  mpack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  mpack2_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  examinee_batch_id int(10) unsigned NOT NULL,
+  qp_item_id int(10) unsigned UNIQUE NOT NULL,
+  examinee_item_marks float(24) unsigned NOT NULL,
+  PRIMARY KEY(mpack3_id)
+);
+
+ALTER TABLE mpack3
+  ADD CONSTRAINT `fk_mpack3_mpack2_id` FOREIGN KEY (mpack2_id) REFERENCES mpack2(mpack2_id) ON DELETE CASCADE;
 
 -- -- --------------------------------------------------------
 -- -- Table structure for table mpack1

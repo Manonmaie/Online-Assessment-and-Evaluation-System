@@ -11,8 +11,18 @@ import org.springframework.stereotype.Service;
 
 import com.iiitb.examAdminBackEnd.batch.Batch;
 import com.iiitb.examAdminBackEnd.batch.BatchService;
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
+import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchService;
+import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarks;
+import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarksService;
 import com.iiitb.examAdminBackEnd.instructions.Instructions;
 import com.iiitb.examAdminBackEnd.instructions.InstructionsService;
+import com.iiitb.examAdminBackEnd.itemMcqOptions.ItemMcqOptions;
+import com.iiitb.examAdminBackEnd.itemMcqOptions.ItemMcqOptionsService;
+import com.iiitb.examAdminBackEnd.itemTrueFalse.ItemTrueFalse;
+import com.iiitb.examAdminBackEnd.itemTrueFalse.ItemTrueFalseService;
+import com.iiitb.examAdminBackEnd.qp_item.QpItem;
+import com.iiitb.examAdminBackEnd.qp_item.QpItemService;
 import com.iiitb.examAdminBackEnd.questionPaper.QuestionPaper;
 import com.iiitb.examAdminBackEnd.questionPaper.QuestionPaperService;
 
@@ -29,6 +39,21 @@ public class QpackService {
 	
 	@Autowired
 	private InstructionsService instructionsService;
+	
+	@Autowired
+	private QpItemService qpItemService;
+	
+	@Autowired
+	ItemMcqOptionsService itemMcqOptionsService;
+	
+	@Autowired
+	ItemTrueFalseService itemTrueFalseService;
+	
+	@Autowired
+	ExamineeBatchService examineeBatchService;
+	
+	@Autowired
+	ExamineeItemMarksService examineeItemMarksService;
 	
 	public List<Qpack> getAllQpacks() {
 		List<Qpack> qpacks = new ArrayList<>();
@@ -68,6 +93,56 @@ public class QpackService {
 				instruction.setQuestionPaper(id2Qp.get((Integer)instructionObjects.get(i)[1]));
 			}
 			instructionsService.addInstructions(instruction);
+		}
+		
+		Map<Integer, QpItem> id2QpItem = new HashMap<Integer, QpItem>();
+		
+		List<Object[]> qpItemObjects = qpackRepository.fetchQpItemdata();
+		for(int i = 0; i < qpItemObjects.size(); i++) {
+			QpItem qpItem = new QpItem((Integer)qpItemObjects.get(i)[0], String.valueOf(qpItemObjects.get(i)[1]), (Float)qpItemObjects.get(i)[2], String.valueOf(qpItemObjects.get(i)[3]), String.valueOf(qpItemObjects.get(i)[4]));
+			if(id2Qp.containsKey((Integer)qpItemObjects.get(i)[5])) {
+				qpItem.setQuestionPaper(id2Qp.get((Integer)qpItemObjects.get(i)[5]));
+			}
+			qpItemService.addQpItem(qpItem);
+			
+			if(!id2QpItem.containsKey(qpItem.getQp_item_id())) {
+				id2QpItem.put(qpItem.getQp_item_id(), qpItem);
+			}
+		}
+		
+		List<Object[]> itemOptionsObjects = qpackRepository.fetchItemOptionsdata();
+		for(int i = 0; i < itemOptionsObjects.size(); i++) {
+			if(String.valueOf(itemOptionsObjects.get(i)[2]).equals("True") || String.valueOf(itemOptionsObjects.get(i)[2]).equals("False")) {
+				ItemTrueFalse itemTrueFalse = new ItemTrueFalse((Integer)itemOptionsObjects.get(i)[1]);
+				
+				if(id2QpItem.containsKey((Integer)itemOptionsObjects.get(i)[0])) {
+					itemTrueFalse.setQpItem(id2QpItem.get((Integer)itemOptionsObjects.get(i)[0]));
+				}
+				itemTrueFalseService.addItemTrueFalse(itemTrueFalse);
+			}
+			else {
+				ItemMcqOptions itemMcqOptions = new ItemMcqOptions((Integer)itemOptionsObjects.get(i)[1], String.valueOf(itemOptionsObjects.get(i)[2]));
+				
+				if(id2QpItem.containsKey((Integer)itemOptionsObjects.get(i)[0])) {
+					itemMcqOptions.setQpItem(id2QpItem.get((Integer)itemOptionsObjects.get(i)[0]));
+				}
+				itemMcqOptionsService.additemMcqOptions(itemMcqOptions);
+			}
+		}
+		
+		List<Object[]> examineeBatchMarksObjects = qpackRepository.fetchExamineeBatchMarksdata();
+		for(int i = 0; i < examineeBatchMarksObjects.size(); i++) {
+			ExamineeBatch examineeBatch = examineeBatchService.getExamineeBatchByExamineeBatchId((Integer)examineeBatchMarksObjects.get(i)[0]);
+			
+			ExamineeItemMarks examineeItemMarks = new ExamineeItemMarks((Float)examineeBatchMarksObjects.get(i)[2]);
+			if(examineeBatch != null) {
+				examineeItemMarks.setExamineeBatch(examineeBatch);
+			}
+			
+			if(id2QpItem.containsKey((Integer)examineeBatchMarksObjects.get(i)[1])) {
+				examineeItemMarks.setQpItem(id2QpItem.get((Integer)examineeBatchMarksObjects.get(i)[1]));
+			}
+			examineeItemMarksService.addExamineeItemMarks(examineeItemMarks);
 		}
 	}
 }

@@ -16,8 +16,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.batch.Batch;
-import com.iiitb.examAdminBackEnd.epack1.Epack1;
 import com.iiitb.examAdminBackEnd.instructions.Instructions;
+import com.iiitb.examAdminBackEnd.qp_item.QpItem;
 
 @Entity
 @Table(name = "ea_question_paper")
@@ -43,6 +43,10 @@ public class QuestionPaper {
 	@OneToMany(mappedBy = "questionPaper")
 	@JsonIgnore
 	private List<Instructions> instructionList;
+	
+	@OneToMany(mappedBy = "questionPaper")
+	@JsonIgnore
+	private List<QpItem> qpItemList;
 
 	public QuestionPaper() {
 		super();
