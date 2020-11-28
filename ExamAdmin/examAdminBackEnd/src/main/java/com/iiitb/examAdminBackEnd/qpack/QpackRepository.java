@@ -18,7 +18,4 @@ public interface QpackRepository extends CrudRepository<Qpack, Integer>{
 	
 	@Query(value="SELECT DISTINCT qp_item_id, item_option_id, option_text FROM qpack3", nativeQuery=true)
 	public List<Object[]> fetchItemOptionsdata();
-	
-	@Query(value="SELECT DISTINCT examinee_batch_id, qp_item_id, examinee_item_marks from mpack3", nativeQuery=true)
-	public List<Object[]> fetchExamineeBatchMarksdata();
 }

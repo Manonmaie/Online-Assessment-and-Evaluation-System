@@ -49,12 +49,6 @@ public class QpackService {
 	@Autowired
 	ItemTrueFalseService itemTrueFalseService;
 	
-	@Autowired
-	ExamineeBatchService examineeBatchService;
-	
-	@Autowired
-	ExamineeItemMarksService examineeItemMarksService;
-	
 	public List<Qpack> getAllQpacks() {
 		List<Qpack> qpacks = new ArrayList<>();
 		qpackRepository.findAll().forEach(qpacks::add);
@@ -128,21 +122,6 @@ public class QpackService {
 				}
 				itemMcqOptionsService.additemMcqOptions(itemMcqOptions);
 			}
-		}
-		
-		List<Object[]> examineeBatchMarksObjects = qpackRepository.fetchExamineeBatchMarksdata();
-		for(int i = 0; i < examineeBatchMarksObjects.size(); i++) {
-			ExamineeBatch examineeBatch = examineeBatchService.getExamineeBatchByExamineeBatchId((Integer)examineeBatchMarksObjects.get(i)[0]);
-			
-			ExamineeItemMarks examineeItemMarks = new ExamineeItemMarks((Float)examineeBatchMarksObjects.get(i)[2]);
-			if(examineeBatch != null) {
-				examineeItemMarks.setExamineeBatch(examineeBatch);
-			}
-			
-			if(id2QpItem.containsKey((Integer)examineeBatchMarksObjects.get(i)[1])) {
-				examineeItemMarks.setQpItem(id2QpItem.get((Integer)examineeBatchMarksObjects.get(i)[1]));
-			}
-			examineeItemMarksService.addExamineeItemMarks(examineeItemMarks);
 		}
 	}
 }

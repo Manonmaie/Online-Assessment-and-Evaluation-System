@@ -15,7 +15,7 @@ public class QpItemService {
 		qpItemRepository.save(qpItem);
 	}
 	
-	public Optional<QpItem> getQpItem(int id){
+	public QpItem getQpItem(int id){
 		return qpItemRepository.findById(id);
 	}
 	
