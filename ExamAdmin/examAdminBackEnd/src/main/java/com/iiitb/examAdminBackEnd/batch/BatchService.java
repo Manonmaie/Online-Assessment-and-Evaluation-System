@@ -43,4 +43,8 @@ public class BatchService {
 	public List<String> getCodes(){
 		return batchRepository.findBatchCodes();
 	}
+	
+	public Batch getBatchesByCode(String batch_code){
+		return batchRepository.findByBatchCode(batch_code);
+	}
 }
