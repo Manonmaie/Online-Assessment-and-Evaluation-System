@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import com.urest.v1.authoring_module.course.AuCourseMaster;
+import com.urest.v1.authoring_module.course.AuCourseMasterRepository;
 import com.urest.v1.authoring_module.instructions.instructions;
 import com.urest.v1.authoring_module.instructions.instructionsRepository;
 import com.urest.v1.authoring_module.item.Item;
@@ -22,6 +24,8 @@ public class questionPaperService {
 	private questionPaperItemRepository qpItemRepository;
 	@Autowired
 	private instructionsRepository inRepository;
+	@Autowired
+	private AuCourseMasterRepository courseRepository;
 	
 	public List<questionPaper> getAllQp(){
 		List<questionPaper> qpList = new ArrayList<>();
@@ -32,7 +36,8 @@ public class questionPaperService {
 	
 	public questionPaper createQP(questionPaper q) {	
 		System.out.println("create qp");
-		questionPaper qp=new questionPaper(q.getTimeDuration(),q.getTotalMarks(),q.getCourse(),q.getBatchCode());
+		questionPaper qp=new questionPaper(q.getTimeDuration(),q.getTotalMarks(),q.getBatchCode());
+		qp.setCourse(q.getCourse());
 		qpRepository.save(qp);
 		ArrayList<Item> items=(ArrayList<Item>) q.getItems();
 		ArrayList<String> inst=(ArrayList<String>) q.getInst();
@@ -50,6 +55,8 @@ public class questionPaperService {
 			in.setQp(qp);
 			qp.getAsInstructions().add(inRepository.save(in));
 		}
+//		AuCourseMaster course=new AuCourseMaster();
+		
 		return qp;	
 	}
 }

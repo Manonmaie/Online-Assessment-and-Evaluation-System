@@ -1,4 +1,5 @@
 import { option } from "../shared/option";
+import { course } from "../shared/course";
 import { Tf } from "../shared/tf";
 
 
@@ -15,10 +16,8 @@ export class Item{
     reviewStatus: string;
     itemUseCount: string;
     asItemTF:Tf[];
-
+    course:course[];
 }
-
-
 
 
 

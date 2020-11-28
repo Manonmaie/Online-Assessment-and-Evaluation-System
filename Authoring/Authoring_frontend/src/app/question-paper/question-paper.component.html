@@ -10,17 +10,18 @@
 
   <!-- Subject -->
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Subject</label>
-    <select id="sub_id" name="sub" class="form-control" [(ngModel)]="selectedSub">
-      <option *ngFor="let sub of subject" [ngValue]="sub.value"> 
-          {{ sub.label }}
+    <label for="exampleFormControlSelect1">Course<span class="required">*</span></label>
+    <select id="sub_id" name="sub" class="form-control" [(ngModel)]="selectedSub" (ngModelChange)="onFilterChange()" >
+      <option [ngValue]="undefined" [disabled]="true">Select Course</option>
+      <option *ngFor="let sub of subject" [ngValue]="sub"> 
+          {{ sub.courseName }}
       </option>
     </select>
   </div>
 
    <!-- Marks -->
   <div class="form-group">
-    <label class=" control-label">Total Marks</label>
+    <label class=" control-label">Total Marks<span class="required">*</span></label>
     <div class="">
         <input type="text" class="form-control" name="number" [(ngModel)]="totalMarks" />
     </div>
@@ -29,7 +30,7 @@
 
   <!-- Test Duration -->
   <div class="form-group">
-    <label class=" control-label">Test Duration(in mins)</label>
+    <label class=" control-label">Test Duration(in mins)<span class="required">*</span></label>
     <div class="">
         <input type="text" class="form-control" name="number" [(ngModel)]="testDuration" />
     </div>
@@ -37,7 +38,7 @@
 
    <!-- Batch Code -->
    <div class="form-group">
-    <label class=" control-label">Batch Code of Question Paper</label>
+    <label class=" control-label">Batch Code of Question Paper<span class="required">*</span></label>
     <div class="">
         <input type="text" class="form-control" name="number" [(ngModel)]="batchCode" />
     </div>
@@ -303,7 +304,6 @@
 
 
 
-
   <!-- 
 ----------------------------------------------- question paper stats and submit ----------------------------------------------------
  -->
@@ -365,13 +365,20 @@
 <h3 style="text-align: center;">Total Marks: {{stats.TotalMarksSoFar}}</h3>
 
 
-  <div style="display:flex; justify-content: flex-end; width: 100%; padding: 20px;">
+  <div style="display:flex; justify-content: flex-end; width: 100%; padding: 20px 100px;">
       <!-- Preview of Question Paper -->
       <button type="button" class="btn btn-secondary mr-2" (click)="routeToQpPreview()">Previous</button>
       <!-- Create of Question Paper -->
-      <div type="button" class="popup" (click)="myFunction()">Create
-        <span class="popuptext" id="myPopup">{{setQP()}}</span>
+      <div id="successQP" class="popup" style="width: 35px;">
+        <svg aria-label="StatusGood" viewBox="0 0 24 24" class=""><path fill="none" color="green" stroke="green" stroke-width="2" d="M12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 Z M7,12 L11,15 L16,8"></path></svg>
+        <span class="popuptext" id="myPopupSuccess">{{messageQP}}</span>
       </div>
+      <div id="errorQP" class="popup" style="width: 35px;">
+        <svg aria-label="StatusCritical" viewBox="0 0 24 24" class=""><path fill="none" color="red" stroke="red" stroke-width="2" d="M12.7031806,2.70318058 C12.3148247,2.31482467 11.6897542,2.31024575 11.2968194,2.70318058 L2.70318058,11.2968194 C2.31482467,11.6851753 2.31024575,12.3102458 2.70318058,12.7031806 L11.2968194,21.2968194 C11.6851753,21.6851753 12.3102458,21.6897542 12.7031806,21.2968194 L21.2968194,12.7031806 C21.6851753,12.3148247 21.6897542,11.6897542 21.2968194,11.2968194 L12.7031806,2.70318058 Z M8.98264552,14.7001725 L14.7001725,8.98264552 M8.98264552,8.98264552 L14.7001725,14.7001725"></path></svg>
+        <span class="popuptext" id="myPopupFailure">{{messageQP}}</span>
+      </div>
+      <div type="button" id="createQP" class="btn btn-primary" (click)="setQP()">Create
+      </div> 
   </div>
   
 
