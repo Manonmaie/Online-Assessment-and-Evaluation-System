@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import com.urest.v1.authoring_module.course.AuCourseMaster;
 import com.urest.v1.authoring_module.options.OptionsStruct;
 
 public class ResponseStruct {
@@ -46,6 +47,17 @@ public class ResponseStruct {
 	private Integer trueMarks;
 	private Integer falseMarks;
 	private String itemType;
+	private AuCourseMaster course; 
+
+	
+	
+	public AuCourseMaster getCourse() {
+		return course;
+	}
+
+	public void setCourse(AuCourseMaster course) {
+		this.course = course;
+	}
 
 	public String getItemType() {
 		return itemType;

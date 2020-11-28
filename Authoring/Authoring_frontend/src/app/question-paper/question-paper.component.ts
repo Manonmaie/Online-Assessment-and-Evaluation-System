@@ -10,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
 import { Item } from "../shared/item";
 
+
 import { ChartsModule } from 'ng2-charts';
 import { Chart } from 'chart.js';
+import { course } from '../shared/course';
  
 
 
@@ -28,8 +30,11 @@ export class QuestionPaperComponent implements OnInit {
   // ng init and constructor
 
   ngOnInit(): void {
+    this.ItemService.getCourses().subscribe((courses)=> this.subject=courses);
     $('#QuestionPreviewModule').hide();
     $('#QPSetModule').hide();
+    $('#successQP').hide();
+    $('#errorQP').hide();
   }
 
 
@@ -50,18 +55,15 @@ export class QuestionPaperComponent implements OnInit {
   selectedType: any = "";
   totalMarks: Number;
   instructions: string;
-  selectedSub: any= "";
+  selectedSub: course;
   ngType: any=true;
   testDuration: Number;
   endMark: Number=100;
   startMark: Number=1;
   noOfQuestions: Number;
   batchCode: string;
-  subject = [
-    { value: '', label: 'Choose question subject' },
-    { value: 'DBMS', label: 'DBMS' },
-    { value: 'Data-Modelling', label: 'Data-Modelling' },
-  ];
+  subject:course[];
+  messageQP: string;
   types = [
     { value: 'McqSingleCorrect', label: 'MCQ', checked: false },
     { value: 'True/False', label: 'TF', checked: false },
@@ -237,7 +239,13 @@ export class QuestionPaperComponent implements OnInit {
 
 
     // subject
-    params = params.set('subject',this.selectedType);
+    if(this.selectedSub )
+    {
+      params = params.set('subject',(this.selectedSub.courseMasterId).toString());
+      console.log(this.selectedSub);
+      console.log(this.selectedSub.courseMasterId);
+    }
+    console.log("filter");
 
     
     // start marks;
@@ -294,9 +302,20 @@ export class QuestionPaperComponent implements OnInit {
     $('#QuestionSeletionModule').hide();
     $('#QuestionPreviewModule').show();
     $('#QPSetModule').hide();
+    this.resetStatus();
     this.chartDatasetsDifLvl[0].data=[this.stats.EASY, this.stats["EASY-MEDIUM"], this.stats.MEDIUM, this.stats["HARD-MEDIUM"], this.stats.HARD];
     this.chartDatasetsCgLvl[0].data=[this.stats.REMEMBER, this.stats.UNDERSTAND, this.stats.APPLY, this.stats.ANALYZE, this.stats.EVALUATE,this.stats.CREATE];
     this.chartDatasetsType[0].data=[this.stats.McqSingleCorrect, this.stats.McqMultiCorrect, this.stats["True/False"]];
+  }
+
+  resetStatus() {
+    $('#createQP').show();
+    $('#errorQP').hide();
+    $('#successQP').hide();
+    var popup = document.getElementById("myPopupSuccess");
+    popup.style.visibility = 'hidden';
+    var popup = document.getElementById("myPopupFailure");
+    popup.style.visibility = 'hidden';
   }
 
 
@@ -309,12 +328,14 @@ routeToQuestionsDisplay(){
   $('#QuestionSeletionModule').show();
   $('#QuestionPreviewModule').hide();
   $('#QPSetModule').hide();
+  this.resetStatus();
 }
 
 routeToQPSet(){
   $('#QuestionSeletionModule').hide();
   $('#QuestionPreviewModule').hide();
   $('#QPSetModule').show();
+  this.resetStatus();
 }
 
 
@@ -366,43 +387,56 @@ public chartType: string = 'pie';
   };
   public chartClicked(e: any): void { }
   public chartHovered(e: any): void { }
+
+  handleError() {
+    console.log("error");
+    $('#errorQP').show();
+    $('#createQP').hide();
+    var popup = document.getElementById("myPopupFailure");
+    popup.style.visibility = 'visible';
+  }
   
+  handleSuccess() {
+    console.log("success");
+    $('#successQP').show();
+    $('#createQP').hide();
+    var popup = document.getElementById("myPopupSuccess");
+    popup.style.visibility = 'visible';
+  }
   
   // create question paper
-  setQP(): string{
-    if(!this.selectedSub || !this.totalMarks || !this.testDuration || !this.batchCode)
+  setQP() {
+    if(!this.selectedSub || !this.totalMarks || !this.testDuration || !this.batchCode || this.totalMarks!=this.stats.TotalMarksSoFar)
     {
       if(!this.selectedSub )
-        return "Subject field not selected";
+        this.messageQP = "Subject field not selected";
       else if(!this.totalMarks)
-        return "Total Marks field is Empty";
+        this.messageQP = "Total Marks field is Empty";
       else if(!this.testDuration)
-        return "Test Duration field is Empty";
+        this.messageQP = "Test Duration field is Empty";
       else if(!this.batchCode)
-        return "Batch Code field is Empty";
-      
-    }
+        this.messageQP = "Batch Code field is Empty";
+      else if(this.totalMarks!=this.stats.TotalMarksSoFar)
+        this.messageQP = "Total marks not equal to marks so far";
 
-
-    let myitems: Item[] = [];
-    for (let value of this.myQPSet.values()) {
-      myitems.push(value);    
-  }
-    let myInstructions: string[] = [];
-    for (let key in this.productForm.value.quantities) { 
-      if (this.productForm.value.quantities.hasOwnProperty(key)) { 
-          let value = this.productForm.value.quantities[key]; 
-          myInstructions.push(value.opt);
+      this.handleError();
+    } else {
+        let myitems: Item[] = [];
+        for (let value of this.myQPSet.values()) {
+          myitems.push(value);    
+        }
+        let myInstructions: string[] = [];
+        for (let key in this.productForm.value.quantities) { 
+          if (this.productForm.value.quantities.hasOwnProperty(key)) { 
+              let value = this.productForm.value.quantities[key]; 
+              myInstructions.push(value.opt);
+          } 
       } 
-  } 
-    console.log("set question Paper");
-    this.QPService.setQP(this.selectedSub,this.totalMarks,this.testDuration,myitems,this.batchCode,myInstructions).subscribe((items)=> console.log(items));
-    return "Question Paper set Sucessfully"
-  }
-
-   myFunction() {
-     console.log("popup");
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-  }
+        console.log("set question Paper");
+        this.QPService.setQP(this.selectedSub,this.totalMarks,this.testDuration,myitems,this.batchCode,myInstructions).subscribe((items)=> console.log(items));
+        this.messageQP = "Question Paper set Sucessfully";
+        this.handleSuccess();
+      }
+  
+    }
 }

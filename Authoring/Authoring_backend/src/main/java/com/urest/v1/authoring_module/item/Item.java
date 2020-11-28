@@ -14,11 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 import com.urest.v1.authoring_module.TF.TF;
+import com.urest.v1.authoring_module.course.AuCourseMaster;
 import com.urest.v1.authoring_module.options.Options;
 
 @Entity // This tells Hibernate to make a table out of this class
@@ -79,6 +81,16 @@ public class Item {
 	private List<Options> asItemMCQ=new ArrayList<Options>();
 	
 	
+	@OneToOne
+	@JoinColumn(name="course_master_id")
+	private AuCourseMaster course=new AuCourseMaster();
+	
+	public AuCourseMaster getCourse() {
+		return course;
+	}
+	public void setCourse(AuCourseMaster course) {
+		this.course = course;
+	}
 	public String getItemType() {
 		return itemType;
 	}
