@@ -32,6 +32,10 @@ public class BatchService {
 		batchRepository.save(batch);
 	}
 	
+	public void updateBatches(List<Batch> batches) {
+		batchRepository.saveAll(batches);
+	}
+	
 	public void addBatch(Batch batch) {
 		batchRepository.save(batch);
 	}

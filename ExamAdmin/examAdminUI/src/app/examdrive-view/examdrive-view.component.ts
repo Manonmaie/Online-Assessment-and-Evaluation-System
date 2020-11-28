@@ -70,9 +70,6 @@ export class ExamdriveViewComponent implements OnInit {
     if(this.batches[center.centerId]==null){
       this.getBatches(center);
     }
-    setTimeout(() => {
-      console.log(this.batches);
-    },500);
   }
 
   getBatches(center: Center): void{
@@ -86,5 +83,18 @@ export class ExamdriveViewComponent implements OnInit {
       }
       return 0;
     });
+  }
+
+  exportQuestionPapers(center: Center): void{
+    //TODO - Export Question Papers
+    if(this.batches[center.centerId]==null){
+      this.getBatches(center);
+    }
+    setTimeout(()=>{
+      for (let batch of this.batches[center.centerId]) {
+        batch.qpStatus = 'SENT';
+      }
+      this.batchService.updateBatches(this.batches[center.centerId]).subscribe((batches)=> this.batches[center.centerId]=batches);
+    },500);
   }
 }

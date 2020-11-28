@@ -38,6 +38,11 @@ public class BatchController {
 		batchService.updateBatch(id, batch);
 	}
 	
+	@RequestMapping(method=RequestMethod.PUT, value="/batchesBulk")
+	public void updateBatches(@RequestBody List<Batch> batches) {
+		batchService.updateBatches(batches);
+	}
+	
 	@RequestMapping(method =RequestMethod.POST, value="/batches")
 	public void addBatch(@RequestBody Batch batch) {
 		batchService.addBatch(batch);
