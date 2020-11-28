@@ -35,4 +35,12 @@ export class BatchService {
   addBatches(batches: Batch[]): Observable<Batch[]>{
     return this.http.post<Batch[]>(baseURL + 'batchesBulk', batches);
   }
+
+  getBatch(id: number): Observable<Batch>{
+    return this.http.get<Batch>(baseURL + "batches/" + id);
+  }
+
+  getCodes(): Observable<string[]>{
+    return this.http.get<string[]>(baseURL + 'batchCodes/');
+  }
 }

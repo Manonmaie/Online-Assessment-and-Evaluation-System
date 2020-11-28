@@ -19,12 +19,14 @@ export class ExamineeUpdateComponent implements OnInit {
   searchText: any;
   pageNo: number = 1;
   itemsPage: number = 25;
+  codes: string[];
   constructor(private examineeService: ExamineeService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
     this.examineeId = this.route.snapshot.params['id'];
     this.getExaminee(this.examineeId);
     this.setExamineeBatchList(this.examineeId);
+    this.getCodes();
   }
 
   getExaminee(id: number): void{
@@ -33,6 +35,13 @@ export class ExamineeUpdateComponent implements OnInit {
 
   updateExaminee(id: number, examinee: Examinee): void{
     this.examineeService.updateExaminee(id,examinee).subscribe((examinee)=>this.examinee=examinee);
+  }
+
+  getCodes(): void{
+    this.examineeService.getCodes().subscribe((codes) => this.codes=codes);
+    setTimeout(() => {
+      this.codes = this.codes.filter(obj => obj !== this.examinee.examineeCode);
+    },1000);
   }
 
   onSubmit(){
@@ -46,14 +55,19 @@ export class ExamineeUpdateComponent implements OnInit {
       }
       else{
         resetError("examineeCode");
-        if(this.examinee.examineePassword==null||this.examinee.examineePassword==""){
-          setError("examineePassword","Student Password is Required");
+        if(this.codes.includes(this.examinee.examineeCode)){
+          setError("examineeCode","This Examinee Code is already taken");
         }
         else{
-          this.updateExaminee(this.examineeId, this.examinee);
-          setTimeout(() => {
-            this.router.navigate(['/examinees']);
-          },500);
+          // if(this.examinee.examineePassword==null||this.examinee.examineePassword==""){
+          //   setError("examineePassword","Student Password is Required");
+          // }
+          // else{
+            this.updateExaminee(this.examineeId, this.examinee);
+            setTimeout(() => {
+              this.router.navigate(['/examinees']);
+            },500);
+          // }
         }
       }
     }
@@ -65,6 +79,9 @@ export class ExamineeUpdateComponent implements OnInit {
   }
 
   setExamineeBatchList(id: number): void{
-    this.examineeBatchService.getExamineeBatchByExamineeId(id).subscribe((examineeBatchList)=> this.examineeBatchList=examineeBatchList);
+    this.examineeBatchService.getExamineeBatchByExamineeId(id).subscribe((examineeBatchList)=> {
+      examineeBatchList = examineeBatchList.reverse();
+      this.examineeBatchList=examineeBatchList
+    });
   }
 }

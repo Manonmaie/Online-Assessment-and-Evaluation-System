@@ -1,6 +1,7 @@
 package com.iiitb.examAdminBackEnd.batch;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,10 @@ public class BatchService {
 
 	@Autowired
 	private BatchRepository batchRepository;
+	
+	public Optional<Batch> getBatch(int id) {
+		return batchRepository.findById(id);
+	}
 	
 	public List<Batch> getBatchesByExamdrive(int id){
 		return batchRepository.findByExamdriveExamdriveId(id);
@@ -33,5 +38,9 @@ public class BatchService {
 	
 	public void addBatches(List<Batch> batches) {
 		batchRepository.saveAll(batches);
+	}
+	
+	public List<String> getCodes(){
+		return batchRepository.findBatchCodes();
 	}
 }

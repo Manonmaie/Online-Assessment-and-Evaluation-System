@@ -10,6 +10,7 @@ import { QuestionPaperService } from "../services/question-paper.service";
 import { ExamineeBatch } from '../shared/examineeBatch';
 import { ExamineeBatchId } from '../shared/examineeBatch';
 import { DatePipe } from '@angular/common';
+import { ResponseListForOpItem } from "../shared/responseListForQpItem";
 
 declare var $:any;
 
@@ -25,6 +26,9 @@ export class ExaminationComponent implements OnInit {
   qpId: number;
   batchId: number;
   examineeId: number;
+  responseListForQpItems: ResponseListForOpItem[];
+  maxQpItemId: number;
+  // checkedOrNot: boolean;
 
   response: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
   attempt: Attempt;
@@ -49,6 +53,8 @@ export class ExaminationComponent implements OnInit {
     this.examineeId = this.activeRoute.snapshot.params['examineeId'];
     this.examinationService.getQpItemsOfQuestionPaper(this.qpId).subscribe((qpItems) => {
       this.qpItems = qpItems;
+      this.maxQpItemId = Math.max.apply(Math, qpItems.map(function(qpItem) { return qpItem.qpItemId; }));
+
       for (let i = 0; i < qpItems.length; i++) {
         this.shuffle(qpItems[i].asItemMcqOptionsList);
       }
@@ -69,11 +75,142 @@ export class ExaminationComponent implements OnInit {
         this.noOfOptionsCheckedForItem.push(0);
       }
 
+      this.responseListForQpItems = [];
+      for(let i=0; i <= this.maxQpItemId; i++){
+        let qpItemResponse: ResponseListForOpItem = new ResponseListForOpItem();
+        qpItemResponse.qpItemId = -1;
+        qpItemResponse.responseList = [];
+        this.responseListForQpItems[i] = qpItemResponse;
+      }
+      this.examinationService.getAllResponsesForBatchAndExamineeIds(this.examineeId, this.batchId).subscribe((allResponses) => {
+        for(let i=0; i < allResponses.length; i++){
+          let qpItemId: number = allResponses[i].asQpItem.qpItemId;
+          this.responseListForQpItems[qpItemId].qpItemId = qpItemId;
+          this.responseListForQpItems[qpItemId].responseList.push(allResponses[i].responseText);
+        }
+        console.log("All responses = ");
+        console.log(allResponses);
+        console.log("Responses List = ");
+        console.log(this.responseListForQpItems);
+        
+        // console.log("Checked or not:");
+        // const input1 = $('input[name=1]')[0] as HTMLInputElement;
+        // console.log(input1);
+        // console.log(input1.checked);
+        // const input2 = $('input[name=1]')[1] as HTMLInputElement;
+        // console.log(input2);
+        // console.log(input2.checked);
+        // const input3 = $('input[name=1]')[2] as HTMLInputElement;
+        // console.log(input3);
+        // console.log(input3.checked);
+        // const input4 = $('input[name=1]')[3] as HTMLInputElement;
+        // console.log(input4);
+        // console.log(input4.checked);
+        // console.log($('input[name=1]'));
+        // console.log(this.checkedOrNot);
+        // console.log($('input[id=1_1]').checked);
+        // console.log($('input[id=1_1]:checked'));
+        // console.log($('input[id=1_2]:checked'));
+        // console.log($('input[id=1_1]').checked);
+        // console.log($('input[name=1]:checked'));
+        // for (let j = 0; j < qpItems.length; j++) {
+          // var checked_gender = document.querySelector('input[name = 1]:checked');
+          // let qpItemId = 1;
+          // console.log($('input[name="' + qpItemId + '"]').get("checked"));
+          // console.log($$('input[name=1]:checked').length == 1);
+          // console.log(checked_gender);
+          // if(checked_gender != null){  //Test if something was checked
+          //   alert(checked_gender); //Alert the value of the checked.
+          // } 
+          // var checked = false, radios = document.getElementsByName(qpItems[j].qpItemId.toString());
+          // console.log(qpItems[j].itemText)
+          // for (var i = 0, radio; radio = radios[i]; i++) {
+          //     if (radio.checked) {
+          //         checked = true;
+          //         break;
+          //     }
+          // }
+          // console.log(radios);
+          // console.log(checked);
+        // }
+        // console.log($('input[name=1]').length);
+
+        // console.log($('input[name=1]:checked').val());
+        // console.log($('input[name=1]')[0]);
+        // console.log($('input[name=1]')[1]);
+        // console.log($('input[name=1]')[2]);
+        // console.log($('input[name=1]')[3]);
+        // console.log($('input[name=1]')[0].checked);
+        // console.log($('input[name=1]')[1].checked);
+        // console.log($('input[name=1]')[2].checked);
+        // console.log($('input[name=1]')[3].checked);
+
+        // console.log($('input[name=1]').is(':checked'));
+        // console.log("Checked or not:");
+        // let i: string = "1_1", j: string = "1_2", ni = "1", nj = "2";
+        // const ele1 = document.getElementById(i) as HTMLInputElement;
+        // const ele2 = document.getElementById(j) as HTMLInputElement;
+        // console.log(ele1);
+        // console.log(ele1.checked);
+        // console.log(ele2);
+        // console.log(ele2.checked);
+        // console.log($('input[name="' + ni + '"]:checked'));
+        // console.log($('input[name="' + nj + '"]:checked'));
+        // // var eles: HTMLInputElement = <HTMLInputElement[]> document.getElementsByName(ni);
+        // var script = <HTMLScriptElement>document.getElementsByName(ni)[0];
+        // console.log(script[0].checked);
+        // console.log(script[1].checked);
+        // var script1 = <HTMLScriptElement>document.getElementsByName(nj)[0];
+        // console.log(script1[0].checked);
+        // console.log(script1[1].checked);
+        // var script = <HTMLScriptElement>document.getElementsByName(ni)[0];
+        // console.log(script[0].checked)
+        // for (let i = 0; i < qpItems.length; i++) {
+        //   for(let j = 0; j < qpItems[i].asItemMcqOptionsList.length; j++){
+        //     console.log("Checked or not: " + qpItems[i].qpItemId + qpItems[i].asItemMcqOptionsList[j].itemMcqId);
+        //     const ele = document.getElementById(qpItems[i].asItemMcqOptionsList[j].itemMcqId.toString()) as HTMLInputElement;
+        //     // const number = document.getElementsByName(qpItems[i].qpItemId.toString()) as HTMLInputElement;
+        //     console.log(ele);
+        //     console.log(ele.size);
+        //     console.log(ele.checked);
+        //   }
+        //   console.log($('input[name="' + qpItems[i].qpItemId + '"]'));
+        //   console.log($('input[name="' + qpItems[i].qpItemId + '"]:checked').length);
+        // }
+        // $('input[name="' + qpItemId + '"]').prop('checked', false);
+        // if(allResponses.length > 0){
+        //   for (let i = 0; i < qpItems.length; i++) {
+        //     let qpItemId: number = qpItems[i].qpItemId;
+        //     if(this.responseListForQpItems[qpItemId].responseList.length > 0){
+        //       if(qpItems[i].itemType == 'McqSingleCorrect'){
+        //         // $('input[name="' + qpItems[i].qpItemId + '"]').prop('checked', true);
+        //       }
+        //       else if(qpItems[i].itemType == 'True/False'){
+        //         console.log("True/false = ");
+        //         console.log($('input[name="' + qpItems[i].qpItemId + '"]'));
+        //         if(this.responseListForQpItems[qpItemId].responseList[0] == "True"){
+        //           $('input[name="' + qpItems[i].qpItemId + '"]').prop('checked', true);
+        //         }
+        //         else{
+        //           $('input[name="' + qpItems[i].qpItemId + '"]').prop('checked', true);
+        //         }
+        //       }
+        //       else if(qpItems[i].itemType == 'McqMultiCorrect'){
+        //         for(let j=0; j < this.responseListForQpItems[qpItemId].responseList.length; j++){
+        //           // $('input[name="' + qpItems[i].qpItemId + '"]').prop('checked', true);
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+      });
+
       // this.flagName = [];
       // for (let i = 0; i < qpItems.length; i++) {
       //   this.flagName.push("Flag");
       // }
     });
+
     // this.examinationService.getLastPostedAttemptForBathAndExamineeIds(this.examineeId, this.batchId).subscribe((attempt) => this.attempt = attempt);
     // this.attempt = this.qpService.getLastAttemptVariable();
     // console.log("In examination component");
@@ -112,17 +249,30 @@ export class ExaminationComponent implements OnInit {
     return false;
   }
 
-  shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+  shuffle(array) { // shuffle according to examineeId
+    var length = array.length, index=0, randomIndex, temp;
+    while(index < length){
+      randomIndex = (index * this.examineeId) % length;
+      temp = array[index];
+      array[index] = array[randomIndex];
+      array[randomIndex] = temp;
+      index += 1;
     }
     return array;
   }
+
+  // shuffle(array) { // random shuffle
+  //   var currentIndex = array.length, temporaryValue, randomIndex;
+  //   while (0 !== currentIndex) {
+  //     randomIndex = Math.floor(Math.random() * currentIndex);
+  //     // randomIndex = Math.floor(Math.floor(Math.random() * currentIndex)/this.examineeId);
+  //     currentIndex -= 1;
+  //     temporaryValue = array[currentIndex];
+  //     array[currentIndex] = array[randomIndex];
+  //     array[randomIndex] = temporaryValue;
+  //   }
+  //   return array;
+  // }
 
   flagRespectiveItem(event: boolean, index: number){
     this.flaggedItems[index] = !this.flaggedItems[index];
@@ -143,7 +293,6 @@ export class ExaminationComponent implements OnInit {
 }
 
   updateResponseTableWhenOptionSelected(event: boolean, itemOptionText: string, qpItem: Examination, qpItemType: string, index: number){
-    
     if(qpItemType == 'Reset'){
       this.noOfOptionsCheckedForItem[index] = 0;
       this.attemptedItems[index] = false;
@@ -157,13 +306,12 @@ export class ExaminationComponent implements OnInit {
           this.deleteResponseById(response.responseId);
         }
       });
-      let qpItemCode: string = qpItem.itemCode;
-      console.log(qpItemCode);
-      $('input[name="' + qpItemCode + '"]').prop('checked', false);
+      let qpItemId: number = qpItem.qpItemId;
+      $('input[name="' + qpItemId + '"]').prop('checked', false);
     }
     else{
       if(qpItemType == 'McqMultiCorrect' && event == false){
-        // var element = <HTMLInputElement> document.getElementById(qpItem.itemCode);
+        // var element = <HTMLInputElement> document.getElementById(qpItem.qpItemId);
         // var isChecked = element.checked;
         // if(isChecked == false){
         //   this.attemptedItems[index] = false;

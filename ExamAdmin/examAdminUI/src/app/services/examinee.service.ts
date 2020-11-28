@@ -36,7 +36,15 @@ export class ExamineeService {
     return this.http.post<Examinee[]>(baseURL + 'examineesBulk', examinees);
   }
 
-  getExamineesByCode(codes: String[]):Observable<any>{
-    return this.http.request('get', baseURL+ 'examineesByCode/', {body: codes});
+  getExamineesByCode(codes: string):Observable<Examinee[]>{
+    return this.http.get<Examinee[]>(baseURL + 'examineesByCode/?code='+codes);
+  }
+
+  updatePasswords():Observable<Examinee[]>{
+    return this.http.get<Examinee[]>(baseURL + '/examineesUpdatePassword');
+  }
+
+  getCodes(): Observable<string[]>{
+    return this.http.get<string[]>(baseURL + 'examineeCodes/');
   }
 }

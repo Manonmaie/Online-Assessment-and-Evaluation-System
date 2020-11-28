@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,6 +17,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExamineeController {
 	@Autowired
 	private ExamineeService examineeService;
+	
+	 public void randomPassword(Examinee examinee) {
+		 String ALPHA_NUMERIC_STRING = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&?{}*";
+		 StringBuilder builder = new StringBuilder();
+		 int count = 8;
+		 while (count-- != 0) {
+		    int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
+		    builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+		 }
+		 examinee.setExamineePassword(builder.toString());
+	}
 	
 	@RequestMapping("/examinees")
 	public List<Examinee> getAllExaminees() {
@@ -39,11 +51,13 @@ public class ExamineeController {
 	
 	@RequestMapping(method=RequestMethod.POST, value="/examinees")
 	public void addExaminee(@RequestBody Examinee examinee) {
+		randomPassword(examinee);
 		examineeService.addExaminee(examinee);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/examineesBulk")
 	public void addExaxmineeBulk(@RequestBody List<Examinee> examinees) {
+		examinees.forEach(examinee->randomPassword(examinee));
 		examineeService.addExamineeBulk(examinees);
 	}
 	
@@ -53,7 +67,19 @@ public class ExamineeController {
 	}
 	
 	@RequestMapping("/examineesByCode")
-	public List<Examinee> getExamineesByCode(@RequestBody List<String> code){
+	public List<Examinee> getExamineesByCode(@RequestParam List<String> code){
 		return examineeService.getExamineesByCode(code);
+	}
+	
+	@RequestMapping("/examineesUpdatePassword")
+	public void updatePasswords() {
+		List<Examinee> examinees = getAllExaminees();
+		examinees.forEach(examinee->randomPassword(examinee));
+		addExaxmineeBulk(examinees);
+	}
+	
+	@RequestMapping("/examineeCodes")
+	public List<String> getCodes(){
+		return examineeService.getCodes();
 	}
 }

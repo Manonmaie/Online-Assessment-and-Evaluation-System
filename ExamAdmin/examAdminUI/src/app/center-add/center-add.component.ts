@@ -11,13 +11,19 @@ import {resetError, setError} from '../shared/error';
 })
 export class CenterAddComponent implements OnInit {
   center = {centerName: null, centerCode: null, centerCapacity: 0}
+  codes: string[];
   constructor(private centerService: CenterService, public router: Router) { }
 
   ngOnInit(): void {
+    this.getCodes();
   }
 
   addCenter(center: Center): void{
     this.centerService.addCenter(center).subscribe((center) => this.center=center);
+  }
+
+  getCodes(): void{
+    this.centerService.getCodes().subscribe((codes) => this.codes=codes);
   }
 
   onSubmit(){
@@ -30,10 +36,15 @@ export class CenterAddComponent implements OnInit {
         setError("centerCode","Center Code is Required");
       }
       else{
-        this.addCenter(this.center);
-        setTimeout(() => {
-          this.router.navigate(['/centers']);
-        },500);
+        if(this.codes.includes(this.center.centerCode)){ 
+          setError("centerCode","This Center Code is already taken");
+        }
+        else{
+          this.addCenter(this.center);
+          setTimeout(() => {
+            this.router.navigate(['/centers']);
+          },500);
+        }
       }
     }
   }

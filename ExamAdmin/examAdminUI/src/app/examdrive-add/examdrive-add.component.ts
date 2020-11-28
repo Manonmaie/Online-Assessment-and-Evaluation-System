@@ -15,11 +15,13 @@ export class ExamdriveAddComponent implements OnInit {
   examdrive = {examdriveCode: null, examdriveName: null, status: 'NOT_STARTED', course: null};
   courses: Course[];
   selectedCourse: number;
+  codes: string[];
 
   constructor(private examdriveService: ExamdriveService, private courseService: CourseService, public router: Router) { }
 
   ngOnInit(): void {
     this.getCourses();
+    this.getCodes();
   }
 
   addExamdrive(examdrive: Examdrive): void{
@@ -27,7 +29,20 @@ export class ExamdriveAddComponent implements OnInit {
   }
 
   getCourses(): void{
-    this.courseService.getCourses().subscribe((courses) => this.courses = courses);
+    this.courseService.getCourses().subscribe((courses) => {
+      courses = courses.sort((obj1, obj2) => {
+        if (obj1.courseCode > obj2.courseCode) {
+            return 1;
+        }
+        if (obj1.courseCode < obj2.courseCode) {
+            return -1;
+        }
+        return 0;
+      });
+      setTimeout(()=>{
+        this.courses = courses;
+      },500);
+    });
   }
 
   getCourse(id: number): void{
@@ -36,6 +51,10 @@ export class ExamdriveAddComponent implements OnInit {
 
   addCourse(){
     this.getCourse(this.selectedCourse);
+  }
+
+  getCodes(): void{
+    this.examdriveService.getCodes().subscribe((codes) => this.codes=codes);
   }
 
   addDrive(){
@@ -49,14 +68,20 @@ export class ExamdriveAddComponent implements OnInit {
       }
       else{
         resetError("examdriveCode");
-        if(this.examdrive.course==null){
-          setError("examdriveCourse","Course is Required");
+        if(this.codes.includes(this.examdrive.examdriveCode)){
+          setError("examdriveCode","This Examdrive Code is already taken");
         }
         else{
-          this.addExamdrive(this.examdrive);
-          setTimeout(() => {
-            this.router.navigate(['/examdrives']);
-          },500);
+          resetError("examdriveCode")
+          if(this.examdrive.course==null){
+            setError("examdriveCourse","Course is Required");
+          }
+          else{
+            this.addExamdrive(this.examdrive);
+            setTimeout(() => {
+              this.router.navigate(['/examdrives']);
+            },1000);
+          }
         }
       }
     }

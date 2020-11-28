@@ -1,5 +1,5 @@
 export class ItemMcqOption{
     itemMcqId: number;
-    itemMcqOptionsCode: string;
+    // itemMcqOptionsCode: string;
     mcqOptionText: string;
 }

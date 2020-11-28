@@ -34,4 +34,8 @@ public class CenterService {
 	public void updateCenter(int id, Center center) {
 		centerRepository.save(center);
 	}
+	
+	public List<String> getCodes(){
+		return centerRepository.findCenterCodes();
+	}
 }

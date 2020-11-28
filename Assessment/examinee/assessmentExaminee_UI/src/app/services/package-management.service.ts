@@ -16,9 +16,9 @@ export class PackageManagementService {
     return this.http.get<Batch[]>(baseURL + 'completedBatchesResponses');
   }
 
-  getAllSentBatchesForBatchHistory(): Observable<Batch[]>{
-    return this.http.get<Batch[]>(baseURL + 'batchesWithSendResponses/SENT');
-  }
+  // getAllSentBatchesForBatchHistory(): Observable<Batch[]>{
+  //   return this.http.get<Batch[]>(baseURL + 'batchesWithSendResponses/SENT');
+  // }
 
   getAllResponsesForBatchId(batchId: number): Observable<Response[]>{
     return this.http.get<Response[]>(baseURL + 'batch/' + batchId + '/allResponsesForBatch');
@@ -32,7 +32,7 @@ export class PackageManagementService {
     return this.http.get<OutRpackHeader[]>(baseURL + 'sentRpacks/SENT');
   }
 
-  updateRpackStatus(rpackHeaderId: number, outRpackHeader: OutRpackHeader): Observable<OutRpackHeader>{
-    return this.http.put<OutRpackHeader>(baseURL + '/rpackHeader/' + rpackHeaderId , outRpackHeader);
-  }
+  // updateRpackStatus(rpackHeaderId: number, outRpackHeader: OutRpackHeader): Observable<OutRpackHeader>{
+  //   return this.http.put<OutRpackHeader>(baseURL + '/rpackHeader/' + rpackHeaderId , outRpackHeader);
+  // }
 }

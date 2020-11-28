@@ -18,7 +18,7 @@
                     <br>
                     <select id="examdriveCenter" name="examdriveCenter" [(ngModel)]="selectedCenter">
                         <option *ngFor = "let center of centers" [value]="center.centerId">
-                            {{center.centerName}}
+                            {{center.centerCode}} - {{center.centerName}}
                         </option>
                     </select>
                     <br>

@@ -41,4 +41,9 @@ public class CourseController {
 	public void updateCourse(@PathVariable int id, @RequestBody Course course) {
 		courseService.updateCourse(id,course);
 	}
+	
+	@RequestMapping("/courseCodes")
+	public List<String> getCodes(){
+		return courseService.getCodes();
+	}
 }

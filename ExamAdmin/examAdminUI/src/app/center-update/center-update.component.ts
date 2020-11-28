@@ -12,11 +12,13 @@ import {resetError, setError} from '../shared/error';
 export class CenterUpdateComponent implements OnInit {
   center: Center;
   centerId: number;
+  codes: string[];
   constructor(private centerService: CenterService, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
     this.centerId = this.route.snapshot.params['id'];
     this.getCenter(this.centerId);
+    this.getCodes();
   }
 
   getCenter(id: number): void{
@@ -25,6 +27,13 @@ export class CenterUpdateComponent implements OnInit {
 
   updateCenter(id:number, center: Center): void{
     this.centerService.updateCenter(id,center).subscribe((center) => this.center = center);
+  }
+
+  getCodes(): void{
+    this.centerService.getCodes().subscribe((codes) => this.codes=codes);
+    setTimeout(() => {
+      this.codes = this.codes.filter(obj => obj !== this.center.centerCode);
+    },1000);
   }
 
   onSubmit(){
@@ -37,10 +46,15 @@ export class CenterUpdateComponent implements OnInit {
         setError("centerCode","Center Code is Required");
       }
       else{
-        this.updateCenter(this.centerId,this.center);
-        setTimeout(() => {
-          this.router.navigate(['/centers']);
-        },500);
+        if(this.codes.includes(this.center.centerCode)){
+          setError("centerCode","This Center Code is already taken");
+        }
+        else{
+          this.updateCenter(this.centerId,this.center);
+          setTimeout(() => {
+            this.router.navigate(['/centers']);
+          },500);
+        }
       }
     }
   }  

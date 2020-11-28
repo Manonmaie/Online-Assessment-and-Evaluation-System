@@ -3,6 +3,8 @@ import {Examdrive} from '../shared/examdrive';
 import {Course} from '../shared/course';
 import { Center } from '../shared/center';
 import { Batch } from '../shared/batch';
+import { Examinee } from '../shared/examinee';
+import { ExamineeBatch } from '../shared/examinee-batch';
 import {ExamdriveService} from '../services/examdrive.service';
 import {CourseService} from '../services/course.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +13,7 @@ import { ExamineeService } from '../services/examinee.service';
 import { ExamineeBatchService } from '../services/examinee-batch.service';
 import {resetError, setError} from '../shared/error';
 import { newArray } from '@angular/compiler/src/util';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-examdrive-update',
@@ -33,12 +36,17 @@ export class ExamdriveUpdateComponent implements OnInit {
   isAddBatch: boolean = false;
   isUpload: boolean[];
   newBatch: Batch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
+  uploadExamineeCodes: string[];
+  uploadExaminees: Examinee[][];  
+  uploadExamineeBatches: ExamineeBatch[][];  
+  codes: string[];
 
   constructor(private examdriveService:ExamdriveService, private courseService: CourseService, private batchService:BatchService, private examineeService: ExamineeService, private examineeBatchService: ExamineeBatchService, private route: ActivatedRoute, public router: Router) { }
 
   ngOnInit(): void {
     this.getCourses();
     this.getExamdrive(this.examdriveId);
+    this.getCodes();
     setTimeout(() => {
       this.getCenters();
       this.selectedCourse = this.examdrive.course.courseMasterId;
@@ -48,6 +56,9 @@ export class ExamdriveUpdateComponent implements OnInit {
     this.isUpdate = new Array();
     this.batches = new Array();
     this.isUpload = new Array();
+    this.uploadExamineeCodes = new Array();
+    this.uploadExaminees = new Array();
+    this.uploadExamineeBatches = new Array();
   }
 
   getExamdrive(id: number): void{
@@ -55,12 +66,32 @@ export class ExamdriveUpdateComponent implements OnInit {
     this.setBatches(id);
   }
 
+  getCodes(): void{
+    this.examdriveService.getCodes().subscribe((codes) => this.codes=codes);
+    setTimeout(() => {
+      this.codes = this.codes.filter(obj => obj !== this.examdrive.examdriveCode);
+    },1000);
+  }
+
   updateExamdrive(id:number, examdrive: Examdrive): void{
     this.examdriveService.updateExamdrive(id,examdrive).subscribe((examdrive)=>this.examdrive=examdrive);
   }
 
   getCourses(): void{
-    this.courseService.getCourses().subscribe((courses) => this.courses = courses);
+    this.courseService.getCourses().subscribe((courses) => {
+      courses = courses.sort((obj1, obj2) => {
+        if (obj1.courseCode > obj2.courseCode) {
+            return 1;
+        }
+        if (obj1.courseCode < obj2.courseCode) {
+            return -1;
+        }
+        return 0;
+      });
+      setTimeout(()=>{
+        this.courses = courses;
+      },500);
+    });
   }
 
   getCourse(id: number): void{
@@ -75,9 +106,22 @@ export class ExamdriveUpdateComponent implements OnInit {
     for( var batch of this.examdrive.batchList){
       this.centers.push(batch.center);
     }
+    function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+      return value !== null && value !== undefined;
+    }
+    this.centers = this.centers.filter(notEmpty);
     this.centers = this.centers.filter(
       (thing, i, arr) => arr.findIndex(t => t.centerId === thing.centerId) === i
     );
+    this.centers = this.centers.sort((obj1, obj2) => {
+      if (obj1.centerCode > obj2.centerCode) {
+          return 1;
+      }
+      if (obj1.centerCode < obj2.centerCode) {
+          return -1;
+      }
+      return 0;
+    });
   }
 
   setBatches(id: number): void{
@@ -108,6 +152,15 @@ export class ExamdriveUpdateComponent implements OnInit {
 
   getBatches(center: Center): void{
     this.batches[center.centerId] = this.examdrive.batchList.filter(b => b.center!=null && b.center.centerId==center.centerId);
+    this.batches[center.centerId] = this.batches[center.centerId].sort((obj1, obj2) => {
+      if (obj1.batchStartTime > obj2.batchStartTime) {
+          return 1;
+      }
+      if (obj1.batchStartTime < obj2.batchStartTime) {
+          return -1;
+      }
+      return 0;
+    });
   }
 
   updateDrive(){
@@ -121,14 +174,20 @@ export class ExamdriveUpdateComponent implements OnInit {
       }
       else{
         resetError("examdriveCode");
-        if(this.examdrive.course==null){
-          setError("examdriveCourse","Course is Required");
+        if(this.codes.includes(this.examdrive.examdriveCode)){
+          setError("examdriveCode","This Examdrive Code is already Taken");
         }
         else{
-          this.updateExamdrive(this.examdriveId,this.examdrive);
-          setTimeout(() => {
-            this.router.navigate(['/examdrives']);
-          },1000);
+          resetError("examdriveCode");
+          if(this.examdrive.course==null){
+            setError("examdriveCourse","Course is Required");
+          }
+          else{
+            this.updateExamdrive(this.examdriveId,this.examdrive);
+            setTimeout(() => {
+              this.router.navigate(['/examdrives']);
+            },1000);
+          }
         }
       }
     }
@@ -197,14 +256,44 @@ export class ExamdriveUpdateComponent implements OnInit {
   }
 
   assignStudentsToBatch(batch: Batch): void{
-    // TODO - from the gotten list of examinees make a examineeBatch json object and upload it to backend
-    // this.examineeBatchService.addExamineeBatches(examineeBatches);
+    let newExamineeBatch = new ExamineeBatch();
+    this.uploadExamineeBatches[batch.batchId] = new Array();
+    for(let examinee of this.uploadExaminees[batch.batchId]){
+      newExamineeBatch = {
+        "examineeBatchId":{"examineeId":examinee.examineeId,"batchId":batch.batchId},
+        "examinee":examinee,
+        "batch":batch
+      }
+      this.uploadExamineeBatches[batch.batchId].push(newExamineeBatch);
+    }
+    setTimeout(()=> {
+      this.examineeBatchService.addExamineeBatches(this.uploadExamineeBatches[batch.batchId]).subscribe(examineeBatchList => this.uploadExamineeBatches[batch.batchId]=examineeBatchList);
+    },5000);
     this.isUpload[batch.batchId] = false;
   }
 
-  onFileChange(ev){
-    // Make the list of batch students as null or create a 2d array of students 1st ind is batch id
-    // TODO - Get list of student codes and call a backend function to get examinee objects of the list
-    // this.examineeService.getExamineesByCode(List of examinee Codes)
+  onFileChange(ev, batch: Batch){
+    let workBook = null;
+    let jsonData = null;
+    const reader = new FileReader();
+    const file = ev.target.files[0];
+    reader.onload = (event) => {
+      const data = reader.result;
+      workBook = XLSX.read(data, { type: 'binary' });
+      jsonData = workBook.SheetNames.reduce((initial, name) => {
+        const sheet = workBook.Sheets[name];
+        initial["1"] = XLSX.utils.sheet_to_json(sheet);
+        return initial["1"];
+      }, {});
+      this.uploadExamineeCodes[batch.batchId] = jsonData[0]["StudentCode"];
+      for( let i=1;i<jsonData.length;i++){
+        this.uploadExamineeCodes[batch.batchId] = this.uploadExamineeCodes[batch.batchId].concat(",");
+        this.uploadExamineeCodes[batch.batchId] = this.uploadExamineeCodes[batch.batchId].concat(jsonData[i]["StudentCode"]);
+      }
+    }
+    reader.readAsBinaryString(file);
+    setTimeout(() => {
+      this.examineeService.getExamineesByCode(this.uploadExamineeCodes[batch.batchId]).subscribe(examineeList => this.uploadExaminees[batch.batchId] = examineeList);    
+    },3000);
   }
 }

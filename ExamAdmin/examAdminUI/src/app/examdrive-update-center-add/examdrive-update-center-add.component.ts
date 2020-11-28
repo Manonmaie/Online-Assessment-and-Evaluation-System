@@ -59,6 +59,15 @@ export class ExamdriveUpdateCenterAddComponent implements OnInit {
     this.getCenters();
     setTimeout(()=>{
       this.centers = this.centers.filter(item => !this.oldCenters.includes(item.centerId));
+      this.centers = this.centers.sort((obj1, obj2) => {
+        if (obj1.centerCode > obj2.centerCode) {
+            return 1;
+        }
+        if (obj1.centerCode < obj2.centerCode) {
+            return -1;
+        }
+        return 0;
+      });
     },200);
   }
 

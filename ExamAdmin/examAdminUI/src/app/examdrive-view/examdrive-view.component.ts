@@ -43,9 +43,22 @@ export class ExamdriveViewComponent implements OnInit {
     for( var batch of this.examdrive.batchList){
       this.centers.push(batch.center);
     }
+    function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
+      return value !== null && value !== undefined;
+    }
+    this.centers = this.centers.filter(notEmpty);
     this.centers = this.centers.filter(
       (thing, i, arr) => arr.findIndex(t => t.centerId === thing.centerId) === i
     );
+    this.centers = this.centers.sort((obj1, obj2) => {
+      if (obj1.centerCode > obj2.centerCode) {
+          return 1;
+      }
+      if (obj1.centerCode < obj2.centerCode) {
+          return -1;
+      }
+      return 0;
+    });
   }
 
   setBatches(id: number): void{
@@ -64,5 +77,14 @@ export class ExamdriveViewComponent implements OnInit {
 
   getBatches(center: Center): void{
     this.batches[center.centerId] = this.examdrive.batchList.filter(b => b.center!=null && b.center.centerId==center.centerId);
+    this.batches[center.centerId] = this.batches[center.centerId].sort((obj1, obj2) => {
+      if (obj1.batchStartTime > obj2.batchStartTime) {
+          return 1;
+      }
+      if (obj1.batchStartTime < obj2.batchStartTime) {
+          return -1;
+      }
+      return 0;
+    });
   }
 }

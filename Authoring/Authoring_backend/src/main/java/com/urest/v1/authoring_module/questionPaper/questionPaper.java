@@ -15,7 +15,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.urest.v1.authoring_module.instructions.instructions;
 import com.urest.v1.authoring_module.item.Item;
+import com.urest.v1.authoring_module.options.Options;
 import com.urest.v1.authoring_module.questionPaperItem.questionPaperItem;
 
 
@@ -36,9 +39,10 @@ public class questionPaper {
 	
 	
 	// --------------------------------------------------------------------------------
-//	@ElementCollection(targetClass=Item.class)
 	@Transient private List<Item> items;
+	@Transient private List<String> inst;
 	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="qp_id", updatable = false, nullable = false)
@@ -57,6 +61,11 @@ public class questionPaper {
             cascade = CascadeType.MERGE,orphanRemoval = true)
 	private List<questionPaperItem> asitemIds=new ArrayList<questionPaperItem>();
 	
+	
+	@OneToMany(mappedBy="qp",
+            cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<instructions> asInstructions=new ArrayList<instructions>();
+
 	
 	
 	
@@ -111,6 +120,18 @@ public class questionPaper {
 	}
 	public void setBatchCode(String batchCode) {
 		this.batchCode = batchCode;
+	}
+	public List<String> getInst() {
+		return inst;
+	}
+	public void setInst(List<String> inst) {
+		this.inst = inst;
+	}
+	public List<instructions> getAsInstructions() {
+		return asInstructions;
+	}
+	public void setAsInstructions(List<instructions> asInstructions) {
+		this.asInstructions = asInstructions;
 	}
 
 	

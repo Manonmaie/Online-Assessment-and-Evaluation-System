@@ -20,6 +20,7 @@ import { CenterUpdateComponent } from '../center-update/center-update.component'
 import { ExamineeUpdateComponent } from '../examinee-update/examinee-update.component';
 import { CourseUpdateComponent } from '../course-update/course-update.component';
 import { ExamdriveMarksComponent } from '../examdrive-marks/examdrive-marks.component';
+import { ExamdriveBatchViewComponent } from '../examdrive-batch-view/examdrive-batch-view.component';
 
 export const routes: Routes = [
     {path: 'examdrives', component: ExamdriveComponent},
@@ -42,5 +43,6 @@ export const routes: Routes = [
     {path: 'examineeupdate/:id', component: ExamineeUpdateComponent},
     {path: 'courseupdate/:id', component: CourseUpdateComponent},
     {path: 'examdrivemarksreport/:id', component: ExamdriveMarksComponent},
+    {path: 'batchview/:id', component:ExamdriveBatchViewComponent},
     {path: '', redirectTo: '/examdrives', pathMatch: 'full'}
 ];

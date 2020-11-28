@@ -20,7 +20,20 @@ export class ExamineeComponent implements OnInit {
   }
 
   getExaminees():void {
-    this.examineeService.getExaminees().subscribe((examinees) => this.examinees = examinees);
+    this.examineeService.getExaminees().subscribe((examinees) => {
+      examinees = examinees.sort((obj1, obj2) => {
+        if (obj1.examineeCode > obj2.examineeCode) {
+            return 1;
+        }
+        if (obj1.examineeCode < obj2.examineeCode) {
+            return -1;
+        }
+        return 0;
+      });
+      setTimeout(()=>{
+        this.examinees = examinees;
+      },500);
+    });
   }
 
   deleteExaminee(examinee: Examinee): void{
@@ -29,6 +42,13 @@ export class ExamineeComponent implements OnInit {
         // alert(response.message);
         this.getExaminees();
       });
+    }
+  }
+
+  updatePasswords(): void{
+    if(confirm("Are you sure to update passwords of all Students")){
+      this.examineeService.updatePasswords().subscribe( (examinees) => this.examinees=examinees);
+      window.location.reload();
     }
   }
 }
