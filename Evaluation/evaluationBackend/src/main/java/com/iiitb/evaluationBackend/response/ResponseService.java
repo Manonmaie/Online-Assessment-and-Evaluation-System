@@ -25,4 +25,7 @@ public class ResponseService {
 		return responseRepository.findByEvExamineeBatchExamineeBatchId(examineeBatchId);
 	}
 	
+	public void addResponse(EvResponse response) {
+		responseRepository.save(response);
+	}
 }

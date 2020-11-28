@@ -707,3 +707,5 @@ ALTER TABLE rpack4
   ADD CONSTRAINT `fk_rpack4_rpack2_id` FOREIGN KEY (rpack2_id) REFERENCES rpack2(rpack2_id) ON DELETE CASCADE;
 --   ADD CONSTRAINT `fk_rpack4_batch_id` FOREIGN KEY (batch_id) REFERENCES rpack1(batch_id) ON DELETE CASCADE,
 --   ADD CONSTRAINT `fk_rpack4_item_id` FOREIGN KEY (item_id) REFERENCES rpack2(item_id) ON DELETE CASCADE;
+
+-- INSERT INTO rpack4 VALUES(0, 17, 1, 1, 1, 1, 4, 10, "True");

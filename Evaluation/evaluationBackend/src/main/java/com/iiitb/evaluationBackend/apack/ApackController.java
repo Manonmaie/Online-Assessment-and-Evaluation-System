@@ -1,4 +1,4 @@
-package com.iiitb.examAdminBackEnd.qpack;
+package com.iiitb.evaluationBackend.apack;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class QpackController {
+public class ApackController {
 	@Autowired
-	private QpackService qpackService;
+	private ApackService apackService;
 	
-	@RequestMapping("/importFromQpack")
-	public void fromQpack(){
-		qpackService.qpack2OriginalTables();
+	@RequestMapping("/importFromApack")
+	public void fromApack(){
+		apackService.apack2OriginalTables();
 	}
 }

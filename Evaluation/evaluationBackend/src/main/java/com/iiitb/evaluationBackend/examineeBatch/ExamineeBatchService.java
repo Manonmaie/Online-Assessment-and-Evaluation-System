@@ -15,5 +15,9 @@ public class ExamineeBatchService {
 		examdriveRepository.findAll().forEach(examdrives::add);
 		return examdrives;
 	}
+	
+	public void addExamineeBatch(EvExamineeBatch examineeBatch) {
+		examdriveRepository.save(examineeBatch);
+	}
 }
 

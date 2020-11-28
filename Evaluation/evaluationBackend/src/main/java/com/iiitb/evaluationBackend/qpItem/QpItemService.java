@@ -15,5 +15,8 @@ public class QpItemService {
 		return qpItemRepository.findByEvQuestionPaperQpId(qpId);
 	}
 
+	public void addQpItem(EvQpItem qpItem) {
+		qpItemRepository.save(qpItem);
+	}
 }
 

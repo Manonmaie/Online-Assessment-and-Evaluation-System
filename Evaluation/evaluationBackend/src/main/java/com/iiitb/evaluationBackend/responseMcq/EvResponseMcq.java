@@ -1,6 +1,8 @@
 package com.iiitb.evaluationBackend.responseMcq;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -11,6 +13,7 @@ import com.iiitb.evaluationBackend.response.EvResponse;
 public class EvResponseMcq {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int responseMcqId;
 	
 	private String responseText;

@@ -20,4 +20,8 @@ public class QuestionPaperService {
 		.forEach(qpList::add);
 		return qpList;
 	}
+	
+	public void addQuestionPaper(EvQuestionPaper questionPaper) {
+		asQuestionPaperRepository.save(questionPaper);
+	}
 }
