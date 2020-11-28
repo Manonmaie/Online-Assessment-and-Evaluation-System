@@ -44,7 +44,12 @@
                         <td>{{center.centerCode}}</td>
                         <td>{{center.centerCapacity}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-send-o"></i></button>
+                            <ng-container *ngIf="examdrive.status=='IN_PROGRESS'">
+                                <button type="button" class="btn btn-warning float-right mr-1" (click)="exportQuestionPapers(center)"><i class="fa fa-send-o"></i></button>
+                            </ng-container>
+                            <ng-container *ngIf="examdrive.status!='IN_PROGRESS'">
+                                <button disabled type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-send-o"></i></button>
+                            </ng-container>
                             <!-- <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button> -->
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "isShow[center.centerId]"><i class="fa fa-eye"></i></button>
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "!isShow[center.centerId]"><i class="fa fa-eye-slash"></i></button>

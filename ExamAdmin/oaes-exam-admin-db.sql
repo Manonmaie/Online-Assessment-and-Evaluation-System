@@ -42,7 +42,7 @@ ALTER TABLE ea_examdrive
 -- Data Entry for table ea_examdrive
 -- --------------------------------------------------------
 INSERT INTO ea_examdrive VALUES(0,"MID","Mid Term Examination",'COMPLETED',1);
-INSERT INTO ea_examdrive VALUES(0,"END","End Term Examination",'NOT_STARTED',1);
+INSERT INTO ea_examdrive VALUES(0,"END","End Term Examination",'IN_PROGRESS',1);
 INSERT INTO ea_examdrive VALUES(0,"IMP","Improvement Examination",'NOT_STARTED',1);
 
 -- --------------------------------------------------------
