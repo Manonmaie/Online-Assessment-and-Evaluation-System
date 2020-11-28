@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as $ from 'jquery'
+import { ItemServiceService } from '../service/itemService.service';
+import { course } from '../shared/course';
+
 
 
 @Component({
@@ -15,7 +18,8 @@ import * as $ from 'jquery'
 export class ItemFormComponent implements OnInit  {
 
   countBox:number;
-  constructor(private httpClient: HttpClient,private fb:FormBuilder) {
+  subject:course[];
+  constructor(private httpClient: HttpClient,private fb:FormBuilder,private itemServiceService:ItemServiceService) {
     this.onChange= this.onChange.bind(this);
     this.countBox=3;
     this.fb.array([])
@@ -25,9 +29,6 @@ export class ItemFormComponent implements OnInit  {
   }
 
 
-  // dynamic option add
-  // .
-  // .
   productForm: FormGroup;
 
   
@@ -54,6 +55,7 @@ export class ItemFormComponent implements OnInit  {
 
 
   ngOnInit() {
+    this.itemServiceService.getCourses().subscribe((courses)=> this.subject=courses);
     $("#MCQoptionID").hide();
     $('#TFOption').hide();
   }
@@ -82,7 +84,7 @@ export class ItemFormComponent implements OnInit  {
   selectedDifLvl: any = "";
   totalMarks: Number;
   author_id: Number=1;
-  selectedSub: any= "";
+  selectedSub: course;
   selectedcrct:any="";
   TFmark1:any="";
   TFmark2:any="";
@@ -116,13 +118,10 @@ export class ItemFormComponent implements OnInit  {
     { value: 'TRUE/FALSE', label: 'TRUE/FALSE' },
     { value: 'Multi_Correct_MCQ', label: 'Multi Correct MCQ' }
   ];
-  subject = [
-    { value: '', label: 'Choose question subject' },
-    { value: 'DBMS', label: 'DBMS' },
-    { value: 'Data-Modelling', label: 'Data-Modelling' },
-  ];
   private REST_API_SERVER_MCQ = "http://localhost:8080/urest/v1/setItemMCQ";
   private REST_API_SERVER_TF = "http://localhost:8080/urest/v1/setItemTF";
+
+  
   onSubmit(){
     var selValue = this.selectedType;
     if(selValue=='MCQ' || selValue=='Multi_Correct_MCQ')
@@ -137,7 +136,8 @@ export class ItemFormComponent implements OnInit  {
       "cgLvl": this.selectedCGLvl,
       "options": this.productForm.value.quantities,
       "diffLvl": this.selectedDifLvl,
-      "authorId": this.author_id
+      "authorId": this.author_id,
+      "course": this.selectedSub,
       }).subscribe((data: any[])=>{
       console.log(data);
     }) 
@@ -156,7 +156,8 @@ export class ItemFormComponent implements OnInit  {
         "diffLvl": this.selectedDifLvl,
         "falseMarks":this.TFmark2,
         "trueMarks":this.TFmark1,
-        "authorId": this.author_id
+        "authorId": this.author_id,
+        "course": this.selectedSub,
         }).subscribe((data: any[])=>{
         console.log(data);
       }) 

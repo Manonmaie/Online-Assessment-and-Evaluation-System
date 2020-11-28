@@ -43,13 +43,16 @@ public class ItemService {
 		List<String> cgLvlList = new ArrayList<String>(Arrays.asList(m.get("cgLvl").split(",")));
 		List<String> difLvlList = new ArrayList<String>(Arrays.asList(m.get("difLvl").split(",")));
 		List<String> typesList = new ArrayList<String>(Arrays.asList(m.get("types").split(",")));
+		int course=-1;
+		if(m.get("subject")!=null)
+			course=Integer.parseInt(m.get("subject").trim());
 		int startMarkInteger = 0;
 		if(m.get("startMark")!=null)
 			startMarkInteger=Integer.parseInt(m.get("startMark").trim());
 		int endMarkInteger=100;
 		if(m.get("endMark")!=null)
 			endMarkInteger=Integer.parseInt(m.get("endMark").trim());
-		List<Item> itemList= itemRepository.findByItemId(cgLvlList,difLvlList,typesList,startMarkInteger,endMarkInteger);
+		List<Item> itemList= itemRepository.findByItemId(cgLvlList,difLvlList,typesList,startMarkInteger,endMarkInteger,course);
 //		System.out.println(itemList.size());
 		return itemList;
 	}
@@ -78,6 +81,7 @@ public class ItemService {
 		item.setDiffLvl(question.getDiffLvl());
 		item.setAuthorId(question.getAuthorId());
 		item.setItemType("TF");
+		item.setCourse(question.getCourse());
 		itemRepository.save(item);
 		
 		
@@ -102,6 +106,7 @@ public class ItemService {
 		item.setDiffLvl(question.getDiffLvl());
 		item.setAuthorId(question.getAuthorId());
 		item.setItemType("MCQ");
+		item.setCourse(question.getCourse());
 		itemRepository.save(item);
 		ArrayList<OptionsStruct> options=question.getOptions();
 		for(int i=0;i<options.size();i++)

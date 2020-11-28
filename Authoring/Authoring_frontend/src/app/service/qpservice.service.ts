@@ -5,6 +5,7 @@ import {Observable, of} from 'rxjs';
 import { delay } from 'rxjs/operators'
 import { QP } from '../shared/QP'
 import { Item } from '../shared/item';
+import { course } from '../shared/course';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { Item } from '../shared/item';
 
 export class QPServiceService {
   constructor(private http: HttpClient) { }
-  setQP(subject :string,TotalMarks: Number,TestDuration: Number,items: Item[],batchCode:string,myInstrucions:string[]) : Observable<any>{
+  setQP(subject :course,TotalMarks: Number,TestDuration: Number,items: Item[],batchCode:string,myInstrucions:string[]) : Observable<any>{
     var qp = new QP();
     qp.course=subject;
     qp.timeDuration=TestDuration;

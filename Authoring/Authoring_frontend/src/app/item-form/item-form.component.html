@@ -4,10 +4,11 @@
 
   <!-- Subject -->
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Subject<span class="required">*</span></label>
+    <label for="exampleFormControlSelect1">Course<span class="required">*</span></label>
     <select id="sub_id" name="sub" class="form-control" [(ngModel)]="selectedSub" >
-      <option *ngFor="let sub of subject" [ngValue]="sub.value"> 
-          {{ sub.label }}
+      <option [ngValue]="undefined" [disabled]="true">Select Course</option>
+      <option *ngFor="let sub of subject" [ngValue]="sub"> 
+          {{ sub.courseName }}
       </option>
     </select>
   </div>
