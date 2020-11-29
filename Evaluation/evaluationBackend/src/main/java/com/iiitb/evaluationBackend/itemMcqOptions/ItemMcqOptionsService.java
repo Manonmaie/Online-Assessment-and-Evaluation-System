@@ -14,5 +14,8 @@ public class ItemMcqOptionsService {
 	public List<EvItemMcqOptions> getAllMcqOptionsForQpItem(int qpItemId) {
 		return itemMcqOptionsRepository.findByEvQpItemQpItemId(qpItemId);
 	}
-
+	
+	public void addItemMcqOptions(EvItemMcqOptions itemMcqOptions) {
+		itemMcqOptionsRepository.save(itemMcqOptions);
+	}
 }

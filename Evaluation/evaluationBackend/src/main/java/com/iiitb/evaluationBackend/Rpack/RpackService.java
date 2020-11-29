@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.iiitb.evaluationBackend.examineeBatch.EvExamineeBatch;
 import com.iiitb.evaluationBackend.examineeBatch.ExamineeBatchService;
+import com.iiitb.evaluationBackend.itemMcqOptions.EvItemMcqOptions;
+import com.iiitb.evaluationBackend.itemMcqOptions.ItemMcqOptionsService;
+import com.iiitb.evaluationBackend.itemTrueFalse.EvItemTrueFalse;
+import com.iiitb.evaluationBackend.itemTrueFalse.ItemTrueFalseService;
 import com.iiitb.evaluationBackend.qpItem.EvQpItem;
 import com.iiitb.evaluationBackend.qpItem.QpItemService;
 import com.iiitb.evaluationBackend.questionPaper.EvQuestionPaper;
@@ -30,6 +34,12 @@ public class RpackService {
 	
 	@Autowired
 	private QpItemService qpItemService;
+	
+	@Autowired
+	private ItemMcqOptionsService itemMcqOptionsService;
+	
+	@Autowired
+	private ItemTrueFalseService itemTrueFalseService;
 	
 	@Autowired
 	private ExamineeBatchService examineeBatchService; 
@@ -88,6 +98,43 @@ public class RpackService {
 			
 			if(!id2QpItem.containsKey(qpItem.getQpItemId())) {
 				id2QpItem.put(qpItem.getQpItemId(), qpItem);
+			}
+		}
+		
+		List<Object[]> itemOptionObjects = rpackRepository.fetchItemOptionsData();
+		for(int i = 0; i < itemOptionObjects.size(); i++) {
+			if(String.valueOf(itemOptionObjects.get(i)[2]).equals("True") || String.valueOf(itemOptionObjects.get(i)[2]).equals("False")) {
+				EvItemTrueFalse itemTrueFalse = new EvItemTrueFalse();
+				itemTrueFalse.setItemTrueFalseId((Integer)itemOptionObjects.get(i)[1]);
+				itemTrueFalse.setQpItemId((Integer)itemOptionObjects.get(i)[0]);
+				if(rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1], "True") != null) {
+					itemTrueFalse.setTruePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1], "True"));
+				}
+				if(rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1], "False") != null) {
+					itemTrueFalse.setTruePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1], "False"));
+				}
+//				if(String.valueOf(itemOptionObjects.get(i)[2]).equals("True")) {
+//					itemTrueFalse.setTruePercentage((float)(Integer)itemOptionObjects.get(i)[2]);
+//					itemTrueFalse.setFalsePercentage((float)(Integer)itemOptionObjects.get(i+1)[2]);
+//				}
+//				else {
+//					itemTrueFalse.setFalsePercentage((float)(Integer)itemOptionObjects.get(i)[2]);
+//					itemTrueFalse.setTruePercentage((float)(Integer)itemOptionObjects.get(i+1)[2]);
+//				}
+				i++;
+				itemTrueFalseService.addItemTrueFalse(itemTrueFalse);
+			}
+			else {
+				EvItemMcqOptions itemMcqOptions = new EvItemMcqOptions();
+				itemMcqOptions.setItemMcqId((Integer)itemOptionObjects.get(i)[1]);
+				if(id2QpItem.containsKey((Integer)itemOptionObjects.get(i)[0])) {
+					itemMcqOptions.setEvQpItem(id2QpItem.get((Integer)itemOptionObjects.get(i)[0]));
+				}
+				itemMcqOptions.setMcqOptionText(String.valueOf(itemOptionObjects.get(i)[2]));
+				if(rpackRepository.fetchItemMcqPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1]) != null) {
+					itemMcqOptions.setMcqOptionPercentage(rpackRepository.fetchItemMcqPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1]));
+				}
+				itemMcqOptionsService.addItemMcqOptions(itemMcqOptions);
 			}
 		}
 		
