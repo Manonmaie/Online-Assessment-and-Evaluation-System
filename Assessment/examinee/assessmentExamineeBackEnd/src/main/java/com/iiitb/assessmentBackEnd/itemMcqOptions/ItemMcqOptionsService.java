@@ -14,5 +14,8 @@ public class ItemMcqOptionsService {
 	public List<AsItemMcqOptions> getAllMcqOptionsForQpItem(int qpItemId) {
 		return itemMcqOptionsRepository.findByAsQpItemQpItemId(qpItemId);
 	}
-
+	
+	public void addItemMcqOptions(AsItemMcqOptions itemMcqOptions) {
+		itemMcqOptionsRepository.save(itemMcqOptions);
+	}
 }

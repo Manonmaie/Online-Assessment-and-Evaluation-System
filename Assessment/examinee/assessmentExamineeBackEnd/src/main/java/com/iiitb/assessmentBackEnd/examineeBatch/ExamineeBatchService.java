@@ -18,4 +18,7 @@ public class ExamineeBatchService {
 		examineeBatchRepository.save(examineeBatch);
 	}
 
+	public void addExamineeBatch(AsExamineeBatch examineeBatch) {
+		examineeBatchRepository.save(examineeBatch);
+	}
 }

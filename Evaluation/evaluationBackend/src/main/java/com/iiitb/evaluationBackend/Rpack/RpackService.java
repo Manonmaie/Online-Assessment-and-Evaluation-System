@@ -91,7 +91,7 @@ public class RpackService {
 			qpItem.setItemText(String.valueOf(qpItemObjects.get(i)[1]));
 			qpItem.setItemMarks((Float)qpItemObjects.get(i)[2]);
 			qpItem.setItemType(String.valueOf(qpItemObjects.get(i)[3]));
-			if(!id2Qp.containsKey((Integer)qpItemObjects.get(i)[0])) {
+			if(id2Qp.containsKey((Integer)qpItemObjects.get(i)[4])) {
 				qpItem.setEvQuestionPaper(id2Qp.get((Integer)qpItemObjects.get(i)[4]));
 			}
 			qpItemService.addQpItem(qpItem);

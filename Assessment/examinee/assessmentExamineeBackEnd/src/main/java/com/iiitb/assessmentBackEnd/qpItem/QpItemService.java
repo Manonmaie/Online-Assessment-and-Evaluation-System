@@ -15,5 +15,8 @@ public class QpItemService {
 	public List<AsQpItem> getAllQpItemsForQp(int qpId) {
 		return qpItemRepository.findByAsQuestionPaperQpId(qpId);
 	}
-
+	
+	public void addQpItem(AsQpItem qpItem) {
+		qpItemRepository.save(qpItem);
+	}
 }

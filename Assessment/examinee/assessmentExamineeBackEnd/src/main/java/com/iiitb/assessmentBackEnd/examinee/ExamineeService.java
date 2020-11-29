@@ -24,4 +24,8 @@ public class ExamineeService {
 //	public void deleteExaminee(int id) {
 //		examineeRepository.deleteById(id);
 //	}
+	
+	public void addExaminee(AsExaminee examinee) {
+		examineeRepository.save(examinee);
+	}
 }
