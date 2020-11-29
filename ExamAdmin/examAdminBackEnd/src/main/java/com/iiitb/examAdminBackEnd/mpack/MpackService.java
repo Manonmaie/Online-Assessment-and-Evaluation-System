@@ -33,14 +33,14 @@ public class MpackService {
 	public void mpack2OriginalTables() {
 		List<Object[]> examineeBatchMarksObjects = mpackRepository.fetchExamineeBatchMarksdata();
 		for(int i = 0; i < examineeBatchMarksObjects.size(); i++) {
-			ExamineeBatch examineeBatch = examineeBatchService.getExamineeBatchByExamineeBatchId((Integer)examineeBatchMarksObjects.get(i)[0]);
+//			ExamineeBatch examineeBatch = examineeBatchService.getExamineeBatchByExamineeBatchId((Integer)examineeBatchMarksObjects.get(i)[0]);
 			QpItem qpItem = qpItemService.getQpItem((Integer)examineeBatchMarksObjects.get(i)[1]);
 			
 			ExamineeItemMarks examineeItemMarks = new ExamineeItemMarks((Float)examineeBatchMarksObjects.get(i)[2]);
-			if(examineeBatch != null) {
-				examineeItemMarks.setExamineeBatch(examineeBatch);
-			}
-			
+//			if(examineeBatch != null) {
+//				examineeItemMarks.setExamineeBatch(examineeBatch);
+//			}
+			examineeItemMarks.setExaminee_batch_id((Integer)examineeBatchMarksObjects.get(i)[0]);
 			if(qpItem != null) {
 				examineeItemMarks.setQpItem(qpItem);
 			}

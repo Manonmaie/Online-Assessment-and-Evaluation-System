@@ -15,7 +15,7 @@ import org.hibernate.annotations.Immutable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.batch.Batch;
 import com.iiitb.examAdminBackEnd.examinee.Examinee;
-import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarks;
+//import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarks;
 
 @Entity
 @Immutable
@@ -36,9 +36,9 @@ public class ExamineeBatch {
 	@JoinColumn(name = "batch_id")
 	private Batch batch;
 	
-	@OneToMany(mappedBy = "examineeBatch")
-	@JsonIgnore
-	private List<ExamineeItemMarks> examineeItemMarksList;
+//	@OneToMany(mappedBy = "examineeBatch")
+//	@JsonIgnore
+//	private List<ExamineeItemMarks> examineeItemMarksList;
 
 	public ExamineeBatch() {
 	}

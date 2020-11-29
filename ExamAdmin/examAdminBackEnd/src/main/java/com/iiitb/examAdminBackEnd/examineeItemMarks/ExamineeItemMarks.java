@@ -30,9 +30,12 @@ public class ExamineeItemMarks {
 	@JoinColumn(name="qp_item_id")
 	private QpItem qpItem;
 	
-	@ManyToOne
-	@JoinColumn(name="examinee_batch_id")
-	private ExamineeBatch examineeBatch;
+//	@ManyToOne
+//	@JoinColumn(name="examinee_batch_id")
+//	private ExamineeBatch examineeBatch;
+	
+	@Column(name = "examinee_batch_id")
+	private int examinee_batch_id;
 	
 	@Column(name = "marks_obtained")
 	private float marks_obtained;
@@ -62,12 +65,12 @@ public class ExamineeItemMarks {
 		this.qpItem = qpItem;
 	}
 
-	public ExamineeBatch getExamineeBatch() {
-		return examineeBatch;
+	public int getExaminee_batch_id() {
+		return examinee_batch_id;
 	}
 
-	public void setExamineeBatch(ExamineeBatch examineeBatch) {
-		this.examineeBatch = examineeBatch;
+	public void setExaminee_batch_id(int examinee_batch_id) {
+		this.examinee_batch_id = examinee_batch_id;
 	}
 
 	public float getMarks_obtained() {
