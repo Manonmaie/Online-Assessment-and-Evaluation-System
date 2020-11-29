@@ -41,4 +41,9 @@ public class CenterController {
 	public void updateCenter(@PathVariable int id,@RequestBody Center center) {
 		centerService.updateCenter(id, center);
 	}
+	
+	@RequestMapping("/centerCodes")
+	public List<String> getCodes(){
+		return centerService.getCodes();
+	}
 }

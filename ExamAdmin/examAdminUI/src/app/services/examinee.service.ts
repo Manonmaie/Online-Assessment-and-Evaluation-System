@@ -43,4 +43,8 @@ export class ExamineeService {
   updatePasswords():Observable<Examinee[]>{
     return this.http.get<Examinee[]>(baseURL + '/examineesUpdatePassword');
   }
+
+  getCodes(): Observable<string[]>{
+    return this.http.get<string[]>(baseURL + 'examineeCodes/');
+  }
 }

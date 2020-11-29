@@ -11,13 +11,19 @@ import {resetError, setError} from '../shared/error';
 })
 export class CourseAddComponent implements OnInit {
   course = {courseName: null,courseCode: null}
+  codes: string[];
   constructor(private courseService: CourseService, public router: Router) { }
 
   ngOnInit(): void {
+    this.getCodes();
   }
 
   addCourse(course: Course): void{
     this.courseService.addCourse(course).subscribe((course) => this.course=course);
+  }
+
+  getCodes(): void{
+    this.courseService.getCodes().subscribe((codes)=> this.codes = codes);
   }
 
   onSubmit(){
@@ -30,10 +36,15 @@ export class CourseAddComponent implements OnInit {
         setError("courseCode","Course Code is Required");
       }
       else{
-        this.addCourse(this.course);
-        setTimeout(() => {
-          this.router.navigate(['/courses']);
-        },500);
+        if(this.codes.includes(this.course.courseCode)){
+          setError("courseCode","This Course Code is already taken");
+        }
+        else{
+          this.addCourse(this.course);
+          setTimeout(() => {
+            this.router.navigate(['/courses']);
+          },500);
+        }
       }
     }
   }

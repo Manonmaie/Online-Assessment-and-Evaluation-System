@@ -77,4 +77,9 @@ public class ExamineeController {
 		examinees.forEach(examinee->randomPassword(examinee));
 		addExaxmineeBulk(examinees);
 	}
+	
+	@RequestMapping("/examineeCodes")
+	public List<String> getCodes(){
+		return examineeService.getCodes();
+	}
 }

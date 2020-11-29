@@ -11,11 +11,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.urest.v1.authoring_module.course.AuCourseMaster;
 import com.urest.v1.authoring_module.instructions.instructions;
 import com.urest.v1.authoring_module.item.Item;
 import com.urest.v1.authoring_module.options.Options;
@@ -30,10 +33,9 @@ public class questionPaper {
 	questionPaper(){
 		super();
 	}
-	questionPaper(int timeDuration,int totalMarks,String course,String batchCode){
+	questionPaper(int timeDuration,int totalMarks,String batchCode){
 		this.timeDuration=timeDuration;
 		this.totalMarks=totalMarks;
-		this.course=course;
 		this.batchCode=batchCode;
 	}
 	
@@ -51,8 +53,6 @@ public class questionPaper {
 	private int timeDuration;
 	@Column(name="maximum_marks")
 	private int totalMarks;
-	@Column(name="course_code")
-	private String course;
 	@Column(name="batch_code")
 	private String batchCode;
 	
@@ -67,6 +67,9 @@ public class questionPaper {
 	private List<instructions> asInstructions=new ArrayList<instructions>();
 
 	
+	@OneToOne
+	@JoinColumn(name="course_master_id")
+	private AuCourseMaster course=new AuCourseMaster();
 	
 	
 	// --------------------------------------------------------------------------------
@@ -101,13 +104,6 @@ public class questionPaper {
 		this.totalMarks = totalMarks;
 	}
 
-	public String getCourse() {
-		return course;
-	}
-
-	public void setCourse(String course) {
-		this.course = course;
-	}
 	public List<questionPaperItem> getAsitemIds() {
 		return asitemIds;
 	}
@@ -133,6 +129,11 @@ public class questionPaper {
 	public void setAsInstructions(List<instructions> asInstructions) {
 		this.asInstructions = asInstructions;
 	}
-
+	public AuCourseMaster getCourse() {
+		return course;
+	}
+	public void setCourse(AuCourseMaster course) {
+		this.course = course;
+	}
 	
 }

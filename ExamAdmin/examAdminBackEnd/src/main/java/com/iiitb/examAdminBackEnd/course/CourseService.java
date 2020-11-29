@@ -34,4 +34,8 @@ public class CourseService {
 	public void updateCourse(int id, Course course) {
 		courseRepository.save(course);
 	}
+	
+	public List<String> getCodes(){
+		return courseRepository.findCourseCodes();
+	}
 }

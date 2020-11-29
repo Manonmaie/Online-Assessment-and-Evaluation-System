@@ -28,6 +28,10 @@ export class BatchService {
     return this.http.put<Batch>(baseURL + 'batches/'+id, batch);
   }
 
+  updateBatches(batches: Batch[]): Observable<Batch[]>{
+    return this.http.put<Batch[]>(baseURL + 'batchesBulk/', batches);
+  }
+
   addBatch(batch: Batch): Observable<Batch>{
     return this.http.post<Batch>(baseURL + 'batches/', batch);
   }
@@ -38,5 +42,9 @@ export class BatchService {
 
   getBatch(id: number): Observable<Batch>{
     return this.http.get<Batch>(baseURL + "batches/" + id);
+  }
+
+  getCodes(): Observable<string[]>{
+    return this.http.get<string[]>(baseURL + 'batchCodes/');
   }
 }

@@ -28,4 +28,7 @@ export class ExamdriveService {
   updateExamdrive(id: number, examdrive: Examdrive): Observable<Examdrive>{
     return this.http.put<Examdrive>(baseURL + "examdrives/" + id, examdrive);
   }
+  getCodes(): Observable<string[]>{
+    return this.http.get<string[]>(baseURL + 'examdriveCodes/');
+  }
 }

@@ -6,11 +6,29 @@ USE oaes_exam_admin_db;
 --
 
 -- --------------------------------------------------------
+-- Table structure for table ea_user
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ea_user(
+  user_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_name varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
+  password varchar(255) NOT NULL,
+  status ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
+  PRIMARY KEY(user_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table ea_user
+-- --------------------------------------------------------
+INSERT INTO ea_user VALUES(0,"Admin","admin",'ACTIVE');
+INSERT INTO ea_user VALUES(0,"Admin1","admin",'ACTIVE');
+INSERT INTO ea_user VALUES(0,"OldAdmin","old_admin",'INACTIVE');
+
+-- --------------------------------------------------------
 -- Table structure for table `ea_course_master`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_course_master (
   course_master_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  course_code varchar(255) UNIQUE NOT NULL,
+  course_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   course_name varchar(255) NOT NULL,
   PRIMARY KEY (course_master_id)
 );
@@ -28,7 +46,7 @@ INSERT INTO ea_course_master VALUES(0,"DSA","Data Structures and Alogorithms");
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_examdrive(
   examdrive_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  examdrive_code varchar(255) UNIQUE NOT NULL,
+  examdrive_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   examdrive_name varchar(255) NOT NULL,
   status ENUM('NOT_STARTED','IN_PROGRESS','COMPLETED') DEFAULT 'NOT_STARTED',
   course_master_id int(10) unsigned,
@@ -42,7 +60,7 @@ ALTER TABLE ea_examdrive
 -- Data Entry for table ea_examdrive
 -- --------------------------------------------------------
 INSERT INTO ea_examdrive VALUES(0,"MID","Mid Term Examination",'COMPLETED',1);
-INSERT INTO ea_examdrive VALUES(0,"END","End Term Examination",'NOT_STARTED',1);
+INSERT INTO ea_examdrive VALUES(0,"END","End Term Examination",'IN_PROGRESS',1);
 INSERT INTO ea_examdrive VALUES(0,"IMP","Improvement Examination",'NOT_STARTED',1);
 
 -- --------------------------------------------------------
@@ -50,7 +68,7 @@ INSERT INTO ea_examdrive VALUES(0,"IMP","Improvement Examination",'NOT_STARTED',
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_examinee(
   examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  examinee_code varchar(255) UNIQUE NOT NULL,
+  examinee_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   examinee_name varchar(255) NOT NULL,
   examinee_password varchar(255) NOT NULL,
   examinee_branch varchar(255),
@@ -73,7 +91,7 @@ INSERT INTO ea_examinee VALUES(0,"S5","X","x",NULL,NULL,NULL);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_center(
   center_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  center_code varchar(255) UNIQUE NOT NULL,
+  center_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   center_name varchar(255) NOT NULL,
   center_capacity int(10) unsigned,
   PRIMARY KEY(center_id)
@@ -92,7 +110,7 @@ INSERT INTO ea_center VALUES(0,"IITM","Indian Institute of Technology, Chennai",
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_batch(
   batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  batch_code varchar(255) UNIQUE NOT NULL,
+  batch_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   batch_start_time datetime NOT NULL,
   batch_end_time datetime NOT NULL,
   qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING','SENT') DEFAULT 'PENDING',

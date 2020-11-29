@@ -31,4 +31,8 @@ export class CenterService {
   updateCenter(id: number, center: Center): Observable<Center>{
     return this.http.put<Center>(baseURL + 'centers/'+id, center);
   }
+
+  getCodes(): Observable<string[]>{
+    return this.http.get<string[]>(baseURL + 'centerCodes/');
+  }
 }

@@ -61,4 +61,8 @@ public class ExamineeService {
 	public List<Examinee> getExamineesByCode(List<String> codes){
 		return examineeRepository.findByExamineeCodeIn(codes);
 	}
+	
+	public List<String> getCodes(){
+		return examineeRepository.findExamineeCodes();
+	}
 }
