@@ -1,0 +1,19 @@
+<div class="container">
+    <!-- <div *ngIf="displayErrorMessage" class="alert alert-danger" role="alert">
+      <strong>Error!</strong> {{errorMessage}}
+    </div> -->
+    <h2 style="text-align:center;"> Login </h2>
+    <form role="form" name="LogIn">
+      <div class="form-item">
+        <label class="required" for="userName">Username </label>
+        <input type="text" placeholder="Enter Username" id="userName" name="userName" [(ngModel)]="userName"/>
+        <small>Error Message</small>
+      </div>
+      <div class="form-item">
+        <label class="required" for="password">Password </label>
+        <input type="password" placeholder="Enter Password" id="password" name="password" [(ngModel)]="password"/>
+        <small>Error Message</small>
+      </div>
+      <input type="submit" value ="Log In" (click)="onSubmit()">
+    </form>
+</div>

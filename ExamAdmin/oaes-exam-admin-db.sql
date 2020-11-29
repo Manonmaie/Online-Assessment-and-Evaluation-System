@@ -6,6 +6,24 @@ USE oaes_exam_admin_db;
 --
 
 -- --------------------------------------------------------
+-- Table structure for table ea_user
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ea_user(
+  user_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_name varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
+  password varchar(255) NOT NULL,
+  status ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
+  PRIMARY KEY(user_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table ea_user
+-- --------------------------------------------------------
+INSERT INTO ea_user VALUES(0,"Admin","admin",'ACTIVE');
+INSERT INTO ea_user VALUES(0,"Admin1","admin",'ACTIVE');
+INSERT INTO ea_user VALUES(0,"OldAdmin","old_admin",'INACTIVE');
+
+-- --------------------------------------------------------
 -- Table structure for table `ea_course_master`
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS ea_course_master (

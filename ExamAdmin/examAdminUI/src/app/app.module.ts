@@ -43,6 +43,7 @@ import { ExamdriveCenterViewComponent } from './examdrive-center-view/examdrive-
 import { ExamdriveMarksComponent } from './examdrive-marks/examdrive-marks.component';
 import { ExamdriveUpdateCenterAddComponent } from './examdrive-update-center-add/examdrive-update-center-add.component';
 import { ExamdriveBatchViewComponent } from './examdrive-batch-view/examdrive-batch-view.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { ExamdriveBatchViewComponent } from './examdrive-batch-view/examdrive-ba
     ExamdriveCenterViewComponent,
     ExamdriveMarksComponent,
     ExamdriveUpdateCenterAddComponent,
-    ExamdriveBatchViewComponent
+    ExamdriveBatchViewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
