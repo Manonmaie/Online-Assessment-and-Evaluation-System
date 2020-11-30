@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Examdrive} from '../shared/examdrive';
 import {ExamdriveService} from '../services/examdrive.service';
 import {Observable, of} from 'rxjs';
+import {resetError, setError} from '../shared/error';
 
 @Component({
   selector: 'app-examdrive',
@@ -13,6 +14,8 @@ export class ExamdriveComponent implements OnInit {
   searchText: any;
   pageNo: number = 1;
   itemsPage: number = 25;
+  MKey: String;
+  QPKey: String;
   constructor(private examdriveService:ExamdriveService) { }
 
   ngOnInit(): void {
@@ -32,6 +35,24 @@ export class ExamdriveComponent implements OnInit {
         // alert(response.message);
         this.getExamdrives();
       });
+    }
+  }
+
+  importMarks(): void{
+    if(this.MKey==null || this.MKey==""){
+      setError("MarksKey", "Key is Required");
+    }
+    else{
+      //TODO-Admin - Import Marks
+    }
+  }
+
+  importQuestionPapers(): void{
+    if(this.QPKey==null || this.QPKey==""){
+      setError("QuestionPaperKey", "Key is Required");
+    }
+    else{
+      //TODO-Admin - Import Question Papers
     }
   }
 }

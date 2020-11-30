@@ -53,6 +53,7 @@
                             <!-- <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button> -->
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "isShow[center.centerId]"><i class="fa fa-eye"></i></button>
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "!isShow[center.centerId]"><i class="fa fa-eye-slash"></i></button>
+                            <!-- TODO-Admin - Depending on sent status display key of the files -->
                         </td>
                     </tr>
                     <td colspan="4" [hidden] = "!isShow[center.centerId]">
