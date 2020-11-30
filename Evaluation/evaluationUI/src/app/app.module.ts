@@ -21,6 +21,7 @@ import { QpItemComponent } from './qp-item/qp-item.component';
 import { ResponseComponent } from './response/response.component';
 import { ExamineeItemMarksComponent } from './examinee-item-marks/examinee-item-marks.component';
 import { LoginComponent } from './login/login.component';
+import { PackageManagementComponent } from './package-management/package-management.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LoginComponent } from './login/login.component';
     QpItemComponent,
     ResponseComponent,
     ExamineeItemMarksComponent,
-    LoginComponent
+    LoginComponent,
+    PackageManagementComponent
   ],
   imports: [
     BrowserModule,
