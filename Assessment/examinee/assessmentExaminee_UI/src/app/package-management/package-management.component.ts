@@ -24,10 +24,14 @@ export class PackageManagementComponent implements OnInit {
   batchToBeUpdated: Batch;
   rpackToBeUpdated: OutRpackHeader;
   batchDummy: Batch;
+  epackKey: string;
+  displayErrorMessage: boolean = false;
+  errorMessage: String;
 
   constructor(private packageManagementService: PackageManagementService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.epackKey="";
     this.packageManagementService.getAllCompletedBatchesToExport().subscribe((completedBatches) => {
       this.completedBatches = completedBatches;
       if(completedBatches != null && completedBatches.length > 0){
@@ -101,8 +105,18 @@ export class PackageManagementComponent implements OnInit {
   // }
 
   importQPack(){
-    // alert("Q-Pack imported");
-    this.packageManagementService.importAllEpacks().subscribe((epacksImported) => {
+    // alert(this.epackKey);
+    if(this.epackKey == ""){
+      this.displayErrorMessage = true;
+      this.errorMessage = "Please enter Username. It is a mandatory field";
+      if(this.displayErrorMessage == true){
+        setTimeout(function() {
+          this.displayErrorMessage = false;
+          console.log("display = " + this.displayErrorMessage);
+        }.bind(this), 3000);
+      }
+    }
+    this.packageManagementService.importAllEpacks(this.epackKey).subscribe((epacksImported) => {
       this.epacksImported = epacksImported;
     });
   }
