@@ -1,9 +1,43 @@
 <div>
     <div class="container">
         <h2 style="text-align:center;"> Evaluator - Package Management </h2>
-        <div class="center">
-            <button type="button" class="btn btn-success btn-lg btn-block" ><i class="fa fa-download"></i> Import Answer Key and Students Response Packs (A-pack and R-Pack)</button>
-            <button type="button" class="btn btn-primary btn-lg btn-block" ><i class="fa fa-paper-plane"></i> Export All Student Marks-Pack (M-Pack) </button>
+        <div>
+            <div *ngIf="displayErrorMessage" class="alert alert-danger" role="alert">
+                <strong>Error!</strong> {{errorMessage}}
+              </div>
+            <div class="border border-light">
+                <h4 style="text-align:center;">Import R-Pack</h4>
+                <div class="row">
+                    <div class="col-xs-6 col-md-5">
+                        <form role="form" name="textBoxForRpackKey">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Enter Key to import the respective R-Pack" name="rpackKey" [(ngModel)]="rpackKey"/>
+                              </div>
+                          </form>
+                    </div>
+                    <div class="col-xs-6 col-md-7">
+                        <button type="button" class="btn btn-success btn-lg btn-block" ><i class="fa fa-download"></i> Import Students Response Pack (R-Pack)</button>
+                    </div>
+                </div>
+            </div>
+            <div class="border border-light">
+                <h4 style="text-align:center;">Import A-Pack</h4>
+                <div class="row">
+                    <div class="col-xs-6 col-md-5">
+                        <form role="form" name="textBoxForApackKey">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Enter Key to import the respective A-Pack" name="apackKey" [(ngModel)]="apackKey"/>
+                              </div>
+                          </form>
+                    </div>
+                    <div class="col-xs-6 col-md-7">
+                        <button type="button" class="btn btn-success btn-lg btn-block" ><i class="fa fa-download"></i> Import Answers Key Pack (A-Pack)</button>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="button" class="btn btn-primary btn-lg btn-block" ><i class="fa fa-paper-plane"></i> Export All Student Marks-Pack (M-Pack)</button>
         </div>
+        
     </div>
 </div>
