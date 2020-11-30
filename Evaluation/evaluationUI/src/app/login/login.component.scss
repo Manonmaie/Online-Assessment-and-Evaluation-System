@@ -8,10 +8,16 @@
 
 .container{
     padding-top: 100px;
+    max-width: 25%;
 }
 
 .required-field::after {
     content: "*";
     color: red;
     margin-left:2px
+}
+
+
+h2 {
+  margin-bottom: 7% !important;
 }
