@@ -6,8 +6,18 @@
 </div>
 
 <div class="container">
-  <button type="button" class="btn btn-warning float-right mr-1" title="Import Marks"><i class="fa fa-download"></i> Import Marks </button>
-  <button type="button" class="btn btn-warning float-right mr-3" title="Import Question Papers"><i class="fa fa-download"></i> Import Question Papers </button>
+  <button type="button" class="btn btn-warning float-right mr-1" title="Import Marks" (click)="importMarks()"><i class="fa fa-download"></i> Import Marks </button>
+  <div class="form-item">
+    <input class="Key mr-1" type="text" id="MarksKey" name="MarksKey" placeholder="Enter Key for import of Marks" [(ngModel)]="MKey">
+    <small>Error Message</small>
+  </div>
+</div>
+<div class="container">
+  <button type="button" class="btn btn-warning float-right mr-1" title="Import Question Papers" (click)="importQuestionPapers()"><i class="fa fa-download"></i> Import Question Papers </button>
+  <div class="form-item">
+    <input class="Key mr-1" type="text" id="QuestionPaperKey" name="QuestionPaperKey" placeholder="Enter Key for import of Question Papers" [(ngModel)]="QPKey">
+    <small>Error Message</small>
+  </div>
 </div>
 <div class="container">
   <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search here..." [(ngModel)]="searchText"/>

@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PackageManagementComponent implements OnInit {
 
+  apackKey: string;
+  rpackKey: string;
+  displayErrorMessage: boolean = false;
+  errorMessage: String;
+
   constructor() { }
+
 
   ngOnInit(): void {
   }
