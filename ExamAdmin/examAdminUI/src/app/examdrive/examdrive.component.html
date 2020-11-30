@@ -6,6 +6,10 @@
 </div>
 
 <div class="container">
+  <button type="button" class="btn btn-warning float-right mr-1" title="Import Marks"><i class="fa fa-download"></i> Import Marks </button>
+  <button type="button" class="btn btn-warning float-right mr-3" title="Import Question Papers"><i class="fa fa-download"></i> Import Question Papers </button>
+</div>
+<div class="container">
   <input type="text" name="search" style="font-family: FontAwesome;" placeholder= "&#xf002; Search here..." [(ngModel)]="searchText"/>
 </div>
 <div class="container">
@@ -37,24 +41,24 @@
             <button disabled type="button" class="btn btn-warning float-right mr-1" [routerLink]="['/examdriveupdate', examdrive.examdriveId]"><i class="fa fa-pencil"></i></button>
           </ng-container>
           <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview', examdrive.examdriveId]"><i class="fa fa-eye"></i></button>
-          <ng-container  *ngIf = "examdrive.status=='IN_PROGRESS'">
+          <!-- <ng-container  *ngIf = "examdrive.status=='IN_PROGRESS'">
             <button type="button" class="btn btn-warning float-right mr-1" title="Import Marks"><i class="fa fa-download"></i> Marks </button>
           </ng-container>
           <ng-container  *ngIf = "examdrive.status!='IN_PROGRESS'">
             <button disabled type="button" class="btn btn-warning float-right mr-1" title="Import Marks"><i class="fa fa-download"></i> Marks </button>
-          </ng-container>
+          </ng-container> -->
           <ng-container  *ngIf = "examdrive.status=='COMPLETED'">
             <button type="button" class="btn btn-success float-right mr-1" title="Marks Reports" [routerLink]="['/examdrivemarksreport', examdrive.examdriveId]"><i class="fa fa-bar-chart"></i></button>
           </ng-container>
           <ng-container  *ngIf = "examdrive.status!='COMPLETED'">
             <button disabled type="button" class="btn btn-success float-right mr-1" title="Marks Reports" [routerLink]="['/examdrivemarksreport', examdrive.examdriveId]"><i class="fa fa-bar-chart"></i></button>
           </ng-container>
-          <ng-container  *ngIf = "examdrive.status=='NOT_STARTED'">
+          <!-- <ng-container  *ngIf = "examdrive.status=='NOT_STARTED'">
             <button type="button" class="btn btn-warning float-right mr-1" title="Import Question Papers"><i class="fa fa-download"></i> Question Papers </button>
           </ng-container>
           <ng-container  *ngIf = "examdrive.status!='NOT_STARTED'">
             <button disabled type="button" class="btn btn-warning float-right mr-1" title="Import Question Papers"><i class="fa fa-download"></i> Question Papers </button>
-          </ng-container>
+          </ng-container> -->
         </td>
       </tr>
     </tbody>
