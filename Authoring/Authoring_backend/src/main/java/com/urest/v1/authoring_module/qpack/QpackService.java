@@ -3,6 +3,7 @@ package com.urest.v1.authoring_module.qpack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.urest.v1.authoring_module.qpack2.Qpack2;
 import com.urest.v1.authoring_module.qpack2.Qpack2Service;
 import com.urest.v1.authoring_module.qpack3.Qpack3;
 import com.urest.v1.authoring_module.qpack3.Qpack3Service;
+import com.urest.v1.authoring_module.sqlDump.SqlDumpService;
 
 @Service
 public class QpackService {
@@ -33,6 +35,9 @@ public class QpackService {
 	@Autowired
 	private Qpack3Service qpack3Service;
 	
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
 	public List<Qpack> getAllQpacks() {
 		List<Qpack> qpacks = new ArrayList<>();
 		qpackRepository.findAll().forEach(qpacks::add);
@@ -43,7 +48,7 @@ public class QpackService {
 		qpackRepository.deleteById(id);
 	}
 	
-	public void addQpack() {
+	public void addQpack() throws IOException {
 		qpack3Service.deleteAll();
 		qpack2Service.deleteAll();
 		qpack1Service.deleteAll();
@@ -119,7 +124,7 @@ public class QpackService {
 			qpack3False.setQpack2(qpack2Service.getQpack2ByQpItemId(qpack3False.getQp_item_id()));
 			qpack3Service.addQpack3(qpack3False);
 		}
-		
+		sqlDumpService.getDump("Qpack");
 	}
 	
 	public Optional<Qpack> getQpack(int id){

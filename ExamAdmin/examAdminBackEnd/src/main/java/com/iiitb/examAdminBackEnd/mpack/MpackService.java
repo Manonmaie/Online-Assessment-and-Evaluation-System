@@ -1,5 +1,6 @@
 package com.iiitb.examAdminBackEnd.mpack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarks;
 import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarksService;
 import com.iiitb.examAdminBackEnd.qp_item.QpItem;
 import com.iiitb.examAdminBackEnd.qp_item.QpItemService;
+import com.iiitb.examAdminBackEnd.sqlDump.SqlDumpService;
 
 @Service
 public class MpackService {
@@ -25,12 +27,17 @@ public class MpackService {
 	private QpItemService qpItemService;
 	
 	@Autowired
-	ExamineeBatchService examineeBatchService;
+	private ExamineeBatchService examineeBatchService;
 	
 	@Autowired
-	ExamineeItemMarksService examineeItemMarksService;
+	private ExamineeItemMarksService examineeItemMarksService;
 	
-	public void mpack2OriginalTables() {
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
+	public void mpack2OriginalTables() throws IOException, InterruptedException {
+		sqlDumpService.importDump("Mpack");
+		
 		List<Object[]> examineeBatchMarksObjects = mpackRepository.fetchExamineeBatchMarksdata();
 		for(int i = 0; i < examineeBatchMarksObjects.size(); i++) {
 //			ExamineeBatch examineeBatch = examineeBatchService.getExamineeBatchByExamineeBatchId((Integer)examineeBatchMarksObjects.get(i)[0]);

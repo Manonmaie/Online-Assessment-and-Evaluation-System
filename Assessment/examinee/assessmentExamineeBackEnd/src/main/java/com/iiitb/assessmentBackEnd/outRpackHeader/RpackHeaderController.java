@@ -1,5 +1,6 @@
 package com.iiitb.assessmentBackEnd.outRpackHeader;
 
+import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,7 +28,7 @@ public class RpackHeaderController {
 	}
 	
 	@RequestMapping("/createRpack")
-	public void createRpack(){
+	public void createRpack()  throws IOException{
 		rpackHeaderService.addRpack();
 	}
 }

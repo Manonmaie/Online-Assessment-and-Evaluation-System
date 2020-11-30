@@ -1,4 +1,5 @@
 package com.urest.v1.authoring_module.apack;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class ApackController {
 	private ApackService apackService;
 	
 	@RequestMapping("/createApack")
-	public void createApack(){
+	public void createApack() throws IOException{
 		apackService.addApack();
 	}
 }

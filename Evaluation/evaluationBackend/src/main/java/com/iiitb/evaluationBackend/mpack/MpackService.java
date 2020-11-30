@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.iiitb.evaluationBackend.mpack2.Mpack2;
 import com.iiitb.evaluationBackend.mpack2.Mpack2Service;
 import com.iiitb.evaluationBackend.mpack3.Mpack3;
 import com.iiitb.evaluationBackend.mpack3.Mpack3Service;
+import com.iiitb.evaluationBackend.sqlDump.SqlDumpService;
 
 @Service
 public class MpackService {
@@ -34,6 +36,9 @@ public class MpackService {
 	@Autowired
 	private Mpack3Service mpack3Service;
 	
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
 	public List<Mpack> getAllMpacks() {
 		List<Mpack> mpacks = new ArrayList<>();
 		mpackRepository.findAll().forEach(mpacks::add);
@@ -48,7 +53,7 @@ public class MpackService {
 		return mpackRepository.findById(id);
 	}
 	
-	public void addMpack() {
+	public void addMpack() throws IOException {
 		mpack3Service.deleteAll();
 		mpack2Service.deleteAll();
 		mpack1Service.deleteAll();
@@ -100,5 +105,7 @@ public class MpackService {
 				mpack3Service.addMpack3(mpack3);
 			}
 		}
+		
+		sqlDumpService.getMpackDump();
 	}
 }

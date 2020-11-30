@@ -1,5 +1,6 @@
 package com.iiitb.evaluationBackend.Rpack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.iiitb.evaluationBackend.response.EvResponse;
 import com.iiitb.evaluationBackend.response.ResponseService;
 import com.iiitb.evaluationBackend.responseMcq.EvResponseMcq;
 import com.iiitb.evaluationBackend.responseMcq.ResponseMcqService;
+import com.iiitb.evaluationBackend.sqlDump.SqlDumpService;
 
 @Service
 public class RpackService {
@@ -50,6 +52,9 @@ public class RpackService {
 	@Autowired
 	private ResponseMcqService responseMcqService;
 	
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
 	
 	public List<Rpack> getAllRpacks() {
 		List<Rpack> rpacks = new ArrayList<>();
@@ -65,7 +70,9 @@ public class RpackService {
 		return rpackRepository.findById(id);
 	}
 	
-	public void rpack2OriginalTables() {
+	public void rpack2OriginalTables() throws IOException, InterruptedException {
+		sqlDumpService.importDump("Rpack");
+		
 		Map<Integer, EvQuestionPaper> id2Qp = new HashMap<Integer, EvQuestionPaper>();
 		
 		List<Object[]> qpObjects = rpackRepository.fetchQPdata();

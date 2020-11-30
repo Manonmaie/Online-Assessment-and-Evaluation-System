@@ -26,7 +26,7 @@ INSERT INTO au_course_master VALUES(0,"dp_103","Design Patterns");
 
 CREATE TABLE IF NOT EXISTS `au_item` (
 		`item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-		`item_text` blob NOT NULL,
+		`item_text` text(1024) NOT NULL,
     		`item_type` varchar(255) NOT NULL,
 		`cognitive_level` ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE') DEFAULT 'UNDERSTAND',
 		`difficulty_level` ENUM('EASY', 'EASY-MEDIUM', 'MEDIUM', 'HARD-MEDIUM', 'HARD') DEFAULT 'EASY',
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS qpack2(
   qp_id int(10) unsigned NOT NULL,
   item_id int(10) unsigned NOT NULL,
   qp_item_id int(10) unsigned NOT NULL,
-  item_text blob NOT NULL,
+  item_text text(1024) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
   cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE')  NOT NULL,
@@ -278,7 +278,7 @@ CREATE TABLE IF NOT EXISTS apack1(
   qp_id int(10) unsigned NOT NULL,
   item_id int(10) unsigned NOT NULL,
   qp_item_id int(10) unsigned NOT NULL,
-  item_text blob NOT NULL,
+  item_text text(1024) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
   PRIMARY KEY(apack1_id)

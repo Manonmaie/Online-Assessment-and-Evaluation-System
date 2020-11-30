@@ -19,9 +19,12 @@ public class SqlDumpService {
 //		sqlDumpRepository.getAllRpackTablesDump();
 //	}
 	
-	public void getRpackDump() throws IOException, InterruptedException {
+	public void getMpackDump() throws IOException {
 		sqlDump.createSqlDumpFile();
-		if(sqlDump.runSqlDumpFile()) {
+	}
+	
+	public void importDump(String pack) throws IOException, InterruptedException {
+		if(sqlDump.runSqlDumpFile(pack)) {
 			System.out.println("Dump execute Success");
 		}
 		else {

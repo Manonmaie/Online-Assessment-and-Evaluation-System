@@ -1,5 +1,7 @@
 package com.iiitb.evaluationBackend.mpack;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,7 @@ public class MpackController {
 	private MpackService mpackService;
 	
 	@RequestMapping("/createMpack")
-	public void createMpack(){
+	public void createMpack() throws IOException{
 		mpackService.addMpack();
 	}
 }

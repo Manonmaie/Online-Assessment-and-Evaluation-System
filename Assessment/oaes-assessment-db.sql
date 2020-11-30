@@ -510,17 +510,92 @@ ALTER TABLE as_response
 -- --------------------------------------------------------
 -- Table structure for table in_epack_header
 -- --------------------------------------------------------
--- CREATE TABLE IF NOT EXISTS in_epack_header(
---   epack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
---   epack_desc varchar(255),
---   created_on datetime,
---   created_by varchar(255),
---   epack_status ENUM('CREATED', 'SENT'),
---   epack_sent_on datetime,
---   epack_path varchar(255),
---   centre_id int(10) unsigned UNIQUE NOT NULL,
---   PRIMARY KEY(epack_header_id)
--- );
+CREATE TABLE IF NOT EXISTS out_epack_header(
+  epack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack_desc varchar(255),
+  created_on datetime,
+  created_by varchar(255),
+  epack_status ENUM('CREATED', 'SENT'),
+  epack_sent_on datetime,
+  epack_path varchar(255),
+  center_id int(10) unsigned NOT NULL,
+  PRIMARY KEY(epack_header_id)
+);
+
+CREATE TABLE IF NOT EXISTS epack1(
+  epack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack_header_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  -- qp_code varchar(255) NOT NULL,
+  maximum_marks float(24) NOT NULL,
+  instruction_id int(10) unsigned UNIQUE,
+  instruction_code varchar(255) UNIQUE,
+  instruction_text varchar(255),
+  duration int(10) NOT NULL,
+  batch_id int(10) unsigned NOT NULL,
+  batch_code varchar(255) NOT NULL,
+  batch_start_time datetime NOT NULL,
+  batch_end_time datetime NOT NULL,
+  center_id int(10) unsigned NOT NULL,
+  center_code varchar(255) NOT NULL,
+  center_name varchar(255) NOT NULL,
+  examdrive_id int(10) unsigned NOT NULL,
+  examdrive_code varchar(255) NOT NULL,
+  examdrive_name varchar(255) NOT NULL,
+  course_master_id int(10) unsigned NOT NULL,
+  course_code varchar(255) NOT NULL,
+  course_name varchar(255) NOT NULL,
+  PRIMARY KEY(epack1_id)
+);
+
+ALTER TABLE epack1
+  ADD CONSTRAINT `fk_epack1_epack_header_id` FOREIGN KEY (epack_header_id) REFERENCES out_epack_header(epack_header_id) ON DELETE CASCADE;
+
+  CREATE TABLE IF NOT EXISTS epack2(
+  epack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack1_id int(10) unsigned NOT NULL,
+  qp_id int(10) unsigned NOT NULL,
+  qp_item_id int(10) unsigned UNIQUE NOT NULL,
+  item_text varchar(511) NOT NULL,
+  item_marks float(24) unsigned NOT NULL,
+  item_type varchar(255) NOT NULL,
+  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
+  PRIMARY KEY(epack2_id)
+);
+
+ALTER TABLE epack2
+  ADD CONSTRAINT `fk_epack2_epack1_id` FOREIGN KEY (epack1_id) REFERENCES epack1(epack1_id) ON DELETE CASCADE;
+
+  CREATE TABLE IF NOT EXISTS epack3(
+  epack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack2_id int(10) unsigned NOT NULL,
+  qp_item_id int(10) unsigned NOT NULL,
+  item_option_id int(10) unsigned NOT NULL,
+  option_text varchar(255) NOT NULL,
+  PRIMARY KEY(epack3_id)
+);
+
+ALTER TABLE epack3
+  ADD CONSTRAINT `fk_epack3_epack2_id` FOREIGN KEY (epack2_id) REFERENCES epack2(epack2_id) ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS epack4(
+  epack4_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  epack1_id int(10) unsigned NOT NULL,
+  batch_id int(10) unsigned NOT NULL,
+  -- qp_id int(10) unsigned NOT NULL,
+  examinee_batch_id int(10) unsigned NOT NULL,
+  examinee_id int(10) unsigned NOT NULL,
+  examinee_code varchar(255) NOT NULL,
+  examinee_name varchar(255) NOT NULL,
+  examinee_password varchar(255) NOT NULL,
+  examinee_branch varchar(255),
+  examinee_email varchar(255),
+  examinee_college varchar(255),
+  PRIMARY KEY(epack4_id)
+);
+
+ALTER TABLE epack4
+  ADD CONSTRAINT `fk_epack4_epack1_id` FOREIGN KEY (epack1_id) REFERENCES epack1(epack1_id) ON DELETE CASCADE;
 
 -- -- --------------------------------------------------------
 -- -- Table structure for table epack1

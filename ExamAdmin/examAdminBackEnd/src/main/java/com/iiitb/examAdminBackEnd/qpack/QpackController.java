@@ -1,5 +1,7 @@
 package com.iiitb.examAdminBackEnd.qpack;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,7 @@ public class QpackController {
 	private QpackService qpackService;
 	
 	@RequestMapping("/importFromQpack")
-	public void fromQpack(){
+	public void fromQpack() throws IOException, InterruptedException{
 		qpackService.qpack2OriginalTables();
 	}
 }

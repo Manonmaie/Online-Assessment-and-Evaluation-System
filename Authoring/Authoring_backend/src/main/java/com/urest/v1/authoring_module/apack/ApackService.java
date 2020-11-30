@@ -3,6 +3,7 @@ package com.urest.v1.authoring_module.apack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import com.urest.v1.authoring_module.apack1.Apack1;
 import com.urest.v1.authoring_module.apack1.Apack1Service;
 import com.urest.v1.authoring_module.apack2.Apack2;
 import com.urest.v1.authoring_module.apack2.Apack2Service;
+import com.urest.v1.authoring_module.sqlDump.SqlDumpService;
 
 @Service
 public class ApackService {
@@ -27,6 +29,9 @@ public class ApackService {
 	@Autowired
 	private Apack2Service apack2Service;
 	
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
 	public List<Apack> getAllApacks() {
 		List<Apack> apacks = new ArrayList<>();
 		apackRepository.findAll().forEach(apacks::add);
@@ -41,7 +46,7 @@ public class ApackService {
 		return apackRepository.findById(id);
 	}
 	
-	public void addApack() {
+	public void addApack() throws IOException {
 		apack2Service.deleteAll();
 		apack1Service.deleteAll();
 		//Generate Apack
@@ -77,5 +82,7 @@ public class ApackService {
 			apack2False.setApack1(apack1Service.getApack1ByQpItemId(apack2False.getQp_item_id()));
 			apack2Service.addApack2(apack2False);
 		}
+		
+		sqlDumpService.getDump("Apack");
 	}
 }

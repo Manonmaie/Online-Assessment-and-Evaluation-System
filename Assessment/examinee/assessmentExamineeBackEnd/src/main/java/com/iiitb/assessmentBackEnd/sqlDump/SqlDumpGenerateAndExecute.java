@@ -10,10 +10,10 @@ public class SqlDumpGenerateAndExecute {
 	public void createSqlDumpFile() throws IOException {
 		System.out.println("creating dump");
 	      Runtime rt = Runtime.getRuntime();
-	      Process p = rt.exec("/usr/local/Cellar/mysql/8.0.12/bin/mysqldump -u root oaes_assessment_db as_user as_role_master");
+	      Process p = rt.exec("/usr/local/Cellar/mysql/8.0.12/bin/mysqldump -u root oaes_assessment_db out_rpack_header rpack1 rpack2 rpack3 rpack4");
 //	      Process p = rt.exec("mysqldump -u root -ppassword oaes_assessment_db as_user as_role_master");
 	      InputStream is=p.getInputStream();
-	      FileOutputStream fos=new FileOutputStream("dump.sql");
+	      FileOutputStream fos=new FileOutputStream("RpackDump.sql");
 	      int ch;
 	      while((ch=is.read())!=-1) {
 	             fos.write(ch);
@@ -25,7 +25,7 @@ public class SqlDumpGenerateAndExecute {
 
 	    public boolean runSqlDumpFile() throws IOException, InterruptedException {
 	      Runtime rt = Runtime.getRuntime();
-	      String dbUsername="root", dbPassword="akshara", dbName="test", sourceFile="dump.sql";
+	      String dbUsername="root", dbPassword="akshara", dbName="oaes_assessment_db", sourceFile="EpackDump.sql";
 //	      String dbUsername="root", dbPassword="password", dbName="test", sourceFile="dump.sql";
 	      String[] command = new String[]{
 //	                "/usr/local/Cellar/mysql/8.0.12/bin/mysql",

@@ -1,5 +1,7 @@
 package com.iiitb.evaluationBackend.Rpack;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,7 @@ public class RpackController {
 	private RpackService rpackService;
 	
 	@RequestMapping("/importFromRpack")
-	public void fromRpack(){
+	public void fromRpack() throws IOException, InterruptedException{
 		rpackService.rpack2OriginalTables();
 	}
 }

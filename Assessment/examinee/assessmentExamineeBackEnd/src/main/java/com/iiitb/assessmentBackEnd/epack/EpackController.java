@@ -1,5 +1,7 @@
 package com.iiitb.assessmentBackEnd.epack;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,7 @@ public class EpackController {
 	private EpackService epackService;
 	
 	@RequestMapping("/importFromEpack")
-	public void fromEpack(){
+	public void fromEpack() throws IOException, InterruptedException{
 		epackService.epack2OriginalTables();
 	}
 }
