@@ -12,7 +12,6 @@ public class SqlDumpGenerateAndExecute {
 	      Runtime rt = Runtime.getRuntime();
 	      Process p = rt.exec("/usr/local/Cellar/mysql/8.0.12/bin/mysqldump -u root oaes_assessment_db as_user as_role_master");
 //	      Process p = rt.exec("mysqldump -u root -ppassword oaes_assessment_db as_user as_role_master");
-//	      mysqldump -u [user name] -p[password] [database name] > [dump file]
 	      InputStream is=p.getInputStream();
 	      FileOutputStream fos=new FileOutputStream("dump.sql");
 	      int ch;
@@ -26,9 +25,8 @@ public class SqlDumpGenerateAndExecute {
 
 	    public boolean runSqlDumpFile() throws IOException, InterruptedException {
 	      Runtime rt = Runtime.getRuntime();
-	      String dbUsername="root", dbPassword="akshara", dbName="dummy", sourceFile="dump.sql";
+	      String dbUsername="root", dbPassword="akshara", dbName="test", sourceFile="dump.sql";
 //	      String dbUsername="root", dbPassword="password", dbName="test", sourceFile="dump.sql";
-//	      Process pr = rt.exec("mysql -p -h ServerName dummy < mydb_abackup.sql");
 	      String[] command = new String[]{
 //	                "/usr/local/Cellar/mysql/8.0.12/bin/mysql",
 	    		  	"mysql",

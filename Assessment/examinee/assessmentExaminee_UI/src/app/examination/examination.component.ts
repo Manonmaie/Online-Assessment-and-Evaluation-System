@@ -28,6 +28,7 @@ export class ExaminationComponent implements OnInit {
   examineeId: number;
   responseListForQpItems: ResponseListForOpItem[];
   maxQpItemId: number;
+  // mapBetweenIndexesBeforeAndAfterShuffle: number[];
   // checkedOrNot: boolean;
 
   response: ResponseTable = {responseId: 0, asQpItem: null, asAttempt: null, responseText: ''};
@@ -55,10 +56,13 @@ export class ExaminationComponent implements OnInit {
       this.qpItems = qpItems;
       this.maxQpItemId = Math.max.apply(Math, qpItems.map(function(qpItem) { return qpItem.qpItemId; }));
 
+      // this.mapBetweenIndexesBeforeAndAfterShuffle = [];
       for (let i = 0; i < qpItems.length; i++) {
-        this.shuffle(qpItems[i].asItemMcqOptionsList);
+        // this.mapBetweenIndexesBeforeAndAfterShuffle.push(i);
+        this.shuffle(qpItems[i].asItemMcqOptionsList, false);
       }
-      this.shuffle(qpItems);
+      
+      this.shuffle(qpItems, true);
       
       this.flaggedItems = [];
       for (let i = 0; i < qpItems.length; i++) {
@@ -93,6 +97,17 @@ export class ExaminationComponent implements OnInit {
         console.log("Responses List = ");
         console.log(this.responseListForQpItems);
         
+        // for (let i = 0; i < qpItems.length; i++) {
+        //   console.log($('input[name="' + qpItems[i].qpItemId + '"]:checked').length);
+        //   let noOfOptionsChecked = $('input[name="' + qpItems[i].qpItemId + '"]:checked').length;
+        //   if(noOfOptionsChecked > 1){
+        //     let index = i;
+        //     this.attemptedItems[index] = true;
+        //     if(qpItems[i].itemText == "McqMultiCorrect"){
+        //       this.noOfOptionsCheckedForItem[index] = noOfOptionsChecked;
+        //     }
+        //   }
+        // }
         // console.log("Checked or not:");
         // const input1 = $('input[name=1]')[0] as HTMLInputElement;
         // console.log(input1);
@@ -249,10 +264,16 @@ export class ExaminationComponent implements OnInit {
     return false;
   }
 
-  shuffle(array) { // shuffle according to examineeId
-    var length = array.length, index=0, randomIndex, temp;
+  shuffle(array, isStored: boolean) { // shuffle according to examineeId
+    var length = array.length, index=0, randomIndex, temp, temp1;
     while(index < length){
       randomIndex = (index * this.examineeId) % length;
+      // if(isStored){
+      //   temp1 = this.mapBetweenIndexesBeforeAndAfterShuffle[index];
+      //   this.mapBetweenIndexesBeforeAndAfterShuffle[index] = this.mapBetweenIndexesBeforeAndAfterShuffle[randomIndex];
+      //   this.mapBetweenIndexesBeforeAndAfterShuffle[randomIndex] = temp1;
+      //   // this.mapBetweenIndexesBeforeAndAfterShuffle[index] = randomIndex;
+      // }
       temp = array[index];
       array[index] = array[randomIndex];
       array[randomIndex] = temp;

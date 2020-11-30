@@ -42,6 +42,11 @@ export class LoginComponent implements OnInit {
           this.displayErrorMessage = true;
           this.errorMessage = "Invalid Username/Registration No or Password!";
         }
+        else if(userRole.user.status == "INACTIVE"){
+          // alert("Invalid Username/Registration No or Password!");
+          this.displayErrorMessage = true;
+          this.errorMessage = "Can't log you in! You are an INACTIVE User.";
+        }
         else{
           if(userRole.role.roleName == "Examinee"){
             this.loginService.getExamineeFromRegistrationNoAndPassword(this.userName, this.password).subscribe((examinee) => {
