@@ -1,0 +1,17 @@
+.center {
+    margin: 5px;
+    margin-bottom: 5px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.container{
+    padding-top: 100px;
+}
+
+.required-field::after {
+    content: "*";
+    color: red;
+    margin-left:2px
+}

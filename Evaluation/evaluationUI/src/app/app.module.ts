@@ -20,6 +20,7 @@ import { DriveCenterComponent } from './drive-center/drive-center.component';
 import { QpItemComponent } from './qp-item/qp-item.component';
 import { ResponseComponent } from './response/response.component';
 import { ExamineeItemMarksComponent } from './examinee-item-marks/examinee-item-marks.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ExamineeItemMarksComponent } from './examinee-item-marks/examinee-item-
     DriveCenterComponent,
     QpItemComponent,
     ResponseComponent,
-    ExamineeItemMarksComponent
+    ExamineeItemMarksComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
