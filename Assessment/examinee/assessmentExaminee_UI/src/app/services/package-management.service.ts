@@ -4,6 +4,7 @@ import { baseURL } from "../shared/baseurl";
 import { Observable, of } from "rxjs";
 import { Batch } from "../shared/batch";
 import { OutRpackHeader } from "../shared/outRpackHeader";
+import { InEpackHeader } from "../shared/inEpackHeader";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,14 @@ export class PackageManagementService {
 
   getAllSentRpacksForPackHistory(): Observable<OutRpackHeader[]>{
     return this.http.get<OutRpackHeader[]>(baseURL + 'sentRpacks/SENT');
+  }
+
+  createAndSendAllBatchesRpacks(): Observable<OutRpackHeader[]>{
+    return this.http.get<OutRpackHeader[]>(baseURL + 'createRpack');
+  }
+
+  importAllEpacks(): Observable<InEpackHeader[]>{
+    return this.http.get<InEpackHeader[]>(baseURL + 'importFromEpack');
   }
 
   // updateRpackStatus(rpackHeaderId: number, outRpackHeader: OutRpackHeader): Observable<OutRpackHeader>{
