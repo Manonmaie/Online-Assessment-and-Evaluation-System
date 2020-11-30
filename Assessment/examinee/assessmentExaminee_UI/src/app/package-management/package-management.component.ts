@@ -23,6 +23,7 @@ export class PackageManagementComponent implements OnInit {
   responsesForSelectedBatch: Response[];
   batchToBeUpdated: Batch;
   rpackToBeUpdated: OutRpackHeader;
+  batchDummy: Batch;
 
   constructor(private packageManagementService: PackageManagementService, private route: ActivatedRoute) { }
 
@@ -36,8 +37,19 @@ export class PackageManagementComponent implements OnInit {
         this.isBatchPresentInCompletedBatches = false;
       }
     });
+
+    this.batchDetailsForRpack = [];
     this.packageManagementService.getAllSentRpacksForPackHistory().subscribe((sentRpacks) => {
       this.sentRpacks = sentRpacks;
+      for(let i=0; i<sentRpacks.length; i++){
+        for( let j=0; j<sentRpacks[i].rpack1List.length; j++){
+          let batchId = sentRpacks[i].rpack1List[j].batchId;
+          this.packageManagementService.getBatchFromRpack1(batchId).subscribe((batch) => {
+            this.batchDummy = batch;
+            this.batchDetailsForRpack.push(batch);
+          });
+        }
+      }
       // todo - get batch details for r-pack
 
       // this.showHistoryBoolean = [];

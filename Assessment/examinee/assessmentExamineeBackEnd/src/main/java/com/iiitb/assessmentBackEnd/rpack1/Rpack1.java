@@ -26,6 +26,7 @@ public class Rpack1 {
 	
 	@ManyToOne
 	@JoinColumn(name="rpack_header_id")
+	@JsonIgnore
 	private OutRpackHeader rpack_header;
 	
 	@Column(name = "qp_id")

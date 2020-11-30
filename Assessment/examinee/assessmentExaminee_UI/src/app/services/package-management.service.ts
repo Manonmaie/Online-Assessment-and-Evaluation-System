@@ -33,6 +33,10 @@ export class PackageManagementService {
     return this.http.get<OutRpackHeader[]>(baseURL + 'sentRpacks/SENT');
   }
 
+  getBatchFromRpack1(batchId: number): Observable<Batch>{
+    return this.http.get<Batch>(baseURL + 'batch/' + batchId + '/Rpack1');
+  }
+
   createAndSendAllBatchesRpacks(): Observable<OutRpackHeader[]>{
     return this.http.get<OutRpackHeader[]>(baseURL + 'createRpack');
   }

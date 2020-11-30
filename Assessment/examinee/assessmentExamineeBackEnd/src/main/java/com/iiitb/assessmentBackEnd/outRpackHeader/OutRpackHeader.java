@@ -22,10 +22,11 @@ public class OutRpackHeader {
 	private LocalDateTime createdOn, rpackSentOn;
 	private enum rpackStatusList { CREATED, SENT};
 	private String rpackStatus;
-	@OneToMany(mappedBy = "rpack_header")
-	@JsonIgnore
-	private List<Rpack1> rpack1List;
 	
+	@OneToMany(mappedBy = "rpack_header")
+//	@JsonIgnore
+	private List<Rpack1> rpack1List;
+
 	public OutRpackHeader() {
 		
 	}
@@ -96,5 +97,13 @@ public class OutRpackHeader {
 
 	public void setRpackStatus(String rpackStatus) {
 		this.rpackStatus = rpackStatus;
+	}
+	
+	public List<Rpack1> getRpack1List() {
+		return rpack1List;
+	}
+
+	public void setRpack1List(List<Rpack1> rpack1List) {
+		this.rpack1List = rpack1List;
 	}
 }
