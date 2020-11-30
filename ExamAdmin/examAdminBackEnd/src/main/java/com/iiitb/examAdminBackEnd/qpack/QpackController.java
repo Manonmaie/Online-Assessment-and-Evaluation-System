@@ -16,8 +16,8 @@ public class QpackController {
 	@Autowired
 	private QpackService qpackService;
 	
-	@RequestMapping("/importFromQpack")
-	public void fromQpack() throws IOException, InterruptedException{
-		qpackService.qpack2OriginalTables();
+	@RequestMapping("/importFromQpack/{QpackKey}")
+	public void fromQpack(@PathVariable String QpackKey) throws IOException, InterruptedException{
+		qpackService.qpack2OriginalTables(QpackKey);
 	}
 }

@@ -33,6 +33,7 @@ import com.iiitb.assessmentBackEnd.qpItem.AsQpItem;
 import com.iiitb.assessmentBackEnd.qpItem.QpItemService;
 import com.iiitb.assessmentBackEnd.questionPaper.AsQuestionPaper;
 import com.iiitb.assessmentBackEnd.questionPaper.QuestionPaperService;
+import com.iiitb.assessmentBackEnd.serverConnect.ServerConnect;
 import com.iiitb.assessmentBackEnd.sqlDump.SqlDumpService;
 
 @Service
@@ -74,7 +75,12 @@ public class EpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
+	@Autowired
+	private ServerConnect serverConnect;
+	
 	public void epack2OriginalTables(String EpackKey) throws IOException, InterruptedException {
+		serverConnect.execCurlPullCommand("EpackDump.sql", EpackKey);
+		
 		sqlDumpService.importEpackDump();
 		
 		Map<Integer, AsCourseMaster> id2CourseMaster = new HashMap<Integer, AsCourseMaster>();

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.urest.v1.authoring_module.serverConnect.Status;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class QpackController {
@@ -19,8 +21,8 @@ public class QpackController {
 	private QpackService qpackService;
 	
 	@RequestMapping("/createQpack")
-	public void createQpack() throws IOException{
-		qpackService.addQpack();
+	public Status createQpack() throws IOException{
+		return qpackService.addQpack();
 	}
 
 }

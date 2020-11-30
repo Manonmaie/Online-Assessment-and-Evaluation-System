@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iiitb.assessmentBackEnd.serverConnect.Status;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RpackHeaderController {
@@ -28,7 +30,7 @@ public class RpackHeaderController {
 	}
 	
 	@RequestMapping("/createRpack")
-	public void createRpack()  throws IOException{
-		rpackHeaderService.addRpack();
+	public Status createRpack()  throws IOException{
+		return rpackHeaderService.addRpack();
 	}
 }

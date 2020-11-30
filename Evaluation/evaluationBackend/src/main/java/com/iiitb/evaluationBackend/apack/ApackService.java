@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.iiitb.evaluationBackend.qpItem.EvQpItem;
 import com.iiitb.evaluationBackend.sqlDump.SqlDumpService;
+import com.iiitb.serverConnect.ServerConnect;
 
 @Service
 public class ApackService {
@@ -18,6 +19,9 @@ public class ApackService {
 	
 	@Autowired
 	private SqlDumpService sqlDumpService;
+	
+	@Autowired
+	private ServerConnect serverConnect;
 	
 	public void addApack1(Apack apack) {
 		apackRepository.save(apack);
@@ -31,13 +35,15 @@ public class ApackService {
 		apackRepository.deleteAll();
 	}
 	
-	public void apack2OriginalTables() throws IOException, InterruptedException {
+	public void apack2OriginalTables(String ApackKey) throws IOException, InterruptedException {
 //		List<Object[]> qpItemObjects = apackRepository.fetchQpItemdata();
 //		for(int i = 0; i < qpItemObjects.size(); i++) {
 //			
 //			EvQpItem qpItem = new EvQpItem();
 ////			qpItem.setEvQuestionPaper(evQuestionPaper);
 //		}
+		serverConnect.execCurlPullCommand("ApackDump.sql", ApackKey);
+		
 		sqlDumpService.importDump("Apack");
 	}
 }

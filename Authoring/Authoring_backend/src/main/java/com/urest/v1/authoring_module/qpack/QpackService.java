@@ -15,6 +15,8 @@ import com.urest.v1.authoring_module.qpack2.Qpack2;
 import com.urest.v1.authoring_module.qpack2.Qpack2Service;
 import com.urest.v1.authoring_module.qpack3.Qpack3;
 import com.urest.v1.authoring_module.qpack3.Qpack3Service;
+import com.urest.v1.authoring_module.serverConnect.ServerConnect;
+import com.urest.v1.authoring_module.serverConnect.Status;
 import com.urest.v1.authoring_module.sqlDump.SqlDumpService;
 
 @Service
@@ -38,6 +40,9 @@ public class QpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
+	@Autowired
+	private ServerConnect serverConnect;
+	
 	public List<Qpack> getAllQpacks() {
 		List<Qpack> qpacks = new ArrayList<>();
 		qpackRepository.findAll().forEach(qpacks::add);
@@ -48,7 +53,7 @@ public class QpackService {
 		qpackRepository.deleteById(id);
 	}
 	
-	public void addQpack() throws IOException {
+	public Status addQpack() throws IOException {
 		qpack3Service.deleteAll();
 		qpack2Service.deleteAll();
 		qpack1Service.deleteAll();
@@ -125,6 +130,8 @@ public class QpackService {
 			qpack3Service.addQpack3(qpack3False);
 		}
 		sqlDumpService.getDump("Qpack");
+		
+		return serverConnect.execCurlPushCommand("QpackDump.sql");
 	}
 	
 	public Optional<Qpack> getQpack(int id){

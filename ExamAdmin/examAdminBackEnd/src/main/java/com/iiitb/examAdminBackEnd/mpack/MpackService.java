@@ -21,6 +21,7 @@ import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarks;
 import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarksService;
 import com.iiitb.examAdminBackEnd.qp_item.QpItem;
 import com.iiitb.examAdminBackEnd.qp_item.QpItemService;
+import com.iiitb.examAdminBackEnd.serverConnect.ServerConnect;
 import com.iiitb.examAdminBackEnd.sqlDump.SqlDumpService;
 
 @Service
@@ -43,7 +44,12 @@ public class MpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	public void mpack2OriginalTables() throws IOException, InterruptedException {
+	@Autowired
+	private ServerConnect serverConnect;
+	
+	public void mpack2OriginalTables(String MpackKey) throws IOException, InterruptedException {
+		serverConnect.execCurlPullCommand("MpackDump.sql", MpackKey);
+		
 		sqlDumpService.importDump("Mpack");
 		
 		Set<Examdrive> examdriveSet =  new HashSet<Examdrive>();

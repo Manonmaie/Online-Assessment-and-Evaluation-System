@@ -13,6 +13,8 @@ import com.urest.v1.authoring_module.apack1.Apack1;
 import com.urest.v1.authoring_module.apack1.Apack1Service;
 import com.urest.v1.authoring_module.apack2.Apack2;
 import com.urest.v1.authoring_module.apack2.Apack2Service;
+import com.urest.v1.authoring_module.serverConnect.ServerConnect;
+import com.urest.v1.authoring_module.serverConnect.Status;
 import com.urest.v1.authoring_module.sqlDump.SqlDumpService;
 
 @Service
@@ -32,6 +34,9 @@ public class ApackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
+	@Autowired
+	private ServerConnect serverConnect;
+	
 	public List<Apack> getAllApacks() {
 		List<Apack> apacks = new ArrayList<>();
 		apackRepository.findAll().forEach(apacks::add);
@@ -46,7 +51,7 @@ public class ApackService {
 		return apackRepository.findById(id);
 	}
 	
-	public void addApack() throws IOException {
+	public Status addApack() throws IOException {
 		apack2Service.deleteAll();
 		apack1Service.deleteAll();
 		//Generate Apack
@@ -84,5 +89,7 @@ public class ApackService {
 		}
 		
 		sqlDumpService.getDump("Apack");
+		
+		return serverConnect.execCurlPushCommand("ApackDump.sql");
 	}
 }

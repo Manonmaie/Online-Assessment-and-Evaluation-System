@@ -20,6 +20,8 @@ import com.iiitb.examAdminBackEnd.epack3.Epack3;
 import com.iiitb.examAdminBackEnd.epack3.Epack3Service;
 import com.iiitb.examAdminBackEnd.epack4.Epack4;
 import com.iiitb.examAdminBackEnd.epack4.Epack4Service;
+import com.iiitb.examAdminBackEnd.serverConnect.ServerConnect;
+import com.iiitb.examAdminBackEnd.serverConnect.Status;
 import com.iiitb.examAdminBackEnd.sqlDump.SqlDumpService;
 
 @Service
@@ -46,6 +48,9 @@ public class EpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
+	@Autowired
+	private ServerConnect serverConnect;
+	
 	public List<Epack> getAllEpacks() {
 		List<Epack> epacks = new ArrayList<>();
 		epackRepository.findAll().forEach(epacks::add);
@@ -56,7 +61,7 @@ public class EpackService {
 		epackRepository.deleteById(id);
 	}
 	
-	public void addEpack(int center_id) throws IOException {
+	public Status addEpack(int center_id) throws IOException {
 		
 		epack3Service.deleteAll();
 		epack2Service.deleteAll();
@@ -162,6 +167,8 @@ public class EpackService {
 		}
 		
 		sqlDumpService.getEpackDump();
+		
+		return serverConnect.execCurlPushCommand("EpackDump.sql");
 		
 //		List<Epack1> epack1s = epackJoinRepository.fetchData();
 //		epack1s.forEach( (epack1) -> epack1.setEpack_header(epack));

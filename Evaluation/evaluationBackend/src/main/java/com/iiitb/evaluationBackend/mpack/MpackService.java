@@ -18,6 +18,8 @@ import com.iiitb.evaluationBackend.mpack2.Mpack2Service;
 import com.iiitb.evaluationBackend.mpack3.Mpack3;
 import com.iiitb.evaluationBackend.mpack3.Mpack3Service;
 import com.iiitb.evaluationBackend.sqlDump.SqlDumpService;
+import com.iiitb.serverConnect.ServerConnect;
+import com.iiitb.serverConnect.Status;
 
 @Service
 public class MpackService {
@@ -39,6 +41,9 @@ public class MpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
+	@Autowired
+	private ServerConnect serverConnect;
+	
 	public List<Mpack> getAllMpacks() {
 		List<Mpack> mpacks = new ArrayList<>();
 		mpackRepository.findAll().forEach(mpacks::add);
@@ -53,7 +58,7 @@ public class MpackService {
 		return mpackRepository.findById(id);
 	}
 	
-	public void addMpack() throws IOException {
+	public Status addMpack() throws IOException {
 		mpack3Service.deleteAll();
 		mpack2Service.deleteAll();
 		mpack1Service.deleteAll();
@@ -107,5 +112,7 @@ public class MpackService {
 		}
 		
 		sqlDumpService.getMpackDump();
+		
+		return serverConnect.execCurlPushCommand("MpackDump.sql");
 	}
 }

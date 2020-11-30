@@ -16,8 +16,8 @@ public class RpackController {
 	@Autowired
 	private RpackService rpackService;
 	
-	@RequestMapping("/importFromRpack")
-	public void fromRpack() throws IOException, InterruptedException{
-		rpackService.rpack2OriginalTables();
+	@RequestMapping("/importFromRpack/{RpackKey}")
+	public void fromRpack(@PathVariable String RpackKey) throws IOException, InterruptedException{
+		rpackService.rpack2OriginalTables(RpackKey);
 	}
 }

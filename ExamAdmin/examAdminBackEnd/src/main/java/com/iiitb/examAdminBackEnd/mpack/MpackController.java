@@ -17,8 +17,8 @@ public class MpackController {
 	@Autowired
 	private MpackService mpackService;
 	
-	@RequestMapping("/importFromMpack")
-	public void fromMpack() throws IOException, InterruptedException{
-		mpackService.mpack2OriginalTables();
+	@RequestMapping("/importFromMpack/{MpackKey}")
+	public void fromMpack(@PathVariable String MpackKey) throws IOException, InterruptedException{
+		mpackService.mpack2OriginalTables(MpackKey);
 	}
 }

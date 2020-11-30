@@ -16,8 +16,8 @@ public class ApackController {
 	@Autowired
 	private ApackService apackService;
 	
-	@RequestMapping("/importFromApack")
-	public void fromApack() throws IOException, InterruptedException{
-		apackService.apack2OriginalTables();
+	@RequestMapping("/importFromApack/{ApackKey}")
+	public void fromApack(@PathVariable String ApackKey) throws IOException, InterruptedException{
+		apackService.apack2OriginalTables(ApackKey);
 	}
 }
