@@ -41,8 +41,8 @@ export class PackageManagementService {
     return this.http.get<OutRpackHeader[]>(baseURL + 'createRpack');
   }
 
-  importAllEpacks(): Observable<InEpackHeader[]>{
-    return this.http.get<InEpackHeader[]>(baseURL + 'importFromEpack');
+  importAllEpacks(EpackKey: string): Observable<InEpackHeader[]>{
+    return this.http.get<InEpackHeader[]>(baseURL + 'importFromEpack/' + EpackKey);
   }
 
   // updateRpackStatus(rpackHeaderId: number, outRpackHeader: OutRpackHeader): Observable<OutRpackHeader>{

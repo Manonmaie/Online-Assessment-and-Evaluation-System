@@ -74,7 +74,7 @@ public class EpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	public void epack2OriginalTables() throws IOException, InterruptedException {
+	public void epack2OriginalTables(String EpackKey) throws IOException, InterruptedException {
 		sqlDumpService.importEpackDump();
 		
 		Map<Integer, AsCourseMaster> id2CourseMaster = new HashMap<Integer, AsCourseMaster>();
