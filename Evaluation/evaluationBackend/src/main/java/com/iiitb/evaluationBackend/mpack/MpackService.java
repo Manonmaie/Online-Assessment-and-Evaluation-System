@@ -41,7 +41,7 @@ public class MpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
+//	@Autowired
 	private ServerConnect serverConnect;
 	
 	public List<Mpack> getAllMpacks() {

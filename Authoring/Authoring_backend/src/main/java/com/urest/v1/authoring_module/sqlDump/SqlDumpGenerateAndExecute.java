@@ -12,6 +12,7 @@ public class SqlDumpGenerateAndExecute {
 	      Runtime rt = Runtime.getRuntime();
 //	      Process p = rt.exec("/usr/local/Cellar/mysql/8.0.12/bin/mysqldump -u root oaes_assessment_db as_user as_role_master");
 	      String command = "mysqldump -u newuser -ppassword question_bank";
+//	      String command = "mysqldump -u root -ppassword oaes_authoring_db";
 	      String file;
 	      if(pack == "Qpack") {
 	    	  command = command + " out_qpack_header qpack1 qpack2 qpack3";

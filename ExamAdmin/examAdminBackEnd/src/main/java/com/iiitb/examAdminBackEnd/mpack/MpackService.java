@@ -44,7 +44,7 @@ public class MpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
+//	@Autowired
 	private ServerConnect serverConnect;
 	
 	public void mpack2OriginalTables(String MpackKey) throws IOException, InterruptedException {
