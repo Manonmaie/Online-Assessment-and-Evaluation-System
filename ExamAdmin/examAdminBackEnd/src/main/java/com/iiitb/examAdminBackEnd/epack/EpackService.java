@@ -1,5 +1,6 @@
 package com.iiitb.examAdminBackEnd.epack;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import com.iiitb.examAdminBackEnd.epack3.Epack3;
 import com.iiitb.examAdminBackEnd.epack3.Epack3Service;
 import com.iiitb.examAdminBackEnd.epack4.Epack4;
 import com.iiitb.examAdminBackEnd.epack4.Epack4Service;
+import com.iiitb.examAdminBackEnd.sqlDump.SqlDumpService;
 
 @Service
 public class EpackService {
@@ -41,6 +43,9 @@ public class EpackService {
 	@Autowired
 	private Epack4Service epack4Service;
 	
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
 	public List<Epack> getAllEpacks() {
 		List<Epack> epacks = new ArrayList<>();
 		epackRepository.findAll().forEach(epacks::add);
@@ -51,7 +56,7 @@ public class EpackService {
 		epackRepository.deleteById(id);
 	}
 	
-	public void addEpack(int center_id) {
+	public void addEpack(int center_id) throws IOException {
 		
 		epack3Service.deleteAll();
 		epack2Service.deleteAll();
@@ -146,7 +151,7 @@ public class EpackService {
 			}
 		}
 		
-		//Generate Qpack4
+		//Generate Epack4
 		for (Map.Entry mapElement : batch_id2Epack1.entrySet()) {
 			List<Object[]> epack4Objects = epackJoinRepository.fetchEpack4Data((int)mapElement.getKey());
 			for(int i = 0; i < epack4Objects.size(); i++) {
@@ -155,6 +160,8 @@ public class EpackService {
 				epack4Service.addEpack4(epack4);
 			}
 		}
+		
+		sqlDumpService.getEpackDump();
 		
 //		List<Epack1> epack1s = epackJoinRepository.fetchData();
 //		epack1s.forEach( (epack1) -> epack1.setEpack_header(epack));

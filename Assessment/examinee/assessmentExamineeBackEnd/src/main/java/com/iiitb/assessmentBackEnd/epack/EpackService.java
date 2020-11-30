@@ -1,5 +1,6 @@
 package com.iiitb.assessmentBackEnd.epack;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import com.iiitb.assessmentBackEnd.qpItem.AsQpItem;
 import com.iiitb.assessmentBackEnd.qpItem.QpItemService;
 import com.iiitb.assessmentBackEnd.questionPaper.AsQuestionPaper;
 import com.iiitb.assessmentBackEnd.questionPaper.QuestionPaperService;
+import com.iiitb.assessmentBackEnd.sqlDump.SqlDumpService;
 
 @Service
 public class EpackService {
@@ -69,7 +71,12 @@ public class EpackService {
 	@Autowired
 	private ExamineeBatchService examineeBatchService;
 	
-	public void epack2OriginalTables() {
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
+	public void epack2OriginalTables() throws IOException, InterruptedException {
+		sqlDumpService.importEpackDump();
+		
 		Map<Integer, AsCourseMaster> id2CourseMaster = new HashMap<Integer, AsCourseMaster>();
 		
 		List<Object[]> courseObjects = epackRepository.fetchCourseMasterdata();

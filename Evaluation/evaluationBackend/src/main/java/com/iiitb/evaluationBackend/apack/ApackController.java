@@ -1,5 +1,7 @@
 package com.iiitb.evaluationBackend.apack;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,7 @@ public class ApackController {
 	private ApackService apackService;
 	
 	@RequestMapping("/importFromApack")
-	public void fromApack(){
+	public void fromApack() throws IOException, InterruptedException{
 		apackService.apack2OriginalTables();
 	}
 }

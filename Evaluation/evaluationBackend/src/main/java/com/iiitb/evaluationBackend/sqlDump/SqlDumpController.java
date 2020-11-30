@@ -15,9 +15,9 @@ public class SqlDumpController {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@RequestMapping("/RpackDump")
+	@RequestMapping("/MpackDump")
 	public void getRpackDump() throws IOException, InterruptedException {
-		sqlDumpService.getRpackDump();
+		sqlDumpService.getMpackDump();
 	}
 	
 //	@RequestMapping("/RpackDump")

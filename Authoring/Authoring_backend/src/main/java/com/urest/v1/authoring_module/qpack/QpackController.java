@@ -1,5 +1,6 @@
 package com.urest.v1.authoring_module.qpack;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class QpackController {
 	private QpackService qpackService;
 	
 	@RequestMapping("/createQpack")
-	public void createQpack(){
+	public void createQpack() throws IOException{
 		qpackService.addQpack();
 	}
 

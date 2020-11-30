@@ -1,5 +1,6 @@
 package com.iiitb.examAdminBackEnd.qpack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +26,7 @@ import com.iiitb.examAdminBackEnd.qp_item.QpItem;
 import com.iiitb.examAdminBackEnd.qp_item.QpItemService;
 import com.iiitb.examAdminBackEnd.questionPaper.QuestionPaper;
 import com.iiitb.examAdminBackEnd.questionPaper.QuestionPaperService;
+import com.iiitb.examAdminBackEnd.sqlDump.SqlDumpService;
 
 @Service
 public class QpackService {
@@ -49,6 +51,9 @@ public class QpackService {
 	@Autowired
 	ItemTrueFalseService itemTrueFalseService;
 	
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
 	public List<Qpack> getAllQpacks() {
 		List<Qpack> qpacks = new ArrayList<>();
 		qpackRepository.findAll().forEach(qpacks::add);
@@ -63,7 +68,9 @@ public class QpackService {
 		return qpackRepository.findById(id);
 	}
 	
-	public void qpack2OriginalTables() {
+	public void qpack2OriginalTables() throws IOException, InterruptedException {
+		sqlDumpService.importDump("Qpack");
+		
 		Map<Integer, QuestionPaper> id2Qp = new HashMap<Integer, QuestionPaper>();
 		
 		List<Object[]> qpDataObjects = qpackRepository.fetchQPdata();

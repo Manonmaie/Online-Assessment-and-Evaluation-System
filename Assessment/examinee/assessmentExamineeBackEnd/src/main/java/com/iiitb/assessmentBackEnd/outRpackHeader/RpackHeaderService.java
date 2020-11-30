@@ -1,5 +1,6 @@
 package com.iiitb.assessmentBackEnd.outRpackHeader;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -16,6 +17,7 @@ import com.iiitb.assessmentBackEnd.rpack3.Rpack3;
 import com.iiitb.assessmentBackEnd.rpack3.Rpack3Service;
 import com.iiitb.assessmentBackEnd.rpack4.Rpack4;
 import com.iiitb.assessmentBackEnd.rpack4.Rpack4Service;
+import com.iiitb.assessmentBackEnd.sqlDump.SqlDumpService;
 
 @Service
 public class RpackHeaderService {
@@ -38,6 +40,9 @@ public class RpackHeaderService {
 	@Autowired
 	private Rpack4Service rpack4Service;
 	
+	@Autowired
+	private SqlDumpService sqlDumpService;
+	
 	public List<OutRpackHeader> getAllRpacksForRpackStatus(String rpackStatus) {
 		return rpackHeaderRepository.findByRpackStatus(rpackStatus);
 	}
@@ -46,7 +51,7 @@ public class RpackHeaderService {
 		rpackHeaderRepository.save(outRpackHeader);
 	}
 	
-	public void addRpack() {
+	public void addRpack()  throws IOException{
 		rpack4Service.deleteAll();
 		rpack3Service.deleteAll();
 		rpack2Service.deleteAll();
@@ -120,5 +125,7 @@ public class RpackHeaderService {
 				rpack4Service.addRpack4(rpack4);
 			}
 		}
+		
+		sqlDumpService.getRpackDump();
 	}
 }
