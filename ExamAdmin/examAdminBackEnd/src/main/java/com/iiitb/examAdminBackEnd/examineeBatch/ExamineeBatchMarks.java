@@ -1,5 +1,6 @@
 package com.iiitb.examAdminBackEnd.examineeBatch;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -21,6 +22,9 @@ public class ExamineeBatchMarks {
 	@EmbeddedId
 	private ExamineeBatchKey examineeBatchId;
 	
+	@Column (name = "examinee_batch_id")
+	private int examineeBatchIdInt;
+	
 	private Float marksObtained;
 	
 	@ManyToOne
@@ -36,14 +40,23 @@ public class ExamineeBatchMarks {
 
 	public ExamineeBatchMarks() {
 	}
-	public ExamineeBatchMarks(ExamineeBatchKey examineeBatchId, Float marksObtained, Examinee examinee, Batch batch) {
+	public ExamineeBatchMarks(ExamineeBatchKey examineeBatchId, Float marksObtained, Examinee examinee, Batch batch, int ExamineeBatchIdInt) {
 		super();
 		this.examineeBatchId = examineeBatchId;
 		this.marksObtained = marksObtained;
 		this.examinee = examinee;
 		this.batch = batch;
+		this.examineeBatchIdInt = examineeBatchIdInt;
 	}
 
+	public int getExamineeBatchIdInt() {
+		return examineeBatchIdInt;
+	}
+	
+	public void setExamineeBatchIdInt(int examineeBatchIdInt) {
+		this.examineeBatchIdInt = examineeBatchIdInt;
+	}
+	
 	public ExamineeBatchKey getExamineeBatchId() {
 		return examineeBatchId;
 	}
