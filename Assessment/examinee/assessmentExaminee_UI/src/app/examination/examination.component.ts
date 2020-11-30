@@ -58,6 +58,7 @@ export class ExaminationComponent implements OnInit {
       for (let i = 0; i < qpItems.length; i++) {
         this.shuffle(qpItems[i].asItemMcqOptionsList);
       }
+      
       this.shuffle(qpItems);
       
       this.flaggedItems = [];
@@ -93,6 +94,17 @@ export class ExaminationComponent implements OnInit {
         console.log("Responses List = ");
         console.log(this.responseListForQpItems);
         
+        // for (let i = 0; i < qpItems.length; i++) {
+        //   console.log($('input[name="' + qpItems[i].qpItemId + '"]'));
+        //   let noOfOptionsChecked = $('input[name="' + qpItems[i].qpItemId + '"]:checked').length;
+        //   if(noOfOptionsChecked > 1){
+        //     let index = i;
+        //     this.attemptedItems[index] = true;
+        //     if(qpItems[i].itemText == "McqMultiCorrect"){
+        //       this.noOfOptionsCheckedForItem[index] = noOfOptionsChecked;
+        //     }
+        //   }
+        // }
         // console.log("Checked or not:");
         // const input1 = $('input[name=1]')[0] as HTMLInputElement;
         // console.log(input1);
@@ -250,7 +262,7 @@ export class ExaminationComponent implements OnInit {
   }
 
   shuffle(array) { // shuffle according to examineeId
-    var length = array.length, index=0, randomIndex, temp;
+    var length = array.length, index=0, randomIndex, temp, temp1;
     while(index < length){
       randomIndex = (index * this.examineeId) % length;
       temp = array[index];

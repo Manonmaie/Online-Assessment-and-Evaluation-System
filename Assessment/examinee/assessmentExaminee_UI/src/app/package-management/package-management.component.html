@@ -2,12 +2,15 @@
     <div class="container">
         <h2 style="text-align:center;"> Center Admin - Package Management </h2>
         <div class="center">
-            <button type="button" class="btn btn-success btn-lg btn-block" (click) = "importQPack()"><i class="fa fa-download"></i> Import question paper and examinee details Pack (E-Pack)</button>
+            <button type="button" class="btn btn-success btn-lg btn-block" (click) = "importQPack()"><i class="fa fa-download"></i> Import Question Paper and Examinee Details Packs (E-Pack)</button>
+            <button type="button" class="btn btn-primary btn-lg btn-block" (click) = "exportAllRpacks()"><i class="fa fa-paper-plane"></i> Export All Response-Packs (R-Pack) </button>
         </div>
+        <br>
+        <h4 style="text-align:center;" *ngIf=isBatchPresentInCompletedBatches>Completed Batches</h4>
         <ul class="list-group">
             <li class="list-group-item" *ngFor="let batch of completedBatches">
                 {{batch.asExamdrive.courseMaster.courseName}} Exam <span style="color:rgb(153, 146, 146);font-size:15px;"> - Completed at {{batch.batchEndTime | date : "MMM d, y HH:mm:ss"}}</span>
-                <button type="button" class="btn btn-primary float-right mr-1" (click) = "exportRPack(batch)"><i class="fa fa-paper-plane"></i> Export Response Pack</button>
+                <!-- <button type="button" class="btn btn-primary float-right mr-1" (click) = "exportRPack(batch)"><i class="fa fa-paper-plane"></i> Export Response Pack</button> -->
             </li>
         </ul>
     </div>

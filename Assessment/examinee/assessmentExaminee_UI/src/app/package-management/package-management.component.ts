@@ -3,6 +3,7 @@ import { Batch } from '../shared/batch';
 import { PackageManagementService } from "../services/package-management.service";
 import { ActivatedRoute } from '@angular/router';
 import { OutRpackHeader } from "../shared/outRpackHeader";
+import { InEpackHeader } from '../shared/inEpackHeader';
 
 @Component({
   selector: 'app-package-management',
@@ -12,6 +13,9 @@ import { OutRpackHeader } from "../shared/outRpackHeader";
 export class PackageManagementComponent implements OnInit {
 
   completedBatches: Batch[];
+  isBatchPresentInCompletedBatches: boolean;
+  rpacksExporting: OutRpackHeader[];
+  epacksImported: InEpackHeader[];
   // sentBatches: Batch[];
   sentRpacks: OutRpackHeader[];
   batchDetailsForRpack: Batch[];
@@ -23,7 +27,15 @@ export class PackageManagementComponent implements OnInit {
   constructor(private packageManagementService: PackageManagementService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.packageManagementService.getAllCompletedBatchesToExport().subscribe((completedBatches) => this.completedBatches = completedBatches);
+    this.packageManagementService.getAllCompletedBatchesToExport().subscribe((completedBatches) => {
+      this.completedBatches = completedBatches;
+      if(completedBatches != null && completedBatches.length > 0){
+        this.isBatchPresentInCompletedBatches = true;
+      }
+      else{
+        this.isBatchPresentInCompletedBatches = false;
+      }
+    });
     this.packageManagementService.getAllSentRpacksForPackHistory().subscribe((sentRpacks) => {
       this.sentRpacks = sentRpacks;
       // todo - get batch details for r-pack
@@ -43,16 +55,31 @@ export class PackageManagementComponent implements OnInit {
     // });
   }
 
-  exportRPack(batch: Batch){
-    alert("R-Pack for the selected qp is exported");
-    this.packageManagementService.getAllResponsesForBatchId(batch.batchId).subscribe((responsesForBatch) => {
-      // todo - fill R-Pack tables;
-      // todo - send R-Pack;
+  exportAllRpacks(){
+    // alert(" all R-Packs are exported");
+    this.packageManagementService.createAndSendAllBatchesRpacks().subscribe((rpacksExporting) => {
+      this.rpacksExporting = rpacksExporting;
     });
-    batch.qpStatus = "SENT";
-    this.updateBatch(batch.batchId, batch);
+    this.isBatchPresentInCompletedBatches = false;
+    for(let i = 0; i < this.completedBatches.length; i++){
+      let batch = this.completedBatches[i];
+      batch.qpStatus = "SENT";
+      this.updateBatch(batch.batchId, batch);
+    }
     window.location.reload();
   }
+
+  // exportRPack(batch: Batch){
+  //   alert("R-Pack for the selected qp is exported");
+  //   this.packageManagementService.getAllResponsesForBatchId(batch.batchId).subscribe((responsesForBatch) => {
+  //     // todo - fill R-Pack tables;
+  //     // todo - send R-Pack;
+  //   });
+  //   this.isBatchPresentInCompletedBatches = false;
+  //   batch.qpStatus = "SENT";
+  //   this.updateBatch(batch.batchId, batch);
+  //   window.location.reload();
+  // }
 
   updateBatch(batchId: number, batch: Batch): void{
     this.packageManagementService.updateBatchQpStatus(batchId, batch).subscribe((batch) => this.batchToBeUpdated = batch);
@@ -62,8 +89,10 @@ export class PackageManagementComponent implements OnInit {
   // }
 
   importQPack(){
-    alert("Q-Pack imported");
-    // todo - fill E-Pack tables and Actual tables
+    // alert("Q-Pack imported");
+    this.packageManagementService.importAllEpacks().subscribe((epacksImported) => {
+      this.epacksImported = epacksImported;
+    });
   }
 
   // manageViewHistoryOfSentBatch(batch: Batch, index: number): void{

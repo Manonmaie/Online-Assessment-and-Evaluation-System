@@ -95,7 +95,7 @@ ALTER TABLE as_role_action
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_course_master (
   course_master_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  course_code varchar(255) UNIQUE NOT NULL,
+  course_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   course_name varchar(255) NOT NULL,
   PRIMARY KEY (course_master_id)
 );
@@ -112,7 +112,7 @@ INSERT INTO as_course_master VALUES(0,"CHEM_Course","Chemistry");
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_examdrive(
   examdrive_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  examdrive_code varchar(255) UNIQUE NOT NULL,
+  examdrive_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   examdrive_name varchar(255) NOT NULL,
   status ENUM('NOT_STARTED','IN_PROGRESS','COMPLETED') DEFAULT 'NOT_STARTED',
   course_master_id int(10) unsigned,
@@ -134,7 +134,7 @@ INSERT INTO as_examdrive VALUES(0,"Mid_Chem","Midsemester_Chemistry","IN_PROGRES
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_examinee(
   examinee_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  examinee_code varchar(255) UNIQUE NOT NULL,
+  examinee_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   examinee_name varchar(255) NOT NULL,
   examinee_password varchar(255) NOT NULL,
   examinee_branch varchar(255),
@@ -156,7 +156,7 @@ INSERT INTO as_examinee VALUES(0,"S4","UVW","uvw",NULL,NULL,NULL);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_center(
   center_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  center_code varchar(255) UNIQUE NOT NULL,
+  center_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   center_name varchar(255) NOT NULL,
   center_capacity int(10) unsigned,
   PRIMARY KEY(center_id)
@@ -172,7 +172,7 @@ INSERT INTO as_center VALUES(0,"CENTER_1","IIIT-Bangalore",1000);
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS as_batch(
   batch_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  batch_code varchar(255) UNIQUE NOT NULL,
+  batch_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
   batch_start_time datetime NOT NULL,
   batch_end_time datetime NOT NULL,
   qp_status ENUM('PENDING','RECEIVED','ERROR_SENDING','SENT') DEFAULT 'PENDING',
@@ -208,7 +208,7 @@ ALTER TABLE as_batch
 -- --------------------------------------------------------
 -- Data Entry for table `as_batch`
 -- --------------------------------------------------------
-INSERT INTO as_batch VALUES(0,"Mrng1","2020-11-27 07:00:00","2020-11-27 23:00:00","SENT",1,1,NULL);
+INSERT INTO as_batch VALUES(0,"Mrng1","2020-11-30 07:00:00","2020-11-30 23:00:00","SENT",1,1,NULL);
 INSERT INTO as_batch VALUES(0,"AfterNoon1","2020-09-28 14:00:00","2020-09-28 23:59:59","RECEIVED",1,2,NULL);
 INSERT INTO as_batch VALUES(0,"Mrng2","2020-01-01 09:00:00","2020-01-01 12:00:00","SENT",1,3,NULL);
 -- INSERT INTO as_batch VALUES(0,"Mrng3","2020-01-01 09:00:00","2020-01-01 12:00:00","SENT",1,3,NULL);
@@ -433,16 +433,16 @@ ALTER TABLE as_attempt
 -- --------------------------------------------------------
 -- Data Entry for table `as_attempt`
 -- --------------------------------------------------------
-INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
-INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
-INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
-INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","IN_PROGRESS",1,1);
-INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,2);
-INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
-INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
-INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
-INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
-INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00",null,"ABANDONED",1,1);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,1);
+-- INSERT INTO as_attempt VALUES(0,4,"2020-09-27 14:00:00","2020-09-27 17:00:00","IN_PROGRESS",1,1);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00",null,"IN_PROGRESS",1,2);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",1,2);
+-- INSERT INTO as_attempt VALUES(0,1,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+-- INSERT INTO as_attempt VALUES(0,3,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
+-- INSERT INTO as_attempt VALUES(0,2,"2020-09-27 14:00:00","2020-09-27 17:00:00","COMPLETED",2,2);
 
 -- --------------------------------------------------------
 -- Table structure for table `as_response`
