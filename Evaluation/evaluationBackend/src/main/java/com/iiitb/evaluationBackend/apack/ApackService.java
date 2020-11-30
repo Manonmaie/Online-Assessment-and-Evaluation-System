@@ -20,7 +20,6 @@ public class ApackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
 	private ServerConnect serverConnect;
 	
 	public void addApack1(Apack apack) {

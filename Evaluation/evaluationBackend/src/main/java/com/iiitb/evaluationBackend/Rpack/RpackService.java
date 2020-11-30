@@ -56,7 +56,6 @@ public class RpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
 	private ServerConnect serverConnect;
 	
 	
