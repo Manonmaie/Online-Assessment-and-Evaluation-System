@@ -62,7 +62,7 @@ public class RpackHeaderService {
 		rpack.setRpackDesc("Nothing");
 		rpack.setCreatedOn(LocalDateTime.now());
 		rpack.setCreatedBy("Author");
-		rpack.setRpackStatus("CREATED");
+		rpack.setRpackStatus("SENT");
 		rpackHeaderRepository.save(rpack);
 		
 		//Generate Rpack1

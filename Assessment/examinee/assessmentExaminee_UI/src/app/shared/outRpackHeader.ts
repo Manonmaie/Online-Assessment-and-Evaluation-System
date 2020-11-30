@@ -1,3 +1,4 @@
+import { Rpack1 } from "./rpack1";
 
 export class OutRpackHeader {
     rpackHeaderId: number;
@@ -7,4 +8,5 @@ export class OutRpackHeader {
     createdOn: string;
     rpackSentOn: string;
     rpackStatus: string;
+    rpack1List: Rpack1[];
 }
