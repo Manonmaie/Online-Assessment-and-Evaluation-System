@@ -43,14 +43,14 @@ export class PackageManagementComponent implements OnInit {
       this.sentRpacks = sentRpacks;
       for(let i=0; i<sentRpacks.length; i++){
         for( let j=0; j<sentRpacks[i].rpack1List.length; j++){
-          let batchId = sentRpacks[i].rpack1List[j].batchId;
+          let batchId = sentRpacks[i].rpack1List[j].batch_id;
           this.packageManagementService.getBatchFromRpack1(batchId).subscribe((batch) => {
             this.batchDummy = batch;
             this.batchDetailsForRpack.push(batch);
           });
         }
       }
-      // todo - get batch details for r-pack
+      // get batch details for r-pack
 
       // this.showHistoryBoolean = [];
       // for (let i = 0; i < sentRpacks.length; i++) {
@@ -84,8 +84,8 @@ export class PackageManagementComponent implements OnInit {
   // exportRPack(batch: Batch){
   //   alert("R-Pack for the selected qp is exported");
   //   this.packageManagementService.getAllResponsesForBatchId(batch.batchId).subscribe((responsesForBatch) => {
-  //     // todo - fill R-Pack tables;
-  //     // todo - send R-Pack;
+  //     // fill R-Pack tables;
+  //     // send R-Pack;
   //   });
   //   this.isBatchPresentInCompletedBatches = false;
   //   batch.qpStatus = "SENT";

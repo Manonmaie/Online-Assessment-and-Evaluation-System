@@ -700,8 +700,8 @@ CREATE TABLE IF NOT EXISTS out_rpack_header(
 -- --------------------------------------------------------
 -- Data Entry for table `out_rpack_header`
 -- --------------------------------------------------------
-INSERT INTO out_rpack_header VALUES(0,"It is R-Pack 1","2020-11-10 07:00:00","Center Admin","CREATED",null,null);
-INSERT INTO out_rpack_header VALUES(0,"It is R-Pack 2","2020-11-11 07:00:00","Center Admin","SENT","2020-11-18 07:00:00",null);
+-- INSERT INTO out_rpack_header VALUES(0,"It is R-Pack 1","2020-11-10 07:00:00","Center Admin","CREATED",null,null);
+-- INSERT INTO out_rpack_header VALUES(0,"It is R-Pack 2","2020-11-11 07:00:00","Center Admin","SENT","2020-11-18 07:00:00",null);
 
 -- --------------------------------------------------------
 -- Table structure for table rpack1
