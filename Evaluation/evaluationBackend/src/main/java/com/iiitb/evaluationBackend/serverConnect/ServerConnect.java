@@ -1,4 +1,4 @@
-package com.iiitb.serverConnect;
+package com.iiitb.evaluationBackend.serverConnect;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;

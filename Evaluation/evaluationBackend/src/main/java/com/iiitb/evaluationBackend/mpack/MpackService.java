@@ -17,9 +17,9 @@ import com.iiitb.evaluationBackend.mpack2.Mpack2;
 import com.iiitb.evaluationBackend.mpack2.Mpack2Service;
 import com.iiitb.evaluationBackend.mpack3.Mpack3;
 import com.iiitb.evaluationBackend.mpack3.Mpack3Service;
+import com.iiitb.evaluationBackend.serverConnect.ServerConnect;
+import com.iiitb.evaluationBackend.serverConnect.Status;
 import com.iiitb.evaluationBackend.sqlDump.SqlDumpService;
-import com.iiitb.serverConnect.ServerConnect;
-import com.iiitb.serverConnect.Status;
 
 @Service
 public class MpackService {

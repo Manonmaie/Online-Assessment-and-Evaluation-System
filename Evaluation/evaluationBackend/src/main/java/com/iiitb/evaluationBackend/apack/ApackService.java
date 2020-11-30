@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iiitb.evaluationBackend.qpItem.EvQpItem;
+import com.iiitb.evaluationBackend.serverConnect.ServerConnect;
 import com.iiitb.evaluationBackend.sqlDump.SqlDumpService;
-import com.iiitb.serverConnect.ServerConnect;
 
 @Service
 public class ApackService {

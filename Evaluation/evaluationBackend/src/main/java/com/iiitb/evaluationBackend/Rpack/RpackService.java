@@ -24,8 +24,8 @@ import com.iiitb.evaluationBackend.response.EvResponse;
 import com.iiitb.evaluationBackend.response.ResponseService;
 import com.iiitb.evaluationBackend.responseMcq.EvResponseMcq;
 import com.iiitb.evaluationBackend.responseMcq.ResponseMcqService;
+import com.iiitb.evaluationBackend.serverConnect.ServerConnect;
 import com.iiitb.evaluationBackend.sqlDump.SqlDumpService;
-import com.iiitb.serverConnect.ServerConnect;
 
 @Service
 public class RpackService {
