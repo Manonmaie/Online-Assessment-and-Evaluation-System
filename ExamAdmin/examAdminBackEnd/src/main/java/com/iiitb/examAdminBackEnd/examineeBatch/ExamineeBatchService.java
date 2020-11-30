@@ -2,6 +2,7 @@ package com.iiitb.examAdminBackEnd.examineeBatch;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class ExamineeBatchService {
 		return examineeBatchRepository.findByBatchBatchId(id);
 	}
 	
-	public ExamineeBatch getExamineeBatchByExamineeBatchId(int id) {
+	public Optional<ExamineeBatch> getExamineeBatchByExamineeBatchId(int id) {
 		return examineeBatchRepository.findByExamineeBatchId(id);
 	}
 }

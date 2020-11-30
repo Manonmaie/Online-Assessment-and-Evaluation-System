@@ -227,6 +227,7 @@ public class EpackService {
 			ExamineeBatchKey examineeBatchKey = new ExamineeBatchKey((Integer)examineeBatchObjects.get(i)[1], (Integer)examineeBatchObjects.get(i)[2]);
 			AsExamineeBatch examineeBatch = new AsExamineeBatch();
 			examineeBatch.setExamineeBatchId(examineeBatchKey);
+			examineeBatch.setExamineeBatchIdPK((Integer)examineeBatchObjects.get(i)[0]);
 			if(id2Examinee.containsKey((Integer)examineeBatchObjects.get(i)[1])) {
 				examineeBatch.setExaminee(id2Examinee.get((Integer)examineeBatchObjects.get(i)[1]));
 			}

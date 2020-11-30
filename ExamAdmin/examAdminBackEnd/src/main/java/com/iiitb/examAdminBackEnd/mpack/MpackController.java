@@ -2,6 +2,7 @@ package com.iiitb.examAdminBackEnd.mpack;
 
 import java.io.IOException;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
