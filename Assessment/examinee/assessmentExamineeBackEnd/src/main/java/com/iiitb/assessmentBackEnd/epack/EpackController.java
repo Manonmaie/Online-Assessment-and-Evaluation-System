@@ -16,8 +16,8 @@ public class EpackController {
 	@Autowired
 	private EpackService epackService;
 	
-	@RequestMapping("/importFromEpack")
-	public void fromEpack() throws IOException, InterruptedException{
-		epackService.epack2OriginalTables();
+	@RequestMapping("/importFromEpack/{EpackKey}")
+	public void fromEpack(@PathVariable String EpackKey) throws IOException, InterruptedException{
+		epackService.epack2OriginalTables(EpackKey);
 	}
 }

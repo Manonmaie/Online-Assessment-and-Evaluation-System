@@ -1,10 +1,10 @@
 import { OutRpackHeader } from './outRpackHeader'
 
 export class Rpack1{
-    rpack1Id: number;
-    rpackHeaderId: OutRpackHeader;
-    qpId: number;
-    maximumMarks: number;
+    rpack1_id: number;
+    // rpackHeaderId: OutRpackHeader;
+    qp_id: number;
+    maximum_marks: number;
     duration: number;
-    batchId: number;
+    batch_id: number;
 }

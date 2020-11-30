@@ -2,13 +2,13 @@ package com.iiitb.assessmentBackEnd.examineeBatch;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.assessmentBackEnd.batch.AsBatch;
 import com.iiitb.assessmentBackEnd.examinee.AsExaminee;
@@ -17,7 +17,8 @@ import com.iiitb.assessmentBackEnd.examinee.AsExaminee;
 public class AsExamineeBatch {
 	
 //	@Id
-//	private int examineeBatchId;
+	@Column (name = "examinee_batch_id")
+	private int examineeBatchIdPK;
 	
 	@EmbeddedId
     private ExamineeBatchKey examineeBatchId;
@@ -43,7 +44,7 @@ public class AsExamineeBatch {
     }
     
 	public AsExamineeBatch(ExamineeBatchKey examineeBatchId, LocalDateTime examineeBatchStartTime, LocalDateTime examineeBatchEndTime, 
-			String examineeBatchStatus, AsExaminee examinee, AsBatch batch) {
+			String examineeBatchStatus, AsExaminee examinee, AsBatch batch, int examineeBatchIdPK) {
 		super();
 		this.examineeBatchId = examineeBatchId;
 		this.examineeBatchStartTime = examineeBatchStartTime;
@@ -51,6 +52,7 @@ public class AsExamineeBatch {
 		this.examineeBatchStatus = examineeBatchStatus;
 		this.examinee = examinee;
 		this.batch = batch;
+		this.examineeBatchIdPK = examineeBatchIdPK;
 	}
 
 	public ExamineeBatchKey getExamineeBatchId() {
@@ -100,4 +102,13 @@ public class AsExamineeBatch {
 	public void setBatch(AsBatch batch) {
 		this.batch = batch;
 	}
+
+	public int getExamineeBatchIdPK() {
+		return examineeBatchIdPK;
+	}
+
+	public void setExamineeBatchIdPK(int examineeBatchIdPK) {
+		this.examineeBatchIdPK = examineeBatchIdPK;
+	}
+	
 }

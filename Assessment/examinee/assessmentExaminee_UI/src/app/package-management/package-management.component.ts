@@ -24,10 +24,14 @@ export class PackageManagementComponent implements OnInit {
   batchToBeUpdated: Batch;
   rpackToBeUpdated: OutRpackHeader;
   batchDummy: Batch;
+  epackKey: string;
+  displayErrorMessage: boolean = false;
+  errorMessage: String;
 
   constructor(private packageManagementService: PackageManagementService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.epackKey="";
     this.packageManagementService.getAllCompletedBatchesToExport().subscribe((completedBatches) => {
       this.completedBatches = completedBatches;
       if(completedBatches != null && completedBatches.length > 0){
@@ -43,14 +47,14 @@ export class PackageManagementComponent implements OnInit {
       this.sentRpacks = sentRpacks;
       for(let i=0; i<sentRpacks.length; i++){
         for( let j=0; j<sentRpacks[i].rpack1List.length; j++){
-          let batchId = sentRpacks[i].rpack1List[j].batchId;
+          let batchId = sentRpacks[i].rpack1List[j].batch_id;
           this.packageManagementService.getBatchFromRpack1(batchId).subscribe((batch) => {
             this.batchDummy = batch;
             this.batchDetailsForRpack.push(batch);
           });
         }
       }
-      // todo - get batch details for r-pack
+      // get batch details for r-pack
 
       // this.showHistoryBoolean = [];
       // for (let i = 0; i < sentRpacks.length; i++) {
@@ -84,8 +88,8 @@ export class PackageManagementComponent implements OnInit {
   // exportRPack(batch: Batch){
   //   alert("R-Pack for the selected qp is exported");
   //   this.packageManagementService.getAllResponsesForBatchId(batch.batchId).subscribe((responsesForBatch) => {
-  //     // todo - fill R-Pack tables;
-  //     // todo - send R-Pack;
+  //     // fill R-Pack tables;
+  //     // send R-Pack;
   //   });
   //   this.isBatchPresentInCompletedBatches = false;
   //   batch.qpStatus = "SENT";
@@ -101,8 +105,18 @@ export class PackageManagementComponent implements OnInit {
   // }
 
   importQPack(){
-    // alert("Q-Pack imported");
-    this.packageManagementService.importAllEpacks().subscribe((epacksImported) => {
+    // alert(this.epackKey);
+    if(this.epackKey == ""){
+      this.displayErrorMessage = true;
+      this.errorMessage = "Please enter Username. It is a mandatory field";
+      if(this.displayErrorMessage == true){
+        setTimeout(function() {
+          this.displayErrorMessage = false;
+          console.log("display = " + this.displayErrorMessage);
+        }.bind(this), 3000);
+      }
+    }
+    this.packageManagementService.importAllEpacks(this.epackKey).subscribe((epacksImported) => {
       this.epacksImported = epacksImported;
     });
   }
