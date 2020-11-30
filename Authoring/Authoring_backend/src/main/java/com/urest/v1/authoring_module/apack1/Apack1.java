@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,7 +37,8 @@ public class Apack1 {
 	@Column(name = "qp_item_id")
 	private int qp_item_id;
 	
-	@Column(name = "item_text")
+	@Lob
+	@Column(length=8192,name = "item_text")
 	private String item_text;
 	
 	@Column(name = "item_marks")

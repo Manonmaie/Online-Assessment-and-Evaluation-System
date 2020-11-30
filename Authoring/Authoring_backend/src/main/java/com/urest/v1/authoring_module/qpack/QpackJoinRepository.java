@@ -11,8 +11,8 @@ import com.urest.v1.authoring_module.qpack2.Qpack2;
 
 
 public interface QpackJoinRepository extends JpaRepository<Qpack, Integer>{
-	@Query(nativeQuery =true, value = "SELECT q.qp_id, q.maximum_marks, i.instruction_id, i.instruction_text, q.duration, q.course_code, q.batch_code FROM "
-			+ "au_question_paper q LEFT JOIN au_instruction i ON q.qp_id = i.qp_id")
+	@Query(nativeQuery =true, value = "SELECT q.qp_id, q.maximum_marks, i.instruction_id, i.instruction_text, q.duration, q.course_master_id, c.course_code, c.course_name, q.batch_code "
+			+ "FROM au_question_paper q LEFT JOIN au_instruction i ON q.qp_id = i.qp_id INNER JOIN au_course_master c ON c.course_master_id = q.course_master_id")
 	List<Object[]> fetchQpack1Data();
 	
 	@Query(nativeQuery = true, value = "SELECT c.course_master_id, c.course_code, c.course_name FROM au_course_master c WHERE c.course_code = :course_code")

@@ -313,7 +313,7 @@ CREATE TABLE IF NOT EXISTS qpack2(
   qp_id int(10) unsigned NOT NULL,
   item_id int(10) unsigned NOT NULL,
   qp_item_id int(10) unsigned NOT NULL,
-  item_text varchar(255) NOT NULL,
+  item_text blob NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
   cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE')  NOT NULL,
@@ -366,7 +366,7 @@ CREATE TABLE IF NOT EXISTS apack1(
   qp_id int(10) unsigned NOT NULL,
   item_id int(10) unsigned NOT NULL,
   qp_item_id int(10) unsigned NOT NULL,
-  item_text varchar(255) NOT NULL,
+  item_text blob NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
   PRIMARY KEY(apack1_id)

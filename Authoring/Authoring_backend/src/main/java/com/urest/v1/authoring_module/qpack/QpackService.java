@@ -60,15 +60,23 @@ public class QpackService {
 		List<Object[]> qpack1Objects = qpackJoinRepository.fetchQpack1Data();
 		List<Qpack1> qpack1s = new ArrayList<Qpack1>();
 		for(int i = 0; i < qpack1Objects.size(); i++) {
-			List<Object[]> course = qpackJoinRepository.getCourseByCode(String.valueOf(qpack1Objects.get(i)[5]));
-			if(!course.isEmpty()) {
-				if(qpack1Objects.get(i)[2] != null) {
-					qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[2], String.valueOf(qpack1Objects.get(i)[3]), (Integer)qpack1Objects.get(i)[4], (Integer)course.get(0)[0], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(course.get(0)[2]), String.valueOf(qpack1Objects.get(i)[6])));
-				}
-				else {
-					qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[4], (Integer)course.get(0)[0], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(course.get(0)[2]), String.valueOf(qpack1Objects.get(i)[6])));
-				}
+			if(qpack1Objects.get(i)[2] != null) {
+				qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[2], String.valueOf(qpack1Objects.get(i)[3]), (Integer)qpack1Objects.get(i)[4], (Integer)qpack1Objects.get(i)[5], String.valueOf(qpack1Objects.get(i)[6]), String.valueOf(qpack1Objects.get(i)[2]), String.valueOf(qpack1Objects.get(i)[8])));
 			}
+			else {
+				qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[4], (Integer)qpack1Objects.get(i)[5], String.valueOf(qpack1Objects.get(i)[6]), String.valueOf(qpack1Objects.get(i)[2]), String.valueOf(qpack1Objects.get(i)[8])));
+			}
+			
+			
+//			List<Object[]> course = qpackJoinRepository.getCourseByCode(String.valueOf(qpack1Objects.get(i)[5]));
+//			if(!course.isEmpty()) {
+//				if(qpack1Objects.get(i)[2] != null) {
+//					qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[2], String.valueOf(qpack1Objects.get(i)[3]), (Integer)qpack1Objects.get(i)[4], (Integer)course.get(0)[0], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(course.get(0)[2]), String.valueOf(qpack1Objects.get(i)[6])));
+//				}
+//				else {
+//					qpack1s.add(new Qpack1((Integer)qpack1Objects.get(i)[0],(Integer)qpack1Objects.get(i)[1], (Integer)qpack1Objects.get(i)[4], (Integer)course.get(0)[0], String.valueOf(qpack1Objects.get(i)[5]), String.valueOf(course.get(0)[2]), String.valueOf(qpack1Objects.get(i)[6])));
+//				}
+//			}
 //			course_id and course_name should always be present(NOT NULL). ensure course_code is correct in question paper.
 //			else {
 //				if(qpack1Objects.get(i)[2] != null) {
