@@ -5,6 +5,110 @@ USE oaes_evaluation_db;
 -- Database: `oaes_evaluation_db`
 --
 
+
+-- --------------------------------------------------------
+-- Table structure for table ev_user
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ev_user(
+  user_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_name varchar(255) UNIQUE NOT NULL,
+  password varchar(255) NOT NULL,
+  status ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
+  PRIMARY KEY(user_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table `ev_user`
+-- --------------------------------------------------------
+INSERT INTO ev_user VALUES(0,"E1","abc","ACTIVE");
+INSERT INTO ev_user VALUES(0,"E2","xyz","ACTIVE");
+INSERT INTO ev_user VALUES(0,"E3","pqr","INACTIVE");
+INSERT INTO ev_user VALUES(0,"E4","uvw","INACTIVE");
+INSERT INTO ev_user VALUES(0,"S1","abc","ACTIVE");
+
+-- --------------------------------------------------------
+-- Table structure for table ev_role_master
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ev_role_master(
+  role_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  role_name varchar(255) UNIQUE NOT NULL,
+  module_name ENUM('AU', 'AS', 'EVAL', 'EA'),
+  PRIMARY KEY(role_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table `ev_role_master`
+-- --------------------------------------------------------
+INSERT INTO ev_role_master VALUES(0,"Evaluator","EVAL");
+INSERT INTO ev_role_master VALUES(0,"Student","AS");
+
+-- --------------------------------------------------------
+-- Table structure for table ev_user_role
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ev_user_role(
+  user_role_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_id int(10) unsigned,
+  role_id int(10) unsigned,
+  PRIMARY KEY(user_role_id)
+);
+
+ALTER TABLE ev_user_role
+  ADD CONSTRAINT `fk_ev_user_role_user_id` FOREIGN KEY (user_id) REFERENCES ev_user(user_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_ev_user_role_role_id` FOREIGN KEY (role_id) REFERENCES ev_role_master(role_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `ev_user_role`
+-- --------------------------------------------------------
+INSERT INTO ev_user_role VALUES(0,1,1);
+INSERT INTO ev_user_role VALUES(0,2,1);
+INSERT INTO ev_user_role VALUES(0,3,1);
+INSERT INTO ev_user_role VALUES(0,4,1);
+INSERT INTO ev_user_role VALUES(0,5,2);
+
+-- --------------------------------------------------------
+-- Table structure for table ev_action_master
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ev_action_master(
+  action_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  action_name varchar(255) UNIQUE NOT NULL,
+  module_name ENUM('AU', 'AS', 'EVAL', 'EA'),
+  PRIMARY KEY(action_id)
+);
+
+-- --------------------------------------------------------
+-- Table structure for table ev_role_action
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ev_role_action(
+  role_action_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  role_id int(10) unsigned,
+  action_id int(10) unsigned,
+  PRIMARY KEY(role_action_id)
+);
+
+ALTER TABLE ev_role_action
+  ADD CONSTRAINT `fk_ev_role_action_role_id` FOREIGN KEY (role_id) REFERENCES ev_role_master(role_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_ev_role_action_action_id` FOREIGN KEY (action_id) REFERENCES ev_action_master(action_id) ON DELETE SET NULL;
+
+
+-- --------------------------------------------------------
+-- Table structure for table ev_evaluator
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS ev_evaluator(
+  evaluator_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  evaluator_code varchar(255) CHARACTER SET utf8 COLLATE utf8_bin UNIQUE NOT NULL,
+  evaluator_name varchar(255) NOT NULL,
+  evaluator_password varchar(255) NOT NULL,
+  PRIMARY KEY(evaluator_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table ev_evaluator
+-- --------------------------------------------------------
+INSERT INTO ev_evaluator VALUES(0,"E1","ABC","abc");
+INSERT INTO ev_evaluator VALUES(0,"E2","XYZ","xyz");
+INSERT INTO ev_evaluator VALUES(0,"E3","PQR","pqr");
+INSERT INTO ev_evaluator VALUES(0,"E4","UVW","uvw");
+
 -- --------------------------------------------------------
 -- Table structure for table `ev_question_paper`
 -- --------------------------------------------------------
