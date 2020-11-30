@@ -2,6 +2,7 @@ package com.iiitb.examAdminBackEnd.examineeBatch;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -25,6 +26,9 @@ public class ExamineeBatch {
 	@EmbeddedId
 	private ExamineeBatchKey examineeBatchId;
 	
+	@Column (name = "examinee_batch_id")
+	private int examineeBatchIdInt;
+	
 	@ManyToOne
 	@MapsId("examineeId")
 	@JoinColumn(name = "examinee_id")
@@ -42,17 +46,25 @@ public class ExamineeBatch {
 
 	public ExamineeBatch() {
 	}
-	public ExamineeBatch(ExamineeBatchKey examineeBatchId, Examinee examinee, Batch batch) {
+	public ExamineeBatch(ExamineeBatchKey examineeBatchId, Examinee examinee, Batch batch, int examineeBatchIdInt) {
 		super();
 		this.examineeBatchId = examineeBatchId;
 		this.examinee = examinee;
 		this.batch = batch;
+		this.examineeBatchIdInt = examineeBatchIdInt;
 	}
 
 	public ExamineeBatchKey getExamineeBatchId() {
 		return examineeBatchId;
 	}
-
+	
+	public int getExamineeBatchIdInt() {
+		return examineeBatchIdInt;
+	}
+	public void setExamineeBatchIdInt(int examineeBatchIdInt) {
+		this.examineeBatchIdInt = examineeBatchIdInt;
+	}
+	
 	public void setExamineeBatchId(ExamineeBatchKey examineeBatchId) {
 		this.examineeBatchId = examineeBatchId;
 	}
