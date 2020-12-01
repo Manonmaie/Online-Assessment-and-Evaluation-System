@@ -31,7 +31,7 @@ CREATE TABLE `out_mpack_header` (
   `mpack_sent_on` datetime DEFAULT NULL,
   `mpack_path` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`mpack_header_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `out_mpack_header` (
 
 LOCK TABLES `out_mpack_header` WRITE;
 /*!40000 ALTER TABLE `out_mpack_header` DISABLE KEYS */;
-INSERT INTO `out_mpack_header` VALUES (1,'Nothing','2020-12-01 16:01:42','Author','CREATED',NULL,NULL),(2,'Nothing','2020-12-01 16:02:15','Author','CREATED',NULL,NULL),(3,'Nothing','2020-12-01 16:02:52','Author','CREATED',NULL,NULL);
+INSERT INTO `out_mpack_header` VALUES (1,'Nothing','2020-12-01 16:26:54','Author','CREATED',NULL,NULL),(2,'Nothing','2020-12-01 16:28:16','Author','CREATED',NULL,NULL);
 /*!40000 ALTER TABLE `out_mpack_header` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `mpack1` (
   PRIMARY KEY (`mpack1_id`),
   KEY `fk_mpack1_mpack_header_id` (`mpack_header_id`),
   CONSTRAINT `fk_mpack1_mpack_header_id` FOREIGN KEY (`mpack_header_id`) REFERENCES `out_mpack_header` (`mpack_header_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `mpack1` (
 
 LOCK TABLES `mpack1` WRITE;
 /*!40000 ALTER TABLE `mpack1` DISABLE KEYS */;
-INSERT INTO `mpack1` VALUES (7,3,1,100,180),(8,3,2,50,120),(9,3,3,25,60);
+INSERT INTO `mpack1` VALUES (4,2,1,100,180),(5,2,2,50,120),(6,2,3,25,60);
 /*!40000 ALTER TABLE `mpack1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `mpack2` (
   PRIMARY KEY (`mpack2_id`),
   KEY `fk_mpack2_mpack1_id` (`mpack1_id`),
   CONSTRAINT `fk_mpack2_mpack1_id` FOREIGN KEY (`mpack1_id`) REFERENCES `mpack1` (`mpack1_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +100,7 @@ CREATE TABLE `mpack2` (
 
 LOCK TABLES `mpack2` WRITE;
 /*!40000 ALTER TABLE `mpack2` DISABLE KEYS */;
-INSERT INTO `mpack2` VALUES (21,7,1,1,'What is a database?',2,'McqSingleCorrect'),(22,7,1,2,'What is a  PK?',1,'McqMultiCorrect'),(23,7,1,3,'What is a FK?',2,'McqMultiCorrect'),(24,7,1,4,'UK and PK are same.',1,'True/False'),(25,7,1,5,'Uk with no null values is Pk.',2,'True/False'),(26,8,2,6,'What is a database?',2,'McqSingleCorrect'),(27,8,2,7,'What is a  PK?',1,'McqSingleCorrect'),(28,8,2,8,'What is a FK?',2,'McqMultiCorrect'),(29,8,2,9,'UK and PK are same.',1,'True/False'),(30,8,2,10,'Uk with no null values is Pk.',2,'True/False');
+INSERT INTO `mpack2` VALUES (11,4,1,1,'What is a database?',2,'McqSingleCorrect'),(12,4,1,2,'What is a  PK?',1,'McqMultiCorrect'),(13,4,1,3,'What is a FK?',2,'McqMultiCorrect'),(14,4,1,4,'UK and PK are same.',1,'True/False'),(15,4,1,5,'Uk with no null values is Pk.',2,'True/False'),(16,5,2,6,'What is a database?',2,'McqSingleCorrect'),(17,5,2,7,'What is a  PK?',1,'McqSingleCorrect'),(18,5,2,8,'What is a FK?',2,'McqMultiCorrect'),(19,5,2,9,'UK and PK are same.',1,'True/False'),(20,5,2,10,'Uk with no null values is Pk.',2,'True/False');
 /*!40000 ALTER TABLE `mpack2` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `mpack3` (
   UNIQUE KEY `qp_item_id` (`qp_item_id`),
   KEY `fk_mpack3_mpack2_id` (`mpack2_id`),
   CONSTRAINT `fk_mpack3_mpack2_id` FOREIGN KEY (`mpack2_id`) REFERENCES `mpack2` (`mpack2_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +131,7 @@ CREATE TABLE `mpack3` (
 
 LOCK TABLES `mpack3` WRITE;
 /*!40000 ALTER TABLE `mpack3` DISABLE KEYS */;
-INSERT INTO `mpack3` VALUES (3,21,1,1,1,10);
+INSERT INTO `mpack3` VALUES (2,11,1,1,1,10);
 /*!40000 ALTER TABLE `mpack3` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -144,4 +144,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01 16:02:53
+-- Dump completed on 2020-12-01 16:28:18

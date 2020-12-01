@@ -462,74 +462,74 @@ ALTER TABLE mpack3
 -- --------------------------------------------------------
 -- Table structure for table in_rpack_header
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS out_rpack_header(
-  rpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  rpack_desc varchar(255),
-  created_on datetime,
-  created_by varchar(255),
-  rpack_status ENUM('CREATED', 'SENT'),
-  rpack_sent_on datetime,
-  rpack_path varchar(255),
-  PRIMARY KEY(rpack_header_id)
-);
+-- CREATE TABLE IF NOT EXISTS out_rpack_header(
+--   rpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   rpack_desc varchar(255),
+--   created_on datetime,
+--   created_by varchar(255),
+--   rpack_status ENUM('CREATED', 'SENT'),
+--   rpack_sent_on datetime,
+--   rpack_path varchar(255),
+--   PRIMARY KEY(rpack_header_id)
+-- );
 
-CREATE TABLE IF NOT EXISTS rpack1(
-  rpack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  rpack_header_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  -- qp_code varchar(255) UNIQUE NOT NULL,
-  maximum_marks float(24) NOT NULL,
-  duration int(10) NOT NULL,
-  batch_id int(10) unsigned NOT NULL,
-  PRIMARY KEY(rpack1_id)
-);
+-- CREATE TABLE IF NOT EXISTS rpack1(
+--   rpack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   rpack_header_id int(10) unsigned NOT NULL,
+--   qp_id int(10) unsigned NOT NULL,
+--   -- qp_code varchar(255) UNIQUE NOT NULL,
+--   maximum_marks float(24) NOT NULL,
+--   duration int(10) NOT NULL,
+--   batch_id int(10) unsigned NOT NULL,
+--   PRIMARY KEY(rpack1_id)
+-- );
 
-ALTER TABLE rpack1
-  ADD CONSTRAINT `fk_rpack1_rpack_header_id` FOREIGN KEY (rpack_header_id) REFERENCES out_rpack_header(rpack_header_id) ON DELETE CASCADE;
+-- ALTER TABLE rpack1
+--   ADD CONSTRAINT `fk_rpack1_rpack_header_id` FOREIGN KEY (rpack_header_id) REFERENCES out_rpack_header(rpack_header_id) ON DELETE CASCADE;
 
-CREATE TABLE IF NOT EXISTS rpack2(
-  rpack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  rpack1_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  -- item_text varchar(255) NOT NULL,
-  item_text text(1024) NOT NULL,
-  item_marks float(24) unsigned NOT NULL,
-  item_type varchar(255) NOT NULL,
-  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
-  PRIMARY KEY(rpack2_id)
-);
+-- CREATE TABLE IF NOT EXISTS rpack2(
+--   rpack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   rpack1_id int(10) unsigned NOT NULL,
+--   qp_id int(10) unsigned NOT NULL,
+--   qp_item_id int(10) unsigned NOT NULL,
+--   -- item_text varchar(255) NOT NULL,
+--   item_text text(1024) NOT NULL,
+--   item_marks float(24) unsigned NOT NULL,
+--   item_type varchar(255) NOT NULL,
+--   cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
+--   PRIMARY KEY(rpack2_id)
+-- );
 
-ALTER TABLE rpack2
-  ADD CONSTRAINT `fk_rpack2_rpack1_id` FOREIGN KEY (rpack1_id) REFERENCES rpack1(rpack1_id) ON DELETE CASCADE;
+-- ALTER TABLE rpack2
+--   ADD CONSTRAINT `fk_rpack2_rpack1_id` FOREIGN KEY (rpack1_id) REFERENCES rpack1(rpack1_id) ON DELETE CASCADE;
 
-CREATE TABLE IF NOT EXISTS rpack3(
-  rpack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  rpack2_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_option_id int(10) unsigned NOT NULL,
-  option_text varchar(255) NOT NULL,
-  PRIMARY KEY(rpack3_id)
-);
+-- CREATE TABLE IF NOT EXISTS rpack3(
+--   rpack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   rpack2_id int(10) unsigned NOT NULL,
+--   qp_item_id int(10) unsigned NOT NULL,
+--   item_option_id int(10) unsigned NOT NULL,
+--   option_text varchar(255) NOT NULL,
+--   PRIMARY KEY(rpack3_id)
+-- );
 
-ALTER TABLE rpack3
-  ADD CONSTRAINT `fk_rpack3_rpack2_id` FOREIGN KEY (rpack2_id) REFERENCES rpack2(rpack2_id) ON DELETE CASCADE;
+-- ALTER TABLE rpack3
+--   ADD CONSTRAINT `fk_rpack3_rpack2_id` FOREIGN KEY (rpack2_id) REFERENCES rpack2(rpack2_id) ON DELETE CASCADE;
 
-CREATE TABLE IF NOT EXISTS rpack4(
-  rpack4_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  rpack2_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  batch_id int(10) unsigned NOT NULL,
-  examinee_batch_id int(10) unsigned NOT NULL,
-  examinee_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  response_id int(10) unsigned NOT NULL,
-  response_text varchar(511) NOT NULL,
-  PRIMARY KEY(rpack4_id)
-);
+-- CREATE TABLE IF NOT EXISTS rpack4(
+--   rpack4_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   rpack2_id int(10) unsigned NOT NULL,
+--   qp_id int(10) unsigned NOT NULL,
+--   batch_id int(10) unsigned NOT NULL,
+--   examinee_batch_id int(10) unsigned NOT NULL,
+--   examinee_id int(10) unsigned NOT NULL,
+--   qp_item_id int(10) unsigned NOT NULL,
+--   response_id int(10) unsigned NOT NULL,
+--   response_text varchar(511) NOT NULL,
+--   PRIMARY KEY(rpack4_id)
+-- );
 
-ALTER TABLE rpack4
-  ADD CONSTRAINT `fk_rpack4_rpack2_id` FOREIGN KEY (rpack2_id) REFERENCES rpack2(rpack2_id) ON DELETE CASCADE;
+-- ALTER TABLE rpack4
+--   ADD CONSTRAINT `fk_rpack4_rpack2_id` FOREIGN KEY (rpack2_id) REFERENCES rpack2(rpack2_id) ON DELETE CASCADE;
 -- -- --------------------------------------------------------
 -- -- Table structure for table rpack1
 -- -- --------------------------------------------------------

@@ -4,6 +4,7 @@ import { baseURL } from "../shared/baseurl";
 import { Observable, of } from "rxjs";
 import { OutMpackHeader } from "../shared/outMpackHeader";
 import { InApackHeader } from "../shared/inApackHeader";
+import { InRpackHeader } from "../shared/inRpackHeader";
 import { PackStatus } from "../shared/packStatus";
 
 @Injectable({
@@ -21,5 +22,8 @@ export class PackageManagementService {
     return this.http.get<InApackHeader[]>(baseURL + 'importFromApack/' + ApackKey);
   }
 
+  importAllRpacks(ApackKey: string): Observable<InRpackHeader[]>{
+    return this.http.get<InRpackHeader[]>(baseURL + 'importFromRpack/' + ApackKey);
+  }
   
 }
