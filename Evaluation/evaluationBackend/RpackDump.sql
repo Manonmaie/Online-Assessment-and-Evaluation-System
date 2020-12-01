@@ -164,7 +164,7 @@ CREATE TABLE `rpack4` (
 
 LOCK TABLES `rpack4` WRITE;
 /*!40000 ALTER TABLE `rpack4` DISABLE KEYS */;
-INSERT INTO `rpack4` VALUES (1,10,1,4,0,1,1,1,'Collection of related data'),(2,10,1,4,8,2,1,1,'Collection of related data'),(3,11,1,4,0,1,2,2,'Foreign Key'),(4,11,1,4,8,2,2,2,'Foreign Key');
+INSERT INTO `rpack4` VALUES (1,10,1,4,6,1,1,1,'Collection of related data'),(2,10,1,4,8,2,1,1,'Collection of related data'),(3,11,1,4,6,1,2,2,'Foreign Key'),(4,11,1,4,8,2,2,2,'Foreign Key');
 /*!40000 ALTER TABLE `rpack4` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

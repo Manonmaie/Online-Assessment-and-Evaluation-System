@@ -160,6 +160,7 @@ public class RpackService {
 			
 			if(!id2ExamineeBatch.containsKey(examineeBatch.getexaminee_batch_id())) {
 				id2ExamineeBatch.put(examineeBatch.getexaminee_batch_id(), examineeBatch);
+//				System.out.println(examineeBatch.getexaminee_batch_id());
 			}
 		}
 		
@@ -168,8 +169,9 @@ public class RpackService {
 			EvResponse response = new EvResponse();
 			if(id2ExamineeBatch.containsKey((Integer)responseObjects.get(i)[0])) {
 				response.setEvExamineeBatch(id2ExamineeBatch.get((Integer)responseObjects.get(i)[0]));
+				System.out.println((Integer)responseObjects.get(i)[0]);
 			}
-			
+			System.out.println("Out- "+(Integer)responseObjects.get(i)[0]);
 			if(id2QpItem.containsKey((Integer)responseObjects.get(i)[1])) {
 				response.setEvQpItem(id2QpItem.get((Integer)responseObjects.get(i)[1]));
 			}
