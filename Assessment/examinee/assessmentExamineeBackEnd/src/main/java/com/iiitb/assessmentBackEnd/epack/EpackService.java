@@ -162,12 +162,15 @@ public class EpackService {
 				batch.setAsExamdrive(id2ExamDrive.get((Integer)batchObjects.get(i)[5]));
 			}
 			
+			batchService.addBatch(batch);
+			
 			if(id2QuestionPaper.containsKey((Integer)batchObjects.get(i)[6])) {
 				batch.setAsQuestionPaper(id2QuestionPaper.get((Integer)batchObjects.get(i)[6]));
 				id2QuestionPaper.get((Integer)batchObjects.get(i)[6]).setAsBatch(batch);
 				questionPaperService.addQuestionPaper(id2QuestionPaper.get((Integer)batchObjects.get(i)[6]));
 			}
-			batchService.addBatch(batch);
+//			batchService.addBatch(batch);
+			batchService.updateBatch(batch);
 			
 			if(!id2Batch.containsKey(batch.getBatchId())) {
 				id2Batch.put(batch.getBatchId(), batch);
