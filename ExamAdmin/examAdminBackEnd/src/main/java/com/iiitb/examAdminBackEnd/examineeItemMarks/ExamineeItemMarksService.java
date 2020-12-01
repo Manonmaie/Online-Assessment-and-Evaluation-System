@@ -26,4 +26,8 @@ public class ExamineeItemMarksService {
 	public void deleteAll() {
 		examineeItemMarksRepository.deleteAll();
 	}
+	
+	public Optional<ExamineeItemMarks> getExamineeItemMarksByQpItemId(int qp_item_id, int examinee_batch_id){
+		return examineeItemMarksRepository.getExamineeItemMarksByQpItemId(qp_item_id, examinee_batch_id);
+	}
 }

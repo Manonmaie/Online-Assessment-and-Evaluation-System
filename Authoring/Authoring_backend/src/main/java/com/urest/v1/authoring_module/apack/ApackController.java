@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.urest.v1.authoring_module.serverConnect.Status;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ApackController {
@@ -17,7 +19,7 @@ public class ApackController {
 	private ApackService apackService;
 	
 	@RequestMapping("/createApack")
-	public void createApack() throws IOException{
-		apackService.addApack();
+	public Status createApack() throws IOException{
+		return apackService.addApack();
 	}
 }

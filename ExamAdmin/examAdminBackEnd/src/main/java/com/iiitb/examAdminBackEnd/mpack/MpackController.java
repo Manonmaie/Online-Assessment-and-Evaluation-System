@@ -2,6 +2,7 @@ package com.iiitb.examAdminBackEnd.mpack;
 
 import java.io.IOException;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +17,8 @@ public class MpackController {
 	@Autowired
 	private MpackService mpackService;
 	
-	@RequestMapping("/importFromMpack")
-	public void fromMpack() throws IOException, InterruptedException{
-		mpackService.mpack2OriginalTables();
+	@RequestMapping("/importFromMpack/{MpackKey}")
+	public void fromMpack(@PathVariable String MpackKey) throws IOException, InterruptedException{
+		mpackService.mpack2OriginalTables(MpackKey);
 	}
 }

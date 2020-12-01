@@ -33,6 +33,7 @@ import com.iiitb.assessmentBackEnd.qpItem.AsQpItem;
 import com.iiitb.assessmentBackEnd.qpItem.QpItemService;
 import com.iiitb.assessmentBackEnd.questionPaper.AsQuestionPaper;
 import com.iiitb.assessmentBackEnd.questionPaper.QuestionPaperService;
+import com.iiitb.assessmentBackEnd.serverConnect.ServerConnect;
 import com.iiitb.assessmentBackEnd.sqlDump.SqlDumpService;
 
 @Service
@@ -74,7 +75,12 @@ public class EpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
+//	@Autowired
+	private ServerConnect serverConnect;
+	
 	public void epack2OriginalTables(String EpackKey) throws IOException, InterruptedException {
+		serverConnect.execCurlPullCommand("EpackDump.sql", EpackKey);
+		
 		sqlDumpService.importEpackDump();
 		
 		Map<Integer, AsCourseMaster> id2CourseMaster = new HashMap<Integer, AsCourseMaster>();
@@ -227,6 +233,7 @@ public class EpackService {
 			ExamineeBatchKey examineeBatchKey = new ExamineeBatchKey((Integer)examineeBatchObjects.get(i)[1], (Integer)examineeBatchObjects.get(i)[2]);
 			AsExamineeBatch examineeBatch = new AsExamineeBatch();
 			examineeBatch.setExamineeBatchId(examineeBatchKey);
+			examineeBatch.setExamineeBatchIdPK((Integer)examineeBatchObjects.get(i)[0]);
 			if(id2Examinee.containsKey((Integer)examineeBatchObjects.get(i)[1])) {
 				examineeBatch.setExaminee(id2Examinee.get((Integer)examineeBatchObjects.get(i)[1]));
 			}

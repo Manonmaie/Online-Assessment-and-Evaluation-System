@@ -24,6 +24,7 @@ import com.iiitb.evaluationBackend.response.EvResponse;
 import com.iiitb.evaluationBackend.response.ResponseService;
 import com.iiitb.evaluationBackend.responseMcq.EvResponseMcq;
 import com.iiitb.evaluationBackend.responseMcq.ResponseMcqService;
+import com.iiitb.evaluationBackend.serverConnect.ServerConnect;
 import com.iiitb.evaluationBackend.sqlDump.SqlDumpService;
 
 @Service
@@ -55,6 +56,9 @@ public class RpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
+//	@Autowired
+	private ServerConnect serverConnect;
+	
 	
 	public List<Rpack> getAllRpacks() {
 		List<Rpack> rpacks = new ArrayList<>();
@@ -70,7 +74,9 @@ public class RpackService {
 		return rpackRepository.findById(id);
 	}
 	
-	public void rpack2OriginalTables() throws IOException, InterruptedException {
+	public void rpack2OriginalTables(String RpackKey) throws IOException, InterruptedException {
+//		serverConnect.execCurlPullCommand("RpackDump.sql", RpackKey);
+		
 		sqlDumpService.importDump("Rpack");
 		
 		Map<Integer, EvQuestionPaper> id2Qp = new HashMap<Integer, EvQuestionPaper>();

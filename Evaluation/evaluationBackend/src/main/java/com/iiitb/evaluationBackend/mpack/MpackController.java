@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iiitb.evaluationBackend.serverConnect.Status;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MpackController {
@@ -17,7 +19,7 @@ public class MpackController {
 	private MpackService mpackService;
 	
 	@RequestMapping("/createMpack")
-	public void createMpack() throws IOException{
-		mpackService.addMpack();
+	public Status createMpack() throws IOException{
+		return mpackService.addMpack();
 	}
 }

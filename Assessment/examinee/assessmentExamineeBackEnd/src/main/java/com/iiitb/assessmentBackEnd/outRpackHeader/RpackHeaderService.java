@@ -17,6 +17,8 @@ import com.iiitb.assessmentBackEnd.rpack3.Rpack3;
 import com.iiitb.assessmentBackEnd.rpack3.Rpack3Service;
 import com.iiitb.assessmentBackEnd.rpack4.Rpack4;
 import com.iiitb.assessmentBackEnd.rpack4.Rpack4Service;
+import com.iiitb.assessmentBackEnd.serverConnect.ServerConnect;
+import com.iiitb.assessmentBackEnd.serverConnect.Status;
 import com.iiitb.assessmentBackEnd.sqlDump.SqlDumpService;
 
 @Service
@@ -43,6 +45,9 @@ public class RpackHeaderService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
+//	@Autowired
+	private ServerConnect serverConnect;
+	
 	public List<OutRpackHeader> getAllRpacksForRpackStatus(String rpackStatus) {
 		return rpackHeaderRepository.findByRpackStatus(rpackStatus);
 	}
@@ -51,7 +56,7 @@ public class RpackHeaderService {
 		rpackHeaderRepository.save(outRpackHeader);
 	}
 	
-	public void addRpack()  throws IOException{
+	public Status addRpack()  throws IOException{
 		rpack4Service.deleteAll();
 		rpack3Service.deleteAll();
 		rpack2Service.deleteAll();
@@ -128,5 +133,7 @@ public class RpackHeaderService {
 		}
 		
 		sqlDumpService.getRpackDump();
+		
+		return serverConnect.execCurlPushCommand("RpackDump.sql");
 	}
 }

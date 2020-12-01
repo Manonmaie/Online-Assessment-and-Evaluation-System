@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iiitb.examAdminBackEnd.serverConnect.Status;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EpackController {
@@ -17,7 +19,7 @@ public class EpackController {
 	private EpackService epackService;
 	
 	@RequestMapping("/createEpack/{id}")
-	public void createQpack(@PathVariable int id) throws IOException{
-		epackService.addEpack(id);
+	public Status createQpack(@PathVariable int id) throws IOException{
+		return epackService.addEpack(id);
 	}
 }

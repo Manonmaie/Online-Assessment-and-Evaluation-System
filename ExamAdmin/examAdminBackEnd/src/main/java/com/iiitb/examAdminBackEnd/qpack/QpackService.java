@@ -3,15 +3,19 @@ package com.iiitb.examAdminBackEnd.qpack;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iiitb.examAdminBackEnd.batch.Batch;
 import com.iiitb.examAdminBackEnd.batch.BatchService;
+import com.iiitb.examAdminBackEnd.examdrive.Examdrive;
+import com.iiitb.examAdminBackEnd.examdrive.ExamdriveService;
 import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatch;
 import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchService;
 import com.iiitb.examAdminBackEnd.examineeItemMarks.ExamineeItemMarks;
@@ -26,6 +30,7 @@ import com.iiitb.examAdminBackEnd.qp_item.QpItem;
 import com.iiitb.examAdminBackEnd.qp_item.QpItemService;
 import com.iiitb.examAdminBackEnd.questionPaper.QuestionPaper;
 import com.iiitb.examAdminBackEnd.questionPaper.QuestionPaperService;
+import com.iiitb.examAdminBackEnd.serverConnect.ServerConnect;
 import com.iiitb.examAdminBackEnd.sqlDump.SqlDumpService;
 
 @Service
@@ -46,13 +51,19 @@ public class QpackService {
 	private QpItemService qpItemService;
 	
 	@Autowired
-	ItemMcqOptionsService itemMcqOptionsService;
+	private ItemMcqOptionsService itemMcqOptionsService;
 	
 	@Autowired
-	ItemTrueFalseService itemTrueFalseService;
+	private ItemTrueFalseService itemTrueFalseService;
+	
+	@Autowired
+	private ExamdriveService examdriveService;
 	
 	@Autowired
 	private SqlDumpService sqlDumpService;
+	
+//	@Autowired
+	private ServerConnect serverConnect;
 	
 	public List<Qpack> getAllQpacks() {
 		List<Qpack> qpacks = new ArrayList<>();
@@ -68,14 +79,17 @@ public class QpackService {
 		return qpackRepository.findById(id);
 	}
 	
-	public void qpack2OriginalTables() throws IOException, InterruptedException {
+	public void qpack2OriginalTables(String EpackKey) throws IOException, InterruptedException {
+		serverConnect.execCurlPullCommand("EpackDump.sql", EpackKey);
+		
 		sqlDumpService.importDump("Qpack");
 		
 		Map<Integer, QuestionPaper> id2Qp = new HashMap<Integer, QuestionPaper>();
-		
+		Set<Examdrive> examdriveSet =  new HashSet<Examdrive>(); 
 		List<Object[]> qpDataObjects = qpackRepository.fetchQPdata();
 		for(int i = 0; i < qpDataObjects.size(); i++) {
 			Batch batch = batchService.getBatchesByCode(String.valueOf(qpDataObjects.get(i)[3]));
+			examdriveSet.add(batch.getExamdrive());
 			batch.setQpStatus("RECEIVED");
 			batchService.updateBatch(batch.getBatchId(), batch);
 //			System.out.println((Integer)qpDataObjects.get(i)[0] + " " + batch.getBatchId() + " " + (float)(Integer)qpDataObjects.get(i)[1]);
@@ -85,6 +99,11 @@ public class QpackService {
 			if(!id2Qp.containsKey(questionPaper.getQp_id())) {
 				id2Qp.put(questionPaper.getQp_id(), questionPaper);
 			}
+		}
+		
+		for (Examdrive examdrive : examdriveSet) {
+			examdrive.setStatus("IN_PROGRESS");
+			examdriveService.updateExamdrive(examdrive.getExamdriveId(), examdrive);
 		}
 		
 		List<Object[]> instructionObjects = qpackRepository.fetchInstructionsdata();
