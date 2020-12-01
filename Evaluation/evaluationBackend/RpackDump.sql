@@ -24,14 +24,14 @@ DROP TABLE IF EXISTS `out_rpack_header`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `out_rpack_header` (
   `rpack_header_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `rpack_desc` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `rpack_desc` varchar(255) DEFAULT NULL,
   `created_on` datetime DEFAULT NULL,
-  `created_by` varchar(255) COLLATE utf8_bin DEFAULT NULL,
-  `rpack_status` enum('CREATED','SENT') COLLATE utf8_bin DEFAULT NULL,
+  `created_by` varchar(255) DEFAULT NULL,
+  `rpack_status` enum('CREATED','SENT') DEFAULT NULL,
   `rpack_sent_on` datetime DEFAULT NULL,
-  `rpack_path` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `rpack_path` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`rpack_header_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `out_rpack_header` (
 
 LOCK TABLES `out_rpack_header` WRITE;
 /*!40000 ALTER TABLE `out_rpack_header` DISABLE KEYS */;
-INSERT INTO `out_rpack_header` VALUES (1,'Nothing','2020-12-01 14:56:51','Author','SENT','2020-12-01 14:56:51',NULL),(2,'Nothing','2020-12-01 14:57:09','Author','SENT','2020-12-01 14:57:09',NULL);
+INSERT INTO `out_rpack_header` VALUES (1,'It is R-Pack 1','2020-11-10 07:00:00','Center Admin','CREATED',NULL,NULL),(2,'It is R-Pack 2','2020-11-11 07:00:00','Center Admin','SENT','2020-11-18 07:00:00',NULL),(3,'Nothing','2020-11-30 17:27:13','Author','SENT',NULL,NULL),(4,'Nothing','2020-11-30 17:27:17','Author','SENT',NULL,NULL);
 /*!40000 ALTER TABLE `out_rpack_header` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,7 +61,7 @@ CREATE TABLE `rpack1` (
   PRIMARY KEY (`rpack1_id`),
   KEY `fk_rpack1_rpack_header_id` (`rpack_header_id`),
   CONSTRAINT `fk_rpack1_rpack_header_id` FOREIGN KEY (`rpack_header_id`) REFERENCES `out_rpack_header` (`rpack_header_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +70,7 @@ CREATE TABLE `rpack1` (
 
 LOCK TABLES `rpack1` WRITE;
 /*!40000 ALTER TABLE `rpack1` DISABLE KEYS */;
-INSERT INTO `rpack1` VALUES (4,2,1,100,180,1),(5,2,2,50,120,2),(6,2,3,25,60,3);
+INSERT INTO `rpack1` VALUES (4,4,1,100,180,1),(5,4,2,50,120,2),(6,4,3,25,60,3);
 /*!40000 ALTER TABLE `rpack1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,14 +86,14 @@ CREATE TABLE `rpack2` (
   `rpack1_id` int(10) unsigned NOT NULL,
   `qp_id` int(10) unsigned NOT NULL,
   `qp_item_id` int(10) unsigned NOT NULL,
-  `item_text` text COLLATE utf8_bin NOT NULL,
+  `item_text` text NOT NULL,
   `item_marks` float unsigned NOT NULL,
-  `item_type` varchar(255) COLLATE utf8_bin NOT NULL,
-  `cognitive_level` enum('REMEMBER','UNDERSTAND','APPLY','ANALYZE','EVALUATE','CREATE') COLLATE utf8_bin DEFAULT NULL,
+  `item_type` varchar(255) NOT NULL,
+  `cognitive_level` enum('REMEMBER','UNDERSTAND','APPLY','ANALYZE','EVALUATE','CREATE') DEFAULT NULL,
   PRIMARY KEY (`rpack2_id`),
   KEY `fk_rpack2_rpack1_id` (`rpack1_id`),
   CONSTRAINT `fk_rpack2_rpack1_id` FOREIGN KEY (`rpack1_id`) REFERENCES `rpack1` (`rpack1_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,11 +118,11 @@ CREATE TABLE `rpack3` (
   `rpack2_id` int(10) unsigned NOT NULL,
   `qp_item_id` int(10) unsigned NOT NULL,
   `item_option_id` int(10) unsigned NOT NULL,
-  `option_text` varchar(255) COLLATE utf8_bin NOT NULL,
+  `option_text` varchar(255) NOT NULL,
   PRIMARY KEY (`rpack3_id`),
   KEY `fk_rpack3_rpack2_id` (`rpack2_id`),
   CONSTRAINT `fk_rpack3_rpack2_id` FOREIGN KEY (`rpack2_id`) REFERENCES `rpack2` (`rpack2_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,11 +151,11 @@ CREATE TABLE `rpack4` (
   `examinee_id` int(10) unsigned NOT NULL,
   `qp_item_id` int(10) unsigned NOT NULL,
   `response_id` int(10) unsigned NOT NULL,
-  `response_text` varchar(511) COLLATE utf8_bin NOT NULL,
+  `response_text` varchar(511) NOT NULL,
   PRIMARY KEY (`rpack4_id`),
   KEY `fk_rpack4_rpack2_id` (`rpack2_id`),
   CONSTRAINT `fk_rpack4_rpack2_id` FOREIGN KEY (`rpack2_id`) REFERENCES `rpack2` (`rpack2_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -176,4 +176,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-01 14:57:09
+-- Dump completed on 2020-11-30 17:27:17

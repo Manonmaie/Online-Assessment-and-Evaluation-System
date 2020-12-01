@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Examdrive} from '../shared/examdrive';
 import {ExamdriveService} from '../services/examdrive.service';
+import {PackageManagementService} from '../services/package-management.service';
 import {Observable, of} from 'rxjs';
 import {resetError, setError} from '../shared/error';
 
@@ -14,9 +15,9 @@ export class ExamdriveComponent implements OnInit {
   searchText: any;
   pageNo: number = 1;
   itemsPage: number = 25;
-  MKey: String;
-  QPKey: String;
-  constructor(private examdriveService:ExamdriveService) { }
+  MKey: string;
+  QPKey: string;
+  constructor(private examdriveService:ExamdriveService, private packageManagementService: PackageManagementService) { }
 
   ngOnInit(): void {
     this.getExamdrives();
@@ -43,7 +44,7 @@ export class ExamdriveComponent implements OnInit {
       setError("MarksKey", "Key is Required");
     }
     else{
-      //TODO-Admin - Import Marks
+      this.packageManagementService.importMPack(this.MKey).subscribe();
     }
   }
 
@@ -52,7 +53,7 @@ export class ExamdriveComponent implements OnInit {
       setError("QuestionPaperKey", "Key is Required");
     }
     else{
-      //TODO-Admin - Import Question Papers
+      this.packageManagementService.importQPack(this.QPKey).subscribe();
     }
   }
 }

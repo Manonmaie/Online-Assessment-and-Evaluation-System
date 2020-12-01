@@ -75,7 +75,7 @@ public class EpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
+//	@Autowired
 	private ServerConnect serverConnect;
 	
 	public void epack2OriginalTables(String EpackKey) throws IOException, InterruptedException {

@@ -89,22 +89,31 @@ export class ExaminationComponent implements OnInit {
           this.responseListForQpItems[qpItemId].qpItemId = qpItemId;
           this.responseListForQpItems[qpItemId].responseList.push(allResponses[i].responseText);
         }
-        console.log("All responses = ");
-        console.log(allResponses);
-        console.log("Responses List = ");
-        console.log(this.responseListForQpItems);
-        
-        for (let i = 0; i < qpItems.length; i++) {
-          console.log($('input[name="' + qpItems[i].qpItemId + '"]'));
-          let noOfOptionsChecked = $('input[name="' + qpItems[i].qpItemId + '"]:checked').length; // todo
-          if(noOfOptionsChecked > 1){
-            let index = i;
-            this.attemptedItems[index] = true;
-            if(qpItems[i].itemText == "McqMultiCorrect"){
-              this.noOfOptionsCheckedForItem[index] = noOfOptionsChecked;
+        // console.log("All responses = ");
+        // console.log(allResponses);
+        // console.log("Responses List = ");
+        // console.log(this.responseListForQpItems);
+
+        for (let i = 1; i < this.responseListForQpItems.length; i++) {
+          if(this.responseListForQpItems[i].qpItemId != -1){
+            this.attemptedItems[i-1] = true;
+            if(qpItems[i-1].itemType == "McqMultiCorrect"){
+              this.noOfOptionsCheckedForItem[i-1] = this.responseListForQpItems[i].responseList.length;
             }
           }
         }
+        
+        // for (let i = 0; i < qpItems.length; i++) {
+        //   // console.log($('input[name="' + qpItems[i].qpItemId + '"]'));
+        //   let noOfOptionsChecked = $('input[name="' + qpItems[i].qpItemId + '"]:checked').length; // todo
+        //   if(noOfOptionsChecked > 1){
+        //     let index = i;
+        //     this.attemptedItems[index] = true;
+        //     if(qpItems[i].itemText == "McqMultiCorrect"){
+        //       this.noOfOptionsCheckedForItem[index] = noOfOptionsChecked;
+        //     }
+        //   }
+        // }
         // console.log("Checked or not:");
         // const input1 = $('input[name=1]')[0] as HTMLInputElement;
         // console.log(input1);

@@ -39,8 +39,8 @@ public class Epack1 {
 	@Column(name = "instruction_id")
 	private int instruction_id;
 	
-	@Column(name = "instruction_code")
-	private String instruction_code;
+//	@Column(name = "instruction_code")
+//	private String instruction_code;
 	
 	@Column(name = "instruction_text")
 	private String instruction_text;
@@ -123,7 +123,7 @@ public class Epack1 {
 
 
 
-	public Epack1(int qp_id, float maximum_marks, int instruction_id, String instruction_code,
+	public Epack1(int qp_id, float maximum_marks, int instruction_id,
 			String instruction_text, int duration, int batch_id, String batch_code, LocalDateTime batch_start_time,
 			LocalDateTime batch_end_time, int center_id, String center_code, String center_name, int examdrive_id,
 			String examdrive_code, String examdrive_name, int course_master_id, String course_code,
@@ -132,7 +132,7 @@ public class Epack1 {
 		this.qp_id = qp_id;
 		this.maximum_marks = maximum_marks;
 		this.instruction_id = instruction_id;
-		this.instruction_code = instruction_code;
+//		this.instruction_code = instruction_code;
 		this.instruction_text = instruction_text;
 		this.duration = duration;
 		this.batch_id = batch_id;
@@ -150,8 +150,7 @@ public class Epack1 {
 		this.course_name = course_name;
 	}
 
-	public Epack1(int epack1_id, int qp_id, float maximum_marks, int instruction_id,
-			String instruction_code, String instruction_text, int duration, int batch_id, String batch_code,
+	public Epack1(int epack1_id, int qp_id, float maximum_marks, int instruction_id, String instruction_text, int duration, int batch_id, String batch_code,
 			LocalDateTime batch_start_time, LocalDateTime batch_end_time, int center_id, String center_code,
 			String center_name, int examdrive_id, String examdrive_code, String examdrive_name, int course_master_id,
 			String course_code, String course_name) {
@@ -160,7 +159,7 @@ public class Epack1 {
 		this.qp_id = qp_id;
 		this.maximum_marks = maximum_marks;
 		this.instruction_id = instruction_id;
-		this.instruction_code = instruction_code;
+//		this.instruction_code = instruction_code;
 		this.instruction_text = instruction_text;
 		this.duration = duration;
 		this.batch_id = batch_id;
@@ -218,13 +217,13 @@ public class Epack1 {
 		this.instruction_id = instruction_id;
 	}
 
-	public String getInstruction_code() {
-		return instruction_code;
-	}
-
-	public void setInstruction_code(String instruction_code) {
-		this.instruction_code = instruction_code;
-	}
+//	public String getInstruction_code() {
+//		return instruction_code;
+//	}
+//
+//	public void setInstruction_code(String instruction_code) {
+//		this.instruction_code = instruction_code;
+//	}
 
 	public String getInstruction_text() {
 		return instruction_text;

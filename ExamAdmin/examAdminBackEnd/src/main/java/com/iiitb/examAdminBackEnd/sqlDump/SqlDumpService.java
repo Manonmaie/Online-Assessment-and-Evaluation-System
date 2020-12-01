@@ -25,10 +25,10 @@ public class SqlDumpService {
 	
 	public void importDump(String pack) throws IOException, InterruptedException {
 		if(sqlDump.runSqlDumpFile(pack)) {
-			System.out.println("Dump execute Success");
+			System.out.println("-- Dump execute Success");
 		}
 		else {
-			System.out.println("Dump execute Failed");
+			System.out.println("-- Dump execute Failed");
 		}
 	}
 	

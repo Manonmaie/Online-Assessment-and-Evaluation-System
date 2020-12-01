@@ -5,6 +5,7 @@ import { Observable, of } from "rxjs";
 import { Batch } from "../shared/batch";
 import { OutRpackHeader } from "../shared/outRpackHeader";
 import { InEpackHeader } from "../shared/inEpackHeader";
+import { PackStatus } from "../shared/packStatus";
 
 @Injectable({
   providedIn: 'root'
@@ -37,8 +38,9 @@ export class PackageManagementService {
     return this.http.get<Batch>(baseURL + 'batch/' + batchId + '/Rpack1');
   }
 
-  createAndSendAllBatchesRpacks(): Observable<OutRpackHeader[]>{
-    return this.http.get<OutRpackHeader[]>(baseURL + 'createRpack');
+  createAndSendAllBatchesRpacks(): Observable<any>{
+    // alert("service");
+    return this.http.get<PackStatus>(baseURL + 'createRpack');
   }
 
   importAllEpacks(EpackKey: string): Observable<InEpackHeader[]>{
@@ -47,5 +49,8 @@ export class PackageManagementService {
 
   // updateRpackStatus(rpackHeaderId: number, outRpackHeader: OutRpackHeader): Observable<OutRpackHeader>{
   //   return this.http.put<OutRpackHeader>(baseURL + '/rpackHeader/' + rpackHeaderId , outRpackHeader);
+  // }
+  // exportQPs(): Observable<any>{
+  //   return this.http.get<Item[]>(baseURL + '/createQpack');
   // }
 }

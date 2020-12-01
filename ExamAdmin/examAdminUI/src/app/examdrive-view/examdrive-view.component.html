@@ -51,6 +51,9 @@
                                 <button disabled type="button" class="btn btn-warning float-right mr-1"><i class="fa fa-send-o"></i></button>
                             </ng-container>
                             <!-- <button type="button" class="btn btn-info float-right mr-1" [routerLink]="['/examdriveview',examdrive.examdriveId,'centerview',center.centerId]"><i class="fa fa-eye"></i></button> -->
+                            <ng-container *ngIf="sentStatus[center.centerId]">
+                                Key - {{sentStatus[center.centerId].key}}
+                            </ng-container>
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "isShow[center.centerId]"><i class="fa fa-eye"></i></button>
                             <button type="button" class="btn btn-info float-right mr-1" (click)="showBatches(center)" [hidden] = "!isShow[center.centerId]"><i class="fa fa-eye-slash"></i></button>
                             <!-- TODO-Admin - Depending on sent status display key of the files -->

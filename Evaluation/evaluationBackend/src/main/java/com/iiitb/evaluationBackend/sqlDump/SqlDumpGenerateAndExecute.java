@@ -44,6 +44,7 @@ public class SqlDumpGenerateAndExecute {
 	                " source " + sourceFile,
 	                dbName
 	        };
+	      	System.out.println(command);
 	        Process runtimeProcess = Runtime.getRuntime().exec(command);
 	        int processComplete = runtimeProcess.waitFor();
 	        return processComplete == 0;

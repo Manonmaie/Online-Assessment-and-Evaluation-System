@@ -34,7 +34,7 @@ public class ApackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
+//	@Autowired
 	private ServerConnect serverConnect;
 	
 	public List<Apack> getAllApacks() {

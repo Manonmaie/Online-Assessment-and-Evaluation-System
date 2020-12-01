@@ -62,7 +62,7 @@ public class QpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
+//	@Autowired
 	private ServerConnect serverConnect;
 	
 	public List<Qpack> getAllQpacks() {
@@ -79,8 +79,8 @@ public class QpackService {
 		return qpackRepository.findById(id);
 	}
 	
-	public void qpack2OriginalTables(String EpackKey) throws IOException, InterruptedException {
-		serverConnect.execCurlPullCommand("EpackDump.sql", EpackKey);
+	public void qpack2OriginalTables(String QpackKey) throws IOException, InterruptedException {
+		serverConnect.execCurlPullCommand("QpackDump.sql", QpackKey);
 		
 		sqlDumpService.importDump("Qpack");
 		
@@ -90,20 +90,23 @@ public class QpackService {
 		for(int i = 0; i < qpDataObjects.size(); i++) {
 			Batch batch = batchService.getBatchesByCode(String.valueOf(qpDataObjects.get(i)[3]));
 			examdriveSet.add(batch.getExamdrive());
-			batch.setQpStatus("RECEIVED");
-			batchService.updateBatch(batch.getBatchId(), batch);
-//			System.out.println((Integer)qpDataObjects.get(i)[0] + " " + batch.getBatchId() + " " + (float)(Integer)qpDataObjects.get(i)[1]);
+			if(batch.getQpStatus().equals("PENDING") || batch.getQpStatus().equals("ERROR_SENDING")) {
+				batch.setQpStatus("RECEIVED");
+			}	
 			QuestionPaper questionPaper = new QuestionPaper((Integer)qpDataObjects.get(i)[0], batch, (float)(Integer)qpDataObjects.get(i)[1], (Integer)qpDataObjects.get(i)[2]);
 			questionPaperService.addQuestionPaper(questionPaper);
-			
+			batch.setQp(questionPaper);
+			batchService.updateBatch(batch.getBatchId(), batch);
 			if(!id2Qp.containsKey(questionPaper.getQp_id())) {
 				id2Qp.put(questionPaper.getQp_id(), questionPaper);
 			}
 		}
 		
 		for (Examdrive examdrive : examdriveSet) {
-			examdrive.setStatus("IN_PROGRESS");
-			examdriveService.updateExamdrive(examdrive.getExamdriveId(), examdrive);
+			if(examdrive.getStatus().equals("NOT_STARTED")) {
+				examdrive.setStatus("IN_PROGRESS");
+				examdriveService.updateExamdrive(examdrive.getExamdriveId(), examdrive);
+			}		
 		}
 		
 		List<Object[]> instructionObjects = qpackRepository.fetchInstructionsdata();

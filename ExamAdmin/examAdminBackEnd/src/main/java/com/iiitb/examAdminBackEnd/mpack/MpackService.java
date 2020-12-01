@@ -44,7 +44,7 @@ public class MpackService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
+//	@Autowired
 	private ServerConnect serverConnect;
 	
 	public void mpack2OriginalTables(String MpackKey) throws IOException, InterruptedException {
@@ -56,7 +56,7 @@ public class MpackService {
 		List<Object[]> examineeBatchMarksObjects = mpackRepository.fetchExamineeBatchMarksdata();
 		for(int i = 0; i < examineeBatchMarksObjects.size(); i++) {
 			Optional<ExamineeItemMarks> examineeItemMarksOptional = examineeItemMarksService.getExamineeItemMarksByQpItemId((Integer)examineeBatchMarksObjects.get(i)[1], (Integer)examineeBatchMarksObjects.get(i)[0]);
-			if(examineeItemMarksOptional.isEmpty()) {
+			if(!examineeItemMarksOptional.isPresent()) {
 				Optional<ExamineeBatch> examineeBatchOptional = examineeBatchService.getExamineeBatchByExamineeBatchId((Integer)examineeBatchMarksObjects.get(i)[0]);
 				QpItem qpItem = qpItemService.getQpItem((Integer)examineeBatchMarksObjects.get(i)[1]);
 				

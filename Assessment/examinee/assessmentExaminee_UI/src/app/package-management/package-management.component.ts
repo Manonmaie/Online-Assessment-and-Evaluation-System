@@ -14,7 +14,7 @@ export class PackageManagementComponent implements OnInit {
 
   completedBatches: Batch[];
   isBatchPresentInCompletedBatches: boolean;
-  rpacksExporting: OutRpackHeader[];
+  // rpacksExporting: OutRpackHeader[];
   epacksImported: InEpackHeader[];
   // sentBatches: Batch[];
   sentRpacks: OutRpackHeader[];
@@ -25,6 +25,7 @@ export class PackageManagementComponent implements OnInit {
   rpackToBeUpdated: OutRpackHeader;
   batchDummy: Batch;
   epackKey: string;
+  rpackKey: any="";
   displayErrorMessage: boolean = false;
   errorMessage: String;
 
@@ -72,9 +73,13 @@ export class PackageManagementComponent implements OnInit {
   }
 
   exportAllRpacks(){
-    // alert(" all R-Packs are exported");
-    this.packageManagementService.createAndSendAllBatchesRpacks().subscribe((rpacksExporting) => {
-      this.rpacksExporting = rpacksExporting;
+    alert(" all R-Packs are exported");
+    // this.QPService.exportQPs().subscribe((j)=>this.key=j.key);
+    this.packageManagementService.createAndSendAllBatchesRpacks().subscribe((statusJsonObject) => {
+      // console.log("exporting");
+      // alert(statusJsonObject);
+      this.rpackKey = statusJsonObject.key;
+      // this.rpacksExporting = rpacksExporting;
     });
     this.isBatchPresentInCompletedBatches = false;
     for(let i = 0; i < this.completedBatches.length; i++){
@@ -82,7 +87,7 @@ export class PackageManagementComponent implements OnInit {
       batch.qpStatus = "SENT";
       this.updateBatch(batch.batchId, batch);
     }
-    window.location.reload();
+    // window.location.reload();
   }
 
   // exportRPack(batch: Batch){

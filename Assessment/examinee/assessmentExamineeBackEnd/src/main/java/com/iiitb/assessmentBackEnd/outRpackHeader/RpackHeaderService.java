@@ -45,7 +45,7 @@ public class RpackHeaderService {
 	@Autowired
 	private SqlDumpService sqlDumpService;
 	
-	@Autowired
+//	@Autowired
 	private ServerConnect serverConnect;
 	
 	public List<OutRpackHeader> getAllRpacksForRpackStatus(String rpackStatus) {
