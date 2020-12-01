@@ -62,7 +62,7 @@ ALTER TABLE ea_examdrive
 -- --------------------------------------------------------
 -- Data Entry for table ea_examdrive
 -- --------------------------------------------------------
-INSERT INTO ea_examdrive VALUES(0,"MID","Mid Term Examination",'COMPLETED',1);
+INSERT INTO ea_examdrive VALUES(0,"MID","Mid Term Examination",'NOT_STARTED',1);
 INSERT INTO ea_examdrive VALUES(0,"END","End Term Examination",'NOT_STARTED',2);
 INSERT INTO ea_examdrive VALUES(0,"IMP","Improvement Examination",'NOT_STARTED',1);
 
@@ -133,7 +133,7 @@ ALTER TABLE ea_batch
 INSERT INTO ea_batch VALUES(0,"MID-MRNG-IIITB","2020-09-23 10:00:00","2020-09-23 13:00:00","PENDING",1,1,NULL);
 INSERT INTO ea_batch VALUES(0,"END-MRNG-IIITB","2020-10-23 10:00:00","2020-10-23 13:00:00","PENDING",1,2,NULL);
 INSERT INTO ea_batch VALUES(0,"IMP-MRNG-IIITB","2020-12-23 10:00:00","2020-12-23 13:00:00","PENDING",1,3,NULL);
-INSERT INTO ea_batch VALUES(0,"batch1","2020-09-23 10:00:00","2020-09-23 13:00:00","SENT",3,1,1);
+INSERT INTO ea_batch VALUES(0,"batch1","2020-09-23 10:00:00","2020-09-23 13:00:00","SENT",3,1,NULL);
 INSERT INTO ea_batch VALUES(0,"batch2","2020-10-23 10:00:00","2020-10-23 13:00:00","PENDING",3,1,NULL);
 INSERT INTO ea_batch VALUES(0,"batch3","2020-12-23 10:00:00","2020-12-23 13:00:00","PENDING",3,2,NULL);
 INSERT INTO ea_batch VALUES(0,"TestBatch","2020-12-01 17:00:00","2020-12-02 17:00:00","PENDING",3,2,NULL);
