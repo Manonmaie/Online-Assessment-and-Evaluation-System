@@ -773,9 +773,9 @@ CREATE TABLE IF NOT EXISTS rpack4(
   batch_id int(10) unsigned NOT NULL,
   examinee_batch_id int(10) unsigned NOT NULL,
   examinee_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  response_id int(10) unsigned NOT NULL,
-  response_text varchar(511) NOT NULL,
+  qp_item_id int(10) unsigned,
+  response_id int(10) unsigned,
+  response_text varchar(511),
   PRIMARY KEY(rpack4_id)
 );
 
