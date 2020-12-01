@@ -7,6 +7,8 @@ import { Batch } from '../shared/batch';
 import {Observable, of} from 'rxjs';
 import { BatchService } from '../services/batch.service';
 import { newArray } from '@angular/compiler/src/util';
+import {Status} from '../shared/status';
+import {PackageManagementService} from '../services/package-management.service';
 
 @Component({
   selector: 'app-examdrive-view',
@@ -21,8 +23,9 @@ export class ExamdriveViewComponent implements OnInit {
   searchText: any;
   pageNo: number = 1;
   itemsPage: number = 25;
+  sentStatus: Status[];
   // minVal = Math.min(this.itemsPage,this.centers.length);
-  constructor(private examdriveService:ExamdriveService, private batchService:BatchService, private route: ActivatedRoute) { }
+  constructor(private examdriveService:ExamdriveService, private packageManagementService: PackageManagementService, private batchService:BatchService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const examdriveId = this.route.snapshot.params['id'];
@@ -32,6 +35,7 @@ export class ExamdriveViewComponent implements OnInit {
     },1000);
     this.isShow = new Array();
     this.batches = new Array();
+    this.sentStatus = new Array();
   }
 
   getExamdrive(id: number): void{
@@ -86,15 +90,26 @@ export class ExamdriveViewComponent implements OnInit {
   }
 
   exportQuestionPapers(center: Center): void{
-    //TODO-Admin - Export Question Papers
+    this.packageManagementService.exportEPack(center.centerId).subscribe((status) => this.sentStatus[center.centerId]=status);
     if(this.batches[center.centerId]==null){
       this.getBatches(center);
     }
     setTimeout(()=>{
-      for (let batch of this.batches[center.centerId]) {
-        batch.qpStatus = 'SENT';
+      if(this.sentStatus[center.centerId].success){
+        for (let batch of this.batches[center.centerId]) {
+          if(batch.qpStatus!='PENDING'){
+            batch.qpStatus = 'SENT';
+          }
+        }
+      }
+      else{
+        for (let batch of this.batches[center.centerId]) {
+          if(batch.qpStatus=='RECEIVED'){
+            batch.qpStatus = 'ERROR_SENDING';
+          }
+        }
       }
       this.batchService.updateBatches(this.batches[center.centerId]).subscribe((batches)=> this.batches[center.centerId]=batches);
-    },500);
+    },30000);
   }
 }

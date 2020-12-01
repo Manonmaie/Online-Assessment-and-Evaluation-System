@@ -10,12 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iiitb.examAdminBackEnd.center.Center;
 import com.iiitb.examAdminBackEnd.examdrive.Examdrive;
 import com.iiitb.examAdminBackEnd.examineeBatch.ExamineeBatchMarks;
+import com.iiitb.examAdminBackEnd.questionPaper.QuestionPaper;
 
 @Entity
 @Table (name ="ea_batch")
@@ -38,6 +40,11 @@ public class Batch {
 	@OneToMany(mappedBy = "batch")
 	@JsonIgnore
 	private List<ExamineeBatchMarks> examineeBatchList;
+	
+	@OneToOne
+	@JoinColumn(name="qp_id")
+	@JsonIgnore
+	private QuestionPaper qp;
 	
 	public Batch() {
 	}
@@ -98,5 +105,11 @@ public class Batch {
 	}
 	public void setExamineeBatchList(List<ExamineeBatchMarks> examineeBatchList) {
 		this.examineeBatchList = examineeBatchList;
+	}
+	public QuestionPaper getQp() {
+		return qp;
+	}
+	public void setQp(QuestionPaper qp) {
+		this.qp = qp;
 	}
 }
