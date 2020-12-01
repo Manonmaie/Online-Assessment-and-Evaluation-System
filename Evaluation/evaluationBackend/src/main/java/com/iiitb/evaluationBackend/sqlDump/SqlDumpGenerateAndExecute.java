@@ -12,6 +12,7 @@ public class SqlDumpGenerateAndExecute {
 	      Runtime rt = Runtime.getRuntime();
 //	      Process p = rt.exec("/usr/local/Cellar/mysql/8.0.12/bin/mysqldump -u root oaes_assessment_db as_user as_role_master");
 	      Process p = rt.exec("mysqldump -u root -proot oaes_evaluation_db out_mpack_header mpack1 mpack2 mpack3");
+//	      Process p = rt.exec("mysqldump -u root -ppassword oaes_evaluation_db out_mpack_header mpack1 mpack2 mpack3");
 //	      mysqldump -u [user name] -p[password] [database name] > [dump file]
 	      InputStream is=p.getInputStream();
 	      FileOutputStream fos=new FileOutputStream("MpackDump.sql");
@@ -28,6 +29,7 @@ public class SqlDumpGenerateAndExecute {
 	      Runtime rt = Runtime.getRuntime();
 //	      String dbUsername="root", dbPassword="akshara", dbName="dummy", sourceFile="dump.sql";
 	      String dbUsername="root", dbPassword="root", dbName="oaes_evaluation_db", sourceFile;
+//	      String dbUsername="root", dbPassword="password", dbName="oaes_evaluation_db", sourceFile;
 	      if(pack == "Apack") {
 	    	  sourceFile = "ApackDump.sql";
 	      }

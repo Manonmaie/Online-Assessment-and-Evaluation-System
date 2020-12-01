@@ -155,6 +155,7 @@ public class EpackService {
 			batch.setBatchCode(String.valueOf(batchObjects.get(i)[1]));
 			batch.setBatchStartTime(LocalDateTime.parse(batchObjects.get(i)[2].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
 			batch.setBatchEndTime(LocalDateTime.parse(batchObjects.get(i)[3].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
+			batch.setQpStatus("RECEIVED");
 			if(id2Center.containsKey((Integer)batchObjects.get(i)[4])) {
 				batch.setAsCenter(id2Center.get((Integer)batchObjects.get(i)[4]));
 			}

@@ -60,8 +60,11 @@ public class ResponseService {
 	}
 	
 	public List<AsResponse> getAllResponsesForExamineeAndBatchIds(int examineeId, int batchId) {
-		int attemptId = attemptRepository.findTopByAsExamineeBatchExamineeBatchIdExamineeIdAndAsExamineeBatchExamineeBatchIdBatchIdOrderByAttemptNumberDesc(examineeId, batchId).getAttemptId();
-		return responseRepository.findByAsAttemptAttemptId(attemptId);
+		AsAttempt attempt = attemptRepository.findTopByAsExamineeBatchExamineeBatchIdExamineeIdAndAsExamineeBatchExamineeBatchIdBatchIdOrderByAttemptNumberDesc(examineeId, batchId);
+		if(attempt == null) {
+			return null;
+		}
+		return responseRepository.findByAsAttemptAttemptId(attempt.getAttemptId());
 	}
 	
 //	public void addResponse(int qpItemtId, int attemptId, AsResponse response) {

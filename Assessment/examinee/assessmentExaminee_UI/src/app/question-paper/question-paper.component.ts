@@ -21,7 +21,7 @@ export class QuestionPaperComponent implements OnInit {
   lastAttempt: Attempt;
 
   attempt: Attempt = {attemptId: 0, attemptNumber: 1, attemptStartTime: '', attemptEndTime: null, attemptStatus: 'IN_PROGRESS', asExamineeBatch: null};
-  examineeBatch: ExamineeBatch = {examineeBatchId: null, examineeBatchStartTime: '', examineeBatchEndTime: null, examineeBatchStatus: 'IN_PROGRESS', examinee: null, batch: null};
+  examineeBatch: ExamineeBatch = {examineeBatchIdPK: 1, examineeBatchId: null, examineeBatchStartTime: '', examineeBatchEndTime: null, examineeBatchStatus: 'IN_PROGRESS', examinee: null, batch: null};
 
   constructor(private questionPaperService: QuestionPaperService, private activeRoute: ActivatedRoute, public route: Router, public datepipe: DatePipe) { 
     
@@ -67,7 +67,11 @@ export class QuestionPaperComponent implements OnInit {
             // console.log(res);
             this.questionPaperService.setLastAttemptVariable(res);
           });
-          this.updateExamineeBatch(examineeId, questionPaper.asBatch.batchId, this.examineeBatch);
+          examineeBatch.examineeBatchStartTime = currDateTimeFormatted;
+          examineeBatch.examineeBatchStatus = "IN_PROGRESS";
+          console.log("examineeBatch");
+          console.log(examineeBatch);
+          this.updateExamineeBatch(examineeId, questionPaper.asBatch.batchId, examineeBatch);
           this.questionPaperService.setSelectedQuestionPaper(questionPaper);
           this.route.navigate(['/questionPaper/' + examineeId + '/examination/' + questionPaper.qpId + '/batch/' + questionPaper.asBatch.batchId]);
           // alert(this.showStartExamModalPopup);
