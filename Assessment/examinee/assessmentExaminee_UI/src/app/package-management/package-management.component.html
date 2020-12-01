@@ -24,7 +24,31 @@
                 </div>
             </div>
             <br>
-            <button type="button" class="btn btn-primary btn-lg btn-block" (click) = "exportAllRpacks()"><i class="fa fa-paper-plane"></i> Export All Response-Packs (R-Pack) </button>
+            <div class="border border-light">
+                <h4 style="text-align:center;">Export R-Pack</h4>
+                <div class="row">
+                    <div class="col-xs-6 col-md-8">
+                        <button type="button" class="btn btn-primary btn-block" (click)="exportAllRpacks()"><i class="fa fa-paper-plane"></i> Export All Response-Packs (R-Pack) </button>
+                    </div>
+                    <div class="col-xs-6 col-md-4">
+                        <div class="form-group">
+                            <!-- <label >Key</label> -->
+                            <input type="text" class="form-control" placeholder="Exported File key" name="rpackKey" [(ngModel)]="rpackKey" />
+                          </div>
+                    </div>
+                </div>
+                <!-- <button type="button" class="btn btn-primary" (click)="exportAllRpacks()"><i class="fa fa-paper-plane"></i> Export All Response-Packs (R-Pack) </button> -->
+                <!-- <button type="button" class="btn btn-primary" (click)="exportAnswers()">Export Answers</button> -->
+                <!-- <br/>
+                <br/> -->
+                <!-- <div class="form-group">
+                  <label >Key<span class="required"></span></label>
+                  <div class="">
+                      <input type="text" class="form-control" name="number" [(ngModel)]="key" />
+                  </div>
+                </div> -->
+            </div>
+            <!-- <button type="button" class="btn btn-primary btn-lg btn-block" (click) = "exportAllRpacks()"><i class="fa fa-paper-plane"></i> Export All Response-Packs (R-Pack) </button> -->
         </div>
         <br>
         <br>

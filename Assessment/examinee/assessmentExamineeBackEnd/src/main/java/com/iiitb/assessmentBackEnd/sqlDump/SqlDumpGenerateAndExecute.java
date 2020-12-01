@@ -28,8 +28,8 @@ public class SqlDumpGenerateAndExecute {
 	      String dbUsername="root", dbPassword="akshara", dbName="oaes_assessment_db", sourceFile="EpackDump.sql";
 //	      String dbUsername="root", dbPassword="password", dbName="test", sourceFile="dump.sql";
 	      String[] command = new String[]{
-//	                "/usr/local/Cellar/mysql/8.0.12/bin/mysql",
-	    		  	"mysql",
+	                "/usr/local/Cellar/mysql/8.0.12/bin/mysql",
+//	    		  	"mysql",
 	                "-u" + dbUsername,
 	                "-p" + dbPassword,
 	                "-e",

@@ -120,11 +120,11 @@ public class RpackService {
 				EvItemTrueFalse itemTrueFalse = new EvItemTrueFalse();
 				itemTrueFalse.setItemTrueFalseId((Integer)itemOptionObjects.get(i)[1]);
 				itemTrueFalse.setQpItemId((Integer)itemOptionObjects.get(i)[0]);
-				if(rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1], "True") != null) {
-					itemTrueFalse.setTruePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1], "True"));
+				if(rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], "True") != null) {
+					itemTrueFalse.setTruePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], "True"));
 				}
-				if(rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1], "False") != null) {
-					itemTrueFalse.setTruePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], (Integer)itemOptionObjects.get(i)[1], "False"));
+				if(rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], "False") != null) {
+					itemTrueFalse.setTruePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], "False"));
 				}
 //				if(String.valueOf(itemOptionObjects.get(i)[2]).equals("True")) {
 //					itemTrueFalse.setTruePercentage((float)(Integer)itemOptionObjects.get(i)[2]);
