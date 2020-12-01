@@ -75,7 +75,7 @@ public class RpackService {
 	}
 	
 	public void rpack2OriginalTables(String RpackKey) throws IOException, InterruptedException {
-//		serverConnect.execCurlPullCommand("RpackDump.sql", RpackKey);
+		serverConnect.execCurlPullCommand("RpackDump.sql", RpackKey);
 		
 		sqlDumpService.importDump("Rpack");
 		

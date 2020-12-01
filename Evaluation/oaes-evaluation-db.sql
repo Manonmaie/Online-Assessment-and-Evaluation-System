@@ -450,7 +450,7 @@ CREATE TABLE IF NOT EXISTS mpack3(
   mpack2_id int(10) unsigned NOT NULL,
   qp_id int(10) unsigned NOT NULL,
   examinee_batch_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned UNIQUE NOT NULL,
+  qp_item_id int(10) unsigned NOT NULL,
   examinee_item_marks float(24) unsigned NOT NULL,
   PRIMARY KEY(mpack3_id)
 );
