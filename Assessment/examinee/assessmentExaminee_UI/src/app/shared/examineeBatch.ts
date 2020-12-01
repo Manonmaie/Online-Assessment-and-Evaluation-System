@@ -8,6 +8,7 @@ export class ExamineeBatchId{
 }
 
 export class ExamineeBatch{
+    examineeBatchIdPK: number;
     examineeBatchId: ExamineeBatchId;
     examineeBatchStartTime: string;
     examineeBatchEndTime: string;

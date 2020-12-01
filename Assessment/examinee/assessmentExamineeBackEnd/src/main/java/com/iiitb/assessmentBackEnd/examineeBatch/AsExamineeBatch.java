@@ -18,6 +18,7 @@ public class AsExamineeBatch {
 	
 //	@Id
 	@Column (name = "examinee_batch_id")
+//	@JsonIgnore
 	private int examineeBatchIdPK;
 	
 	@EmbeddedId
