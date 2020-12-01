@@ -220,8 +220,14 @@ export class ExamdriveUpdateComponent implements OnInit {
   }
 
   updateBatch(id: number, batch: Batch, ind: number): void{
-    this.isUpdate[batch.center.centerId] = false;
-    this.batchService.updateBatch(id,batch).subscribe(batch => this.batches[batch.center.centerId][ind]=batch)
+    if(batch.batchCode==null||batch.batchCode==""){
+      setError("batchCode","Batch Code is Required");
+    }
+    else{
+      resetError("batchCode");
+      this.isUpdate[batch.center.centerId] = false;
+      this.batchService.updateBatch(id,batch).subscribe(batch => this.batches[batch.center.centerId][ind]=batch);
+    }
   }
 
   deleteBatch(batch: Batch): void{
@@ -237,18 +243,35 @@ export class ExamdriveUpdateComponent implements OnInit {
   }
 
   addBatch(center: Center): void{
-    this.isAddBatch = false;
-    this.newBatch.center = center;
-    this.newBatch.examdrive = this.examdrive;
-    this.batchService.addBatch(this.newBatch).subscribe( response => {
-      this.batches[center.centerId].push(this.newBatch);
-      setTimeout(()=>{
-        window.location.reload();
-      },200);
-    });
-    setTimeout(() => {
-      this.newBatch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
-    },200);
+    if(this.newBatch.batchCode==null||this.newBatch.batchCode==""){
+      setError("batchCode","Batch Code is Required");
+    }
+    else{
+      resetError("batchCode");
+      if(this.newBatch.batchStartTime==null||this.newBatch.batchStartTime==""){
+        setError("batchStartTime","Start Time is Required");
+      }
+      else{
+        resetError("batchStartTime");
+        if(this.newBatch.batchEndTime==null||this.newBatch.batchEndTime==""){
+          setError("batchEndTime","End Time is Required");
+        }
+        else{
+          this.isAddBatch = false;
+          this.newBatch.center = center;
+          this.newBatch.examdrive = this.examdrive;
+          this.batchService.addBatch(this.newBatch).subscribe( response => {
+            this.batches[center.centerId].push(this.newBatch);
+            setTimeout(()=>{
+              window.location.reload();
+            },200);
+          });
+          setTimeout(() => {
+            this.newBatch = {batchCode: null, batchStartTime: null, batchEndTime: null, qpStatus: 'PENDING', center: null, examdrive: null};
+          },200);
+        }
+      }
+    }
   }
 
   uploadStudents(batch: Batch): void{
