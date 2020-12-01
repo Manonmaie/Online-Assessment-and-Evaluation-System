@@ -252,7 +252,8 @@ CREATE TABLE IF NOT EXISTS ev_response (
   response_text varchar(511) NOT NULL,
   examinee_batch_id int(10) unsigned,
   qp_item_id int(10) unsigned,
-  PRIMARY KEY (response_id)
+  PRIMARY KEY (response_id),
+  CONSTRAINT `uk_ev_response` UNIQUE (qp_item_id,examinee_batch_id)
 );
 
 ALTER TABLE ev_response

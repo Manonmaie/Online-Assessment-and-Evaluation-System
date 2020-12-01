@@ -80,7 +80,7 @@ public class MpackService {
 		}
 			
 		for (Examdrive examdrive : examdriveSet) {
-			System.out.println(examdrive.getExamdriveId());
+//			System.out.println(examdrive.getExamdriveId());
 			examdrive.setStatus("COMPLETED");
 			examdriveService.updateExamdrive(examdrive.getExamdriveId(), examdrive);
 		}

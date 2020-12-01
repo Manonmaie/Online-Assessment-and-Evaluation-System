@@ -14,7 +14,7 @@ import com.iiitb.evaluationBackend.examineeBatch.EvExamineeBatch;
 public class EvResponse {
 	
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int responseId;
 	
 	private String responseCode;

@@ -166,27 +166,28 @@ public class RpackService {
 		
 		List<Object[]> responseObjects = rpackRepository.fetchResponseData();
 		for(int i = 0; i < responseObjects.size(); i++) {
-			EvResponse response = new EvResponse();
-			if(id2ExamineeBatch.containsKey((Integer)responseObjects.get(i)[0])) {
-				response.setEvExamineeBatch(id2ExamineeBatch.get((Integer)responseObjects.get(i)[0]));
-				System.out.println((Integer)responseObjects.get(i)[0]);
-			}
-			System.out.println("Out- "+(Integer)responseObjects.get(i)[0]);
-			if(id2QpItem.containsKey((Integer)responseObjects.get(i)[1])) {
-				response.setEvQpItem(id2QpItem.get((Integer)responseObjects.get(i)[1]));
-			}
-			response.setResponseId((Integer)responseObjects.get(i)[2]);
-			response.setResponseText(String.valueOf(responseObjects.get(i)[3]));
-			
-			responseService.addResponse(response);
-			
-			if((!response.getResponseText().equals("True")) || (!response.getResponseText().equals("False"))) {
-				EvResponseMcq responseMcq = new EvResponseMcq();
-//				responseMcq.setResponseId(response.getResponseId());
-				responseMcq.setEvResponse(response);
-				responseMcq.setResponseText(response.getResponseText());
+			Optional<EvResponse> examineeItemMarksOptional = responseService.getResponseByQpItemIdExamineeBatchId((Integer)responseObjects.get(i)[1], (Integer)responseObjects.get(i)[0]);
+			if(!examineeItemMarksOptional.isPresent()) {
+				EvResponse response = new EvResponse();
+				if(id2ExamineeBatch.containsKey((Integer)responseObjects.get(i)[0])) {
+					response.setEvExamineeBatch(id2ExamineeBatch.get((Integer)responseObjects.get(i)[0]));
+				}
+				if(id2QpItem.containsKey((Integer)responseObjects.get(i)[1])) {
+					response.setEvQpItem(id2QpItem.get((Integer)responseObjects.get(i)[1]));
+				}
+//				response.setResponseId((Integer)responseObjects.get(i)[2]);
+				response.setResponseText(String.valueOf(responseObjects.get(i)[3]));
 				
-				responseMcqService.addResponseMcq(responseMcq);
+				responseService.addResponse(response);
+				
+//				if((!response.getResponseText().equals("True")) || (!response.getResponseText().equals("False"))) {
+//					EvResponseMcq responseMcq = new EvResponseMcq();
+////					responseMcq.setResponseId(response.getResponseId());
+//					responseMcq.setEvResponse(response);
+//					responseMcq.setResponseText(response.getResponseText());
+//					
+//					responseMcqService.addResponseMcq(responseMcq);
+//				}
 			}
 		}
 	}
