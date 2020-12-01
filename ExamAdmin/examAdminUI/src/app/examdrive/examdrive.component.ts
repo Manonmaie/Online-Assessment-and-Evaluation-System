@@ -44,7 +44,7 @@ export class ExamdriveComponent implements OnInit {
       setError("MarksKey", "Key is Required");
     }
     else{
-      //TODO-Admin - Import Marks
+      this.packageManagementService.importMPack(this.MKey).subscribe();
     }
   }
 

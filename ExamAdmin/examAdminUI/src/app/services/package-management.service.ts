@@ -13,4 +13,8 @@ export class PackageManagementService {
   importQPack(key: string): Observable<any>{
     return this.http.get<any>(baseURL+'importFromQpack/'+key);
   }
+
+  importMPack(key: string): Observable<any>{
+    return this.http.get<any>(baseURL+'importFromMpack/'+key);
+  }
 }
