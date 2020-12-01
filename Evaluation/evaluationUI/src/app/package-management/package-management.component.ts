@@ -16,6 +16,7 @@ export class PackageManagementComponent implements OnInit {
   sentMpacks: OutMpackHeader[];
   mpackToBeUpdated: OutMpackHeader;
   apackKey: string;
+  mpackKey: any="";
   displayErrorMessage: boolean = false;
   errorMessage: String;
 
@@ -26,15 +27,14 @@ export class PackageManagementComponent implements OnInit {
   }
 
   exportAllMpacks(){
-    alert(" all M-Packs are exported");
-    this.packageManagementService.createAndSendAllBatchesMpacks().subscribe((mpacksExporting) => {
-      this.mpacksExporting = mpacksExporting;
+    // alert(" all M-Packs are exported");
+    this.packageManagementService.createAndSendAllBatchesMpacks().subscribe((statusJsonObject) => {
+      this.mpackKey = statusJsonObject.key;
     });
-    window.location.reload();
   }
 
 
-  importQPack(){
+  importAPack(){
     if(this.apackKey == ""){
       this.displayErrorMessage = true;
       this.errorMessage = "Please enter Username. It is a mandatory field";

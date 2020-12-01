@@ -4,6 +4,7 @@ import { baseURL } from "../shared/baseurl";
 import { Observable, of } from "rxjs";
 import { OutMpackHeader } from "../shared/outMpackHeader";
 import { InApackHeader } from "../shared/inApackHeader";
+import { PackStatus } from "../shared/packStatus";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class PackageManagementService {
 
   constructor(private http: HttpClient) { }
 
-  createAndSendAllBatchesMpacks(): Observable<OutMpackHeader[]>{
-    return this.http.get<OutMpackHeader[]>(baseURL + 'createMpack');
+  createAndSendAllBatchesMpacks(): Observable<any>{
+    return this.http.get<PackStatus>(baseURL + 'createMpack');
   }
 
   importAllApacks(ApackKey: string): Observable<InApackHeader[]>{
