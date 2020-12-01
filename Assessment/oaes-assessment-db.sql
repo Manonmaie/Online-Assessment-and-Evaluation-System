@@ -1,5 +1,6 @@
 DROP DATABASE oaes_assessment_db;
-CREATE DATABASE oaes_assessment_db;
+-- CREATE DATABASE oaes_assessment_db;
+CREATE DATABASE oaes_assessment_db DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_bin;
 USE oaes_assessment_db;
 
 --
