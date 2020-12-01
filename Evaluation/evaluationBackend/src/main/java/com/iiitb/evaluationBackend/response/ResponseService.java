@@ -1,6 +1,7 @@
 package com.iiitb.evaluationBackend.response;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,5 +28,9 @@ public class ResponseService {
 	
 	public void addResponse(EvResponse response) {
 		responseRepository.save(response);
+	}
+	
+	public Optional<EvResponse> getResponseByQpItemIdExamineeBatchId(int qp_item_id, int examinee_batch_id){
+		return responseRepository.getResponseByQpItemIdExamineeBatchId(qp_item_id, examinee_batch_id);
 	}
 }

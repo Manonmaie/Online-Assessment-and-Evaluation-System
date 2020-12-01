@@ -41,7 +41,7 @@ export class PackageManagementComponent implements OnInit {
   importAPack(){
     if(this.apackKey == ""){
       this.displayErrorMessage = true;
-      this.errorMessage = "Please enter Username. It is a mandatory field";
+      this.errorMessage = "Please enter Key. It is a mandatory field";
       if(this.displayErrorMessage == true){
         setTimeout(function() {
           this.displayErrorMessage = false;
@@ -57,7 +57,7 @@ export class PackageManagementComponent implements OnInit {
   importRPack(){
     if(this.rpackKey == ""){
       this.displayErrorMessage = true;
-      this.errorMessage = "Please enter Username. It is a mandatory field";
+      this.errorMessage = "Please enter Key. It is a mandatory field";
       if(this.displayErrorMessage == true){
         setTimeout(function() {
           this.displayErrorMessage = false;

@@ -151,16 +151,16 @@ CREATE TABLE IF NOT EXISTS ev_qp_item (
 ALTER TABLE ev_qp_item
   ADD CONSTRAINT `fk_ev_qp_item_qp_id` FOREIGN KEY (qp_id) REFERENCES ev_question_paper(qp_id) ON DELETE SET NULL;
 
-INSERT INTO ev_qp_item VALUES(0,"Item1_qp1","What is a database?",2,"McqSingleCorrect",1);
-INSERT INTO ev_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"McqMultiCorrect",1);
-INSERT INTO ev_qp_item VALUES(0,"Item3_qp1","What is a FK?",2,"McqMultiCorrect",1);
-INSERT INTO ev_qp_item VALUES(0,"Item4_qp1","UK and PK are same.",1,"True/False",1);
-INSERT INTO ev_qp_item VALUES(0,"Item5_qp1","Uk with no null values is Pk.",2,"True/False",1);
-INSERT INTO ev_qp_item VALUES(0,"Item1_qp2","What is a database?",2,"McqSingleCorrect",2);
-INSERT INTO ev_qp_item VALUES(0,"Item2_qp2","What is a  PK?",1,"McqSingleCorrect",2);
-INSERT INTO ev_qp_item VALUES(0,"Item3_qp2","What is a FK?",2,"McqMultiCorrect",2);
-INSERT INTO ev_qp_item VALUES(0,"Item4_qp2","UK and PK are same.",1,"True/False",2);
-INSERT INTO ev_qp_item VALUES(0,"Item5_qp2","Uk with no null values is Pk.",2,"True/False",2);
+-- INSERT INTO ev_qp_item VALUES(0,"Item1_qp1","What is a database?",2,"McqSingleCorrect",1);
+-- INSERT INTO ev_qp_item VALUES(0,"Item2_qp1","What is a  PK?",1,"McqMultiCorrect",1);
+-- INSERT INTO ev_qp_item VALUES(0,"Item3_qp1","What is a FK?",2,"McqMultiCorrect",1);
+-- INSERT INTO ev_qp_item VALUES(0,"Item4_qp1","UK and PK are same.",1,"True/False",1);
+-- INSERT INTO ev_qp_item VALUES(0,"Item5_qp1","Uk with no null values is Pk.",2,"True/False",1);
+-- INSERT INTO ev_qp_item VALUES(0,"Item1_qp2","What is a database?",2,"McqSingleCorrect",2);
+-- INSERT INTO ev_qp_item VALUES(0,"Item2_qp2","What is a  PK?",1,"McqSingleCorrect",2);
+-- INSERT INTO ev_qp_item VALUES(0,"Item3_qp2","What is a FK?",2,"McqMultiCorrect",2);
+-- INSERT INTO ev_qp_item VALUES(0,"Item4_qp2","UK and PK are same.",1,"True/False",2);
+-- INSERT INTO ev_qp_item VALUES(0,"Item5_qp2","Uk with no null values is Pk.",2,"True/False",2);
 
 -- --------------------------------------------------------
 -- Table structure for table `ev_item_mcq_options`
@@ -177,18 +177,18 @@ CREATE TABLE IF NOT EXISTS ev_item_mcq_options(
 ALTER TABLE ev_item_mcq_options
   ADD CONSTRAINT `fk_ev_item_mcq_options_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq1_item1_qp1",1,"Collection of related data",100.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq2_item1_qp1",1,"Collection of data",0.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq3_item1_qp1",1,"Collection of words",0.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq4_item1_qp1",1,"Collection of people",0.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq1_item2_qp1",2,"Primary Key",50.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq2_item2_qp1",2,"Personal Key",0.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq3_item2_qp1",2,"Person Key",0.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq4_item2_qp1",2,"Primary Keyword",50.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq1_item3_qp1",3,"Foreign Key",50.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq2_item3_qp1",3,"Foreign Keyword",50.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq3_item3_qp1",3,"Fashion Key",0.0);
-INSERT INTO ev_item_mcq_options VALUES(0,"Mcq4_item3_qp1",3,"Forward Key",0.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq1_item1_qp1",1,"Collection of related data",100.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq2_item1_qp1",1,"Collection of data",0.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq3_item1_qp1",1,"Collection of words",0.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq4_item1_qp1",1,"Collection of people",0.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq1_item2_qp1",2,"Primary Key",50.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq2_item2_qp1",2,"Personal Key",0.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq3_item2_qp1",2,"Person Key",0.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq4_item2_qp1",2,"Primary Keyword",50.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq1_item3_qp1",3,"Foreign Key",50.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq2_item3_qp1",3,"Foreign Keyword",50.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq3_item3_qp1",3,"Fashion Key",0.0);
+-- INSERT INTO ev_item_mcq_options VALUES(0,"Mcq4_item3_qp1",3,"Forward Key",0.0);
 
 -- --------------------------------------------------------
 -- Table structure for table `ev_item_true_false`
@@ -205,8 +205,8 @@ CREATE TABLE IF NOT EXISTS ev_item_true_false(
 ALTER TABLE ev_item_true_false
   ADD CONSTRAINT `fk_ev_item_true_false_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
-INSERT INTO ev_item_true_false VALUES(0,"TF_item4_qp1",4,0.0,100.0);
-INSERT INTO ev_item_true_false VALUES(0,"TF_item5_qp1",5,100.0,0.0);
+-- INSERT INTO ev_item_true_false VALUES(0,"TF_item4_qp1",4,0.0,100.0);
+-- INSERT INTO ev_item_true_false VALUES(0,"TF_item5_qp1",5,100.0,0.0);
 
 -- --------------------------------------------------------
 -- Table structure for table `ev_examinee_batch`
@@ -217,14 +217,14 @@ CREATE TABLE IF NOT EXISTS ev_examinee_batch(
   PRIMARY KEY(examinee_batch_id)
 );
 
-INSERT INTO ev_examinee_batch VALUES(0,'COMPLETED');
-INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
-INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
-INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
-INSERT INTO ev_examinee_batch VALUES(0,'ABANDONED');
-INSERT INTO ev_examinee_batch VALUES(0,'COMPLETED');
-INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
-INSERT INTO ev_examinee_batch VALUES(0,'ABANDONED');
+-- INSERT INTO ev_examinee_batch VALUES(0,'COMPLETED');
+-- INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+-- INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+-- INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+-- INSERT INTO ev_examinee_batch VALUES(0,'ABANDONED');
+-- INSERT INTO ev_examinee_batch VALUES(0,'COMPLETED');
+-- INSERT INTO ev_examinee_batch VALUES(0,'PENDING');
+-- INSERT INTO ev_examinee_batch VALUES(0,'ABANDONED');
 
 -- --------------------------------------------------------
 -- Table structure for table ev_examinee_item_marks
@@ -241,7 +241,7 @@ ALTER TABLE ev_examinee_item_marks
   ADD CONSTRAINT `fk_ev_examinee_item_marks_examinee_batch_id` FOREIGN KEY (examinee_batch_id) REFERENCES ev_examinee_batch(examinee_batch_id) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_ev_examinee_item_marks_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
-INSERT INTO ev_examinee_item_marks VALUES(0,10.0,1,1);
+-- INSERT INTO ev_examinee_item_marks VALUES(0,10.0,1,1);
 
 -- --------------------------------------------------------
 -- Table structure for table `ev_response`
@@ -252,33 +252,34 @@ CREATE TABLE IF NOT EXISTS ev_response (
   response_text varchar(511) NOT NULL,
   examinee_batch_id int(10) unsigned,
   qp_item_id int(10) unsigned,
-  PRIMARY KEY (response_id)
+  PRIMARY KEY (response_id),
+  CONSTRAINT `uk_ev_response` UNIQUE (qp_item_id,examinee_batch_id)
 );
 
 ALTER TABLE ev_response
   ADD CONSTRAINT `fk_ev_response_examinee_batch_id` FOREIGN KEY (examinee_batch_id) REFERENCES ev_examinee_batch(examinee_batch_id) ON DELETE SET NULL,
   ADD CONSTRAINT `fk_ev_response_qp_item_id` FOREIGN KEY (qp_item_id) REFERENCES ev_qp_item(qp_item_id) ON DELETE SET NULL;
 
-INSERT INTO ev_response VALUES(0,"Mcq1_Item11_qp1","Collection of related data",1,1);
-INSERT INTO ev_response VALUES(0,"Mcq1_Item12_qp1","Primary Key",1,2);
-INSERT INTO ev_response VALUES(0,"Mcq4_Item12_qp1","Primary Keyword",1,2);
-INSERT INTO ev_response VALUES(0,"Mcq1_Item13_qp1","Foreign Key",1,3);
-INSERT INTO ev_response VALUES(0,"Mcq3_Item13_qp1","Foreign Keyword",1,3);
-INSERT INTO ev_response VALUES(0,"TF_Item14_qp1","False",1,4);
-INSERT INTO ev_response VALUES(0,"TF_Item15_qp1","True",1,5);
-INSERT INTO ev_response VALUES(0,"Mcq1_Item21_qp1","Collection of related data",2,1);
-INSERT INTO ev_response VALUES(0,"Mcq1_Item22_qp1","Primary Key",2,2);
-INSERT INTO ev_response VALUES(0,"Mcq3_Item23_qp1","Fashion Key",2,3);
-INSERT INTO ev_response VALUES(0,"TF_Item24_qp1","False",2,4);
-INSERT INTO ev_response VALUES(0,"TF_Item25_qp1","False",2,5);
-INSERT INTO ev_response VALUES(0,"Mcq1_Item31_qp1","Collection of data",3,1);
-INSERT INTO ev_response VALUES(0,"Mcq4_Item32_qp1","Primary Keyword",3,2);
-INSERT INTO ev_response VALUES(0,"Mcq3_Item32_qp1","Personal Key",3,2);
-INSERT INTO ev_response VALUES(0,"Mcq2_Item32_qp1","Person Key",3,2);
-INSERT INTO ev_response VALUES(0,"Mcq4_Item33_qp1","Forward Key",3,3);
-INSERT INTO ev_response VALUES(0,"Mcq3_Item33_qp1","Fashion Key",3,3);
-INSERT INTO ev_response VALUES(0,"TF_Item34_qp1","True",3,4);
-INSERT INTO ev_response VALUES(0,"TF_Item35_qp1","False",3,5);
+-- INSERT INTO ev_response VALUES(0,"Mcq1_Item11_qp1","Collection of related data",1,1);
+-- INSERT INTO ev_response VALUES(0,"Mcq1_Item12_qp1","Primary Key",1,2);
+-- INSERT INTO ev_response VALUES(0,"Mcq4_Item12_qp1","Primary Keyword",1,2);
+-- INSERT INTO ev_response VALUES(0,"Mcq1_Item13_qp1","Foreign Key",1,3);
+-- INSERT INTO ev_response VALUES(0,"Mcq3_Item13_qp1","Foreign Keyword",1,3);
+-- INSERT INTO ev_response VALUES(0,"TF_Item14_qp1","False",1,4);
+-- INSERT INTO ev_response VALUES(0,"TF_Item15_qp1","True",1,5);
+-- INSERT INTO ev_response VALUES(0,"Mcq1_Item21_qp1","Collection of related data",2,1);
+-- INSERT INTO ev_response VALUES(0,"Mcq1_Item22_qp1","Primary Key",2,2);
+-- INSERT INTO ev_response VALUES(0,"Mcq3_Item23_qp1","Fashion Key",2,3);
+-- INSERT INTO ev_response VALUES(0,"TF_Item24_qp1","False",2,4);
+-- INSERT INTO ev_response VALUES(0,"TF_Item25_qp1","False",2,5);
+-- INSERT INTO ev_response VALUES(0,"Mcq1_Item31_qp1","Collection of data",3,1);
+-- INSERT INTO ev_response VALUES(0,"Mcq4_Item32_qp1","Primary Keyword",3,2);
+-- INSERT INTO ev_response VALUES(0,"Mcq3_Item32_qp1","Personal Key",3,2);
+-- INSERT INTO ev_response VALUES(0,"Mcq2_Item32_qp1","Person Key",3,2);
+-- INSERT INTO ev_response VALUES(0,"Mcq4_Item33_qp1","Forward Key",3,3);
+-- INSERT INTO ev_response VALUES(0,"Mcq3_Item33_qp1","Fashion Key",3,3);
+-- INSERT INTO ev_response VALUES(0,"TF_Item34_qp1","True",3,4);
+-- INSERT INTO ev_response VALUES(0,"TF_Item35_qp1","False",3,5);
 
  
 -- --------------------------------------------------------
@@ -295,11 +296,11 @@ CREATE TABLE IF NOT EXISTS ev_response_mcq (
 ALTER TABLE ev_response_mcq
   ADD CONSTRAINT `fk_ev_response_mcq_response_id` FOREIGN KEY (response_id) REFERENCES ev_response(response_id) ON DELETE SET NULL;
 
-INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item1_qp1","Collection of related data",1);
-INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item2_qp1","Primary Key",2);
-INSERT INTO ev_response_mcq VALUES(0,"Mcq4_item2_qp1","Primary Keyword",2);
-INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item3_qp1","Foreign Key",3);
-INSERT INTO ev_response_mcq VALUES(0,"Mcq3_item3_qp1","Fashion Key",3);
+-- INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item1_qp1","Collection of related data",1);
+-- INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item2_qp1","Primary Key",2);
+-- INSERT INTO ev_response_mcq VALUES(0,"Mcq4_item2_qp1","Primary Keyword",2);
+-- INSERT INTO ev_response_mcq VALUES(0,"Mcq1_item3_qp1","Foreign Key",3);
+-- INSERT INTO ev_response_mcq VALUES(0,"Mcq3_item3_qp1","Fashion Key",3);
 
 
 
@@ -430,7 +431,7 @@ CREATE TABLE IF NOT EXISTS mpack2(
   mpack1_id int(10) unsigned NOT NULL,
   qp_id int(10) unsigned NOT NULL,
   qp_item_id int(10) unsigned NOT NULL,
-  item_text varchar(511) NOT NULL,
+  item_text text(1024) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
   PRIMARY KEY(mpack2_id)
