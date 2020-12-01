@@ -25,6 +25,8 @@ import com.iiitb.assessmentBackEnd.examinee.ExamineeService;
 import com.iiitb.assessmentBackEnd.examineeBatch.AsExamineeBatch;
 import com.iiitb.assessmentBackEnd.examineeBatch.ExamineeBatchKey;
 import com.iiitb.assessmentBackEnd.examineeBatch.ExamineeBatchService;
+import com.iiitb.assessmentBackEnd.instruction.AsInstruction;
+import com.iiitb.assessmentBackEnd.instruction.InstructionService;
 import com.iiitb.assessmentBackEnd.itemMcqOptions.AsItemMcqOptions;
 import com.iiitb.assessmentBackEnd.itemMcqOptions.ItemMcqOptionsService;
 import com.iiitb.assessmentBackEnd.itemTrueFalse.AsItemTrueFalse;
@@ -53,6 +55,9 @@ public class EpackService {
 	
 	@Autowired
 	private QuestionPaperService questionPaperService;
+	
+	@Autowired
+	private InstructionService instructionService;
 	
 	@Autowired
 	private BatchService batchService;
@@ -176,6 +181,17 @@ public class EpackService {
 			if(!id2Batch.containsKey(batch.getBatchId())) {
 				id2Batch.put(batch.getBatchId(), batch);
 			}
+		}
+		
+		List<Object[]> instructionObjects = epackRepository.fetchInstructionData();
+		for(int i = 0; i < instructionObjects.size(); i++) {
+			AsInstruction instruction = new AsInstruction();
+			instruction.setInstructionId((Integer)instructionObjects.get(i)[0]);
+			instruction.setInstructionText(String.valueOf(instructionObjects.get(i)[1]));
+			if(id2QuestionPaper.containsKey((Integer)instructionObjects.get(i)[2])) {
+				instruction.setAsQuestionPaper(id2QuestionPaper.get((Integer)instructionObjects.get(i)[2]));
+			}
+			instructionService.addInstruction(instruction);
 		}
 		
 		Map<Integer, AsQpItem> id2QpItem = new HashMap<Integer, AsQpItem>();

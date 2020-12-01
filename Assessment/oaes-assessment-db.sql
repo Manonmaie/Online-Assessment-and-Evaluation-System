@@ -765,6 +765,9 @@ ALTER TABLE rpack3
 -- SELECT q.qp_id, q.batch_id, eb.examinee_batch_id, eb.examinee_id, i.qp_item_id, r.response_id, r.response_text FROM as_qp_item i INNER JOIN as_question_paper q ON 
 -- i.qp_id = q.qp_id INNER JOIN as_batch b ON q.batch_id = b.batch_id INNER JOIN as_examinee_batch eb ON b.batch_id = eb.batch_id INNER JOIN as_response r ON i.qp_item_id 
 -- = r.qp_item_id WHERE i.qp_item_id = :qp_item_id
+
+-- SELECT q.qp_id, q.batch_id, eb.examinee_batch_id, eb.examinee_id, i.qp_item_id, r.response_id, r.response_text FROM as_response r INNER JOIN as_attempt a ON 
+-- r.attempt_id = a.attempt_id INNER JOIN as_examinee_batch eb ON eb.examinee_id = a.examinee_id AND eb.batch_id = a.batch_id INNER JOIN as_question_paper q ON q.batch_id = eb.batch_id
 -- --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS rpack4(
   rpack4_id int(10) unsigned NOT NULL AUTO_INCREMENT,
