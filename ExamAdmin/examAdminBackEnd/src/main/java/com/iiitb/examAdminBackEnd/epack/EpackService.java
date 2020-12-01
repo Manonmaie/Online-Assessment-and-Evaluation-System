@@ -63,6 +63,7 @@ public class EpackService {
 	
 	public Status addEpack(int center_id) throws IOException {
 		
+		epack4Service.deleteAll();
 		epack3Service.deleteAll();
 		epack2Service.deleteAll();
 		epack1Service.deleteAll();
@@ -87,25 +88,25 @@ public class EpackService {
 			epack1.setMaximum_marks((Float)epack1Objects.get(i)[1]);
 			if(epack1Objects.get(i)[2] != null) {
 				epack1.setInstruction_id((Integer)epack1Objects.get(i)[2]);
-				epack1.setInstruction_code(String.valueOf(epack1Objects.get(i)[3]));
-				epack1.setInstruction_text(String.valueOf(epack1Objects.get(i)[4]));
+//				epack1.setInstruction_code(String.valueOf(epack1Objects.get(i)[3]));
+				epack1.setInstruction_text(String.valueOf(epack1Objects.get(i)[3]));
 			}
-			epack1.setDuration((Integer)epack1Objects.get(i)[5]);
-			epack1.setBatch_id((Integer)epack1Objects.get(i)[6]);
-			epack1.setbatch_code(String.valueOf(epack1Objects.get(i)[7]));
-			epack1.setBatch_start_time(LocalDateTime.parse(epack1Objects.get(i)[8].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
-			epack1.setBatch_end_time(LocalDateTime.parse(epack1Objects.get(i)[9].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
+			epack1.setDuration((Integer)epack1Objects.get(i)[4]);
+			epack1.setBatch_id((Integer)epack1Objects.get(i)[5]);
+			epack1.setbatch_code(String.valueOf(epack1Objects.get(i)[6]));
+			epack1.setBatch_start_time(LocalDateTime.parse(epack1Objects.get(i)[7].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
+			epack1.setBatch_end_time(LocalDateTime.parse(epack1Objects.get(i)[8].toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")));
 //			epack1.setBatch_start_time(((TimeStamp)epack1Objects.get(i)[8]).toLocalDateTime());
 //			epack1.setBatch_end_time((LocalDateTime)epack1Objects.get(i)[9]);
-			epack1.setCenter_id((Integer)epack1Objects.get(i)[10]);
-			epack1.setCenter_code(String.valueOf(epack1Objects.get(i)[11]));
-			epack1.setCenter_name(String.valueOf(epack1Objects.get(i)[12]));
-			epack1.setExamdrive_id((Integer)epack1Objects.get(i)[13]);
-			epack1.setExamdrive_code(String.valueOf(epack1Objects.get(i)[14]));
-			epack1.setExamdrive_name(String.valueOf(epack1Objects.get(i)[15]));
-			epack1.setCourse_master_id((Integer)epack1Objects.get(i)[16]);
-			epack1.setCourse_code(String.valueOf(epack1Objects.get(i)[17]));
-			epack1.setCourse_name(String.valueOf(epack1Objects.get(i)[18]));
+			epack1.setCenter_id((Integer)epack1Objects.get(i)[9]);
+			epack1.setCenter_code(String.valueOf(epack1Objects.get(i)[10]));
+			epack1.setCenter_name(String.valueOf(epack1Objects.get(i)[11]));
+			epack1.setExamdrive_id((Integer)epack1Objects.get(i)[12]);
+			epack1.setExamdrive_code(String.valueOf(epack1Objects.get(i)[13]));
+			epack1.setExamdrive_name(String.valueOf(epack1Objects.get(i)[14]));
+			epack1.setCourse_master_id((Integer)epack1Objects.get(i)[15]);
+			epack1.setCourse_code(String.valueOf(epack1Objects.get(i)[16]));
+			epack1.setCourse_name(String.valueOf(epack1Objects.get(i)[17]));
 			epack1.setEpack_header(epack);
 			
 			epack1Service.addEpack1(epack1);

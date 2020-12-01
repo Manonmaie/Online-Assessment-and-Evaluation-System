@@ -1,5 +1,5 @@
 DROP DATABASE oaes_exam_admin_db;
-CREATE DATABASE oaes_exam_admin_db;
+CREATE DATABASE oaes_exam_admin_db DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_bin;
 USE oaes_exam_admin_db;
 --
 -- Database: `oaes_exam_admin_db`
@@ -62,9 +62,9 @@ ALTER TABLE ea_examdrive
 -- --------------------------------------------------------
 -- Data Entry for table ea_examdrive
 -- --------------------------------------------------------
-INSERT INTO ea_examdrive VALUES(0,"MID","Mid Term Examination",'COMPLETED',5);
-INSERT INTO ea_examdrive VALUES(0,"END","End Term Examination",'NOT_STARTED',5);
-INSERT INTO ea_examdrive VALUES(0,"IMP","Improvement Examination",'NOT_STARTED',5);
+INSERT INTO ea_examdrive VALUES(0,"MID","Mid Term Examination",'COMPLETED',1);
+INSERT INTO ea_examdrive VALUES(0,"END","End Term Examination",'NOT_STARTED',2);
+INSERT INTO ea_examdrive VALUES(0,"IMP","Improvement Examination",'NOT_STARTED',1);
 
 -- --------------------------------------------------------
 -- Table structure for table ea_examinee
@@ -130,14 +130,14 @@ ALTER TABLE ea_batch
 -- --------------------------------------------------------
 -- Data Entry for table ea_batch
 -- --------------------------------------------------------
--- INSERT INTO ea_batch VALUES(0,"MID-MRNG-IIITB","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",5,4,NULL);
--- INSERT INTO ea_batch VALUES(0,"END-MRNG-IIITB","2020-10-23 10:00:00","2020-10-23 13:00:00","RECEIVED",5,5,NULL);
--- INSERT INTO ea_batch VALUES(0,"IMP-MRNG-IIITB","2020-12-23 10:00:00","2020-12-23 13:00:00","RECEIVED",5,6,NULL);
-INSERT INTO ea_batch VALUES(0,"batch1","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",5,4,NULL);
-INSERT INTO ea_batch VALUES(0,"batch2","2020-10-23 10:00:00","2020-10-23 13:00:00","RECEIVED",5,5,NULL);
-INSERT INTO ea_batch VALUES(0,"batch3","2020-12-23 10:00:00","2020-12-23 13:00:00","RECEIVED",5,6,NULL);
-INSERT INTO ea_batch VALUES(0,"MID-EVNG-IIITB","2020-09-23 14:00:00","2020-09-23 17:00:00","RECEIVED",5,4,NULL);
-INSERT INTO ea_batch VALUES(0,"MID-MRNG-IIITH","2020-09-23 10:00:00","2020-09-23 13:00:00","RECEIVED",6,4,NULL);
+INSERT INTO ea_batch VALUES(0,"MID-MRNG-IIITB","2020-09-23 10:00:00","2020-09-23 13:00:00","PENDING",1,1,NULL);
+INSERT INTO ea_batch VALUES(0,"END-MRNG-IIITB","2020-10-23 10:00:00","2020-10-23 13:00:00","PENDING",1,2,NULL);
+INSERT INTO ea_batch VALUES(0,"IMP-MRNG-IIITB","2020-12-23 10:00:00","2020-12-23 13:00:00","PENDING",1,3,NULL);
+INSERT INTO ea_batch VALUES(0,"batch1","2020-09-23 10:00:00","2020-09-23 13:00:00","SENT",3,1,NULL);
+INSERT INTO ea_batch VALUES(0,"batch2","2020-10-23 10:00:00","2020-10-23 13:00:00","PENDING",3,1,NULL);
+INSERT INTO ea_batch VALUES(0,"batch3","2020-12-23 10:00:00","2020-12-23 13:00:00","PENDING",3,2,NULL);
+INSERT INTO ea_batch VALUES(0,"MID-EVNG-IIITB","2020-09-23 14:00:00","2020-09-23 17:00:00","PENDING",1,1,NULL);
+INSERT INTO ea_batch VALUES(0,"MID-MRNG-IIITH","2020-09-23 10:00:00","2020-09-23 13:00:00","PENDING",2,1,NULL);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_examinee_batch`
@@ -157,11 +157,16 @@ ALTER TABLE ea_examinee_batch
 -- --------------------------------------------------------
 -- Data Entry for table ea_examinee_batch
 -- --------------------------------------------------------
-INSERT INTO ea_examinee_batch VALUES(0,6,6);
-INSERT INTO ea_examinee_batch VALUES(0,7,6);
-INSERT INTO ea_examinee_batch VALUES(0,6,7);
-INSERT INTO ea_examinee_batch VALUES(0,7,7);
-INSERT INTO ea_examinee_batch VALUES(0,8,7);
+INSERT INTO ea_examinee_batch VALUES(0,1,1);
+INSERT INTO ea_examinee_batch VALUES(0,2,1);
+INSERT INTO ea_examinee_batch VALUES(0,1,2);
+INSERT INTO ea_examinee_batch VALUES(0,2,2);
+INSERT INTO ea_examinee_batch VALUES(0,3,2);
+INSERT INTO ea_examinee_batch VALUES(0,4,1);
+INSERT INTO ea_examinee_batch VALUES(0,5,1);
+INSERT INTO ea_examinee_batch VALUES(0,4,2);
+INSERT INTO ea_examinee_batch VALUES(0,5,2);
+INSERT INTO ea_examinee_batch VALUES(0,6,2);
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_question_paper`
@@ -208,9 +213,12 @@ ALTER TABLE ea_instruction
 -- --------------------------------------------------------
 -- Data Entry for table ea_instruction
 -- --------------------------------------------------------
-INSERT INTO ea_instruction VALUES(0,"IC1",1,"Instruction 1");
-INSERT INTO ea_instruction VALUES(0,"IC2",1,"Instruction 2");
-INSERT INTO ea_instruction VALUES(0,"IC3",2,"Instruction 3");
+-- INSERT INTO ea_instruction VALUES(0,"IC1",1,"Instruction 1");
+-- INSERT INTO ea_instruction VALUES(0,"IC2",1,"Instruction 2");
+-- INSERT INTO ea_instruction VALUES(0,"IC3",2,"Instruction 3");
+INSERT INTO ea_instruction VALUES(0,1,"Instruction 1");
+INSERT INTO ea_instruction VALUES(0,1,"Instruction 2");
+INSERT INTO ea_instruction VALUES(0,2,"Instruction 3");
 
 -- --------------------------------------------------------
 -- Table structure for table `ea_itemtype_master`
@@ -229,7 +237,7 @@ CREATE TABLE IF NOT EXISTS ea_itemtype_master (
 CREATE TABLE IF NOT EXISTS ea_qp_item (
   qp_item_id int(10) unsigned NOT NULL AUTO_INCREMENT,
   -- item_code varchar(255) UNIQUE NOT NULL,
-  item_text varchar(511) NOT NULL,
+  item_text text(1024) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
   cognitive_level ENUM('REMEMBER','UNDERSTAND','APPLY','ANALYZE','EVALUATE','CREATE'),
@@ -350,63 +358,63 @@ INSERT INTO ea_item_true_false VALUES(0,5);
 -- --------------------------------------------------------
 -- Table structure for table out_qpack_header
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS out_qpack_header(
-  qpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qpack_desc varchar(255),
-  created_on datetime,
-  created_by varchar(255),
-  qpack_status ENUM('CREATED', 'SENT') DEFAULT 'CREATED',
-  qpack_sent_on datetime,
-  qpack_path varchar(255),
-  PRIMARY KEY(qpack_header_id)
-);
+-- CREATE TABLE IF NOT EXISTS out_qpack_header(
+--   qpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   qpack_desc varchar(255),
+--   created_on datetime,
+--   created_by varchar(255),
+--   qpack_status ENUM('CREATED', 'SENT') DEFAULT 'CREATED',
+--   qpack_sent_on datetime,
+--   qpack_path varchar(255),
+--   PRIMARY KEY(qpack_header_id)
+-- );
 
-CREATE TABLE IF NOT EXISTS qpack1(
-  qpack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qpack_header_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  maximum_marks int(10) NOT NULL,
-  instruction_id int(10) unsigned UNIQUE,
-  instruction_text varchar(255),
-  duration int(10) NOT NULL,
-  course_id int(10) unsigned NOT NULL,
-  course_code varchar(255) NOT NULL,
-  course_name varchar(255) NOT NULL,
-  batch_code varchar(255) NOT NULL,
-  PRIMARY KEY(qpack1_id)
-);
+-- CREATE TABLE IF NOT EXISTS qpack1(
+--   qpack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   qpack_header_id int(10) unsigned NOT NULL,
+--   qp_id int(10) unsigned NOT NULL,
+--   maximum_marks int(10) NOT NULL,
+--   instruction_id int(10) unsigned UNIQUE,
+--   instruction_text varchar(255),
+--   duration int(10) NOT NULL,
+--   course_id int(10) unsigned NOT NULL,
+--   course_code varchar(255) NOT NULL,
+--   course_name varchar(255) NOT NULL,
+--   batch_code varchar(255) NOT NULL,
+--   PRIMARY KEY(qpack1_id)
+-- );
 
-ALTER TABLE qpack1
-  ADD CONSTRAINT `fk_qpack1_qpack_header_id` FOREIGN KEY (qpack_header_id) REFERENCES out_qpack_header(qpack_header_id) ON DELETE CASCADE;
+-- ALTER TABLE qpack1
+--   ADD CONSTRAINT `fk_qpack1_qpack_header_id` FOREIGN KEY (qpack_header_id) REFERENCES out_qpack_header(qpack_header_id) ON DELETE CASCADE;
 
-CREATE TABLE IF NOT EXISTS qpack2(
-  qpack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qpack1_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_text varchar(511) NOT NULL,
-  item_marks float(24) unsigned NOT NULL,
-  item_type varchar(255) NOT NULL,
-  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE')  NOT NULL,
-  PRIMARY KEY(qpack2_id)
-);
+-- CREATE TABLE IF NOT EXISTS qpack2(
+--   qpack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   qpack1_id int(10) unsigned NOT NULL,
+--   qp_id int(10) unsigned NOT NULL,
+--   item_id int(10) unsigned NOT NULL,
+--   qp_item_id int(10) unsigned NOT NULL,
+--   item_text varchar(511) NOT NULL,
+--   item_marks float(24) unsigned NOT NULL,
+--   item_type varchar(255) NOT NULL,
+--   cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE')  NOT NULL,
+--   PRIMARY KEY(qpack2_id)
+-- );
 
-ALTER TABLE qpack2
-  ADD CONSTRAINT `fk_qpack2_qpack1_id` FOREIGN KEY (qpack1_id) REFERENCES qpack1(qpack1_id) ON DELETE CASCADE;
+-- ALTER TABLE qpack2
+--   ADD CONSTRAINT `fk_qpack2_qpack1_id` FOREIGN KEY (qpack1_id) REFERENCES qpack1(qpack1_id) ON DELETE CASCADE;
 
-CREATE TABLE IF NOT EXISTS qpack3(
-  qpack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qpack2_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_option_id int(10) unsigned NOT NULL,
-  option_text varchar(255) NOT NULL,
-  PRIMARY KEY(qpack3_id)
-);
+-- CREATE TABLE IF NOT EXISTS qpack3(
+--   qpack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   qpack2_id int(10) unsigned NOT NULL,
+--   item_id int(10) unsigned NOT NULL,
+--   qp_item_id int(10) unsigned NOT NULL,
+--   item_option_id int(10) unsigned NOT NULL,
+--   option_text varchar(255) NOT NULL,
+--   PRIMARY KEY(qpack3_id)
+-- );
 
-ALTER TABLE qpack3
-  ADD CONSTRAINT `fk_qpack3_qpack2_id` FOREIGN KEY (qpack2_id) REFERENCES qpack2(qpack2_id) ON DELETE CASCADE;
+-- ALTER TABLE qpack3
+--   ADD CONSTRAINT `fk_qpack3_qpack2_id` FOREIGN KEY (qpack2_id) REFERENCES qpack2(qpack2_id) ON DELETE CASCADE;
 
 -- -- --------------------------------------------------------
 -- -- Table structure for table qpack1
@@ -486,7 +494,7 @@ CREATE TABLE IF NOT EXISTS epack1(
   -- qp_code varchar(255) NOT NULL,
   maximum_marks float(24) NOT NULL,
   instruction_id int(10) unsigned UNIQUE,
-  instruction_code varchar(255) UNIQUE,
+  -- instruction_code varchar(255) UNIQUE,
   instruction_text varchar(255),
   duration int(10) NOT NULL,
   batch_id int(10) unsigned NOT NULL,
@@ -518,7 +526,7 @@ CREATE TABLE IF NOT EXISTS epack2(
   epack1_id int(10) unsigned NOT NULL,
   qp_id int(10) unsigned NOT NULL,
   qp_item_id int(10) unsigned UNIQUE NOT NULL,
-  item_text varchar(511) NOT NULL,
+  item_text text(1024) NOT NULL,
   item_marks float(24) unsigned NOT NULL,
   item_type varchar(255) NOT NULL,
   cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE'),
