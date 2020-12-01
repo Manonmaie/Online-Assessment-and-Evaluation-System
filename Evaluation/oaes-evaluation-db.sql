@@ -1,5 +1,6 @@
 DROP DATABASE oaes_evaluation_db;
-CREATE DATABASE oaes_evaluation_db;
+-- CREATE DATABASE oaes_evaluation_db;
+CREATE DATABASE oaes_evaluation_db DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_bin;
 USE oaes_evaluation_db;
 --
 -- Database: `oaes_evaluation_db`
@@ -318,45 +319,45 @@ ALTER TABLE ev_response_true_false
 -- --------------------------------------------------------
 -- Table structure for table in_apack_header
 -- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS out_apack_header(
-  apack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  apack_desc varchar(255),
-  created_on datetime,
-  created_by varchar(255),
-  apack_status ENUM('CREATED', 'SENT') DEFAULT 'CREATED',
-  apack_sent_on datetime,
-  apack_path varchar(255),
-  PRIMARY KEY(apack_header_id)
-);
+-- CREATE TABLE IF NOT EXISTS out_apack_header(
+--   apack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   apack_desc varchar(255),
+--   created_on datetime,
+--   created_by varchar(255),
+--   apack_status ENUM('CREATED', 'SENT') DEFAULT 'CREATED',
+--   apack_sent_on datetime,
+--   apack_path varchar(255),
+--   PRIMARY KEY(apack_header_id)
+-- );
 
-CREATE TABLE IF NOT EXISTS apack1(
-  apack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  apack_header_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_text varchar(255) NOT NULL,
-  item_marks float(24) unsigned NOT NULL,
-  item_type varchar(255) NOT NULL,
-  PRIMARY KEY(apack1_id)
-);
+-- CREATE TABLE IF NOT EXISTS apack1(
+--   apack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   apack_header_id int(10) unsigned NOT NULL,
+--   qp_id int(10) unsigned NOT NULL,
+--   item_id int(10) unsigned NOT NULL,
+--   qp_item_id int(10) unsigned NOT NULL,
+--   item_text varchar(255) NOT NULL,
+--   item_marks float(24) unsigned NOT NULL,
+--   item_type varchar(255) NOT NULL,
+--   PRIMARY KEY(apack1_id)
+-- );
 
-ALTER TABLE apack1
-  ADD CONSTRAINT `fk_apack1_apack_header_id` FOREIGN KEY (apack_header_id) REFERENCES out_apack_header(apack_header_id) ON DELETE CASCADE;
+-- ALTER TABLE apack1
+--   ADD CONSTRAINT `fk_apack1_apack_header_id` FOREIGN KEY (apack_header_id) REFERENCES out_apack_header(apack_header_id) ON DELETE CASCADE;
 
-CREATE TABLE IF NOT EXISTS apack2(
-  apack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  apack1_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_option_id int(10) unsigned NOT NULL,
-  option_text varchar(255) NOT NULL,
-  option_percentage int(10) NOT NULL,
-  PRIMARY KEY(apack2_id)
-);
+-- CREATE TABLE IF NOT EXISTS apack2(
+--   apack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+--   apack1_id int(10) unsigned NOT NULL,
+--   item_id int(10) unsigned NOT NULL,
+--   qp_item_id int(10) unsigned NOT NULL,
+--   item_option_id int(10) unsigned NOT NULL,
+--   option_text varchar(255) NOT NULL,
+--   option_percentage int(10) NOT NULL,
+--   PRIMARY KEY(apack2_id)
+-- );
 
-ALTER TABLE apack2
-  ADD CONSTRAINT `fk_apack2_apack1_id` FOREIGN KEY (apack1_id) REFERENCES apack1(apack1_id) ON DELETE CASCADE;
+-- ALTER TABLE apack2
+--   ADD CONSTRAINT `fk_apack2_apack1_id` FOREIGN KEY (apack1_id) REFERENCES apack1(apack1_id) ON DELETE CASCADE;
 
 -- -- --------------------------------------------------------
 -- -- Table structure for table apack1
