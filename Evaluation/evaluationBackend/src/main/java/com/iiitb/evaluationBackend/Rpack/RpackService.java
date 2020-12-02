@@ -75,7 +75,7 @@ public class RpackService {
 	}
 	
 	public void rpack2OriginalTables(String RpackKey) throws IOException, InterruptedException {
-		serverConnect.execCurlPullCommand("RpackDump.sql", RpackKey);
+//		serverConnect.execCurlPullCommand("RpackDump.sql", RpackKey);
 		
 		sqlDumpService.importDump("Rpack");
 		
@@ -124,7 +124,7 @@ public class RpackService {
 					itemTrueFalse.setTruePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], "True"));
 				}
 				if(rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], "False") != null) {
-					itemTrueFalse.setTruePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], "False"));
+					itemTrueFalse.setFalsePercentage((float)rpackRepository.fetchItemTFPercentData((Integer)itemOptionObjects.get(i)[0], "False"));
 				}
 //				if(String.valueOf(itemOptionObjects.get(i)[2]).equals("True")) {
 //					itemTrueFalse.setTruePercentage((float)(Integer)itemOptionObjects.get(i)[2]);
