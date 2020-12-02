@@ -17,4 +17,9 @@ public class InstructionService {
 		instructionRepository.findByAsQuestionPaperQpId(qpId).forEach(inst_list::add);
 		return inst_list;
 	}
+	
+	public void addInstruction(AsInstruction instruction) {
+		instructionRepository.save(instruction);
+	}
+	
 }

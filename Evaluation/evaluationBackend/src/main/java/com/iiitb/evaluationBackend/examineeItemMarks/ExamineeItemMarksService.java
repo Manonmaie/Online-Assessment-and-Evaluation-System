@@ -75,7 +75,7 @@ public class ExamineeItemMarksService {
 			for(EvItemMcqOptions mcqOptions: response.getEvQpItem().getEvItemMcqOptionsList()) {
 				if(response.getResponseText().compareTo(mcqOptions.getMcqOptionText())==0) {
 					float currMarks = (float) ((response.getEvQpItem().getItemMarks())
-							*(mcqOptions.getMcqOptionPercentage()));
+							*(mcqOptions.getMcqOptionPercentage()/100));
 					ExamineeItemMarksKey examineeMarksId = new ExamineeItemMarksKey(response.getEvQpItem().getQpItemId(),examineeBatchId);
 					EvExamineeItemMarks itemMarks = examineeItemMarksRepository.findByExamineeItemMarksId(examineeMarksId);
 					float prevMarks = itemMarks.getExamineeItemMarks();

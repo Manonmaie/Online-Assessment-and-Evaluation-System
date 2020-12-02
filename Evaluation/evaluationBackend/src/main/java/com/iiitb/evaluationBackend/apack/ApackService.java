@@ -42,7 +42,7 @@ public class ApackService {
 //			EvQpItem qpItem = new EvQpItem();
 ////			qpItem.setEvQuestionPaper(evQuestionPaper);
 //		}
-//		serverConnect.execCurlPullCommand("ApackDump.sql", ApackKey);
+		serverConnect.execCurlPullCommand("ApackDump.sql", ApackKey);
 		
 		sqlDumpService.importDump("Apack");
 	}

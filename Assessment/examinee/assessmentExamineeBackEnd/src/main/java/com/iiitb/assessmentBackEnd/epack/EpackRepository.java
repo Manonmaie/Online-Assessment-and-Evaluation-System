@@ -22,6 +22,9 @@ public interface EpackRepository extends CrudRepository<Epack, Integer>{
 	@Query(value="SELECT DISTINCT batch_id, batch_code, batch_start_time, batch_end_time, center_id, examdrive_id, qp_id FROM epack1", nativeQuery=true)
 	public List<Object[]> fetchBatchData();
 	
+	@Query(value="SELECT DISTINCT instruction_id, instruction_text, qp_id FROM epack1", nativeQuery=true)
+	public List<Object[]> fetchInstructionData();
+	
 	@Query(value="SELECT DISTINCT qp_item_id, item_text, item_marks, item_type, cognitive_level, qp_id FROM epack2", nativeQuery=true)
 	public List<Object[]> fetchQpItemData();
 	
