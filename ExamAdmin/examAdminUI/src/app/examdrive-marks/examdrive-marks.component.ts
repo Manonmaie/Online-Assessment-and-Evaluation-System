@@ -50,9 +50,10 @@ export class ExamdriveMarksComponent implements OnInit {
   fileName: string;
 
   exportAsExcel(): void{
-    this.fileName = "Marks Reports of ".concat(this.examdrive.examdriveCode.toString());
-    this.fileName = this.fileName.concat(" in ");
-    this.fileName = this.fileName.concat(this.examdrive.course.courseCode.toString());
+    // this.fileName = "Marks Reports of ".concat(this.examdrive.examdriveCode.toString());
+    // this.fileName = this.fileName.concat(" in ");
+    // this.fileName = this.fileName.concat(this.examdrive.course.courseCode.toString());
+    this.fileName = this.examdrive.examdriveCode.toString();
     this.excelService.tableToExcel("drive-marks-list",this.fileName);
   }
 }
