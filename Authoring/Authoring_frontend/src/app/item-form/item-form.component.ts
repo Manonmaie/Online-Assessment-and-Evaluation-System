@@ -6,6 +6,7 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import * as $ from 'jquery'
 import { ItemServiceService } from '../service/itemService.service';
 import { course } from '../shared/course';
+import { Router } from '@angular/router';
 
 
 
@@ -19,7 +20,7 @@ export class ItemFormComponent implements OnInit  {
 
   countBox:number;
   subject:course[];
-  constructor(private httpClient: HttpClient,private fb:FormBuilder,private itemServiceService:ItemServiceService) {
+  constructor(private httpClient: HttpClient,private fb:FormBuilder,private itemServiceService:ItemServiceService,private router:Router) {
     this.onChange= this.onChange.bind(this);
     this.countBox=3;
     this.fb.array([])
@@ -106,11 +107,11 @@ export class ItemFormComponent implements OnInit  {
   ];
   difLvl = [
     { value: '',disabled:"disabled", label: 'Choose Difficulty level' },
-    { value: 'Easy', label: 'Easy' },
-    { value: 'Medium-Easy', label: 'Medium-Easy' },
-    { value: 'Medium', label: 'Medium' },
-    { value: 'Medium-Hard', label: 'Medium-Hard' },
-    { value: 'Hard', label: 'Hard' },
+    { value: 'EASY', label: 'EASY' },
+    { value: 'EASY-MEDIUM', label: 'EASY-MEDIUM' },
+    { value: 'MEDIUM', label: 'MEDIUM' },
+    { value: 'HARD-MEDIUM', label: 'HARD-MEDIUM' },
+    { value: 'HARD', label: 'HARD' },
   ];
   types = [
     { value: '', label: 'Choose question type' },
@@ -141,7 +142,7 @@ export class ItemFormComponent implements OnInit  {
       }).subscribe((data: any[])=>{
       console.log(data);
     }) 
-
+    this.router.navigate(['/exports']);
     }
 
     if(selValue=='TRUE/FALSE')
@@ -162,8 +163,7 @@ export class ItemFormComponent implements OnInit  {
         console.log(data);
       }) 
     }
-    
-    
+    this.router.navigate(['/exports']);
   };
 
 }

@@ -1,0 +1,137 @@
+/* You can add global styles to this file, and also import other style files */
+.container {
+    padding: 16px;
+}
+
+legend {
+    background-color: rgb(49, 52, 58);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 7px;
+}
+  
+input {
+    margin: 8px;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=datetime-local], select {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[name=search] {
+    border-radius: 100px;
+    outline: none;
+}
+
+input[name=items] {
+    width: 100px;
+}
+
+input[type=password], select {
+    width: 100%;
+    padding: 8px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit]{
+    background-color: #44bd48;
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+input[type=file]{
+    background-color: white;
+    width: auto;
+    border: none;
+    border-style: solid;
+    border-color: cadetblue;
+    border-width: 2px;
+    color: gray;
+    padding: 10px 14px;
+    text-decoration: none;
+    text-align: center;
+    margin: auto;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+input[type=file]:hover {
+    border-style: solid;
+    border-color: blue;
+}
+
+#file {
+    text-align: center;
+    margin: auto;
+}
+
+th, td {
+    border-bottom: 1px solid rgb(180, 180, 180);
+    padding: 10px;
+    text-align: left;
+}
+
+select{
+    text-indent: 5px;
+}
+
+tr:hover {
+    background-color: #dddbdb;
+}  
+
+th {
+    background-color: rgb(90, 91, 92);
+    color: white;
+}
+
+.required:after {
+    content:" *";
+    color: red;
+}
+
+.form-item.error small{
+    visibility: visible;
+    color: red;
+}
+
+.form-item small{
+    visibility: hidden;
+}
+
+.form-item.error input{
+    border-color: red;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+  }
