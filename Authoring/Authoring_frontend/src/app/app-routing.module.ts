@@ -12,7 +12,7 @@ const routes: Routes = [
   {   path:'questionManagement', component:QuestionManagementComponent},
   {   path:'exports', component:ExportsComponent},
   {   path: 'login', component: LoginComponent},
-  {   path: '', redirectTo:'/login',pathMatch: 'full'}
+  {   path: '', redirectTo:'/exports',pathMatch: 'full'}
 ];
 
 @NgModule({
