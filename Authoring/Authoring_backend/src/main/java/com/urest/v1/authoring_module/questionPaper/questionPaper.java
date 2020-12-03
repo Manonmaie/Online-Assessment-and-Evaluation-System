@@ -46,7 +46,7 @@ public class questionPaper {
 	
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="qp_id", updatable = false, nullable = false)
 	private Integer questionPaperId;
 	@Column(name="duration")

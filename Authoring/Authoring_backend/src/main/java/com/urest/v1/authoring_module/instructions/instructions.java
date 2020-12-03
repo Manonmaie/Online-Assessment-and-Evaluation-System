@@ -24,7 +24,7 @@ public class instructions {
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "instruction_id",updatable = false, nullable = false)
 	private Integer instructionId;
 	
