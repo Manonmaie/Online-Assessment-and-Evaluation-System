@@ -1,11 +1,69 @@
-drop table IF EXISTS au_item_true_false;
-drop table IF EXISTS au_item_mcq_options;
-drop table IF EXISTS au_qp_item;
-drop table IF EXISTS au_item;
-drop table IF EXISTS au_course_master;
-drop table IF EXISTS au_instruction;
-drop table IF EXISTS au_question_paper;
-drop table IF EXISTS au_course_master;
+drop database question_bank;
+create database question_bank DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_bin;
+
+
+use question_bank;
+
+
+-- --------------------------------------------------------
+-- Table structure for table as_user
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS au_user(
+  user_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_name varchar(255) UNIQUE NOT NULL,
+  password varchar(255) NOT NULL,
+  status ENUM('ACTIVE','INACTIVE') DEFAULT 'ACTIVE',
+  PRIMARY KEY(user_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_user`
+-- --------------------------------------------------------
+INSERT INTO au_user VALUES(0,"S1","abc","ACTIVE");
+INSERT INTO au_user VALUES(0,"S2","xyz","ACTIVE");
+INSERT INTO au_user VALUES(0,"person3@gmail.com","a","ACTIVE");
+INSERT INTO au_user VALUES(0,"person4@gmail.com","a","ACTIVE");
+INSERT INTO au_user VALUES(0,"person5@gmail.com","a","ACTIVE");
+
+-- --------------------------------------------------------
+-- Table structure for table as_role_master
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS au_role_master(
+  role_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  role_name varchar(255) UNIQUE NOT NULL,
+  module_name ENUM('AU', 'AS', 'EVAL', 'EA'),
+  PRIMARY KEY(role_id)
+);
+
+-- --------------------------------------------------------
+-- Data Entry for table `as_role_master`
+-- --------------------------------------------------------
+INSERT INTO au_role_master VALUES(0,"Authoring","AU");
+
+
+-- --------------------------------------------------------
+-- Table structure for table au_user_role
+-- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS au_user_role(
+  user_role_id int(10) unsigned NOT NULL AUTO_INCREMENT,
+  user_id int(10) unsigned,
+  role_id int(10) unsigned,
+  PRIMARY KEY(user_role_id)
+);
+
+ALTER TABLE au_user_role
+  ADD CONSTRAINT `fk_au_user_role_user_id` FOREIGN KEY (user_id) REFERENCES au_user(user_id) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_au_user_role_role_id` FOREIGN KEY (role_id) REFERENCES au_role_master(role_id) ON DELETE SET NULL;
+
+-- --------------------------------------------------------
+-- Data Entry for table `au_user_role`
+-- --------------------------------------------------------
+INSERT INTO au_user_role VALUES(0,1,1);
+INSERT INTO au_user_role VALUES(0,2,1);
+INSERT INTO au_user_role VALUES(0,3,1);
+INSERT INTO au_user_role VALUES(0,4,1);
+INSERT INTO au_user_role VALUES(0,5,1);
+
 
 
 
@@ -46,20 +104,26 @@ ALTER TABLE au_item
     INSERT INTO au_item VALUES(0,"What is a  PK?","McqSingleCorrect","UNDERSTAND","MEDIUM","APPROVED",1,"ACTIVE",0,1,1);
     INSERT INTO au_item VALUES(0,"What is a FK?","McqMultiCorrect","APPLY","HARD","APPROVED",1,"ACTIVE",0,1,1);
     INSERT INTO au_item VALUES(0,"UK and PK are same.","True/False","APPLY","HARD","APPROVED",1,"ACTIVE",0,1,1);
-    INSERT INTO au_item VALUES(0,"What is a database?","McqSingleCorrect","EVALUATE","EASY","APPROVED",1,"ACTIVE",0,1,1);
-    INSERT INTO au_item VALUES(0,"Uk with no null values is Pk.","True/False","APPLY","HARD","APPROVED",1,"ACTIVE",0,1,1);
-    INSERT INTO au_item VALUES(0,"What is a  PK?","McqSingleCorrect","UNDERSTAND","MEDIUM","APPROVED",1,"ACTIVE",0,1,1);
-    INSERT INTO au_item VALUES(0,"What is a FK?","McqMultiCorrect","ANALYZE","EASY","APPROVED",1,"ACTIVE",0,1,1);
-    INSERT INTO au_item VALUES(0,"UK and PK are same.","True/False","EVALUATE","EASY","APPROVED",1,"ACTIVE",0,1,1);
+    INSERT INTO au_item VALUES(0,"What is a database?","McqSingleCorrect","EVALUATE","EASY","APPROVED",1,"ACTIVE",0,1,2);
+    INSERT INTO au_item VALUES(0,"Uk with no null values is Pk.","True/False","APPLY","HARD","APPROVED",1,"ACTIVE",0,1,2);
+    INSERT INTO au_item VALUES(0,"What is a  PK?","McqSingleCorrect","UNDERSTAND","MEDIUM","APPROVED",1,"ACTIVE",0,1,2);
+    INSERT INTO au_item VALUES(0,"What is a FK?","McqMultiCorrect","ANALYZE","EASY","APPROVED",1,"ACTIVE",0,1,2);
+    INSERT INTO au_item VALUES(0,"UK and PK are same.","True/False","EVALUATE","EASY","APPROVED",1,"ACTIVE",0,1,2);
     INSERT INTO au_item VALUES(0,"Uk with no null values is Pk.","True/False","ANALYZE","EASY","APPROVED",1,"ACTIVE",0,1,2);
     INSERT INTO au_item VALUES(0,"What is a  PK?","McqSingleCorrect","UNDERSTAND","MEDIUM","APPROVED",2,"ACTIVE",0,1,2);
     INSERT INTO au_item VALUES(0,"What is a database?","McqSingleCorrect","UNDERSTAND","EASY","APPROVED",2,"ACTIVE",0,1,2);
-    INSERT INTO au_item VALUES(0,"What is a FK?","McqMultiCorrect","UNDERSTAND","EASY-MEDIUM","APPROVED",2,"ACTIVE",0,1,3);
+    INSERT INTO au_item VALUES(0,"What is a FK?","McqMultiCorrect","EVALUATE","EASY-MEDIUM","APPROVED",2,"ACTIVE",0,1,3);
     INSERT INTO au_item VALUES(0,"UK and PK are same.","True/False","ANALYZE","EASY","APPROVED",2,"ACTIVE",0,1,3);
-    INSERT INTO au_item VALUES(0,"Uk with no null values is Pk.","True/False","UNDERSTAND","EASY-MEDIUM","APPROVED",2,"ACTIVE",0,1,3);
+    INSERT INTO au_item VALUES(0,"Uk with no null values is Pk.","True/False","APPLY","EASY-MEDIUM","APPROVED",2,"ACTIVE",0,1,3);
 
 
-
+-- 16 th
+    INSERT INTO au_item VALUES(0,"What do you mean by one to many relationship between Teacher and Class table?","McqSingleCorrect","EVALUATE","MEDIUM","APPROVED",2,"ACTIVE",0,1,1);
+    INSERT INTO au_item VALUES(0,"In one-to-many relationship the table on 'many' side is called","McqSingleCorrect","ANALYZE","EASY","APPROVED",2,"ACTIVE",0,1,1);	
+    INSERT INTO au_item VALUES(0,"In which state one gathers and list all the necessary fields for the database design project.","McqSingleCorrect","UNDERSTAND","HARD-MEDIUM","APPROVED",2,"ACTIVE",0,1,1);
+    INSERT INTO au_item VALUES(0," 	
+A database has a built-in capability to create, process and administer itself.","True/False","CREATE","EASY-MEDIUM","APPROVED",2,"ACTIVE",0,1,1);
+    INSERT INTO au_item VALUES(0,"Enterprise Resource Planning (ERP) is an example of a single user database.","True/False","APPLY","MEDIUM","APPROVED",2,"ACTIVE",0,1,1);
 
 
 CREATE TABLE IF NOT EXISTS `au_item_true_false` (
@@ -80,7 +144,9 @@ INSERT INTO au_item_true_false VALUES(0,9,100,0);
 INSERT INTO au_item_true_false VALUES(0,8,0,100);
 INSERT INTO au_item_true_false VALUES(0,14,100,0);
 INSERT INTO au_item_true_false VALUES(0,15,100,0);
-
+INSERT INTO au_item_true_false VALUES(0,19,0,100);
+INSERT INTO au_item_true_false VALUES(0,20,100,0);
+INSERT INTO au_item_true_false VALUES(0,4,100,0);
 
 CREATE TABLE IF NOT EXISTS `au_item_mcq_options` (
 	    `item_mcq_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -95,19 +161,36 @@ ALTER TABLE au_item_mcq_options
   ADD CONSTRAINT `fk_itemMcqOptions_item` FOREIGN KEY (item_id) REFERENCES au_item(item_id) ON DELETE SET NULL;
 
 
-  INSERT INTO au_item_mcq_options VALUES(0,1,"Collection of related data",1);
+  INSERT INTO au_item_mcq_options VALUES(0,1,"Collection of related data",100);
   INSERT INTO au_item_mcq_options VALUES(0,1,"Collection of data",0);
   INSERT INTO au_item_mcq_options VALUES(0,1,"Collection of words",0);
   INSERT INTO au_item_mcq_options VALUES(0,1,"Collection of people",0);
-  INSERT INTO au_item_mcq_options VALUES(0,2,"Primary Key",1);
+
+  INSERT INTO au_item_mcq_options VALUES(0,2,"Primary Key",100);
   INSERT INTO au_item_mcq_options VALUES(0,2,"Personal Key",0);
   INSERT INTO au_item_mcq_options VALUES(0,2,"Person Key",0);
   INSERT INTO au_item_mcq_options VALUES(0,2,"Primary Keyword",0);
-  INSERT INTO au_item_mcq_options VALUES(0,3,"Foreign Key",0);
-  INSERT INTO au_item_mcq_options VALUES(0,3,"Foreign Keyword",1);
-  INSERT INTO au_item_mcq_options VALUES(0,3,"Fashion Key",0);
-  INSERT INTO au_item_mcq_options VALUES(0,3,"Forward Key",0);
 
+INSERT INTO au_item_mcq_options VALUES(0,3,"Foreign Key",0);
+INSERT INTO au_item_mcq_options VALUES(0,3,"Foreign Keyword",100);
+INSERT INTO au_item_mcq_options VALUES(0,3,"Fashion Key",0);
+INSERT INTO au_item_mcq_options VALUES(0,3,"Forward Key",0);
+
+
+INSERT INTO au_item_mcq_options VALUES(0,16,"One class may have many teachers",0);
+INSERT INTO au_item_mcq_options VALUES(0,16,"One teacher can have many classes",100);
+INSERT INTO au_item_mcq_options VALUES(0,16,"Many classes may have many teachers",0);
+INSERT INTO au_item_mcq_options VALUES(0,16,"Many teachers may have many classes",0);
+
+INSERT INTO au_item_mcq_options VALUES(0,17,"Parent",0);
+INSERT INTO au_item_mcq_options VALUES(0,17,"Child",100);
+INSERT INTO au_item_mcq_options VALUES(0,17,"Sister",0);
+INSERT INTO au_item_mcq_options VALUES(0,17,"Master",0);
+
+INSERT INTO au_item_mcq_options VALUES(0,18,"Data Definition",100);
+INSERT INTO au_item_mcq_options VALUES(0,18,"Data Refinement",0);
+INSERT INTO au_item_mcq_options VALUES(0,18,"Establishing Relationship",0);
+INSERT INTO au_item_mcq_options VALUES(0,18,"None Of The Above",0);
 
 
 
@@ -176,130 +259,3 @@ ALTER TABLE au_question_paper
     INSERT INTO au_instruction VALUES(0,3,"Exam duration is 1 hr");
     INSERT INTO au_instruction VALUES(0,3,"It has only one section with no negative marking");
 
--- --------------------------------------------------------
--- Table structure for table out_qpack_header
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS out_qpack_header(
-  qpack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qpack_desc varchar(255),
-  created_on datetime,
-  created_by varchar(255),
-  qpack_status ENUM('CREATED', 'SENT') DEFAULT 'CREATED',
-  qpack_sent_on datetime,
-  qpack_path varchar(255),
-  PRIMARY KEY(qpack_header_id)
-);
-
--- --------------------------------------------------------
--- Table structure for table qpack1
--- SELECT q.qp_id, q.maximum_marks, q.duration, q.course_code, q.batch_code, i.instruction_id, i.instruction_text FROM au_question_paper q INNER JOIN au_instruction i
--- ON q.qp_id = i.qp_id;
--- Then fetch course_id and course_name using course_code from course_master and add it to qpack1 
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS qpack1(
-  qpack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qpack_header_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  maximum_marks int(10) NOT NULL,
-  instruction_id int(10) unsigned UNIQUE,
-  instruction_text varchar(255),
-  duration int(10) NOT NULL,
-  course_id int(10) unsigned NOT NULL,
-  course_code varchar(255) NOT NULL,
-  course_name varchar(255) NOT NULL,
-  batch_code varchar(255) NOT NULL,
-  PRIMARY KEY(qpack1_id)
-);
-
-ALTER TABLE qpack1
-  ADD CONSTRAINT `fk_qpack1_qpack_header_id` FOREIGN KEY (qpack_header_id) REFERENCES out_qpack_header(qpack_header_id) ON DELETE CASCADE;
-
-
--- --------------------------------------------------------
--- Table structure for table qpack2
--- SELECT q.qp_id, i.item_id, i.item_text, i.marks, i.item_type, i.cognitive_level FROM au_item i INNER JOIN au_qp_item q ON q.item_id = i.item_id;
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS qpack2(
-  qpack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qpack1_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_text text(1024) NOT NULL,
-  item_marks float(24) unsigned NOT NULL,
-  item_type varchar(255) NOT NULL,
-  cognitive_level ENUM('REMEMBER', 'UNDERSTAND', 'APPLY', 'ANALYZE', 'EVALUATE', 'CREATE')  NOT NULL,
-  PRIMARY KEY(qpack2_id)
-);
-
-ALTER TABLE qpack2
-  ADD CONSTRAINT `fk_qpack2_qpack1_id` FOREIGN KEY (qpack1_id) REFERENCES qpack1(qpack1_id) ON DELETE CASCADE;
-
-
--- --------------------------------------------------------
--- Table structure for table qpack3
--- SELECT i.item_id, o.item_mcq_id, o.mcq_option_text FROM au_qp_item i INNER JOIN au_item_mcq_options o ON i.item_id = o.item_id;
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS qpack3(
-  qpack3_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  qpack2_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_option_id int(10) unsigned NOT NULL,
-  option_text varchar(255) NOT NULL,
-  PRIMARY KEY(qpack3_id)
-);
-
-ALTER TABLE qpack3
-  ADD CONSTRAINT `fk_qpack3_qpack2_id` FOREIGN KEY (qpack2_id) REFERENCES qpack2(qpack2_id) ON DELETE CASCADE;
-
-
--- --------------------------------------------------------
--- Table structure for table out_apack_header
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS out_apack_header(
-  apack_header_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  apack_desc varchar(255),
-  created_on datetime,
-  created_by varchar(255),
-  apack_status ENUM('CREATED', 'SENT') DEFAULT 'CREATED',
-  apack_sent_on datetime,
-  apack_path varchar(255),
-  PRIMARY KEY(apack_header_id)
-);
-
--- --------------------------------------------------------
--- Table structure for table apack1
--- SELECT q.qp_id, i.item_id, i.item_text, i.marks, i.item_type FROM au_item i INNER JOIN au_qp_item q ON q.item_id = i.item_id;
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS apack1(
-  apack1_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  apack_header_id int(10) unsigned NOT NULL,
-  qp_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_text text(1024) NOT NULL,
-  item_marks float(24) unsigned NOT NULL,
-  item_type varchar(255) NOT NULL,
-  PRIMARY KEY(apack1_id)
-);
-
-ALTER TABLE apack1
-  ADD CONSTRAINT `fk_apack1_apack_header_id` FOREIGN KEY (apack_header_id) REFERENCES out_apack_header(apack_header_id) ON DELETE CASCADE;
-
-  -- --------------------------------------------------------
--- Table structure for table apack2
--- --------------------------------------------------------
-CREATE TABLE IF NOT EXISTS apack2(
-  apack2_id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  apack1_id int(10) unsigned NOT NULL,
-  item_id int(10) unsigned NOT NULL,
-  qp_item_id int(10) unsigned NOT NULL,
-  item_option_id int(10) unsigned NOT NULL,
-  option_text varchar(255) NOT NULL,
-  option_percentage int(10) NOT NULL,
-  PRIMARY KEY(apack2_id)
-);
-
-ALTER TABLE apack2
-  ADD CONSTRAINT `fk_apack2_apack1_id` FOREIGN KEY (apack1_id) REFERENCES apack1(apack1_id) ON DELETE CASCADE;

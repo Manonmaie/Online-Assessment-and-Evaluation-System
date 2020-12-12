@@ -70,6 +70,5 @@ export class QuestionManagementComponent {
     // this.collectionSize = this.items.length;
   }
 
-
 }
 

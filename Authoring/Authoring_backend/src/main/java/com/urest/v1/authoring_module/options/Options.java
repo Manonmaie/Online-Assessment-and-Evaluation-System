@@ -47,7 +47,7 @@ public class Options {
 
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "item_mcq_id",updatable = false, nullable = false)
 	private Integer item_mcq_options_id;
 	@Column(name = "mcq_option_marks")

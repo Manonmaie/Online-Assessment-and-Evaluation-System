@@ -47,7 +47,7 @@ public class Item {
 	
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(updatable = false, nullable = false,name="item_id")
 	private Integer itemId;
 	

@@ -37,7 +37,7 @@ public class TF {
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(updatable = false, nullable = false,name="item_true_false_id")
 	private Integer itemTrueFalseId;
 	@Column(name="true_percent")

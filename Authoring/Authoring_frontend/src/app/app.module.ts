@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { QuestionManagementComponent } from './question-management/question-management.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
+import { ExportsComponent } from './exports/exports.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { ChartsModule } from 'ng2-charts';
     ItemFormComponent,
     QuestionManagementComponent,
     QuestionPaperComponent,
+    ExportsComponent,
+    LoginComponent,
    ],
   imports: [
     BrowserModule,

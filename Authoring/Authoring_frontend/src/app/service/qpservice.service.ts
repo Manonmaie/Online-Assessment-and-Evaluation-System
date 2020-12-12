@@ -28,4 +28,12 @@ export class QPServiceService {
   getitemByIds(params): Observable<any>{
     return this.http.get<Item[]>(baseURL + '/urest/v1/getitem_ids/',{params});
   }
+
+
+  exportQPs(): Observable<any>{
+    return this.http.get<Item[]>(baseURL + '/createQpack');
+  }
+  exportAnswers(): Observable<any>{
+    return this.http.get<Item[]>(baseURL + '/createApack');
+  }
 }
