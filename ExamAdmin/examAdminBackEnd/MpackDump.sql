@@ -150,3 +150,9 @@ UNLOCK TABLES;
 2020-12-02 10:59:42.402  INFO 11309 --- [n(15)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
 2020-12-02 10:59:42.402  INFO 11309 --- [n(15)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2020-12-02 10:59:42.415  INFO 11309 --- [n(15)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+-- Dump execute Failed
+2020-12-02 20:13:20.641  INFO 5432 --- [n(10)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-12-02 20:13:20.712  INFO 5432 --- [n(10)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-12-02 20:13:20.749  INFO 5432 --- [n(10)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-12-02 20:13:20.750  INFO 5432 --- [n(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-12-02 20:13:20.760  INFO 5432 --- [n(10)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

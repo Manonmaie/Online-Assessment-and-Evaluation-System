@@ -41,7 +41,7 @@ CREATE TABLE `out_epack_header` (
 
 LOCK TABLES `out_epack_header` WRITE;
 /*!40000 ALTER TABLE `out_epack_header` DISABLE KEYS */;
-INSERT INTO `out_epack_header` VALUES (1,'Nothing','2020-12-02 10:14:19','Author','CREATED',NULL,NULL,1);
+INSERT INTO `out_epack_header` VALUES (1,'Nothing','2020-12-02 19:59:48','Author','CREATED',NULL,NULL,1);
 /*!40000 ALTER TABLE `out_epack_header` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `epack1` (
 
 LOCK TABLES `epack1` WRITE;
 /*!40000 ALTER TABLE `epack1` DISABLE KEYS */;
-INSERT INTO `epack1` VALUES (1,1,4,10,8,'time duration is 30mins',30,10,'batch4','2020-12-02 10:05:00','2020-12-03 10:05:00',1,'IIITB','International Institute of Information Technology, Bangalore',4,'test','Test',1,'dbms_101','DBMS'),(2,1,4,10,9,'no negative marks',30,10,'batch4','2020-12-02 10:05:00','2020-12-03 10:05:00',1,'IIITB','International Institute of Information Technology, Bangalore',4,'test','Test',1,'dbms_101','DBMS');
+INSERT INTO `epack1` VALUES (1,1,4,10,8,'time duration is 30mins',30,10,'batch4','2020-12-02 21:00:00','2020-12-02 23:00:00',1,'IIITB','International Institute of Information Technology, Bangalore',4,'test','Test',1,'dbms_101','DBMS'),(2,1,4,10,9,'no negative marks',30,10,'batch4','2020-12-02 21:00:00','2020-12-02 23:00:00',1,'IIITB','International Institute of Information Technology, Bangalore',4,'test','Test',1,'dbms_101','DBMS');
 /*!40000 ALTER TABLE `epack1` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,4 +196,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-02 10:14:21
+-- Dump completed on 2020-12-02 19:59:50
