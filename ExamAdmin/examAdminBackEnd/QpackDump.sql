@@ -155,3 +155,6 @@ UNLOCK TABLES;
 -- Dump execute Success
 creating dump
 ----SQL backup file generated: mydb_abackup.sql----
+-- Dump execute Failed
+creating dump
+----SQL backup file generated: mydb_abackup.sql----
